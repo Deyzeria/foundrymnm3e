@@ -1,0 +1,289 @@
+{
+"Actor": {
+    "types": ["hero", "vehicle", "base"],
+    "templates": {
+        "common": {
+            "abilities":{
+                "str": {
+                    "purchased": 0,
+                    "misc": 0,
+                    "auto": 0,
+                    "total": 0
+                },
+                "sta": {
+                    "purchased": 0,
+                    "misc": 0,
+                    "auto": 0,
+                    "total": 0
+                },
+                "agl": {
+                    "purchased": 0,
+                    "misc": 0,
+                    "auto": 0,
+                    "total": 0
+                },
+                "dex": {
+                    "purchased": 0,
+                    "misc": 0,
+                    "auto": 0,
+                    "total": 0
+                },
+                "fgt": {
+                    "purchased": 0,
+                    "misc": 0,
+                    "auto": 0,
+                    "total": 0
+                },
+                "int": {
+                    "purchased": 0,
+                    "misc": 0,
+                    "auto": 0,
+                    "total": 0
+                },
+                "awe": {
+                    "purchased": 0,
+                    "misc": 0,
+                    "auto": 0,
+                    "total": 0
+                },
+                "pre": {
+                    "purchased": 0,
+                    "misc": 0,
+                    "auto": 0,
+                    "total": 0
+                }
+            },
+            "generic": {               
+                "pl": 0,
+                "pp": 0,
+                "extrapp": 0,
+                "ep": 0,
+                "hero_point": 0,
+                "pp_ability": 0,
+                "pp_defenses": 0,
+                "pp_skills": 0,
+                "pp_advantages": 0,
+                "pp_powers": 0,
+                "pp_spent": 0,
+                "initiative": 0,
+                "size": -2
+            },
+            "defenses":{
+                "dodge":{
+                    "default": "",
+                    "purchased": 0,
+                    "misc": 0,
+                    "auto": 0,
+                    "total": "",
+                    "ac": 10,
+                    "immune": "",
+                    "imprevious": 0
+                },
+                "parry":{
+                    "default": "",
+                    "purchased": 0,
+                    "misc": 0,
+                    "auto": 0,
+                    "total": "",
+                    "ac": 10,
+                    "immune": "",
+                    "imprevious": 0
+                },
+                "fortitude":{
+                    "default": "",
+                    "purchased": 0,
+                    "misc": 0,
+                    "auto": 0,
+                    "total": "",
+                    "ac": 10,
+                    "immune": "",
+                    "imprevious": 0
+                },
+                "toughness":{
+                    "default": "",
+                    "purchased": 0,
+                    "misc": 0,
+                    "auto": 0,
+                    "total": "",
+                    "ac": 10,
+                    "immune": "",
+                    "imprevious": 0
+                },
+                "will":{
+                    "default": "",
+                    "purchased": 0,
+                    "misc": 0,
+                    "auto": 0,
+                    "total": "",
+                    "ac": 10,
+                    "immune": "",
+                    "imprevious": 0
+                },
+                "wounds": 0
+            },
+            "skills":{
+                "ath": {
+                    "default": "",
+                    "ability": "str",
+                    "purchased": 0,
+                    "misc": 0,
+                    "auto": 0,
+                    "total": "",
+                    "mastery": false
+                }
+            }
+        },
+        "speed": {
+            "walk": {
+                "rank": 0,
+                "distance": 8,
+                "units": "m"
+            },
+            "burrowing": {
+                "rank": 0,
+                "distance": 8,
+                "units": "m"
+            },
+            "flight": {
+                "rank": 0,
+                "distance": 8,
+                "units": "m"
+            },
+            "leaping": {
+                "rank": 0,
+                "distance": 8,
+                "units": "m"
+            },
+            "swimming": {
+                "rank": 0,
+                "distance": 8,
+                "units": "m"
+            },
+            "teleport": {
+                "rank": 0,
+                "distance": 8,
+                "units": "m"
+            }
+        },
+        "detals": {
+            "hero_name": "",
+            "real_identity": "",
+            "gender": "",
+            "age": 0,
+            "height": 0,
+            "weight": 0,
+            "eyes": "",
+            "hair": "",
+            "group_affiliation": "",
+            "base_of_operation": ""
+        },
+        "vehicle": {
+            "size": 0,
+            "str": 0,
+            "defense": {
+                "bought": 0,
+                "ac": 0
+            },
+            "toughness": 5
+        },
+        "base": {
+            "size": 0,
+            "toghness": 6
+        }
+    },
+    "hero": {
+        "templates": ["common", "speed", "details"]
+    },
+    "vehicle": {
+        "templates": ["vehicle", "speed"]
+    },
+    "base": {
+        "templates": ["base"]
+    }
+},
+"Item": {
+    "types": ["power", "advantage", "equipment", "general", "base", "vehicle", "attack"],
+    "templates": {
+        "itemDescription": "",
+        "power_cost": {
+            "base_cost": 1,
+            "extras": 0,
+            "flaws": 0,
+            "flat": 0,
+            "rank": 0
+        },
+        "customisable": {
+            "power_effect": "",
+            "descriptor": "",
+            "description_mod": "",
+            "extras": "",
+            "flaws": "",
+            "flats": "",
+            "type": "",
+            "action": "",
+            "range": "",
+            "duration": "",
+            "resistance": "",
+            "array": "Normal",
+            "active": false
+        },
+        "advDescription": {
+            "ranks": null,
+            "ranked": false,
+            "additionalDesc": "",
+            "effect": "",
+            "enchanced": false
+        },
+        "power": {
+            "templates": ["itemDescription", "power_cost", "customisable"]
+        },
+        "equipment": {
+            "templates": ["itemDescription", "power_cost", "customisable"]
+        },
+        "general": {
+            "templates": ["itemDescription"],
+            "cost": 0
+        },
+        "vehicle": {
+            "templates": ["itemDescription"],
+            "size": 0,
+            "str": 0,
+            "speed": 0,
+            "defense": 0,
+            "toughness": 5,
+            "features": 0,
+            "feature_desc": "",
+            "cost": 0
+        },
+        "base": {
+            "templates": ["itemDescription"],
+            "size": 0,
+            "toghness": 6,
+            "features": 0,
+            "feature_desc": "",
+            "cost": 0
+        },
+        "advantage": {
+            "templates": ["itemDescription", "advDetails"]
+        },
+        "attack": {
+            "templates": ["itemDescription"],
+            "name": "",
+            "action": "",
+            "type": "",
+            "effect": null,
+            "range": 0,
+            "range_medium": 0,
+            "range_far": 0,
+            "power": 0,
+            "misc_to_hit": 0,
+            "dc": null,
+            "other_mods": ""
+        }
+    }
+
+}
+
+
+
+}
