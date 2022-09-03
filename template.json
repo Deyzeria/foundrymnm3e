@@ -233,7 +233,8 @@
             "additionalDesc": "",
             "effect": "",
             "enchanced": false
-        },
+        }
+    },
         "power": {
             "templates": ["itemDescription", "power_cost", "customisable"]
         },
@@ -281,9 +282,4 @@
             "other_mods": ""
         }
     }
-
-}
-
-
-
 }
