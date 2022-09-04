@@ -129,40 +129,262 @@
                     "misc": 0,
                     "auto": 0,
                     "total": "",
+                    "untrained": true,
+                    "mastery": false
+                },
+                "acr": {
+                    "default": "",
+                    "ability": "agl",
+                    "purchased": 0,
+                    "misc": 0,
+                    "auto": 0,
+                    "total": "",
+                    "untrained": false,
+                    "mastery": false
+                },
+                "clc": {
+                    "default": "",
+                    "ability": "fgt",
+                    "purchased": 0,
+                    "misc": 0,
+                    "auto": 0,
+                    "total": "",
+                    "subtype": "",
+                    "untrained": true,
+                    "mastery": false
+                },
+                "clc2": {
+                    "default": "",
+                    "ability": "fgt",
+                    "purchased": 0,
+                    "misc": 0,
+                    "auto": 0,
+                    "total": "",
+                    "subtype": "",
+                    "untrained": true,
+                    "mastery": false
+                },
+                "dec": {
+                    "default": "",
+                    "ability": "pre",
+                    "purchased": 0,
+                    "misc": 0,
+                    "auto": 0,
+                    "total": "",
+                    "untrained": true,
+                    "mastery": false
+                },
+                "exp1": {
+                    "default": "",
+                    "ability": "int",
+                    "purchased": 0,
+                    "misc": 0,
+                    "auto": 0,
+                    "total": "",
+                    "subtype": "",
+                    "untrained": false,
+                    "mastery": false
+                },
+                "exp2": {
+                    "default": "",
+                    "ability": "int",
+                    "purchased": 0,
+                    "misc": 0,
+                    "auto": 0,
+                    "total": "",
+                    "subtype": "",
+                    "untrained": false,
+                    "mastery": false
+                },
+                "exp3": {
+                    "default": "",
+                    "ability": "int",
+                    "purchased": 0,
+                    "misc": 0,
+                    "auto": 0,
+                    "total": "",
+                    "subtype": "",
+                    "untrained": false,
+                    "mastery": false
+                },
+                "exp4": {
+                    "default": "",
+                    "ability": "int",
+                    "purchased": 0,
+                    "misc": 0,
+                    "auto": 0,
+                    "total": "",
+                    "subtype": "",
+                    "untrained": false,
+                    "mastery": false
+                },
+                "exp5": {
+                    "default": "",
+                    "ability": "int",
+                    "purchased": 0,
+                    "misc": 0,
+                    "auto": 0,
+                    "total": "",
+                    "subtype": "",
+                    "untrained": false,
+                    "mastery": false
+                },
+                "ins": {
+                    "default": "",
+                    "ability": "awe",
+                    "purchased": 0,
+                    "misc": 0,
+                    "auto": 0,
+                    "total": "",
+                    "untrained": true,
+                    "mastery": false
+                },
+                "inm": {
+                    "default": "",
+                    "ability": "pre",
+                    "purchased": 0,
+                    "misc": 0,
+                    "auto": 0,
+                    "total": "",
+                    "untrained": true,
+                    "mastery": false
+                },
+                "inv": {
+                    "default": "",
+                    "ability": "int",
+                    "purchased": 0,
+                    "misc": 0,
+                    "auto": 0,
+                    "total": "",
+                    "untrained": false,
+                    "mastery": false
+                },
+                "prc": {
+                    "default": "",
+                    "ability": "awe",
+                    "purchased": 0,
+                    "misc": 0,
+                    "auto": 0,
+                    "total": "",
+                    "untrained": true,
+                    "mastery": false
+                },
+                "prs": {
+                    "default": "",
+                    "ability": "pre",
+                    "purchased": 0,
+                    "misc": 0,
+                    "auto": 0,
+                    "total": "",
+                    "untrained": true,
+                    "mastery": false
+                },
+                "rng1": {
+                    "default": "",
+                    "ability": "dex",
+                    "purchased": 0,
+                    "misc": 0,
+                    "auto": 0,
+                    "total": "",
+                    "subtype": "",
+                    "untrained": true,
+                    "mastery": false
+                },
+                "rng2": {
+                    "default": "",
+                    "ability": "dex",
+                    "purchased": 0,
+                    "misc": 0,
+                    "auto": 0,
+                    "total": "",
+                    "subtype": "",
+                    "untrained": true,
+                    "mastery": false
+                },
+                "soh": {
+                    "default": "",
+                    "ability": "dex",
+                    "purchased": 0,
+                    "misc": 0,
+                    "auto": 0,
+                    "total": "",
+                    "untrained": false,
+                    "mastery": false
+                },
+                "ste": {
+                    "default": "",
+                    "ability": "agl",
+                    "purchased": 0,
+                    "misc": 0,
+                    "auto": 0,
+                    "total": "",
+                    "untrained": true,
+                    "mastery": false
+                },
+                "tec": {
+                    "default": "",
+                    "ability": "int",
+                    "purchased": 0,
+                    "misc": 0,
+                    "auto": 0,
+                    "total": "",
+                    "untrained": false,
+                    "mastery": false
+                },
+                "tre": {
+                    "default": "",
+                    "ability": "int",
+                    "purchased": 0,
+                    "misc": 0,
+                    "auto": 0,
+                    "total": "",
+                    "untrained": false,
+                    "mastery": false
+                },
+                "veh": {
+                    "default": "",
+                    "ability": "dex",
+                    "purchased": 0,
+                    "misc": 0,
+                    "auto": 0,
+                    "total": "",
+                    "untrained": false,
                     "mastery": false
                 }
             }
         },
-        "speed": {
-            "walk": {
-                "rank": 0,
-                "distance": 8,
-                "units": "m"
-            },
-            "burrowing": {
-                "rank": 0,
-                "distance": 8,
-                "units": "m"
-            },
-            "flight": {
-                "rank": 0,
-                "distance": 8,
-                "units": "m"
-            },
-            "leaping": {
-                "rank": 0,
-                "distance": 8,
-                "units": "m"
-            },
-            "swimming": {
-                "rank": 0,
-                "distance": 8,
-                "units": "m"
-            },
-            "teleport": {
-                "rank": 0,
-                "distance": 8,
-                "units": "m"
+        "movement": {
+            "speed": {
+                "walk": {
+                    "rank": 0,
+                    "distance": 8,
+                    "units": "m"
+                },
+                "burrowing": {
+                    "rank": 0,
+                    "distance": 8,
+                    "units": "m"
+                },
+                "flight": {
+                    "rank": 0,
+                    "distance": 8,
+                    "units": "m"
+                },
+                "leaping": {
+                    "rank": 0,
+                    "distance": 8,
+                    "units": "m"
+                },
+                "swimming": {
+                    "rank": 0,
+                    "distance": 8,
+                    "units": "m"
+                },
+                "teleport": {
+                    "rank": 0,
+                    "distance": 8,
+                    "units": "m"
+                }
             }
         },
         "detals": {
@@ -192,10 +414,10 @@
         }
     },
     "hero": {
-        "templates": ["common", "speed", "details"]
+        "templates": ["common", "movement", "details"]
     },
     "vehicle": {
-        "templates": ["vehicle", "speed"]
+        "templates": ["vehicle", "movement"]
     },
     "base": {
         "templates": ["base"]
