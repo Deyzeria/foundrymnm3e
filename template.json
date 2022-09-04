@@ -224,6 +224,7 @@
             "range": "",
             "duration": "",
             "resistance": "",
+            "active_rank": 0,
             "array": "Normal",
             "active": false
         },
