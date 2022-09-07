@@ -68,59 +68,59 @@
                 "initiative": 0,
                 "size": -2
             },
-            "defenses":{
-                "dodge":{
-                    "default": "",
-                    "purchased": 0,
-                    "misc": 0,
-                    "auto": 0,
-                    "total": "",
-                    "ac": 10,
-                    "immune": "",
-                    "imprevious": 0
-                },
-                "parry":{
-                    "default": "",
-                    "purchased": 0,
-                    "misc": 0,
-                    "auto": 0,
-                    "total": "",
-                    "ac": 10,
-                    "immune": "",
-                    "imprevious": 0
-                },
-                "fortitude":{
-                    "default": "",
-                    "purchased": 0,
-                    "misc": 0,
-                    "auto": 0,
-                    "total": "",
-                    "ac": 10,
-                    "immune": "",
-                    "imprevious": 0
-                },
-                "toughness":{
-                    "default": "",
-                    "purchased": 0,
-                    "misc": 0,
-                    "auto": 0,
-                    "total": "",
-                    "ac": 10,
-                    "immune": "",
-                    "imprevious": 0
-                },
-                "will":{
-                    "default": "",
-                    "purchased": 0,
-                    "misc": 0,
-                    "auto": 0,
-                    "total": "",
-                    "ac": 10,
-                    "immune": "",
-                    "imprevious": 0
-                },
-                "wounds": 0
+          "defenses": {
+            "dodge": {
+              "default": "",
+              "purchased": 0,
+              "misc": 0,
+              "auto": 0,
+              "total": "",
+              "ac": 10,
+              "immune": "",
+              "imprevious": 0
             },
+            "parry": {
+              "default": "",
+              "purchased": 0,
+              "misc": 0,
+              "auto": 0,
+              "total": "",
+              "ac": 10,
+              "immune": "",
+              "imprevious": 0
+            },
+            "fortitude": {
+              "default": "",
+              "purchased": 0,
+              "misc": 0,
+              "auto": 0,
+              "total": "",
+              "ac": 10,
+              "immune": "",
+              "imprevious": 0
+            },
+            "toughness": {
+              "default": "",
+              "purchased": 0,
+              "misc": 0,
+              "auto": 0,
+              "total": "",
+              "ac": 10,
+              "immune": "",
+              "imprevious": 0
+            },
+            "will": {
+              "default": "",
+              "purchased": 0,
+              "misc": 0,
+              "auto": 0,
+              "total": "",
+              "ac": 10,
+              "immune": "",
+              "imprevious": 0
+            },
+            "wounds": 0
+          },
             "skills":{
                 "ath": {
                     "default": "",
@@ -142,7 +142,7 @@
                     "untrained": false,
                     "mastery": false
                 },
-                "clc": {
+                "clc1": {
                     "default": "",
                     "ability": "fgt",
                     "purchased": 0,
@@ -432,7 +432,8 @@
             "extras": 0,
             "flaws": 0,
             "flat": 0,
-            "rank": 0
+            "rank": 0,
+            "final_cost": 0
         },
         "customisable": {
             "power_effect": "",
