@@ -426,7 +426,9 @@
 "Item": {
     "types": ["power", "advantage", "equipment", "general", "base", "vehicle", "attack"],
     "templates": {
-        "itemDescription": "",
+        "itemDescription": {
+            "Description": ""
+        },
         "power_cost": {
             "base_cost": 1,
             "extras": 0,
