@@ -452,13 +452,6 @@
             "active_rank": 0,
             "array": "Normal",
             "active": false
-        },
-        "advDescription": {
-            "ranks": null,
-            "ranked": false,
-            "additionalDesc": "",
-            "effect": "",
-            "enchanced": false
         }
     },
         "power": {
@@ -491,7 +484,12 @@
             "cost": 0
         },
         "advantage": {
-            "templates": ["itemDescription", "advDetails"]
+            "templates": ["itemDescription"],
+            "ranks": 1,
+            "ranked": false,
+            "additionalDesc": "",
+            "effect": "",
+            "enchanced": false
         },
         "attack": {
             "templates": ["itemDescription"],

@@ -6,7 +6,7 @@ import { Foundry-MnM3eActorSheet } from "./sheets/actor-sheet.mjs";
 import { Foundry-MnM3eItemSheet } from "./sheets/item-sheet.mjs";
 // Import helper/utility classes and constants.
 import { preloadHandlebarsTemplates } from "./helpers/templates.mjs";
-import { BOILERPLATE } from "./helpers/config.mjs";
+import { MNM3E } from "./helpers/config.mjs";
 
 /* -------------------------------------------- */
 /*  Init Hook                                   */
@@ -23,14 +23,14 @@ Hooks.once('init', async function() {
   };
 
   // Add custom constants for configuration.
-  CONFIG.BOILERPLATE = BOILERPLATE;
+  CONFIG.MNM3E = MNM3E;
 
   /**
    * Set an initiative formula for the system
    * @type {String}
    */
   CONFIG.Combat.initiative = {
-    formula: "1d20 + @abilities.dex.mod",
+    formula: "1d20 + @abilities.agl.total",
     decimals: 2
   };
 
