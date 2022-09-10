@@ -1,9 +1,9 @@
 // Import document classes.
-import { Foundry-MnM3eActor } from "./documents/actor.mjs";
-import { Foundry-MnM3eItem } from "./documents/item.mjs";
+import { FoundryMnM3eActor } from "./documents/actor.mjs";
+import { FoundryMnM3eItem } from "./documents/item.mjs";
 // Import sheet classes.
-import { Foundry-MnM3eActorSheet } from "./sheets/actor-sheet.mjs";
-import { Foundry-MnM3eItemSheet } from "./sheets/item-sheet.mjs";
+import { FoundryMnM3eActorSheet } from "./sheets/actor-sheet.mjs";
+import { FoundryMnM3eItemSheet } from "./sheets/item-sheet.mjs";
 // Import helper/utility classes and constants.
 import { preloadHandlebarsTemplates } from "./helpers/templates.mjs";
 import { MNM3E } from "./helpers/config.mjs";
@@ -16,9 +16,9 @@ Hooks.once('init', async function() {
 
   // Add utility classes to the global game object so that they're more easily
   // accessible in global contexts.
-  game.foundry-mnm3e = {
-    Foundry-MnM3eActor,
-    Foundry-MnM3eItem,
+  game.foundrymnm3e = {
+    FoundryMnM3eActor,
+    FoundryMnM3eItem,
     rollItemMacro
   };
 
@@ -35,14 +35,14 @@ Hooks.once('init', async function() {
   };
 
   // Define custom Document classes
-  CONFIG.Actor.documentClass = Foundry-MnM3eActor;
-  CONFIG.Item.documentClass = Foundry-MnM3eItem;
+  CONFIG.Actor.documentClass = FoundryMnM3eActor;
+  CONFIG.Item.documentClass = FoundryMnM3eItem;
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet("foundry-mnm3e", Foundry-MnM3eActorSheet, { makeDefault: true });
+  Actors.registerSheet("foundrymnm3e", FoundryMnM3eActorSheet, { makeDefault: true });
   Items.unregisterSheet("core", ItemSheet);
-  Items.registerSheet("foundry-mnm3e", Foundry-MnM3eItemSheet, { makeDefault: true });
+  Items.registerSheet("foundrymnm3e", FoundryMnM3eItemSheet, { makeDefault: true });
 
   // Preload Handlebars templates.
   return preloadHandlebarsTemplates();
@@ -93,7 +93,7 @@ async function createItemMacro(data, slot) {
   const item = data.data;
 
   // Create the macro command
-  const command = `game.foundry-mnm3e.rollItemMacro("${item.name}");`;
+  const command = `game.foundrymnm3e.rollItemMacro("${item.name}");`;
   let macro = game.macros.find(m => (m.name === item.name) && (m.command === command));
   if (!macro) {
     macro = await Macro.create({
@@ -101,7 +101,7 @@ async function createItemMacro(data, slot) {
       type: "script",
       img: item.img,
       command: command,
-      flags: { "foundry-mnm3e.itemMacro": true }
+      flags: { "foundrymnm3e.itemMacro": true }
     });
   }
   game.user.assignHotbarMacro(macro, slot);

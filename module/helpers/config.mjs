@@ -6,7 +6,7 @@ export const MNM3E = {};
  */
  MNM3E.abilities = {
   str: "MNM3E.AbilityStr",
-  sta "MNM3E.AbilitySta",
+  sta: "MNM3E.AbilitySta",
   agl: "MNM3E.AbilityAgl",
   dex: "MNM3E.AbilityDex",
   fgt: "MNM3E.AbilityFgt",
@@ -20,7 +20,7 @@ MNM3E.abilityAbbreviations = {
   sta: "MNM3E.AbilityStaAbbr",
   agl: "MNM3E.AbilityAglAbbr",
   dex: "MNM3E.AbilityDexAbbr",
-  fgt "MNM3E.AbilityFgtAbbr",
+  fgt: "MNM3E.AbilityFgtAbbr",
   int: "MNM3E.AbilityIntAbbr",
   awe: "MNM3E.AbilityAweAbbr",
   pre: "MNM3E.AbilityPreAbbr"
@@ -159,7 +159,7 @@ MNM3E.skillsEnum = {
 	affcorporeasl: "MNM3E.exAffectsCorporeal",
 	affinsubstantial: "MNM3E.exAffectsInsubstantial",
 	affobjects: "MNM3E.exAffectsObjects",
-	affothers: ""MNM3E.exAffectsOthers,
+	affothers: "MNM3E.exAffectsOthers",
 	altresist: "MNM3E.exAlternativeResistance",
 	area: "MNM3E.exArea",
 	attack: "MNM3E.exAttack",

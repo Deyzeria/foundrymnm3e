@@ -4,13 +4,13 @@ import {onManageActiveEffect, prepareActiveEffectCategories} from "../helpers/ef
  * Extend the basic ActorSheet with some very simple modifications
  * @extends {ActorSheet}
  */
-export class Foundry-MnM3eActorSheet extends ActorSheet {
+export class FoundryMnM3eActorSheet extends ActorSheet {
 
   /** @override */
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
-      classes: ["foundry-mnm3e", "sheet", "actor"],
-      template: "systems/foundry-mnm3e/templates/actor/actor-sheet.html",
+      classes: ["foundrymnm3e", "sheet", "actor"],
+      template: "systems/foundrymnm3e/templates/actor/actor-sheet.html",
       width: 600,
       height: 600,
       tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "features" }]
@@ -19,7 +19,7 @@ export class Foundry-MnM3eActorSheet extends ActorSheet {
 
   /** @override */
   get template() {
-    return `systems/foundry-mnm3e/templates/actor/actor-${this.actor.data.type}-sheet.html`;
+    return `systems/foundrymnm3e/templates/actor/actor-${this.actor.data.type}-sheet.html`;
   }
 
   /* -------------------------------------------- */

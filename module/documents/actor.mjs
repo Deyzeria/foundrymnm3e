@@ -2,7 +2,7 @@
  * Extend the base Actor document by defining a custom roll data structure which is ideal for the Simple system.
  * @extends {Actor}
  */
-export class Foundry-MnM3eActor extends Actor {
+export class FoundryMnM3eActor extends Actor {
 
   /** @override */
   prepareData() {
@@ -31,7 +31,7 @@ export class Foundry-MnM3eActor extends Actor {
   prepareDerivedData() {
     const actorData = this.data;
     const data = actorData.data;
-    const flags = actorData.flags.foundry-mnm3e || {};
+    const flags = actorData.flags.foundrymnm3e || {};
 
     // Make separate methods for each Actor type (character, npc, etc.) to keep
     // things organized.

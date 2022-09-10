@@ -7,9 +7,9 @@
   return loadTemplates([
 
     // Actor partials.
-    "systems/foundry-mnm3e/templates/actor/parts/actor-features.html",
-    "systems/foundry-mnm3e/templates/actor/parts/actor-items.html",
-    "systems/foundry-mnm3e/templates/actor/parts/actor-spells.html",
-    "systems/foundry-mnm3e/templates/actor/parts/actor-effects.html",
+    "systems/foundrymnm3e/templates/actor/parts/actor-features.html",
+    "systems/foundrymnm3e/templates/actor/parts/actor-items.html",
+    "systems/foundrymnm3e/templates/actor/parts/actor-spells.html",
+    "systems/foundrymnm3e/templates/actor/parts/actor-effects.html",
   ]);
 };
