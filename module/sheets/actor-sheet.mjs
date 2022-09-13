@@ -19,7 +19,7 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
 
   /** @override */
   get template() {
-    return `systems/foundrymnm3e/templates/actor/actor-${this.actor.data.type}-sheet.html`;
+    return `systems/foundrymnm3e/templates/actor/actor-ccharacter-sheet.html`;
   }
 
   /* -------------------------------------------- */

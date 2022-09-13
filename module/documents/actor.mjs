@@ -17,6 +17,17 @@ export class FoundryMnM3eActor extends Actor {
   prepareBaseData() {
     // Data modifications in this step occur before processing embedded
     // documents or derived data.
+    const updates = {};
+    this._prepareBaseAbilities(updates);
+    this._prepareBaseSkills(updates);
+    switch (this.type) {
+      case "hero":
+        return this._prepareCharacterData(updates);
+      case "vehicle":
+        return null;
+      case "base":
+        return null;
+    }
   }
 
   /**
@@ -35,35 +46,41 @@ export class FoundryMnM3eActor extends Actor {
 
     // Make separate methods for each Actor type (character, npc, etc.) to keep
     // things organized.
-    this._prepareCharacterData(actorData);
-    this._prepareNpcData(actorData);
+    //this._prepareCharacterData(actorData);
+    //this._prepareNpcData(actorData);
+  }
+
+  _prepareBaseSkills (updates){
+    if (this.type !== "hero") return;
+    const skills = {};
+    for (const [key, skill] of Object.entries(CONFIG.MNM3E.skillsEnum)) {
+      skills[key] = this.system.skillsEnum[key];
+    }
+    this.system.skills = skills;
+  }
+
+  _prepareBaseAbilities (updates){
+    if (this.type !== "hero") return;
+    const abilities = {};
+    for (const key of Object.keys(CONFIG.MNM3E.abilities)){
+      abilities[key] = this.system.abilities[key];
+    }
+    this.system.abilities = abilities;
   }
 
   /**
    * Prepare Character type specific data
    */
-  _prepareCharacterData(actorData) {
-    if (actorData.type !== 'character') return;
-
-    // Make modifications to data here. For example:
-    const data = actorData.data;
-
-    // Loop through ability scores, and add their modifiers to our sheet output.
-    for (let [key, ability] of Object.entries(data.abilities)) {
-      // Calculate the modifier using d20 rules.
-      ability.mod = Math.floor((ability.value - 10) / 2);
-    }
+  _prepareCharacterData(updates) {
+    this.system.generic.pl = 0;
+    this.system.generic.pp = Math.max(this.system.generic.pl * 15, 15) + this.system.generic.extrapp;
   }
 
   /**
    * Prepare NPC type specific data.
    */
-  _prepareNpcData(actorData) {
-    if (actorData.type !== 'npc') return;
+  _prepareVehicleData(updates) {
 
-    // Make modifications to data here. For example:
-    const data = actorData.data;
-    data.xp = (data.cr * data.cr) * 100;
   }
 
   /**

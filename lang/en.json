@@ -1,4 +1,9 @@
 {
+  "MNM3E.SheetHero": "Hero",
+  "MNM3E.SheetVehicle": "Vehicle",
+  "MNM3E.SheetBase": "Base",
+  "MNM3E.SheetItem": "Item",
+
   "MNM3E.AbilityStr": "Strength",
   "MNM3E.AbilitySta": "Stamina",
   "MNM3E.AbilityAgl": "Agility",

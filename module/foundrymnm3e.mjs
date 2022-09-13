@@ -30,8 +30,7 @@ Hooks.once('init', async function() {
    * @type {String}
    */
   CONFIG.Combat.initiative = {
-    formula: "1d20 + @abilities.agl.total",
-    decimals: 2
+    formula: "1d20 + @abilities.agl.total"
   };
 
   // Define custom Document classes
@@ -40,9 +39,30 @@ Hooks.once('init', async function() {
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet("foundrymnm3e", FoundryMnM3eActorSheet, { makeDefault: true });
+  Actors.registerSheet("foundrymnm3e", FoundryMnM3eActorSheet, 
+    {  
+      types: ["hero"],
+      makeDefault: true,
+      label: "MNM3E.SheetHero"
+    });
+  Actors.registerSheet("foundrymnm3e", FoundryMnM3eActorSheet, 
+    {  
+      types: ["vehicle"],
+      makeDefault: true,
+      label: "MNM3E.SheetVehicle"
+    });
+  Actors.registerSheet("foundrymnm3e", FoundryMnM3eActorSheet, 
+    {  
+      types: ["base"],
+      makeDefault: true,
+      label: "MNM3E.SheetBase"
+    });
   Items.unregisterSheet("core", ItemSheet);
-  Items.registerSheet("foundrymnm3e", FoundryMnM3eItemSheet, { makeDefault: true });
+  Items.registerSheet("foundrymnm3e", FoundryMnM3eItemSheet, 
+  { 
+    makeDefault: true,
+    label: "MNM3E.SheetItem"
+  });
 
   // Preload Handlebars templates.
   return preloadHandlebarsTemplates();
