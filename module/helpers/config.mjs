@@ -14,6 +14,7 @@ export const MNM3E = {};
   awe: "MNM3E.AbilityAwe",
   pre: "MNM3E.AbilityPre"
 };
+preLocalize("abilities");
 
 MNM3E.abilityAbbreviations = {
   str: "MNM3E.AbilityStrAbbr",
@@ -25,6 +26,7 @@ MNM3E.abilityAbbreviations = {
   awe: "MNM3E.AbilityAweAbbr",
   pre: "MNM3E.AbilityPreAbbr"
 };
+preLocalize("abilityAbbreviations");
 
 MNM3E.skillsEnum = {
 	ath: {label: "MNM3E.SkillAth", ability: "str"},
@@ -50,6 +52,7 @@ MNM3E.skillsEnum = {
 	tre: {label: "MNM3E.SkillTre", ability: "int"},
 	veh: {label: "MNM3E.SkillVeh", ability: "dex"}
 };
+preLocalize("skillsEnum", {key:"label", sort: true});
 
  MNM3E.defenseEnum = {
 	dodge: "MNM3E.Dodge",
@@ -58,6 +61,7 @@ MNM3E.skillsEnum = {
 	fortitude: "MNM3E.Fortitude",
 	will: "MNM3E.Will"
  };
+ preLocalize("defenseEnum");
 
  MNM3E.movementTypes = {
 	walk: "MNM3E.Walk",
@@ -67,6 +71,7 @@ MNM3E.skillsEnum = {
 	swimming: "MNM3E.Swimming",
 	teleport: "MNM3E.Teleport"
  };
+ preLocalize("movementTypes");
 
   MNM3E.powerTypeEnum = {
 	attack: "MNM3E.PowerTypeAttack",
@@ -76,6 +81,7 @@ MNM3E.skillsEnum = {
 	movement: "MNM3E.PowerTypeMovement",
 	sensory: "MNM3E.PowerTypeSensory"
    };
+   preLocalize("powerTypeEnum");
 
   MNM3E.powerActivationEnum = {
 	standard: "MNM3E.ActionStandard",
@@ -84,6 +90,7 @@ MNM3E.skillsEnum = {
 	free: "MNM3E.ActionFree",
 	none: "MNM3E.ActionNone"
   };
+  preLocalize("powerActivationEnum");
 
    MNM3E.powerRangeEnum = {
 	personal: "MNM3E.RangePersonal",
@@ -92,6 +99,7 @@ MNM3E.skillsEnum = {
 	perception: "MNM3E.RangePerception",
 	rank: "MNM3E.RangeRank"
    };
+   preLocalize("powerRangeEnum");
 
    MNM3E.powerDurationEnum = {
 	instant: "MNM3E.DurationInstant",
@@ -100,13 +108,15 @@ MNM3E.skillsEnum = {
 	continuous: "MNM3E.DurationContinuous",
 	permanent: "MNM3E.DurationPermanent"
    };
+   preLocalize("powerDurationEnum");
 
    MNM3E.arrayTypes = {
 	normal: "MNM3E.ArrayNormal",
 	alternative: "MNM3E.ArrayAlternative",
 	dynamic: "MNM3E.ArrayDynamic"
    };
-
+   preLocalize("arrayTypes");
+   
    MNM3E.defaultPowerEffects = {
 	affliction: "MNM3E.pAffliction",
 	burrowing: "MNM3E.pBurrowing",
@@ -153,6 +163,7 @@ MNM3E.skillsEnum = {
 	impfortitude: "MNM3E.pImpreviousFortitude",
 	impwill: "MNM3E.pImpreviousWill",
    };
+   preLocalize("defaultPowerEffects");
 
    MNM3E.ExtrasGeneral = {
 	accurate: "MNM3E.exAccurate",
@@ -192,8 +203,7 @@ MNM3E.skillsEnum = {
 	triggered: "MNM3E.exTriggered",
 	vardescriptor: "MNM3E.exVariableDescriptor"
    };
-
-
+   preLocalize("ExtrasGeneral");
 
    MNM3E.ExtrasAffliction = {
 	cumulative: "MNM3E.exPCumulative"
@@ -275,4 +285,5 @@ MNM3E.skillsEnum = {
 	tracking: "MNM3E.advTracking",
 	wellinformed: "MNM3E.advWellInformed"
    };
+   preLocalize("AdvantageEnum");
 

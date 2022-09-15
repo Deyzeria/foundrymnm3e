@@ -3,8 +3,17 @@
   "title": "Mutants and Masterminds",
   "description": "A system for playing Mutants and Masterminds 3rd Edition by Green Ronin",
   "version": "0.0.1",
-  "esmodules": [ "module/boilerplate.mjs" ],
-  "styles": [ "css/boilerplate.css" ],
+  "esmodules": [ "module/foundrymnm3e.mjs" ],
+  "styles": [ "css/foundrymnm3e.css" ],
   "scripts": [],
-  "packs": []
+  "packs": [],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "gridDistance": 1,
+  "gridUnits": "m"
 }
