@@ -30,7 +30,7 @@ Hooks.once('init', async function() {
    * @type {String}
    */
   CONFIG.Combat.initiative = {
-    formula: "1d20 + @abilities.agl.total"
+    formula: "1d20 + @abilities.agl.total + @generic.initiative"
   };
 
   // Define custom Document classes

@@ -40,14 +40,16 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
     context.flags = actorData.flags;
 
     // Prepare character data and items.
-    if (actorData.type == 'character') {
+    if (actorData.type == 'hero') {
       this._prepareItems(context);
       this._prepareCharacterData(context);
     }
 
     // Prepare NPC data and items.
-    if (actorData.type == 'npc') {
-      this._prepareItems(context);
+    if (actorData.type == 'vehicle') {
+    }
+
+    if (actorData.type == 'base') {
     }
 
     // Add roll data for TinyMCE editors.
@@ -69,7 +71,7 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
   _prepareCharacterData(context) {
     // Handle ability scores.
     for (let [k, v] of Object.entries(context.data.abilities)) {
-      v.label = game.i18n.localize(CONFIG.BOILERPLATE.abilities[k]) ?? k;
+      v.label = game.i18n.localize(CONFIG.MNM3E.abilities[k]) ?? k;
     }
   }
 
@@ -82,44 +84,37 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
    */
   _prepareItems(context) {
     // Initialize containers.
-    const gear = [];
-    const features = [];
-    const spells = {
-      0: [],
-      1: [],
-      2: [],
-      3: [],
-      4: [],
-      5: [],
-      6: [],
-      7: [],
-      8: [],
-      9: []
-    };
+    const power = [];
+    const advantage = [];
+    const equipment = [];
+    const attack = [];
 
     // Iterate through items, allocating to containers
     for (let i of context.items) {
       i.img = i.img || DEFAULT_TOKEN;
-      // Append to gear.
-      if (i.type === 'item') {
-        gear.push(i);
+      // Append to power.
+      if (i.type === 'power') {
+        power.push(i);
       }
-      // Append to features.
-      else if (i.type === 'feature') {
-        features.push(i);
-      }
-      // Append to spells.
-      else if (i.type === 'spell') {
-        if (i.data.spellLevel != undefined) {
-          spells[i.data.spellLevel].push(i);
-        }
-      }
+      // Append to advamtages.
+      else if (i.type === 'advantage') {
+        advantage.push(i);
+      } 
+      // Append to equipment.
+      else if (i.type === 'equipment') {
+        equipment.push(i);
+      } 
+      // Append to attacks.
+      else if (i.type === 'attack') {
+        attack.push(i);
+      } 
     }
 
     // Assign and return
-    context.gear = gear;
-    context.features = features;
-    context.spells = spells;
+    context.power = power;
+    context.advantage = advantage;
+    context.equipment = equipment;
+    context.attack = attack;
   }
 
   /* -------------------------------------------- */
