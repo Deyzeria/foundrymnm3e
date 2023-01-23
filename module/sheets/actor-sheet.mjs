@@ -19,7 +19,7 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
 
   /** @override */
   get template() {
-    return `systems/foundrymnm3e/templates/actor/actor-ccharacter-sheet.html`;
+    return `systems/boilerplate/templates/actor/actor-${this.actor.type}-sheet.html`;
   }
 
   /* -------------------------------------------- */
@@ -33,11 +33,11 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
     const context = super.getData();
 
     // Use a safe clone of the actor data for further operations.
-    const actorData = this.actor.data.toObject(false);
+    const actorData = this.actor.toObject(false);
 
-    // Add the actor's data to context.data for easier access, as well as flags.
-    context.data = actorData.data;
-    context.flags = actorData.flags;
+  // Add the actor's data to context.data for easier access, as well as flags.
+  context.system = actorData.system;
+  context.flags = actorData.flags;
 
     // Prepare character data and items.
     if (actorData.type == 'hero') {
@@ -68,9 +68,9 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
    *
    * @return {undefined}
    */
-  _prepareCharacterData(context) {
+   _prepareCharacterData(context) {
     // Handle ability scores.
-    for (let [k, v] of Object.entries(context.data.abilities)) {
+    for (let [k, v] of Object.entries(context.system.abilities)) {
       v.label = game.i18n.localize(CONFIG.MNM3E.abilities[k]) ?? k;
     }
   }
@@ -96,7 +96,7 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
       if (i.type === 'power') {
         power.push(i);
       }
-      // Append to advamtages.
+      // Append to advantages.
       else if (i.type === 'advantage') {
         advantage.push(i);
       } 
@@ -167,7 +167,7 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
    * @param {Event} event   The originating click event
    * @private
    */
-  async _onItemCreate(event) {
+   async _onItemCreate(event) {
     event.preventDefault();
     const header = event.currentTarget;
     // Get the type of item to create.
@@ -180,10 +180,10 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
     const itemData = {
       name: name,
       type: type,
-      data: data
+      system: data
     };
     // Remove the type from the dataset since it's in the itemData.type prop.
-    delete itemData.data["type"];
+    delete itemData.system["type"];
 
     // Finally, create the item!
     return await Item.create(itemData, {parent: this.actor});
@@ -194,7 +194,7 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
    * @param {Event} event   The originating click event
    * @private
    */
-  _onRoll(event) {
+   _onRoll(event) {
     event.preventDefault();
     const element = event.currentTarget;
     const dataset = element.dataset;

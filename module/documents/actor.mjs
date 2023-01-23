@@ -16,7 +16,7 @@ export class FoundryMnM3eActor extends Actor {
   /** @override */
   prepareBaseData() {
     // Data modifications in this step occur before processing embedded
-    // documents or derived data.
+    /* documents or derived data.
     const updates = {};
     this._prepareBaseAbilities(updates);
     this._prepareBaseSkills(updates);
@@ -27,7 +27,7 @@ export class FoundryMnM3eActor extends Actor {
         return null;
       case "base":
         return null;
-    }
+    }*/
   }
 
   /**
@@ -50,36 +50,43 @@ export class FoundryMnM3eActor extends Actor {
     //this._prepareNpcData(actorData);
   }
 
-  _prepareBaseSkills (updates){
-    if (this.type !== "hero") return;
+  _prepareBaseSkills (actorData){
+    if (actorData.type !== "hero") return;
+
+    const systemData = actorData.system;
     const skills = {};
     for (const [key, skill] of Object.entries(CONFIG.MNM3E.skillsEnum)) {
-      skills[key] = this.system.skillsEnum[key];
+      skills[key] = systemData.skillsEnum[key];
     }
-    this.system.skills = skills;
+    systemData.skills = skills;
   }
 
-  _prepareBaseAbilities (updates){
-    if (this.type !== "hero") return;
+  _prepareBaseAbilities (actorData){
+    if (actorData.type !== "hero") return;
+
+    const systemData = actorData.system;
     const abilities = {};
     for (const key of Object.keys(CONFIG.MNM3E.abilities)){
-      abilities[key] = this.system.abilities[key];
+      abilities[key] = systemData.abilities[key];
     }
-    this.system.abilities = abilities;
+    systemData.abilities = abilities;
   }
 
   /**
    * Prepare Character type specific data
    */
-  _prepareCharacterData(updates) {
-    this.system.generic.pl = 0;
-    this.system.generic.pp = Math.max(this.system.generic.pl * 15, 15) + this.system.generic.extrapp;
+  _prepareCharacterData(actorData) {
+    if (actorData.type !== "hero") return;
+
+    const systemData = actorData.system;
+    systemData.generic.pl = 0;
+    systemData.generic.pp = Math.max(systemData.generic.pl * 15, 15) + systemData.generic.extrapp;
   }
 
   /**
    * Prepare NPC type specific data.
    */
-  _prepareVehicleData(updates) {
+  _prepareVehicleData(actorData) {
 
   }
 
@@ -91,7 +98,6 @@ export class FoundryMnM3eActor extends Actor {
 
     // Prepare character roll data.
     this._getCharacterRollData(data);
-    this._getNpcRollData(data);
 
     return data;
   }
@@ -99,8 +105,8 @@ export class FoundryMnM3eActor extends Actor {
   /**
    * Prepare character roll data.
    */
-  _getCharacterRollData(data) {
-    if (this.data.type !== 'character') return;
+   _getCharacterRollData(data) {
+    if (this.type !== 'hero') return;
 
     // Copy the ability scores to the top level, so that rolls can use
     // formulas like `@str.mod + 4`.
@@ -115,14 +121,4 @@ export class FoundryMnM3eActor extends Actor {
       data.lvl = data.attributes.level.value ?? 0;
     }
   }
-
-  /**
-   * Prepare NPC roll data.
-   */
-  _getNpcRollData(data) {
-    if (this.data.type !== 'npc') return;
-
-    // Process additional NPC data here.
-  }
-
 }

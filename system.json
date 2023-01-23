@@ -3,8 +3,16 @@
   "title": "Mutants and Masterminds",
   "description": "A system for playing Mutants and Masterminds 3rd Edition by Green Ronin",
   "version": "0.0.1",
-  "esmodules": [ "module/foundrymnm3e.mjs" ],
-  "styles": [ "css/foundrymnm3e.css" ],
+  "compatibility": {
+    "minimum": 10,
+    "verified": "10.287",
+    "maximum": 10
+  },
+  "authors": [{
+    "name": "Asacolips"
+  }],
+  "esmodules": ["module/foundrymnm3e.mjs"],
+  "styles": ["css/foundrymnm3e.css"],
   "scripts": [],
   "packs": [],
   "languages": [
@@ -15,5 +23,10 @@
     }
   ],
   "gridDistance": 1,
-  "gridUnits": "m"
+  "gridUnits": "m",
+  "url": "",
+  "manifest": "",
+  "download": "",
+  "license": "LICENSE.txt",
+  "changelog": "CHANGELOG.md"
 }
