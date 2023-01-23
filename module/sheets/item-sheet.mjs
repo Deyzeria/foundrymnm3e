@@ -17,7 +17,7 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
   /** @override */
   get template() {
     const path = "systems/foundrymnm3e/templates/item";
-    // Return a single sheet for all item types.
+    // Return a single sheet for all item types.d
     // return `${path}/item-sheet.html`;
 
     // Alternatively, you could use the following return statement to do a
