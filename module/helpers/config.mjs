@@ -1,3 +1,5 @@
+import { preLocalize } from "./utils.mjs";
+
 export const MNM3E = {};
 
 /**

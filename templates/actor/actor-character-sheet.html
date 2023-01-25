@@ -49,7 +49,7 @@
           <div class="abilities flexcol">
             {{#each system.abilities as |ability key|}}
             <div class="ability flexrow flex-group-center">
-              <label for="system.abilities.{{key}}.total" class="resource-label rollable flexlarge align-left" data-roll="d20+@abilities.{{key}}.total" data-label="{{ability.label}}">{{ability.label}}</label>
+              <label for="system.abilities.{{key}}.purchased" class="resource-label rollable flexlarge align-left" data-roll="d20+@abilities.{{key}}.total" data-label="{{ability.label}}">{{ability.label}}</label>
               <input type="text" name="system.abilities.{{key}}.purchased" value="{{ability.purchased}}" data-dtype="Number"/>
               <span class="ability-mod rollable" data-roll="d20+@abilities.{{key}}.total" data-label="{{ability.label}}">{{numberFormat ability.total decimals=0 sign=true}}</span>
             </div>
