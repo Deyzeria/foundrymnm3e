@@ -225,6 +225,7 @@
 
 /* Styles limited to foundrymnm3e sheets */
 .foundrymnm3e {
+  width: 715px;
   /* ----------------------------------------- */
   /*  Items Lists                              */
   /* ----------------------------------------- */
@@ -284,6 +285,7 @@
 .foundrymnm3e .sheet-body .tab,
 .foundrymnm3e .sheet-body .tab .editor {
   height: 100%;
+  width: 100%;
 }
 .foundrymnm3e .tox .tox-editor-container {
   background: #fff;

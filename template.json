@@ -66,60 +66,65 @@
                 "pp_powers": 0,
                 "pp_spent": 0,
                 "initiative": 0,
-                "size": -2
+                "size": -2,
+                "wounds": 0
             },
           "defenses": {
             "dodge": {
-              "default": "",
               "purchased": 0,
+              "default": 0,
+              "ability": "agl",
               "misc": 0,
               "auto": 0,
               "total": "",
-              "ac": 10,
+              "ac": 0,
               "immune": "",
               "imprevious": 0
             },
             "parry": {
-              "default": "",
               "purchased": 0,
+              "default": 0,
+              "ability": "fgt",
               "misc": 0,
               "auto": 0,
               "total": "",
-              "ac": 10,
+              "ac": 0,
               "immune": "",
               "imprevious": 0
             },
             "fortitude": {
-              "default": "",
               "purchased": 0,
+              "default": 0,
+              "ability": "sta",
               "misc": 0,
               "auto": 0,
               "total": "",
-              "ac": 10,
+              "ac": 0,
               "immune": "",
               "imprevious": 0
             },
             "toughness": {
-              "default": "",
               "purchased": 0,
+              "default": 0,
+              "ability": "sta",
               "misc": 0,
               "auto": 0,
               "total": "",
-              "ac": 10,
+              "ac": 0,
               "immune": "",
               "imprevious": 0
             },
             "will": {
-              "default": "",
               "purchased": 0,
+              "default": 0,
+              "ability": "awe",
               "misc": 0,
               "auto": 0,
               "total": "",
-              "ac": 10,
+              "ac": 0,
               "immune": "",
               "imprevious": 0
-            },
-            "wounds": 0
+            }
           },
             "skills":{
                 "ath": {

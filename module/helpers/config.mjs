@@ -30,7 +30,7 @@ MNM3E.abilityAbbreviations = {
 };
 preLocalize("abilityAbbreviations");
 
-MNM3E.skillsEnum = {
+MNM3E.skills = {
 	ath: {label: "MNM3E.SkillAth", ability: "str"},
 	acr: {label: "MNM3E.SkillAcr", ability: "agl"},
 	clc1: {label: "MNM3E.SkillClc", ability: "fgt"},
@@ -54,16 +54,16 @@ MNM3E.skillsEnum = {
 	tre: {label: "MNM3E.SkillTre", ability: "int"},
 	veh: {label: "MNM3E.SkillVeh", ability: "dex"}
 };
-preLocalize("skillsEnum", {key:"label", sort: true});
+preLocalize("skills", {key:"label", sort: true});
 
- MNM3E.defenseEnum = {
+ MNM3E.defenses = {
 	dodge: "MNM3E.Dodge",
 	parry: "MNM3E.Parry",
 	toughness: "MNM3E.Toughness",
 	fortitude: "MNM3E.Fortitude",
 	will: "MNM3E.Will"
  };
- preLocalize("defenseEnum");
+ preLocalize("defenses");
 
  MNM3E.movementTypes = {
 	walk: "MNM3E.Walk",

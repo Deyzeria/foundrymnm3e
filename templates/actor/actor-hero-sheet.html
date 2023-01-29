@@ -15,12 +15,17 @@
         center all of its child elements content and text. --}}
 
         <div class="resource flex-group-center">
-          <label for="system.common.generic.pl" class="resource-label">Power Level</label>
+          <label for="system.generic.pl" class="resource-label">Power Level</label>
           <div class="resource-content flexrow flex-center flex-between">
-          <input type="text" name="system.common.generic.pl" value="{{system.common.generic.pl}}" data-dtype="Number"/>
+          <input type="text" name="system.generic.pl" value="{{system.generic.pl}}" data-dtype="Number"/>
           </div>
         </div>
-
+        <div class="resource flex-group-center">
+          <label for="system.generic.pp" class="resource-label">Power Points</label>
+          <div class="resource-content flexrow flex-center flex-between">
+          <input type="text" disabled="true" name="system.generic.pp" value="{{system.generic.pp}}" data-dtype="Number"/>
+          </div>
+        </div>
       </div>
     </div>
   </header>
@@ -30,8 +35,6 @@
     {{!-- Default tab is specified in actor-sheet.mjs --}}
     <a class="item" data-tab="features">Features</a>
     <a class="item" data-tab="description">Description</a>
-    <a class="item" data-tab="items">Items</a>
-    <a class="item" data-tab="spells">Spells</a>
     <a class="item" data-tab="effects">Effects</a>
   </nav>
 
@@ -40,28 +43,37 @@
 
     {{!-- Owned Features Tab --}}
     <div class="tab features" data-group="primary" data-tab="features">
-      <section class="grid grid-4col">
+      <section class="grid grid">
         <aside class="sidebar">
 
           {{!-- The grid classes are defined in scss/global/_grid.scss. To use,
           use both the "grid" and "grid-Ncol" class where "N" can be any number
           from 1 to 12 and will create that number of columns.  --}}
-          <div class="abilities flexcol">
+          
             {{#each system.abilities as |ability key|}}
-            <div class="ability flexrow flex-group-center">
-              <label for="system.abilities.{{key}}.purchased" class="resource-label rollable flexlarge align-left" data-roll="d20+@abilities.{{key}}.total" data-label="{{ability.label}}">{{ability.label}}</label>
-              <input type="text" name="system.abilities.{{key}}.purchased" value="{{ability.purchased}}" data-dtype="Number"/>
-              <span class="ability-mod rollable" data-roll="d20+@abilities.{{key}}.total" data-label="{{ability.label}}">{{numberFormat ability.total decimals=0 sign=true}}</span>
+            <div class="ability flexrow flex-group-left">
+              <label class="resource-label rollable flexlarge align-center" data-roll="d20+@abilities.{{key}}.total" data-label="{{ability.label}}">{{ability.label}}</label>
+              <input title="Purchased" type="text" name="system.abilities.{{key}}.purchased" value="{{ability.purchased}}" data-dtype="Number"/>
+              <input title="Misc Bonuses" type="text" name="system.abilities.{{key}}.misc" value="{{ability.misc}}" data-dtype="Number"/>
+              <input title="Automatic" type="text" disabled="true" name="system.abilities.{{key}}.auto" value="{{ability.auto}}" data-dtype="Number"/>
+              <span class="ability-total rollable" data-roll="d20+@abilities.{{key}}.total" data-label="{{abilities}}">{{numberFormat ability.total decimals=0 sign=true}}</span>
             </div>
             {{/each}}
-          </div>
         </aside>
 
-        {{!-- For the main features list, span the right two columns --}}
-        <section class="main grid-span-2">
-          {{!-- This is a Handlebars partial. They're stored in the `/parts` folder next to this sheet, and defined in module/helpers/templates.mjs --}}
-          {{> "systems/foundrymnm3e/templates/actor/parts/actor-features.html"}}
-        </section>
+        <aside class="sidebar">
+          {{#each system.defenses as |defense key|}}
+          <section class="defense flexrow flex-group-left">
+            <label class="resource-label rollable flexlarge align-center" data-roll="d20+@defenses.{{key}}.total" data-label="{{defense.label}}">{{defense.label}}</label>
+            <input title="From Original Stat" type="text" disabled="true" name="system.defenses.{{key}}.default" value="{{defense.default}}" data-dtype="Number"/>
+            <input title="Purchased" type="text" name="system.defenses.{{key}}.purchased" value="{{defense.purchased}}" data-dtype="Number"/>
+            <input title="Misc Bonuses" type="text" name="system.defenses.{{key}}.misc" value="{{defense.misc}}" data-dtype="Number"/>
+            <input title="Automatic" type="text" disabled="true" name="system.defenses.{{key}}.auto" value="{{defense.auto}}" data-dtype="Number"/>
+            <span class="defense-total rollable" data-roll="d20+@defenses.{{key}}.total" data-label="{{defenses}}">{{numberFormat defense.total decimals=0 sign=true}}</span>
+            <input title="AC" type="text" disabled="true" name="system.defenses.{{key}}.ac" value="{{defense.ac}}" data-dtype="Number"/>
+          </section>
+          {{/each}}
+        </aside>
 
       </section>
     </div>

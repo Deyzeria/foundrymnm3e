@@ -40,13 +40,14 @@ export class FoundryMnM3eActor extends Actor {
    * is queried and has a roll executed directly from it).
    */
   prepareDerivedData() {
-    const actorData = this.data;
-    const data = actorData.data;
-    const flags = actorData.flags.foundrymnm3e || {};
+    const actorData = this;
+    const systemData = actorData.system;
+    const flags = actorData.flags.boilerplate || {};
+
 
     // Make separate methods for each Actor type (character, npc, etc.) to keep
     // things organized.
-    //this._prepareCharacterData(actorData);
+    this._prepareCharacterData(actorData);
     //this._prepareNpcData(actorData);
   }
 
@@ -65,11 +66,18 @@ export class FoundryMnM3eActor extends Actor {
     if (actorData.type !== "hero") return;
 
     const systemData = actorData.system;
+
     const abilities = {};
     for (const key of Object.keys(CONFIG.MNM3E.abilities)){
       abilities[key] = systemData.abilities[key];
     }
     systemData.abilities = abilities;
+
+    const defenses = {};
+    for (const key of Object.keys(CONFIG.MNM3E.defenses)){
+      defenses[key] = systemData.defenses[key];
+    }
+    systemData.defenses = defenses;
   }
 
   /**
@@ -79,8 +87,17 @@ export class FoundryMnM3eActor extends Actor {
     if (actorData.type !== "hero") return;
 
     const systemData = actorData.system;
-    systemData.generic.pl = 0;
     systemData.generic.pp = Math.max(systemData.generic.pl * 15, 15) + systemData.generic.extrapp;
+
+    for (let [key, ability] of Object.entries(systemData.abilities)) {
+      ability.total = ability.purchased + ability.misc + ability.auto;
+    }
+
+    for (let [key, defense] of Object.entries(systemData.defenses)) {
+      defense.default = systemData.abilities[defense.ability].total;
+      defense.total = defense.purchased + defense.misc + defense.auto + defense.default;
+      defense.ac = 10 + parseFloat(defense.total);
+    }
   }
 
   /**
