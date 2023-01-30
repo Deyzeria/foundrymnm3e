@@ -76,6 +76,20 @@
         </aside>
 
       </section>
+
+      {{#each system.skills as |skill key|}}
+          <section class="skill flexrow flex-group-left">
+            <label class="resource-label rollable flexlarge align-center" data-roll="d20+@skills.{{key}}.total" data-label="{{skills.label}}">{{skills.label}}</label>
+            <input title="From Original Stat" type="text" disabled="true" name="system.skills.{{key}}.default" value="{{skill.default}}" data-dtype="Number"/>
+            <input title="Purchased" type="text" name="system.skills.{{key}}.purchased" value="{{skill.purchased}}" data-dtype="Number"/>
+            <input title="Misc Bonuses" type="text" name="system.skills.{{key}}.misc" value="{{skill.misc}}" data-dtype="Number"/>
+            <input title="Automatic" type="text" disabled="true" name="system.skills.{{key}}.auto" value="{{skill.auto}}" data-dtype="Number"/>
+            <span class="skill-total rollable" data-roll="d20+@skills.{{key}}.total" data-label="{{skills}}">{{numberFormat skill.total decimals=0 sign=true}}</span>
+            <input type="checkbox" id="untrained" name="untrained" disabled="true">
+            <input type="checkbox" id="mastery" name="mastery">
+          </section>
+          {{/each}}
+{{!-- https://stackoverflow.com/questions/6199773/how-to-enable-disable-an-html-button-based-on-scenarios --}}
     </div>
 
     {{!-- Biography Tab --}}
