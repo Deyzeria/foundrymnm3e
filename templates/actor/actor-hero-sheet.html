@@ -8,7 +8,7 @@
       {{!-- The grid classes are defined in scss/global/_grid.scss. To use,
       use both the "grid" and "grid-Ncol" class where "N" can be any number
       from 1 to 12 and will create that number of columns.  --}}
-      <div class="resources grid grid-3col">
+      <div class="resources grid grid-6col">
 
         {{!-- "flex-group-center" is also defined in the _grid.scss file
         and it will add a small amount of padding, a border, and will
@@ -21,9 +21,28 @@
           </div>
         </div>
         <div class="resource flex-group-center">
+          <label for="system.generic.extrapp" class="resource-label">Extra Points</label>
+          <div class="resource-content flexrow flex-center flex-between">
+          <input type="text" name="system.generic.extrapp" value="{{system.generic.extrapp}}" data-dtype="Number"/>
+          </div>
+        </div>
+        <div class="resource flex-group-center">
           <label for="system.generic.pp" class="resource-label">Power Points</label>
           <div class="resource-content flexrow flex-center flex-between">
           <input type="text" disabled="true" name="system.generic.pp" value="{{system.generic.pp}}" data-dtype="Number"/>
+          </div>
+        </div>
+        <div class="resource flex-group-center">
+          <label for="system.generic.pp_spent" class="resource-label">Points Spent</label>
+          <div class="resource-content flexrow flex-center flex-between">
+          <input type="text" disabled="true" name="system.generic.pp" value="{{system.generic.pp_spent}}" data-dtype="Number"/>
+          </div>
+        </div>
+        <div></div>
+        <div class="resource flex-group-center">
+          <label for="system.generic.hero_point" class="resource-label">Hero Points</label>
+          <div class="resource-content flexrow flex-center flex-between">
+          <input type="text" name="system.generic.hero_point" value="{{system.generic.hero_point}}" data-dtype="Number"/>
           </div>
         </div>
       </div>

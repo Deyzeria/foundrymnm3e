@@ -78,6 +78,12 @@ export class FoundryMnM3eActor extends Actor {
       defenses[key] = systemData.defenses[key];
     }
     systemData.defenses = defenses;
+
+    const skills = {};
+    for (const key of Object.keys(CONFIG.MNM3E.skills)){
+      skills[key] = systemData.skills[key];
+    }
+    systemData.skills = skills;
   }
 
   /**
