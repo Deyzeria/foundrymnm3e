@@ -53,9 +53,9 @@
             {{#each system.abilities as |ability key|}}
             <div class="ability flexrow flex-group-left">
               <label class="resource-label rollable flexlarge align-center" data-roll="d20+@abilities.{{key}}.total" data-label="{{ability.label}}">{{ability.label}}</label>
-              <input title="Purchased" type="text" name="system.abilities.{{key}}.purchased" value="{{ability.purchased}}" data-dtype="Number"/>
-              <input title="Misc Bonuses" type="text" name="system.abilities.{{key}}.misc" value="{{ability.misc}}" data-dtype="Number"/>
-              <input title="Automatic" type="text" disabled="true" name="system.abilities.{{key}}.auto" value="{{ability.auto}}" data-dtype="Number"/>
+              <input width="30" title="Purchased" type="text" name="system.abilities.{{key}}.purchased" value="{{ability.purchased}}" data-dtype="Number"/>
+              <input width="30" title="Misc Bonuses" type="text" name="system.abilities.{{key}}.misc" value="{{ability.misc}}" data-dtype="Number"/>
+              <input width="30" title="Automatic" type="text" disabled="true" name="system.abilities.{{key}}.auto" value="{{ability.auto}}" data-dtype="Number"/>
               <span class="ability-total rollable" data-roll="d20+@abilities.{{key}}.total" data-label="{{abilities}}">{{numberFormat ability.total decimals=0 sign=true}}</span>
             </div>
             {{/each}}
@@ -65,19 +65,18 @@
           {{#each system.defenses as |defense key|}}
           <section class="defense flexrow flex-group-left">
             <label class="resource-label rollable flexlarge align-center" data-roll="d20+@defenses.{{key}}.total" data-label="{{defense.label}}">{{defense.label}}</label>
-            <input title="From Original Stat" type="text" disabled="true" name="system.defenses.{{key}}.default" value="{{defense.default}}" data-dtype="Number"/>
-            <input title="Purchased" type="text" name="system.defenses.{{key}}.purchased" value="{{defense.purchased}}" data-dtype="Number"/>
-            <input title="Misc Bonuses" type="text" name="system.defenses.{{key}}.misc" value="{{defense.misc}}" data-dtype="Number"/>
-            <input title="Automatic" type="text" disabled="true" name="system.defenses.{{key}}.auto" value="{{defense.auto}}" data-dtype="Number"/>
+            <input width="30" title="From Original Stat" type="text" disabled="true" name="system.defenses.{{key}}.default" value="{{defense.default}}" data-dtype="Number"/>
+            <input width="30" title="Purchased" type="text" name="system.defenses.{{key}}.purchased" value="{{defense.purchased}}" data-dtype="Number"/>
+            <input width="30" title="Misc Bonuses" type="text" name="system.defenses.{{key}}.misc" value="{{defense.misc}}" data-dtype="Number"/>
+            <input width="30" title="Automatic" type="text" disabled="true" name="system.defenses.{{key}}.auto" value="{{defense.auto}}" data-dtype="Number"/>
             <span class="defense-total rollable" data-roll="d20+@defenses.{{key}}.total" data-label="{{defenses}}">{{numberFormat defense.total decimals=0 sign=true}}</span>
-            <input title="AC" type="text" disabled="true" name="system.defenses.{{key}}.ac" value="{{defense.ac}}" data-dtype="Number"/>
+            <input width="30" title="AC" type="text" disabled="true" name="system.defenses.{{key}}.ac" value="{{defense.ac}}" data-dtype="Number"/>
           </section>
           {{/each}}
         </aside>
 
-      </section>
-
-      {{#each system.skills as |skill key|}}
+      <aside class="sidebar">
+        {{#each system.skills as |skill key|}}
           <section class="skill flexrow flex-group-left">
             <label class="resource-label rollable flexlarge align-center" data-roll="d20+@skills.{{key}}.total" data-label="{{skills.label}}">{{skills.label}}</label>
             <input title="From Original Stat" type="text" disabled="true" name="system.skills.{{key}}.default" value="{{skill.default}}" data-dtype="Number"/>
@@ -85,13 +84,15 @@
             <input title="Misc Bonuses" type="text" name="system.skills.{{key}}.misc" value="{{skill.misc}}" data-dtype="Number"/>
             <input title="Automatic" type="text" disabled="true" name="system.skills.{{key}}.auto" value="{{skill.auto}}" data-dtype="Number"/>
             <span class="skill-total rollable" data-roll="d20+@skills.{{key}}.total" data-label="{{skills}}">{{numberFormat skill.total decimals=0 sign=true}}</span>
-            <input type="checkbox" id="untrained" name="untrained" disabled="true">
-            <input type="checkbox" id="mastery" name="mastery">
+            <input title="Untrained?" type="checkbox" id="untrained" name="untrained" disabled="true">
+            <input title="Mastery" type="checkbox" id="mastery" name="mastery" disabled="true">
           </section>
           {{/each}}
-{{!-- https://stackoverflow.com/questions/6199773/how-to-enable-disable-an-html-button-based-on-scenarios --}}
+        </aside>
+      </section>
     </div>
 
+    {{!-- https://stackoverflow.com/questions/6199773/how-to-enable-disable-an-html-button-based-on-scenarios --}}
     {{!-- Biography Tab --}}
     <div class="tab biography" data-group="primary" data-tab="description">
       {{!-- If you want TinyMCE editors to output inline rolls when rendered, you need to pass the actor's roll data to the rollData property. --}}
