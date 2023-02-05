@@ -69,66 +69,66 @@
                 "size": -2,
                 "wounds": 0
             },
-          "defenses": {
-            "dodge": {
-              "purchased": 0,
-              "default": 0,
-              "ability": "agl",
-              "misc": 0,
-              "auto": 0,
-              "total": "",
-              "ac": 0,
-              "immune": "",
-              "imprevious": 0
+            "defenses": {
+                "dodge": {
+                "purchased": 0,
+                "default": 0,
+                "ability": "agl",
+                "misc": 0,
+                "auto": 0,
+                "total": "",
+                "ac": 0,
+                "immune": "",
+                "imprevious": 0
+                },
+                "parry": {
+                "purchased": 0,
+                "default": 0,
+                "ability": "fgt",
+                "misc": 0,
+                "auto": 0,
+                "total": "",
+                "ac": 0,
+                "immune": "",
+                "imprevious": 0
+                },
+                "fortitude": {
+                "purchased": 0,
+                "default": 0,
+                "ability": "sta",
+                "misc": 0,
+                "auto": 0,
+                "total": "",
+                "ac": 0,
+                "immune": "",
+                "imprevious": 0
+                },
+                "toughness": {
+                "purchased": 0,
+                "default": 0,
+                "ability": "sta",
+                "misc": 0,
+                "auto": 0,
+                "total": "",
+                "ac": 0,
+                "immune": "",
+                "imprevious": 0
+                },
+                "will": {
+                "purchased": 0,
+                "default": 0,
+                "ability": "awe",
+                "misc": 0,
+                "auto": 0,
+                "total": "",
+                "ac": 0,
+                "immune": "",
+                "imprevious": 0
+                }
             },
-            "parry": {
-              "purchased": 0,
-              "default": 0,
-              "ability": "fgt",
-              "misc": 0,
-              "auto": 0,
-              "total": "",
-              "ac": 0,
-              "immune": "",
-              "imprevious": 0
-            },
-            "fortitude": {
-              "purchased": 0,
-              "default": 0,
-              "ability": "sta",
-              "misc": 0,
-              "auto": 0,
-              "total": "",
-              "ac": 0,
-              "immune": "",
-              "imprevious": 0
-            },
-            "toughness": {
-              "purchased": 0,
-              "default": 0,
-              "ability": "sta",
-              "misc": 0,
-              "auto": 0,
-              "total": "",
-              "ac": 0,
-              "immune": "",
-              "imprevious": 0
-            },
-            "will": {
-              "purchased": 0,
-              "default": 0,
-              "ability": "awe",
-              "misc": 0,
-              "auto": 0,
-              "total": "",
-              "ac": 0,
-              "immune": "",
-              "imprevious": 0
-            }
-          },
             "skills":{
                 "ath": {
-                    "default": "",
+                    "default": 0,
                     "ability": "str",
                     "purchased": 0,
                     "misc": 0,
@@ -138,7 +138,7 @@
                     "mastery": false
                 },
                 "acr": {
-                    "default": "",
+                    "default": 0,
                     "ability": "agl",
                     "purchased": 0,
                     "misc": 0,
@@ -148,7 +148,7 @@
                     "mastery": false
                 },
                 "clc1": {
-                    "default": "",
+                    "default": 0,
                     "ability": "fgt",
                     "purchased": 0,
                     "misc": 0,
@@ -159,7 +159,7 @@
                     "mastery": false
                 },
                 "clc2": {
-                    "default": "",
+                    "default": 0,
                     "ability": "fgt",
                     "purchased": 0,
                     "misc": 0,
@@ -170,7 +170,7 @@
                     "mastery": false
                 },
                 "dec": {
-                    "default": "",
+                    "default": 0,
                     "ability": "pre",
                     "purchased": 0,
                     "misc": 0,
@@ -180,7 +180,7 @@
                     "mastery": false
                 },
                 "exp1": {
-                    "default": "",
+                    "default": 0,
                     "ability": "int",
                     "purchased": 0,
                     "misc": 0,
@@ -191,7 +191,7 @@
                     "mastery": false
                 },
                 "exp2": {
-                    "default": "",
+                    "default": 0,
                     "ability": "int",
                     "purchased": 0,
                     "misc": 0,
@@ -202,7 +202,7 @@
                     "mastery": false
                 },
                 "exp3": {
-                    "default": "",
+                    "default": 0,
                     "ability": "int",
                     "purchased": 0,
                     "misc": 0,
@@ -213,7 +213,7 @@
                     "mastery": false
                 },
                 "exp4": {
-                    "default": "",
+                    "default": 0,
                     "ability": "int",
                     "purchased": 0,
                     "misc": 0,
@@ -224,7 +224,7 @@
                     "mastery": false
                 },
                 "exp5": {
-                    "default": "",
+                    "default": 0,
                     "ability": "int",
                     "purchased": 0,
                     "misc": 0,
@@ -235,7 +235,7 @@
                     "mastery": false
                 },
                 "ins": {
-                    "default": "",
+                    "default": 0,
                     "ability": "awe",
                     "purchased": 0,
                     "misc": 0,
@@ -245,7 +245,7 @@
                     "mastery": false
                 },
                 "inm": {
-                    "default": "",
+                    "default": 0,
                     "ability": "pre",
                     "purchased": 0,
                     "misc": 0,
@@ -255,7 +255,7 @@
                     "mastery": false
                 },
                 "inv": {
-                    "default": "",
+                    "default": 0,
                     "ability": "int",
                     "purchased": 0,
                     "misc": 0,
@@ -265,7 +265,7 @@
                     "mastery": false
                 },
                 "prc": {
-                    "default": "",
+                    "default": 0,
                     "ability": "awe",
                     "purchased": 0,
                     "misc": 0,
@@ -275,7 +275,7 @@
                     "mastery": false
                 },
                 "prs": {
-                    "default": "",
+                    "default": 0,
                     "ability": "pre",
                     "purchased": 0,
                     "misc": 0,
@@ -285,7 +285,7 @@
                     "mastery": false
                 },
                 "rng1": {
-                    "default": "",
+                    "default": 0,
                     "ability": "dex",
                     "purchased": 0,
                     "misc": 0,
@@ -296,7 +296,7 @@
                     "mastery": false
                 },
                 "rng2": {
-                    "default": "",
+                    "default": 0,
                     "ability": "dex",
                     "purchased": 0,
                     "misc": 0,
@@ -307,7 +307,7 @@
                     "mastery": false
                 },
                 "soh": {
-                    "default": "",
+                    "default": 0,
                     "ability": "dex",
                     "purchased": 0,
                     "misc": 0,
@@ -317,7 +317,7 @@
                     "mastery": false
                 },
                 "ste": {
-                    "default": "",
+                    "default": 0,
                     "ability": "agl",
                     "purchased": 0,
                     "misc": 0,
@@ -327,7 +327,7 @@
                     "mastery": false
                 },
                 "tec": {
-                    "default": "",
+                    "default": 0,
                     "ability": "int",
                     "purchased": 0,
                     "misc": 0,
@@ -337,7 +337,7 @@
                     "mastery": false
                 },
                 "tre": {
-                    "default": "",
+                    "default": 0,
                     "ability": "int",
                     "purchased": 0,
                     "misc": 0,
@@ -347,7 +347,7 @@
                     "mastery": false
                 },
                 "veh": {
-                    "default": "",
+                    "default": 0,
                     "ability": "dex",
                     "purchased": 0,
                     "misc": 0,

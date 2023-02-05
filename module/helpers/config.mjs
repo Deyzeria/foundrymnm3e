@@ -31,30 +31,30 @@ MNM3E.abilityAbbreviations = {
 preLocalize("abilityAbbreviations");
 
 MNM3E.skills = {
-	ath: {label: "MNM3E.SkillAth", ability: "str"},
-	acr: {label: "MNM3E.SkillAcr", ability: "agl"},
-	clc1: {label: "MNM3E.SkillClc", ability: "fgt"},
-	clc2: {label: "MNM3E.SkillClc", ability: "fgt"},
-	dec: {label: "MNM3E.SkillDec", ability: "pre"},
-	exp1: {label: "MNM3E.SkillExp", ability: "int"},
-	exp2: {label: "MNM3E.SkillExp", ability: "int"},
-	exp3: {label: "MNM3E.SkillExp", ability: "int"},
-	exp4: {label: "MNM3E.SkillExp", ability: "int"},
-	exp5: {label: "MNM3E.SkillExp", ability: "int"},
-	ins: {label: "MNM3E.SkillIns", ability: "awe"},
-	inm: {label: "MNM3E.SkillInm", ability: "pre"},
-	inv: {label: "MNM3E.SkillInv", ability: "int"},
-	prc: {label: "MNM3E.SkillPrc", ability: "awe"},
-	prs: {label: "MNM3E.SkillPrs", ability: "pre"},
-	rng1: {label: "MNM3E.SkillRng", ability: "dex"},
-	rng2: {label: "MNM3E.SkillRng", ability: "dex"},
-	soh: {label: "MNM3E.SkillSoh", ability: "dex"},
-	ste: {label: "MNM3E.SkillSte", ability: "agl"},
-	tec: {label: "MNM3E.SkillTec", ability: "int"},
-	tre: {label: "MNM3E.SkillTre", ability: "int"},
-	veh: {label: "MNM3E.SkillVeh", ability: "dex"}
+	ath: "MNM3E.SkillAth",
+	acr: "MNM3E.SkillAcr",
+	clc1: "MNM3E.SkillClc",
+	clc2: "MNM3E.SkillClc",
+	dec: "MNM3E.SkillDec",
+	exp1: "MNM3E.SkillExp",
+	exp2: "MNM3E.SkillExp",
+	exp3: "MNM3E.SkillExp",
+	exp4: "MNM3E.SkillExp",
+	exp5: "MNM3E.SkillExp",
+	ins: "MNM3E.SkillIns",
+	inm: "MNM3E.SkillInm",
+	inv: "MNM3E.SkillInv",
+	prc: "MNM3E.SkillPrc",
+	prs: "MNM3E.SkillPrs",
+	rng1: "MNM3E.SkillRng",
+	rng2: "MNM3E.SkillRng",
+	soh: "MNM3E.SkillSoh", 
+	ste: "MNM3E.SkillSte", 
+	tec: "MNM3E.SkillTec", 
+	tre: "MNM3E.SkillTre", 
+	veh: "MNM3E.SkillVeh"
 };
-preLocalize("skills", {key:"label", sort: true});
+preLocalize("skills");
 
  MNM3E.defenses = {
 	dodge: "MNM3E.Dodge",

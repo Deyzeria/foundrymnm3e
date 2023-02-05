@@ -56,9 +56,7 @@ export class FoundryMnM3eActor extends Actor {
 
     const systemData = actorData.system;
     const skills = {};
-    for (const [key, skill] of Object.entries(CONFIG.MNM3E.skillsEnum)) {
-      skills[key] = systemData.skillsEnum[key];
-    }
+
     systemData.skills = skills;
   }
 
@@ -104,6 +102,15 @@ export class FoundryMnM3eActor extends Actor {
       defense.total = defense.purchased + defense.misc + defense.auto + defense.default;
       defense.ac = 10 + parseFloat(defense.total);
     }
+
+    for (let [key, skill] of Object.entries(systemData.skills)) {
+      skill.default = systemData.abilities[skill.ability].total;
+      skill.total = skill.default + skill.purchased + skill.misc + skill.auto;
+      var sadg = "unt" + game.i18n.localize(CONFIG.MNM3E.skills[key]) ?? key;
+      console.log(sadg);
+      // document.getElementById(sadg).checked = skill.untrained;
+    }
+
   }
 
   /**

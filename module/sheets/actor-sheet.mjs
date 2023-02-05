@@ -79,7 +79,7 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
       v.label = game.i18n.localize(CONFIG.MNM3E.defenses[k]) ?? k;
     }
 
-    // Handle defense scores.
+    // Handle skills scores.
     for (let [k, v] of Object.entries(context.system.skills)) {
       v.label = game.i18n.localize(CONFIG.MNM3E.skills[k]) ?? k;
     }
