@@ -26,6 +26,37 @@ export class FoundryMnM3eItem extends Item {
     return rollData;
   }
 
+
+  /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    if(this.isOwned)
+    {
+      this.prepareFinalAttributes();
+    }
+  }
+
+  prepareFinalAttributes(){
+    const pcost = this.system.power_cost;
+    console.log("test1");
+    var combinedPerRank = 0
+
+    combinedPerRank = pcost.base_cost + pcost.extras - pcost.flaws;
+
+    if(combinedPerRank < 1)
+    {
+      pcost.final_cost = Math.ceil(pcost.rank / (2 - combinedPerRank)) + pcost.flat;
+    } 
+    else 
+    {
+      pcost.final_cost = combinedPerRank * pcost.rank + pcost.flat;
+    }
+  }
+
   /**
    * Handle clickable rolls.
    * @param {Event} event   The originating click event

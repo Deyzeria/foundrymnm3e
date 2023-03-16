@@ -48,6 +48,7 @@ export class FoundryMnM3eActor extends Actor {
     // Make separate methods for each Actor type (character, npc, etc.) to keep
     // things organized.
     this._prepareCharacterData(actorData);
+
     //this._prepareNpcData(actorData);
   }
 
@@ -95,22 +96,47 @@ export class FoundryMnM3eActor extends Actor {
 
     for (let [key, ability] of Object.entries(systemData.abilities)) {
       ability.total = ability.purchased + ability.misc + ability.auto;
+      systemData.generic.pp_ability += ability.purchased * 2;
     }
 
     for (let [key, defense] of Object.entries(systemData.defenses)) {
       defense.default = systemData.abilities[defense.ability].total;
       defense.total = defense.purchased + defense.misc + defense.auto + defense.default;
       defense.ac = 10 + parseFloat(defense.total);
+      systemData.generic.pp_defenses += defense.purchased;
     }
 
     for (let [key, skill] of Object.entries(systemData.skills)) {
       skill.default = systemData.abilities[skill.ability].total;
       skill.total = skill.default + skill.purchased + skill.misc + skill.auto;
-      var sadg = "unt" + game.i18n.localize(CONFIG.MNM3E.skills[key]) ?? key;
-      console.log(sadg);
-      // document.getElementById(sadg).checked = skill.untrained;
+      systemData.generic.pp_skills += skill.purchased / 2;
+      /*var aname = game.i18n.localize(CONFIG.MNM3E.skills[key]) ?? key;
+
+      if(charsheetloaded){
+        //document.getElementById("unt-"+aname).setAttribute("checked", "");
+        //document.getElementById("abi-"+aname).setAttribute();
+        //console.log(tempe);
+        //document.getElementById("abi-"+aname).value = skill.ability;
+      }*/
     }
 
+    systemData.generic.pp_spent = systemData.generic.pp_ability + systemData.generic.pp_defenses + systemData.generic.pp_skills + systemData.generic.pp_advantages + systemData.generic.pp_powers;
+  }
+
+  calculatePowerCost(actorData) {
+    const systemData = actorData.system;
+    var combinedPerRank = 0
+
+    combinedPerRank = BaseCost + Extras - Flaws;
+
+    if(combinedPerRank < 1)
+    {
+      TotalCost = Math.ceil(Rank / (2 - combinedPerRank)) + Static;
+    } 
+    else 
+    {
+      TotalCost = combinedPerRank * Rank + Static;
+    }
   }
 
   /**

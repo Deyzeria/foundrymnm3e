@@ -1,0 +1,55 @@
+<form class="{{cssClass}}" autocomplete="off">
+  <header class="sheet-header">
+    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+    <div class="header-fields">
+      <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
+    </div>
+  </header>
+
+  {{!-- Sheet Tab Navigation --}}
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="description">Description</a>
+    <a class="item" data-tab="attributes">Attributes</a>
+  </nav>
+
+  {{!-- Sheet Body --}}
+  <section class="sheet-body">
+
+    {{!-- Description Tab --}}
+    <div class="tab" data-group="primary" data-tab="description">
+      {{!-- To render inline rolls in a TinyMCE editor, you need to pass the parent actor's (if any) roll data to the rollData prop. --}}
+      {{editor system.description target="system.description" rollData=rollData button=true owner=owner editable=editable}}
+    </div>
+
+    {{!-- Attributes Tab --}}
+    <div class="tab attributes" data-group="primary" data-tab="attributes">
+      <div class=" grid grid-6col">
+        {{!-- As you add new fields, add them in here! --}}
+        <div class="resource flex-group-center">
+          <label class="resource-label">Base cost</label>
+          <input type="text" name="system.power_cost.base_cost" value="{{system.power_cost.base_cost}}" data-dtype="Number" placeholder="0"/>
+        </div>
+        <div class="resource flex-group-center">
+          <label class="resource-label">Extras</label>
+          <input type="text" name="system.power_cost.extras" value="{{system.power_cost.extras}}" data-dtype="Number"/>
+        </div>
+        <div class="resource flex-group-center">
+          <label class="resource-label">Flaws</label>
+          <input type="text" name="system.power_cost.flaws" value="{{system.power_cost.flaws}}" data-dtype="Number"/>
+        </div>
+        <div class="resource flex-group-center">
+          <label class="resource-label">Flat</label>
+          <input type="text" name="system.power_cost.flat" value="{{system.power_cost.flat}}" data-dtype="Number"/>
+        </div>
+        <div class="resource flex-group-center">
+          <label class="resource-label">Rank</label>
+          <input type="text" name="system.power_cost.rank" value="{{system.power_cost.rank}}" data-dtype="Number"/>
+        </div>
+        <div class="resource flex-group-center">
+          <label class="resource-label">Final cost</label>
+          <input type="text" disabled="true" name="system.power_cost.final_cost" value="{{system.power_cost.final_cost}}" data-dtype="Number"/>
+        </div>
+      </div>
+    </div>
+  </section>
+</form>

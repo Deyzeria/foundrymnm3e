@@ -32,17 +32,49 @@
           <input type="text" disabled="true" name="system.generic.pp" value="{{system.generic.pp}}" data-dtype="Number"/>
           </div>
         </div>
-        <div class="resource flex-group-center">
-          <label for="system.generic.pp_spent" class="resource-label">Points Spent</label>
-          <div class="resource-content flexrow flex-center flex-between">
-          <input type="text" disabled="true" name="system.generic.pp" value="{{system.generic.pp_spent}}" data-dtype="Number"/>
-          </div>
-        </div>
+        <div></div>
         <div></div>
         <div class="resource flex-group-center">
           <label for="system.generic.hero_point" class="resource-label">Hero Points</label>
           <div class="resource-content flexrow flex-center flex-between">
           <input type="text" name="system.generic.hero_point" value="{{system.generic.hero_point}}" data-dtype="Number"/>
+          </div>
+        </div>
+
+        <div class="resource flex-group-center">
+          <label for="system.generic.pp_ability" class="resource-label">Abilities</label>
+          <div class="resource-content flexrow flex-center flex-between">
+          <input type="text" disabled="true" name="system.generic.pp_ability" value="{{system.generic.pp_ability}}" data-dtype="Number"/>
+          </div>
+        </div>
+        <div class="resource flex-group-center">
+          <label for="system.generic.pp_defenses" class="resource-label">Defenses</label>
+          <div class="resource-content flexrow flex-center flex-between">
+          <input type="text" disabled="true" name="system.generic.pp_defenses" value="{{system.generic.pp_defenses}}" data-dtype="Number"/>
+          </div>
+        </div>
+        <div class="resource flex-group-center">
+          <label for="system.generic.pp_skills" class="resource-label">Skills</label>
+          <div class="resource-content flexrow flex-center flex-between">
+          <input type="text" disabled="true" name="system.generic.pp_skills" value="{{system.generic.pp_skills}}" data-dtype="Number"/>
+          </div>
+        </div>
+        <div class="resource flex-group-center">
+          <label for="system.generic.pp_advantages" class="resource-label">Advantages</label>
+          <div class="resource-content flexrow flex-center flex-between">
+          <input type="text" disabled="true" name="system.generic.pp_advantages" value="{{system.generic.pp_advantages}}" data-dtype="Number"/>
+          </div>
+        </div>
+        <div class="resource flex-group-center">
+          <label for="system.generic.pp_powers" class="resource-label">Powers</label>
+          <div class="resource-content flexrow flex-center flex-between">
+          <input type="text" disabled="true" name="system.generic.pp_powers" value="{{system.generic.pp_powers}}" data-dtype="Number"/>
+          </div>
+        </div>
+        <div class="resource flex-group-center">
+          <label for="system.generic.pp_spent" class="resource-label">Spent</label>
+          <div class="resource-content flexrow flex-center flex-between">
+          <input type="text" disabled="true" name="system.generic.pp_spent" value="{{system.generic.pp_spent}}" data-dtype="Number"/>
           </div>
         </div>
       </div>
@@ -51,8 +83,8 @@
 
   {{!-- Sheet Tab Navigation --}}
   <nav class="sheet-tabs tabs" data-group="primary">
-    {{!-- Default tab is specified in actor-sheet.mjs --}}
     <a class="item" data-tab="features">Features</a>
+    <a class="item" data-tab="powers">Powers</a>
     <a class="item" data-tab="description">Description</a>
     <a class="item" data-tab="effects">Effects</a>
   </nav>
@@ -61,8 +93,8 @@
   <section class="sheet-body">
 
     {{!-- Owned Features Tab --}}
-    <div class="tab features" data-group="primary" data-tab="features">
-      <section class="grid grid">
+    <div class="tab features" data-group="primary" id="maintab" data-tab="features">
+      <section class="grid grid-2col">
         <aside class="sidebar">
 
           {{!-- The grid classes are defined in scss/global/_grid.scss. To use,
@@ -98,16 +130,6 @@
         {{#each system.skills as |skill key|}}
           <section class="skill flexrow flex-group-left">
             <label class="resource-label rollable flexlarge align-center" data-roll="d20+@skills.{{key}}.total" data-label="{{skill.label}}">{{skill.label}}</label>
-            <select name="skills-ability" id="skills-ability-{{skill.label}}" value="{{skill.ability}}">
-              <option value="str">Str</option>
-              <option value="sta">Sta</option>
-              <option value="agl">Agl</option>
-              <option value="dex">Dex</option>
-              <option value="fgt">Fgt</option>
-              <option value="int">Int</option>
-              <option value="awe">Awe</option>
-              <option value="pre">Pre</option>
-            </select>
             <input title="From Original Stat" type="text" disabled="true" name="system.skills.{{key}}.default" value="{{skill.default}}" data-dtype="Number"/>
             <input title="Purchased" type="text" name="system.skills.{{key}}.purchased" value="{{skill.purchased}}" data-dtype="Number"/>
             <input title="Misc Bonuses" type="text" name="system.skills.{{key}}.misc" value="{{skill.misc}}" data-dtype="Number"/>
@@ -128,9 +150,9 @@
       {{editor system.biography target="system.biography" rollData=rollData button=true owner=owner editable=editable}}
     </div>
 
-    {{!-- Owned Items Tab --}}
-    <div class="tab items" data-group="primary" data-tab="items">
-       {{> "systems/foundrymnm3e/templates/actor/parts/actor-items.html"}}
+    {{!-- Owned powers Tab --}}
+    <div class="tab powers" data-group="primary" data-tab="powers">
+       {{> "systems/foundrymnm3e/templates/actor/parts/actor-powers.html"}}
     </div>
 
     {{!-- Active Effects Tab --}}

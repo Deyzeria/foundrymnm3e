@@ -11,8 +11,8 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
     return mergeObject(super.defaultOptions, {
       classes: ["foundrymnm3e", "sheet", "actor"],
       template: "systems/foundrymnm3e/templates/actor/actor-sheet.html",
-      width: 600,
-      height: 600,
+      width: 800,
+      height: 800,
       tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "features" }]
     });
   }

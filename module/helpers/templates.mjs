@@ -8,7 +8,7 @@
 
     // Actor partials.
     "systems/foundrymnm3e/templates/actor/parts/actor-features.html",
-    "systems/foundrymnm3e/templates/actor/parts/actor-items.html",
+    "systems/foundrymnm3e/templates/actor/parts/actor-powers.html",
     "systems/foundrymnm3e/templates/actor/parts/actor-spells.html",
     "systems/foundrymnm3e/templates/actor/parts/actor-effects.html",
   ]);
