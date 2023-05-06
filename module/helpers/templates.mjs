@@ -7,9 +7,10 @@
   return loadTemplates([
 
     // Actor partials.
-    "systems/foundrymnm3e/templates/actor/parts/actor-features.html",
-    "systems/foundrymnm3e/templates/actor/parts/actor-powers.html",
-    "systems/foundrymnm3e/templates/actor/parts/actor-spells.html",
-    "systems/foundrymnm3e/templates/actor/parts/actor-effects.html",
+    "systems/foundrymnm3e/templates/actor/parts/actor-attacks.hbs",
+    "systems/foundrymnm3e/templates/actor/parts/actor-features.hbs",
+    "systems/foundrymnm3e/templates/actor/parts/actor-powers.hbs",
+    "systems/foundrymnm3e/templates/actor/parts/actor-spells.hbs",
+    "systems/foundrymnm3e/templates/actor/parts/actor-effects.hbs",
   ]);
 };

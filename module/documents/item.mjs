@@ -10,6 +10,7 @@ export class FoundryMnM3eItem extends Item {
     // As with the actor class, items are documents that can have their data
     // preparation methods overridden (such as prepareBaseData()).
     super.prepareData();
+    //this.populateLists();
   }
 
   /**
@@ -26,7 +27,6 @@ export class FoundryMnM3eItem extends Item {
     return rollData;
   }
 
-
   /* -------------------------------------------- */
   /*  Data Preparation                            */
   /* -------------------------------------------- */
@@ -42,7 +42,7 @@ export class FoundryMnM3eItem extends Item {
 
   prepareFinalAttributes(){
     const pcost = this.system.power_cost;
-    console.log("test1");
+
     var combinedPerRank = 0
 
     combinedPerRank = pcost.base_cost + pcost.extras - pcost.flaws;

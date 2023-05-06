@@ -10,7 +10,7 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       classes: ["foundrymnm3e", "sheet", "actor"],
-      template: "systems/foundrymnm3e/templates/actor/actor-sheet.html",
+      template: "systems/foundrymnm3e/templates/actor/actor-sheet.hbs",
       width: 800,
       height: 800,
       tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "features" }]
@@ -19,7 +19,7 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
 
   /** @override */
   get template() {
-    return `systems/foundrymnm3e/templates/actor/actor-${this.actor.type}-sheet.html`;
+    return `systems/foundrymnm3e/templates/actor/actor-${this.actor.type}-sheet.hbs`;
   }
 
   /* -------------------------------------------- */

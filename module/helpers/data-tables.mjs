@@ -421,18 +421,55 @@ const volume_m3_display = [
     "30 million m³"
 ];
 
+var distance_values = distance_miles_values;
+var distance_display = distance_miles_display;
+var mass_values = mass_pounds_values;
+var mass_display = mass_pounds_display;
+var volume_display = volume_cft_display;
 
+function SetGameValues(value)
+{
+    if (value == "meters")
+    {
+        distance_values = distance_meters_values;
+        distance_display = distance_meters_display;
+        mass_values = mass_kilograms_values;
+        mass_display = mass_kilograms_display;
+        volume_display = volume_m3_display;
+    }
+    else
+    {
+        distance_values = distance_miles_values;
+        distance_display = distance_miles_display;
+        mass_values = mass_pounds_values;
+        mass_display = mass_pounds_display;
+        volume_display = volume_cft_display;
+    }
+}
 
 export function GetDistanceValueMeters(value){
     if (value >= 0 && value <= 35)
     {
-        return distance_meters_values[value-5];
+        return distance_values[value-5];
     } 
     else if (value > 35) {
-        GetOverLimit(distance_meters_values, value);
+        GetOverLimit(distance_values, value);
     }
     else if (value < 0) {
-        GetUnderLimit(distance_meters_values, value);
+        GetUnderLimit(distance_values, value);
+    }
+}
+
+export function GetDistanceDisplayMeters(value){
+    if (value >= 0 && value <= 35)
+    {
+        return distance_display[value-5];
+    } 
+    else if (value > 35) {
+        GetOverLimit(distance_values, value);
+    }
+    else if (value < 0) {
+        GetUnderLimit(distance_values, value);
     }
 }
 
