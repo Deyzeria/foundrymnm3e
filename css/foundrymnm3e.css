@@ -202,6 +202,12 @@
   flex: 2;
 }
 
+.flexexlarge {
+  -webkit-box-flex: 3;
+  -ms-flex: 3;
+  flex: 3;
+}
+
 .align-left {
   -webkit-box-pack: start;
   -ms-flex-pack: start;

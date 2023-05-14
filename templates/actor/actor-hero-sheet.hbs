@@ -126,10 +126,11 @@
           {{/each}}
         </aside>
       </section>
+      <section class="grid grid-2col">
       <aside class="sidebar">
         {{#each system.skills as |skill key|}}
           <section class="skill flexrow flex-group-left">
-            <label class="resource-label rollable flexlarge align-center" data-roll="d20+@skills.{{key}}.total" data-label="{{skill.label}}">{{skill.label}}</label>
+            <label class="resource-label rollable flexexlarge align-center" data-roll="d20+@skills.{{key}}.total" data-label="{{skill.label}}">{{skill.label}}</label>
             <input title="From Original Stat" type="text" disabled="true" name="system.skills.{{key}}.default" value="{{skill.default}}" data-dtype="Number"/>
             <input title="Purchased" type="text" name="system.skills.{{key}}.purchased" value="{{skill.purchased}}" data-dtype="Number"/>
             <input title="Misc Bonuses" type="text" name="system.skills.{{key}}.misc" value="{{skill.misc}}" data-dtype="Number"/>
@@ -140,6 +141,7 @@
           </section>
           {{/each}}
         </aside>
+        </section>
     </div>
 
     {{!-- https://stackoverflow.com/questions/6199773/how-to-enable-disable-an-html-button-based-on-scenarios --}}
