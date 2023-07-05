@@ -110,14 +110,6 @@ export class FoundryMnM3eActor extends Actor {
       skill.default = systemData.abilities[skill.ability].total;
       skill.total = skill.default + skill.purchased + skill.misc + skill.auto;
       systemData.generic.pp_skills += skill.purchased / 2;
-      /*var aname = game.i18n.localize(CONFIG.MNM3E.skills[key]) ?? key;
-
-      if(charsheetloaded){
-        //document.getElementById("unt-"+aname).setAttribute("checked", "");
-        //document.getElementById("abi-"+aname).setAttribute();
-        //console.log(tempe);
-        //document.getElementById("abi-"+aname).value = skill.ability;
-      }*/
     }
 
     systemData.generic.pp_spent = systemData.generic.pp_ability + systemData.generic.pp_defenses + systemData.generic.pp_skills + systemData.generic.pp_advantages + systemData.generic.pp_powers;
@@ -165,3 +157,12 @@ export class FoundryMnM3eActor extends Actor {
     if (this.type !== 'hero') return;
     }
 }
+
+Hooks.on("renderActorSheet", (app, html, data) => {
+  if(data.system.generic.pp_spent > data.system.generic.pp){
+    html.find(".attribute-value.multiple .spenttotal")[0].style.background = "red";
+  }
+  if(!Number.isInteger(data.system.generic.pp_skills)){
+    html.find(".skillsspent")[0].style.background = "red";
+  }
+});

@@ -2,82 +2,86 @@
 
   {{!-- Sheet Header --}}
   <header class="sheet-header">
-    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"/>
+    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="150" width="100"/>
+    <img class="secondary-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="50" width="50"/>
     <div class="header-fields">
-      <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></h1>
-      {{!-- The grid classes are defined in scss/global/_grid.scss. To use,
-      use both the "grid" and "grid-Ncol" class where "N" can be any number
-      from 1 to 12 and will create that number of columns.  --}}
-      <div class="resources grid grid-6col">
-
-        {{!-- "flex-group-center" is also defined in the _grid.scss file
-        and it will add a small amount of padding, a border, and will
-        center all of its child elements content and text. --}}
-
-        <div class="resource flex-group-center">
-          <label for="system.generic.pl" class="resource-label">Power Level</label>
-          <div class="resource-content flexrow flex-center flex-between">
-          <input type="text" name="system.generic.pl" value="{{system.generic.pl}}" data-dtype="Number"/>
-          </div>
-        </div>
-        <div class="resource flex-group-center">
-          <label for="system.generic.extrapp" class="resource-label">Extra Points</label>
-          <div class="resource-content flexrow flex-center flex-between">
-          <input type="text" name="system.generic.extrapp" value="{{system.generic.extrapp}}" data-dtype="Number"/>
-          </div>
-        </div>
-        <div class="resource flex-group-center">
-          <label for="system.generic.pp" class="resource-label">Power Points</label>
-          <div class="resource-content flexrow flex-center flex-between">
-          <input type="text" disabled="true" name="system.generic.pp" value="{{system.generic.pp}}" data-dtype="Number"/>
-          </div>
-        </div>
-        <div></div>
-        <div></div>
-        <div class="resource flex-group-center">
-          <label for="system.generic.hero_point" class="resource-label">Hero Points</label>
-          <div class="resource-content flexrow flex-center flex-between">
-          <input type="text" name="system.generic.hero_point" value="{{system.generic.hero_point}}" data-dtype="Number"/>
-          </div>
-        </div>
-
-        <div class="resource flex-group-center">
-          <label for="system.generic.pp_ability" class="resource-label">Abilities</label>
-          <div class="resource-content flexrow flex-center flex-between">
-          <input type="text" disabled="true" name="system.generic.pp_ability" value="{{system.generic.pp_ability}}" data-dtype="Number"/>
-          </div>
-        </div>
-        <div class="resource flex-group-center">
-          <label for="system.generic.pp_defenses" class="resource-label">Defenses</label>
-          <div class="resource-content flexrow flex-center flex-between">
-          <input type="text" disabled="true" name="system.generic.pp_defenses" value="{{system.generic.pp_defenses}}" data-dtype="Number"/>
-          </div>
-        </div>
-        <div class="resource flex-group-center">
-          <label for="system.generic.pp_skills" class="resource-label">Skills</label>
-          <div class="resource-content flexrow flex-center flex-between">
-          <input type="text" disabled="true" name="system.generic.pp_skills" value="{{system.generic.pp_skills}}" data-dtype="Number"/>
-          </div>
-        </div>
-        <div class="resource flex-group-center">
-          <label for="system.generic.pp_advantages" class="resource-label">Advantages</label>
-          <div class="resource-content flexrow flex-center flex-between">
-          <input type="text" disabled="true" name="system.generic.pp_advantages" value="{{system.generic.pp_advantages}}" data-dtype="Number"/>
-          </div>
-        </div>
-        <div class="resource flex-group-center">
-          <label for="system.generic.pp_powers" class="resource-label">Powers</label>
-          <div class="resource-content flexrow flex-center flex-between">
-          <input type="text" disabled="true" name="system.generic.pp_powers" value="{{system.generic.pp_powers}}" data-dtype="Number"/>
-          </div>
-        </div>
-        <div class="resource flex-group-center">
-          <label for="system.generic.pp_spent" class="resource-label">Spent</label>
-          <div class="resource-content flexrow flex-center flex-between">
-          <input type="text" disabled="true" name="system.generic.pp_spent" value="{{system.generic.pp_spent}}" data-dtype="Number"/>
-          </div>
-        </div>
+      <div class="flexrow">
+        <h1 class="charname"><input name="hname" type="text" value="{{actor.hero_name}}" placeholder="Superman"/></h1>
+        <i class="fa-solid fa-arrows-rotate swapbutton"></i>
+        <h1 class="charname"><input name="nname" type="text" value="{{actor.real_identity}}" placeholder="Clark Kent"/></h1>
       </div>
+
+      {{!-- Power Level, Power Points Total, Extra Power Points, Hero Points --}}
+      <ul class="attributes flexrow">
+        <li class="attribute pl">
+          <h4 class="attribute-name box-title">Power Level</h4>
+          <center>
+          <input class="attribute-value" type="text" name="system.generic.pl" value="{{system.generic.pl}}" data-dtype="Number"/>
+          </center>
+        </li>
+
+        <li class="attribute extpp">
+          <h4 class="attribute-name box-title">Extra PP</h4>
+          <center>
+          <input class="attribute-value" type="text" name="system.generic.extrapp" value="{{system.generic.extrapp}}" data-dtype="Number"/>
+          </center>
+        </li>
+
+        <li class="attribute hp">
+          <h4 class="attribute-name box-title">Hero Points</h4>
+          <center>
+          <input class="attribute-value" type="text" name="system.generic.hero_point" value="{{system.generic.hero_point}}" data-dtype="Number"/>
+          </center>
+        </li>
+      </ul>
+      {{!-- Power Point Spent --}}
+      <ul class="attributes flexrow">
+        <li class="attribute ppabilities">
+          <h4 class="attribute-name box-title">Abilities</h4>
+          <center>
+          <input class="attribute-value" type="text" name="system.generic.pp_ability" value="{{system.generic.pp_ability}}" data-dtype="Number" disabled="true"/>
+          </center>
+        </li>
+
+        <li class="attribute ppdefences">
+          <h4 class="attribute-name box-title">Defences</h4>
+          <center>
+          <input class="attribute-value" type="text" name="system.generic.pp_defenses" value="{{system.generic.pp_defenses}}" data-dtype="Number" disabled="true"/>
+          </center>
+        </li>
+
+        <li class="attribute ppskills">
+          <h4 class="attribute-name box-title">Skills</h4>
+          <center>
+          <input class="attribute-value skillsspent" type="text" name="system.generic.pp_skills" value="{{system.generic.pp_skills}}" data-dtype="Number" disabled="true"/>
+          </center>
+        </li>
+
+        <li class="attribute ppadvantages">
+          <h4 class="attribute-name box-title">Advantages</h4>
+          <center>
+          <input class="attribute-value" type="text" name="system.generic.pp_advantages" value="{{system.generic.pp_advantages}}" data-dtype="Number" disabled="true"/>
+          </center>
+        </li>
+
+        <li class="attribute pppowers">
+          <h4 class="attribute-name box-title">Powers</h4>
+          <center>
+          <input class="attribute-value" type="text" name="system.generic.pp_powers" value="{{system.generic.pp_powers}}" data-dtype="Number" disabled="true"/>
+          </center>
+        </li>
+
+        <li class="attribute ppspent">
+          <h4 class="attribute-name box-title">Spent</h4>
+          <center>
+          <div id="pptotal" class="attribute-value multiple">
+            <input class="spenttotal" type="text" name="system.generic.pp_spent" value="{{system.generic.pp_spent}}" data-dtype="Number" disabled="true"/>
+            <span class="sep"> / </span>
+            <input type="text" name="system.generic.pp" value="{{system.generic.pp}}" data-dtype="Number" disabled="true"/>
+          </div>
+          </center>
+        </li>
+      </ul>
     </div>
   </header>
 
@@ -112,6 +116,7 @@
             {{/each}}
         </aside>
 
+        {{!-- Skills --}}
         <aside class="sidebar">
           {{#each system.defenses as |defense key|}}
           <section class="defense flexrow flex-group-left">
@@ -126,22 +131,26 @@
           {{/each}}
         </aside>
       </section>
-      <section class="grid grid-2col">
-      <aside class="sidebar">
-        {{#each system.skills as |skill key|}}
-          <section class="skill flexrow flex-group-left">
-            <label class="resource-label rollable flexexlarge align-center" data-roll="d20+@skills.{{key}}.total" data-label="{{skill.label}}">{{skill.label}}</label>
-            <input title="From Original Stat" type="text" disabled="true" name="system.skills.{{key}}.default" value="{{skill.default}}" data-dtype="Number"/>
+
+      {{!-- Skills --}}
+      <ul class="skills-list">
+      {{#each system.skills as |skill key|}}
+        <li class="skill flexrow">
+            <div class="skill-name-controls">
+              <i class="fa-solid fa-dice-d20 roll-button rollable flexexlarge align-center" data-roll="d20+@skills.{{key}}.total"></i>
+              <label class="resource-label flexexlarge align-center" data-label="{{skill.label}}">{{skill.label}}</label>
+              <a class="config-button" data-action="skill" data-tooltip="Configure">
+                <i class="fas fa-cog"></i>
+              </a>
+            </div>
+            <label class="skill-ability" title="Original Ability">{{skill.ability}}</label>
+            <label class="skill-original-ability" title="From Original Stat">+{{skill.default}}</label>
             <input title="Purchased" type="text" name="system.skills.{{key}}.purchased" value="{{skill.purchased}}" data-dtype="Number"/>
-            <input title="Misc Bonuses" type="text" name="system.skills.{{key}}.misc" value="{{skill.misc}}" data-dtype="Number"/>
-            <input title="Automatic" type="text" disabled="true" name="system.skills.{{key}}.auto" value="{{skill.auto}}" data-dtype="Number"/>
-            <span class="skill-total rollable" data-roll="d20+@skills.{{key}}.total" data-label="{{skills}}">{{numberFormat skill.total decimals=0 sign=true}}</span>
-            <input title="Untrained?" type="checkbox" name="untrained" id="unt-{{skill.label}}" disabled="true"/>
-            <input title="Mastery" type="checkbox" name="mastery" disabled="true"/>
-          </section>
-          {{/each}}
-        </aside>
-        </section>
+        </li>
+      {{/each}}
+      </ul>
+
+
     </div>
 
     {{!-- https://stackoverflow.com/questions/6199773/how-to-enable-disable-an-html-button-based-on-scenarios --}}
