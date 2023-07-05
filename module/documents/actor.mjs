@@ -52,15 +52,6 @@ export class FoundryMnM3eActor extends Actor {
     //this._prepareNpcData(actorData);
   }
 
-  _prepareBaseSkills (actorData){
-    if (actorData.type !== "hero") return;
-
-    const systemData = actorData.system;
-    const skills = {};
-
-    systemData.skills = skills;
-  }
-
   _prepareBaseAbilities (actorData){
     if (actorData.type !== "hero") return;
 
@@ -92,11 +83,28 @@ export class FoundryMnM3eActor extends Actor {
     if (actorData.type !== "hero") return;
 
     const systemData = actorData.system;
+
+    if (systemData.heroname == ""){
+      systemData.heroname = actorData.name;
+    } else if (systemData.heroname != actorData.name && systemData.heroname != "")
+    {
+      actorData.name = systemData.heroname;
+    }
+    
+
     systemData.generic.pp = Math.max(systemData.generic.pl * 15, 15) + systemData.generic.extrapp;
 
     for (let [key, ability] of Object.entries(systemData.abilities)) {
-      ability.total = ability.purchased + ability.misc + ability.auto;
-      systemData.generic.pp_ability += ability.purchased * 2;
+      if(ability.purchased > -5)
+      {
+        ability.total = ability.purchased + ability.misc + ability.auto;
+        systemData.generic.pp_ability += ability.purchased * 2;
+      } 
+      else
+      {
+        ability.total = -100;
+        systemData.generic.pp_ability += -5 * 2;
+      }
     }
 
     for (let [key, defense] of Object.entries(systemData.defenses)) {
@@ -115,6 +123,7 @@ export class FoundryMnM3eActor extends Actor {
     systemData.generic.pp_spent = systemData.generic.pp_ability + systemData.generic.pp_defenses + systemData.generic.pp_skills + systemData.generic.pp_advantages + systemData.generic.pp_powers;
   }
 
+  //to add later to powers
   calculatePowerCost(actorData) {
     const systemData = actorData.system;
     var combinedPerRank = 0

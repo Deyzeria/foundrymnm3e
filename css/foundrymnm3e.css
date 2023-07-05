@@ -470,7 +470,11 @@
   text-shadow: 0 0 8px blue;
   cursor: pointer;
 }
-
+.foundrymnm3e.sheet.actor .config-button {
+  color: #4b4a44;
+  font-size: 10px;
+  font-weight: normal;
+}
 .foundrymnm3e .sheet-header h1.charname input {
   width: 100%;
   height: 100%;
@@ -524,15 +528,6 @@
 .foundrymnm3e.sheet.actor ul.attributes li.attribute:last-child {
   margin: 0;
 }
-.foundrymnm3e.sheet.actor ul.attributes li.attribute .attribute-value.multiple input,
-.foundrymnm3e.sheet.actor ul.attributes li.attribute .attribute-value.multiple span:not(.sep) {
-  flex: 0 0 33%;
-  border: transparent;
-}
-.foundrymnm3e.sheet.actor ul.attributes li.attribute .attribute-value.multiple .spenttotal{
-    background: transparent;
-}
-
 .foundrymnm3e.sheet.actor ul.attributes li.attribute .attribute-value {
   display: flex;
   justify-content: center;
@@ -543,9 +538,19 @@
   font-size: 20px;
   font-weight: 700;
 }
+
+.foundrymnm3e.sheet.actor ul.attributes li.attribute .attribute-value.multiple input,
+.foundrymnm3e.sheet.actor ul.attributes li.attribute .attribute-value.multiple span:not(.sep) {
+  flex: 0 0 33%;
+  border: transparent;
+}
+.foundrymnm3e.sheet.actor ul.attributes li.attribute .attribute-value.multiple .spenttotal{
+  background: transparent;
+}
 .foundrymnm3e.sheet.actor ul.attributes li.attribute .skillsspent{
   background: transparent;
 }
+
 .foundrymnm3e.sheet.actor .attributes .attribute {
   position: relative;
   height: 70px;
@@ -571,6 +576,7 @@
   border: transparent;
 }
 .foundrymnm3e.sheet.actor .attributes .attribute .attribute-value.multiple{
+  width: auto;
   background:rgba(80, 226, 112, 0.38);
   border: transparent;
 }
@@ -610,7 +616,8 @@
 }
 .foundrymnm3e.sheet.actor ul.skills-list li.skill .skill-name-controls .config-button {
   right: 3px;
-  top: 0px;
+  top: 1px;
+  font-size: 15px;
   position: absolute;
   display: none;
 }

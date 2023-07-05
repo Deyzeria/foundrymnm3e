@@ -53,7 +53,7 @@
                     "total": 0
                 }
             },
-            "generic": {               
+            "generic": {
                 "pl": 0,
                 "pp": 0,
                 "extrapp": 0,
@@ -392,12 +392,13 @@
                 }
             }
         },
-        "detals": {
-            "hero_name": "",
-            "real_identity": "",
+        "details": {
+            "heroname": "",
+            "realidentity": "",
+            "currentPosition": 1,
             "gender": "",
             "age": 0,
-            "height": 0,
+            "height": "",
             "weight": 0,
             "eyes": "",
             "hair": "",

@@ -1,5 +1,7 @@
 import {onManageActiveEffect, prepareActiveEffectCategories} from "../helpers/effects.mjs";
 
+import SkillsConfig from "./parts/skills-config.mjs"
+
 /**
  * Extend the basic ActorSheet with some very simple modifications
  * @extends {ActorSheet}
@@ -142,34 +144,52 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
 
     // -------------------------------------------------------------
     // Everything below here is only needed if the sheet is editable
-    if (!this.isEditable) return;
+    if (!this.isEditable){
 
-    // Add Inventory Item
-    html.find('.item-create').click(this._onItemCreate.bind(this));
+      // Add Inventory Item
+      html.find('.item-create').click(this._onItemCreate.bind(this));
 
-    // Delete Inventory Item
-    html.find('.item-delete').click(ev => {
-      const li = $(ev.currentTarget).parents(".item");
-      const item = this.actor.items.get(li.data("itemId"));
-      item.delete();
-      li.slideUp(200, () => this.render(false));
-    });
-
-    // Active Effect management
-    html.find(".effect-control").click(ev => onManageActiveEffect(ev, this.actor));
-
-    // Rollable abilities.
-    html.find('.rollable').click(this._onRoll.bind(this));
-
-    // Drag events for macros.
-    if (this.actor.isOwner) {
-      let handler = ev => this._onDragStart(ev);
-      html.find('li.item').each((i, li) => {
-        if (li.classList.contains("inventory-header")) return;
-        li.setAttribute("draggable", true);
-        li.addEventListener("dragstart", handler, false);
+      // Delete Inventory Item
+      html.find('.item-delete').click(ev => {
+        const li = $(ev.currentTarget).parents(".item");
+        const item = this.actor.items.get(li.data("itemId"));
+        item.delete();
+        li.slideUp(200, () => this.render(false));
       });
+
+      // Active Effect management
+      html.find(".effect-control").click(ev => onManageActiveEffect(ev, this.actor));
+
+      // Rollable abilities.
+      html.find('.rollable').click(this._onRoll.bind(this));
+
+      html.find(".config-button").click(this._onConfigMenu.bind(this));
+
+      // Drag events for macros.
+      if (this.actor.isOwner) {
+        let handler = ev => this._onDragStart(ev);
+        html.find('li.item').each((i, li) => {
+          if (li.classList.contains("inventory-header")) return;
+          li.setAttribute("draggable", true);
+          li.addEventListener("dragstart", handler, false);
+        });
+      }
     }
+  }
+
+  _onConfigMenu(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    const button = event.currentTarget;
+    let app;
+    switch ( button.dataset.action ) {
+      case "skill":
+        app = new SkillsConfig(this.actor);
+        break;
+      default:
+        break;
+    }
+    app?.render(true);
   }
 
   /**
