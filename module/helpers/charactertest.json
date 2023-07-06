@@ -19,12 +19,12 @@
          },
          "character": {
             "powerpoints": {
-               "_text": "195 PP",
-               "_value": "195"
+               "_text": "303 PP",
+               "_value": "303"
             },
             "powerlevel": {
-               "_text": "PL 16",
-               "_value": "16"
+               "_text": "PL 15",
+               "_value": "15"
             },
             "size": {
                "_name": "Medium"
@@ -33,33 +33,33 @@
                "resource": [
                   {
                      "_name": "Abilities",
-                     "_spent": "72"
+                     "_spent": "70"
                   },
                   {
                      "_name": "Powers",
-                     "_spent": "0"
+                     "_spent": "150"
                   },
                   {
                      "_name": "Advantages",
-                     "_spent": "8"
+                     "_spent": "26"
                   },
                   {
                      "_name": "Skills",
-                     "_spent": "105"
+                     "_spent": "45"
                   },
                   {
                      "_name": "Defenses",
-                     "_spent": "10"
+                     "_spent": "12"
                   }
                ],
                "_startingpp": "150",
                "_totalpp": "150",
                "_startingpl": "10",
-               "_currentpl": "16",
-               "_wealth": "8"
+               "_currentpl": "15",
+               "_wealth": "20"
             },
             "personal": {
-               "description": "",
+               "description": "Real name- Zahra Burnett\n\nКавалерия началась с Lightning Hawk-а, которую какой то из ее злодеев разоблачил перед народом ее реальную личность (в те времена супергерои старались скрывать свои реальные личности), как простую афроамериканскую студентку 18 лет от роду из семьи беженцев, по имени Zahra Burnett(Захра Бурнет). А она взяла, перевернула это вокруг, и использовала как сверхсильную саморекламу. И у нее, от мощной харизмы, простого, но сильного характера, и умении работать на публику, получилось. Она и начала переворот, который вот 9 лет длится, который сделал более популярным публичных супергероев. А саму Захру в ее супергеройском костюме сокращают до LH(ЭлЭйч).\n\nПри этом сама LH тоже не слабая. У нее был потенциал, и она его смогла развить и все ещё развивает. Она оперирует вокруг очень близкого контроля сил гравитации и того, что она называет векторами. Полет, скорость, стрельба объектами, отведение снарядом, и вплоть до недавно развивающегося в ней прохождения сквозь стены путем просто раздвигания молекул так, что бы перенести свои на нужную позицию.\n\nДо этого тоже были супергеройские команды, однако она и это выкрутила в огромный плюс и начала вокруг себя собирать умных, сильных и заметных супергероев.",
                "charheight": {
                   "_text": "5' 8\"",
                   "_value": "68"
@@ -68,78 +68,83 @@
                   "_text": "175 lb.",
                   "_value": "175"
                },
-               "_gender": "Male",
+               "_gender": "Female",
                "_age": "25",
-               "_hair": "",
-               "_eyes": ""
+               "_hair": "Black n Yellow",
+               "_eyes": "Yellow"
             },
             "languages": {
-               "language": {
-                  "_name": "Native Language",
-                  "_useradded": "no"
-               }
+               "language": [
+                  {
+                     "_name": "English",
+                     "_useradded": "no"
+                  },
+                  {
+                     "_name": "Spanish"
+                  }
+               ]
             },
             "attributes": {
                "attribute": [
                   {
                      "cost": {
-                        "_text": "2 PP",
-                        "_value": "2"
+                        "_text": "8 PP",
+                        "_value": "8"
                      },
                      "_name": "Strength",
-                     "_text": "1",
-                     "_base": "1",
-                     "_modified": "1"
-                  },
-                  {
-                     "cost": {
-                        "_text": "10 PP",
-                        "_value": "10"
-                     },
-                     "_name": "Stamina",
-                     "_text": "5",
-                     "_base": "5",
-                     "_modified": "5"
-                  },
-                  {
-                     "cost": {
-                        "_text": "4 PP",
-                        "_value": "4"
-                     },
-                     "_name": "Agility",
-                     "_text": "2",
-                     "_base": "2",
-                     "_modified": "2"
+                     "_text": "12",
+                     "_base": "4",
+                     "_modified": "12"
                   },
                   {
                      "cost": {
                         "_text": "12 PP",
                         "_value": "12"
                      },
-                     "_name": "Dexterity",
+                     "_name": "Stamina",
                      "_text": "6",
                      "_base": "6",
                      "_modified": "6"
                   },
                   {
                      "cost": {
-                        "_text": "6 PP",
-                        "_value": "6"
+                        "_text": "8 PP",
+                        "_value": "8"
                      },
-                     "_name": "Fighting",
-                     "_text": "3",
-                     "_base": "3",
-                     "_modified": "3"
+                     "_name": "Agility",
+                     "_text": "4",
+                     "_base": "4",
+                     "_modified": "4"
                   },
                   {
                      "cost": {
-                        "_text": "14 PP",
-                        "_value": "14"
+                        "_text": "10 PP",
+                        "_value": "10"
+                     },
+                     "_name": "Dexterity",
+                     "_text": "5",
+                     "_base": "5",
+                     "_modified": "5"
+                  },
+                  {
+                     "cost": {
+                        "_text": "8 PP",
+                        "_value": "8"
+                     },
+                     "_name": "Fighting",
+                     "_text": "4",
+                     "_base": "4",
+                     "_modified": "4"
+                  },
+                  {
+                     "cost": {
+                        "_text": "4 PP",
+                        "_value": "4"
                      },
                      "_name": "Intellect",
-                     "_text": "7",
-                     "_base": "7",
-                     "_modified": "7"
+                     "_text": "2",
+                     "_base": "2",
+                     "_modified": "2"
                   },
                   {
                      "cost": {
@@ -153,13 +158,13 @@
                   },
                   {
                      "cost": {
-                        "_text": "16 PP",
-                        "_value": "16"
+                        "_text": "12 PP",
+                        "_value": "12"
                      },
                      "_name": "Presence",
-                     "_text": "8",
-                     "_base": "8",
-                     "_modified": "8"
+                     "_text": "6",
+                     "_base": "6",
+                     "_modified": "6"
                   }
                ]
             },
@@ -167,38 +172,38 @@
                "defense": [
                   {
                      "cost": {
-                        "_text": "1 PP",
-                        "_value": "1"
+                        "_text": "0 PP",
+                        "_value": "0"
                      },
                      "_name": "Dodge",
                      "_abbr": "Dodge",
-                     "_text": "3",
-                     "_base": "3",
-                     "_modified": "3",
+                     "_text": "20/4",
+                     "_base": "4",
+                     "_modified": "20",
                      "_impervious": "0"
                   },
                   {
                      "cost": {
-                        "_text": "2 PP",
-                        "_value": "2"
+                        "_text": "0 PP",
+                        "_value": "0"
                      },
                      "_name": "Parry",
                      "_abbr": "Parry",
-                     "_text": "5",
-                     "_base": "5",
-                     "_modified": "5",
+                     "_text": "20/4",
+                     "_base": "4",
+                     "_modified": "20",
                      "_impervious": "0"
                   },
                   {
                      "cost": {
-                        "_text": "3 PP",
-                        "_value": "3"
+                        "_text": "4 PP",
+                        "_value": "4"
                      },
                      "_name": "Fortitude",
                      "_abbr": "Fort",
-                     "_text": "8",
-                     "_base": "8",
-                     "_modified": "8",
+                     "_text": "10",
+                     "_base": "10",
+                     "_modified": "10",
                      "_impervious": "0"
                   },
                   {
@@ -208,37 +213,152 @@
                      },
                      "_name": "Toughness",
                      "_abbr": "Tou",
-                     "_text": "5",
-                     "_base": "5",
-                     "_modified": "5",
-                     "_impervious": "0"
+                     "_text": "10",
+                     "_base": "10",
+                     "_modified": "10",
+                     "_impervious": "8"
                   },
                   {
                      "cost": {
-                        "_text": "4 PP",
-                        "_value": "4"
+                        "_text": "8 PP",
+                        "_value": "8"
                      },
                      "_name": "Will",
                      "_abbr": "Will",
-                     "_text": "8",
-                     "_base": "8",
-                     "_modified": "8",
+                     "_text": "12",
+                     "_base": "12",
+                     "_modified": "12",
                      "_impervious": "0"
                   }
                ]
             },
             "initiative": {
-               "_total": "+2"
+               "_total": "+16"
             },
             "skills": {
                "skill": [
                   {
                      "description": "Use Acrobatics to flip, dive, roll, tumble, and perform other acrobatic maneuvers, as well as keeping your balance under difficult circumstances.\n\nBalancing: You can keep your balance and move along a precarious surface at your ground speed minus 1 rank with a successful Acrobatics check against the surface's DC. A degree of failure indicates you spend your move action just maintaining your balance and do not actually move, while two or more degrees of failure means you lose your balance and fall. You are vulnerable while balancing. If you accept a +5 increase to the Acrobatics DC, you are not vulnerable.\n\nManeuvering: You can make Acrobatics checks for various acrobatic stunts or maneuvers, from back flips to jumping over an opponent (to get behind them), flipping up onto a ledge, tumbling through obstacles, and so forth. The GM sets the DC. Success means you accomplish the maneuver.\n\nStanding: You can make a DC 20 Acrobatics check to go from prone to standing as a free action rather than a move action. A failed check means you remain prone.\n\nTumbling: You can make an Acrobatics check (DC 5) to lessen damage from a fall, reducing the damage by 1 per degree. A fall reduced to rank 0 damage does no damage and you quickly roll to your feet as a free action. Otherwise, you are prone at the end of a fall.",
                      "cost": {
+                        "_text": "4 PP",
+                        "_value": "4"
+                     },
+                     "_name": "Acrobatics",
+                     "_attrbonus": "4",
+                     "_value": "+12",
+                     "_base": "8",
+                     "_trainedonly": "yes"
+                  },
+                  {
+                     "description": "Use Athletics for physical feats like climbing, jumping, riding animal mounts, and swimming.\n\nClimbing: With a successful Athletics check, you can climb along a slope, wall, or other steep incline at your ground speed rank minus 2 as a move action. A perfectly smooth, flat, vertical surface can't be climbed without the Wall-crawling effect of Movement (see the Powers chapter).\n\nJumping: The result of an Athletics check is the distance (in feet) you can clear in a running long-jump. If you make a standing jump, divide the distance in half. If you make a vertical jump (straight up) divide the distance by 5, and if you make a standing vertical jump, divide it by 10. Your Athletics bonus + 10 is the base distance you can jump under routine circumstances.\n\nRunning: You can make a DC 15 Athletics check as a free action to run faster: success increases your ground speed rank by +1 for one round.\n\nSwimming: A successful DC 10 Athletics check allows you to swim your ground speed rank minus 2 as a move action. If the check fails, you make no progress through the water during the action. With more than one degree of failure, you go under. If underwater, you must hold your breath to avoid drowning.",
+                     "cost": {
+                        "_text": "2 PP",
+                        "_value": "2"
+                     },
+                     "_name": "Athletics",
+                     "_attrbonus": "12",
+                     "_value": "+16",
+                     "_base": "4"
+                  },
+                  {
+                     "description": "You're trained with a particular type of close attack, giving you a bonus to your attack checks with it equal to your skill rank (see Attack Check in The Basics and in the Action & Adventure chapter). Each close attack is a separate Close Combat skill with its own rank, and encompasses a single weapon or power, although an array may be considered one power, at the Gamemaster's discretion (see Arrays in the Powers chapter for more information).",
+                     "cost": {
+                        "_text": "7 PP",
+                        "_value": "7"
+                     },
+                     "_name": "Close Combat: Unarmed",
+                     "_attrbonus": "4",
+                     "_value": "+18",
+                     "_base": "14"
+                  },
+                  {
+                     "description": "Deception is the skill of getting others to believe what you want them to believe. It covers things like acting, bluffing, fast-talk, trickery, and subterfuge. Deception takes as long as it takes to spin-out your story.\n\nBluffing: Make a Deception check to tell a believable lie or get someone do go along with you. A bluff is usually opposed by the target's Deception or Insight check. Favorable and unfavorable circumstances weigh heavily on the outcome.\n\nDisguise: You can use makeup, costumes, and other props to change your appearance. Your Deception check result determines the effectiveness of the disguise, opposed by others' Perception check results. The GM makes the Deception check secretly, so you are not sure exactly how well your disguise holds up under scrutiny.\n\nFeinting: You can use Deception as a standard action to mislead an opponent in combat. Make a Deception check as a standard action. If your Deception check succeeds, the target is vulnerable against your next attack, until the end of your next round (see Vulnerable in the Conditions section of The Basics chapter).\n\nInnuendo: You can use Deception to send covert messages using wordplay and double-meanings while apparently talking about other things. The DC for a basic message is 10. Complex messages or messages trying to communicate new information have DCs of 15 or 20, respectively. The recipient of the message must make an Insight check against the same DC to understand it.\n\nTricking: You can use Deception to mislead an opponent into taking a potentially unwise action, such as trying to hit you while standing in front of an electrical junction box or at the edge of a precipice. If your Deception check opposed by Deception or Insight succeeds, your opponent is heedless of the potential danger and may hit the junction box or lose his balance and fall, if his attack against you fails.",
+                     "cost": {
                         "_text": "0 PP",
                         "_value": "0"
                      },
-                     "_name": "Acrobatics",
+                     "_name": "Deception",
+                     "_attrbonus": "6",
+                     "_value": "+6",
+                     "_base": "-"
+                  },
+                  {
+                     "description": "This Expertise skill is based on your Presence ability score.\n\nExpertise is a broad skill encompassing knowledge and training in a variety of specialized fields, particularly professional disciplines and scholarship. Each is considered a separate skill and training in each is acquired separately, so a former police officer turned district attorney might have Expertise: Police Officer and Expertise: Law, each with their own ranks, for example.\n\nSample Expertise domains: Art, Business, Carpentry, Cooking, Criminal, Current Events, Dance, History, Journalism, Law, Law Enforcement, Medicine, Military, Music, Magic, Philosophy, Politics, Popular Culture, Psychiatry, Science, Sociology, Streetwise, Theology.",
+                     "cost": {
+                        "_text": "5 PP",
+                        "_value": "5"
+                     },
+                     "_name": "Expertise (PRE): Acting",
+                     "_attrbonus": "6",
+                     "_value": "+16",
+                     "_base": "10",
+                     "_trainedonly": "yes"
+                  },
+                  {
+                     "description": "Expertise is a broad skill encompassing knowledge and training in a variety of specialized fields, particularly professional disciplines and scholarship. Each is considered a separate skill and training in each is acquired separately, so a former police officer turned district attorney might have Expertise: Police Officer and Expertise: Law, each with their own ranks, for example.\n\nSample Expertise domains: Art, Business, Carpentry, Cooking, Criminal, Current Events, Dance, History, Journalism, Law, Law Enforcement, Medicine, Military, Music, Magic, Philosophy, Politics, Popular Culture, Psychiatry, Science, Sociology, Streetwise, Theology.",
+                     "cost": {
+                        "_text": "4 PP",
+                        "_value": "4"
+                     },
+                     "_name": "Expertise: Current Events",
+                     "_attrbonus": "2",
+                     "_value": "+10",
+                     "_base": "8",
+                     "_trainedonly": "yes"
+                  },
+                  {
+                     "description": "Expertise is a broad skill encompassing knowledge and training in a variety of specialized fields, particularly professional disciplines and scholarship. Each is considered a separate skill and training in each is acquired separately, so a former police officer turned district attorney might have Expertise: Police Officer and Expertise: Law, each with their own ranks, for example.\n\nSample Expertise domains: Art, Business, Carpentry, Cooking, Criminal, Current Events, Dance, History, Journalism, Law, Law Enforcement, Medicine, Military, Music, Magic, Philosophy, Politics, Popular Culture, Psychiatry, Science, Sociology, Streetwise, Theology.",
+                     "cost": {
+                        "_text": "3 PP",
+                        "_value": "3"
+                     },
+                     "_name": "Expertise: Law",
+                     "_attrbonus": "2",
+                     "_value": "+8",
+                     "_base": "6",
+                     "_trainedonly": "yes"
+                  },
+                  {
+                     "description": "Expertise is a broad skill encompassing knowledge and training in a variety of specialized fields, particularly professional disciplines and scholarship. Each is considered a separate skill and training in each is acquired separately, so a former police officer turned district attorney might have Expertise: Police Officer and Expertise: Law, each with their own ranks, for example.\n\nSample Expertise domains: Art, Business, Carpentry, Cooking, Criminal, Current Events, Dance, History, Journalism, Law, Law Enforcement, Medicine, Military, Music, Magic, Philosophy, Politics, Popular Culture, Psychiatry, Science, Sociology, Streetwise, Theology.",
+                     "cost": {
+                        "_text": "5 PP",
+                        "_value": "5"
+                     },
+                     "_name": "Expertise: Show Biz",
+                     "_attrbonus": "2",
+                     "_value": "+12",
+                     "_base": "10",
+                     "_trainedonly": "yes"
+                  },
+                  {
+                     "description": "You can tell someone's true intentions and feelings by paying attention to things like body language, inflection, and your own intuition.\n\nDetect Illusion: The GM makes a secret Insight check to determine if your hero senses the true nature of an illusion (DC 10 + Illusion rank). Success means you pick up on a flaw in the illusion, sensing it is not real. See the Illusion effect in the Powers chapter for details.\n\nDetect Influence: You can make an Insight check to notice someone acting under outside influence. The DC is 10 + the rank of the effect or skill affecting the subject. If you succeed, you notice the subject is not acting entirely of his or her own will. Three or more degrees give you a general idea of what is influencing them (and perhaps even whom, depending on the situation and the Gamemaster's  judgment).\n\nEvaluate: With an Insight check, opposed by Deception, you can tell if someone is trustworthy and honorable (or not) upon meeting them. You can also make an Insight check (DC 20) to evaluate a social situation, getting a feel for the overall mood and prevailing attitudes. Two or more degrees of failure on either check mean you misinterpret the signs, so the GM may make these checks for you in secret.\n\nInnuendo: You can use Insight to pick up on hidden messages sent via the Deception skill (see the Deception skill description).\n\nResist Influence: Make an Insight check when called to do so to resist or overcome the effects of certain interaction skills, such as Deception or Intimidation. If the result of your check exceeds your opponent's, you are unaffected by their attempt to influence you.",
+                     "cost": {
+                        "_text": "3 PP",
+                        "_value": "3"
+                     },
+                     "_name": "Insight",
+                     "_attrbonus": "4",
+                     "_value": "+10",
+                     "_base": "6"
+                  },
+                  {
+                     "description": "You know how to use threats (both real and implied) to get others to do what you want.\n\nCoercing: Make an Intimidation check, opposed by the target's Insight or Will defense (whichever has the highest bonus). If your check succeeds, you may treat the target as friendly, but only for actions taken in your presence. That is, the target retains his normal attitude, but will talk, advise, offer limited help, or advocate on your behalf while intimidated. The target cooperates, but won't necessarily obey your every whim or do anything that would directly endanger him.\n\nDemoralizing: You can use Intimidation in combat as a standard action to undermine an opponent's confidence. Make an Intimidation check as a standard action. If it succeeds, your target is impaired (a -2 circumstance penalty on checks) until the end of your next round. With four or more degrees of success, the target is disabled (a -5 penalty) until the end of your next round.\n\nIntimidating Minions: You can intimidate a whole group of minions - who can all see and hear you - with a single check. If the group has you at a disadvantage, you suffer the usual circumstance penalty on your check. Compare your check result against a single resistance check made by the GM for the entire group. Your Intimidation check must have the same effect on every member of the group.",
+                     "cost": {
+                        "_text": "4 PP",
+                        "_value": "4"
+                     },
+                     "_name": "Intimidation",
+                     "_attrbonus": "6",
+                     "_value": "+14",
+                     "_base": "8"
+                  },
+                  {
+                     "description": "You know how to search for and study clues, gather information through interviews and surveillance, and analyze evidence to help solve crimes. The GM may make Investigation checks for you in secret, so you do not know exactly what you have found, or if you may have missed something.\n\nSearch: You can search an area for clues, hidden items, traps, and other details. Perception allows you to immediately notice things, while an Investigation check allows you to pick up on details with some effort.\n\nGather Evidence: To collect a piece of evidence for analysis, make an Investigation check (DC 15). If the check succeeds, the evidence can be analyzed (see the following). If the check fails, an analysis can be done, but with a -5 penalty for highly unfavorable circumstances. With more than one degree of failure, the evidence is ruined and no analysis can be done. On the other hand, two or more degrees of success provide a +2 circumstance bonus to later analysis.\n\nAnalyze Evidence: You can make an Investigation check to apply forensic knowledge to evidence. This function of Investigation does not give you clues where none exist. It simply allows you to extract useful information from evidence and clues you have found.\n\nGather Information: You know how to make contacts, collect gossip and rumors, question informants, and otherwise get information from people.\n\nSurveillance: You can set up surveillance of a particular area, watching from a stationary location. The DC of the subject's Stealth check to evade your notice is equal to the result of your Investigation check. For actively following a subject, see Tailing in the Stealth skill description.",
+                     "cost": {
+                        "_text": "0 PP",
+                        "_value": "0"
+                     },
+                     "_name": "Investigation",
                      "_attrbonus": "2",
                      "_value": "-",
                      "_base": "-",
@@ -246,284 +366,794 @@
                      "_usable": "no"
                   },
                   {
-                     "description": "Use Athletics for physical feats like climbing, jumping, riding animal mounts, and swimming.\n\nClimbing: With a successful Athletics check, you can climb along a slope, wall, or other steep incline at your ground speed rank minus 2 as a move action. A perfectly smooth, flat, vertical surface can't be climbed without the Wall-crawling effect of Movement (see the Powers chapter).\n\nJumping: The result of an Athletics check is the distance (in feet) you can clear in a running long-jump. If you make a standing jump, divide the distance in half. If you make a vertical jump (straight up) divide the distance by 5, and if you make a standing vertical jump, divide it by 10. Your Athletics bonus + 10 is the base distance you can jump under routine circumstances.\n\nRunning: You can make a DC 15 Athletics check as a free action to run faster: success increases your ground speed rank by +1 for one round.\n\nSwimming: A successful DC 10 Athletics check allows you to swim your ground speed rank minus 2 as a move action. If the check fails, you make no progress through the water during the action. With more than one degree of failure, you go under. If underwater, you must hold your breath to avoid drowning.",
-                     "cost": {
-                        "_text": "0.5 PP",
-                        "_value": "0.5"
-                     },
-                     "_name": "Athletics",
-                     "_attrbonus": "1",
-                     "_value": "+2",
-                     "_base": "1"
-                  },
-                  {
-                     "description": "You're trained with a particular type of close attack, giving you a bonus to your attack checks with it equal to your skill rank (see Attack Check in The Basics and in the Action & Adventure chapter). Each close attack is a separate Close Combat skill with its own rank, and encompasses a single weapon or power, although an array may be considered one power, at the Gamemaster's discretion (see Arrays in the Powers chapter for more information).",
-                     "cost": {
-                        "_text": "1 PP",
-                        "_value": "1"
-                     },
-                     "_name": "Close Combat: Cloc 1",
-                     "_attrbonus": "3",
-                     "_value": "+5",
-                     "_base": "2"
-                  },
-                  {
-                     "description": "You're trained with a particular type of close attack, giving you a bonus to your attack checks with it equal to your skill rank (see Attack Check in The Basics and in the Action & Adventure chapter). Each close attack is a separate Close Combat skill with its own rank, and encompasses a single weapon or power, although an array may be considered one power, at the Gamemaster's discretion (see Arrays in the Powers chapter for more information).",
-                     "cost": {
-                        "_text": "1.5 PP",
-                        "_value": "1.5"
-                     },
-                     "_name": "Close Combat: Cloc 2",
-                     "_attrbonus": "3",
-                     "_value": "+6",
-                     "_base": "3"
-                  },
-                  {
-                     "description": "Deception is the skill of getting others to believe what you want them to believe. It covers things like acting, bluffing, fast-talk, trickery, and subterfuge. Deception takes as long as it takes to spin-out your story.\n\nBluffing: Make a Deception check to tell a believable lie or get someone do go along with you. A bluff is usually opposed by the target's Deception or Insight check. Favorable and unfavorable circumstances weigh heavily on the outcome.\n\nDisguise: You can use makeup, costumes, and other props to change your appearance. Your Deception check result determines the effectiveness of the disguise, opposed by others' Perception check results. The GM makes the Deception check secretly, so you are not sure exactly how well your disguise holds up under scrutiny.\n\nFeinting: You can use Deception as a standard action to mislead an opponent in combat. Make a Deception check as a standard action. If your Deception check succeeds, the target is vulnerable against your next attack, until the end of your next round (see Vulnerable in the Conditions section of The Basics chapter).\n\nInnuendo: You can use Deception to send covert messages using wordplay and double-meanings while apparently talking about other things. The DC for a basic message is 10. Complex messages or messages trying to communicate new information have DCs of 15 or 20, respectively. The recipient of the message must make an Insight check against the same DC to understand it.\n\nTricking: You can use Deception to mislead an opponent into taking a potentially unwise action, such as trying to hit you while standing in front of an electrical junction box or at the edge of a precipice. If your Deception check opposed by Deception or Insight succeeds, your opponent is heedless of the potential danger and may hit the junction box or lose his balance and fall, if his attack against you fails.",
-                     "cost": {
-                        "_text": "2 PP",
-                        "_value": "2"
-                     },
-                     "_name": "Deception",
-                     "_attrbonus": "8",
-                     "_value": "+12",
-                     "_base": "4"
-                  },
-                  {
-                     "description": "This Expertise skill is based on your Awareness ability score.\n\nExpertise is a broad skill encompassing knowledge and training in a variety of specialized fields, particularly professional disciplines and scholarship. Each is considered a separate skill and training in each is acquired separately, so a former police officer turned district attorney might have Expertise: Police Officer and Expertise: Law, each with their own ranks, for example.\n\nSample Expertise domains: Art, Business, Carpentry, Cooking, Criminal, Current Events, Dance, History, Journalism, Law, Law Enforcement, Medicine, Military, Music, Magic, Philosophy, Politics, Popular Culture, Psychiatry, Science, Sociology, Streetwise, Theology.",
-                     "cost": {
-                        "_text": "2.5 PP",
-                        "_value": "2.5"
-                     },
-                     "_name": "Expertise (AWE): Exper1 Awe",
-                     "_attrbonus": "4",
-                     "_value": "+9",
-                     "_base": "5",
-                     "_trainedonly": "yes"
-                  },
-                  {
-                     "description": "This Expertise skill is based on your Strength ability score.\n\nExpertise is a broad skill encompassing knowledge and training in a variety of specialized fields, particularly professional disciplines and scholarship. Each is considered a separate skill and training in each is acquired separately, so a former police officer turned district attorney might have Expertise: Police Officer and Expertise: Law, each with their own ranks, for example.\n\nSample Expertise domains: Art, Business, Carpentry, Cooking, Criminal, Current Events, Dance, History, Journalism, Law, Law Enforcement, Medicine, Military, Music, Magic, Philosophy, Politics, Popular Culture, Psychiatry, Science, Sociology, Streetwise, Theology.",
-                     "cost": {
-                        "_text": "3 PP",
-                        "_value": "3"
-                     },
-                     "_name": "Expertise (STR): Exper2 Str",
-                     "_attrbonus": "1",
-                     "_value": "+7",
-                     "_base": "6",
-                     "_trainedonly": "yes"
-                  },
-                  {
-                     "description": "Expertise is a broad skill encompassing knowledge and training in a variety of specialized fields, particularly professional disciplines and scholarship. Each is considered a separate skill and training in each is acquired separately, so a former police officer turned district attorney might have Expertise: Police Officer and Expertise: Law, each with their own ranks, for example.\n\nSample Expertise domains: Art, Business, Carpentry, Cooking, Criminal, Current Events, Dance, History, Journalism, Law, Law Enforcement, Medicine, Military, Music, Magic, Philosophy, Politics, Popular Culture, Psychiatry, Science, Sociology, Streetwise, Theology.",
-                     "cost": {
-                        "_text": "3.5 PP",
-                        "_value": "3.5"
-                     },
-                     "_name": "Expertise: Exper3 Int",
-                     "_attrbonus": "7",
-                     "_value": "+14",
-                     "_base": "7",
-                     "_trainedonly": "yes"
-                  },
-                  {
-                     "description": "Expertise is a broad skill encompassing knowledge and training in a variety of specialized fields, particularly professional disciplines and scholarship. Each is considered a separate skill and training in each is acquired separately, so a former police officer turned district attorney might have Expertise: Police Officer and Expertise: Law, each with their own ranks, for example.\n\nSample Expertise domains: Art, Business, Carpentry, Cooking, Criminal, Current Events, Dance, History, Journalism, Law, Law Enforcement, Medicine, Military, Music, Magic, Philosophy, Politics, Popular Culture, Psychiatry, Science, Sociology, Streetwise, Theology.",
-                     "cost": {
-                        "_text": "4 PP",
-                        "_value": "4"
-                     },
-                     "_name": "Expertise: Exper4(original) Int",
-                     "_attrbonus": "7",
-                     "_value": "+15",
-                     "_base": "8",
-                     "_trainedonly": "yes"
-                  },
-                  {
-                     "description": "You can tell someone's true intentions and feelings by paying attention to things like body language, inflection, and your own intuition.\n\nDetect Illusion: The GM makes a secret Insight check to determine if your hero senses the true nature of an illusion (DC 10 + Illusion rank). Success means you pick up on a flaw in the illusion, sensing it is not real. See the Illusion effect in the Powers chapter for details.\n\nDetect Influence: You can make an Insight check to notice someone acting under outside influence. The DC is 10 + the rank of the effect or skill affecting the subject. If you succeed, you notice the subject is not acting entirely of his or her own will. Three or more degrees give you a general idea of what is influencing them (and perhaps even whom, depending on the situation and the Gamemaster's  judgment).\n\nEvaluate: With an Insight check, opposed by Deception, you can tell if someone is trustworthy and honorable (or not) upon meeting them. You can also make an Insight check (DC 20) to evaluate a social situation, getting a feel for the overall mood and prevailing attitudes. Two or more degrees of failure on either check mean you misinterpret the signs, so the GM may make these checks for you in secret.\n\nInnuendo: You can use Insight to pick up on hidden messages sent via the Deception skill (see the Deception skill description).\n\nResist Influence: Make an Insight check when called to do so to resist or overcome the effects of certain interaction skills, such as Deception or Intimidation. If the result of your check exceeds your opponent's, you are unaffected by their attempt to influence you.",
-                     "cost": {
-                        "_text": "4.5 PP",
-                        "_value": "4.5"
-                     },
-                     "_name": "Insight",
-                     "_attrbonus": "4",
-                     "_value": "+13",
-                     "_base": "9"
-                  },
-                  {
-                     "description": "You know how to use threats (both real and implied) to get others to do what you want.\n\nCoercing: Make an Intimidation check, opposed by the target's Insight or Will defense (whichever has the highest bonus). If your check succeeds, you may treat the target as friendly, but only for actions taken in your presence. That is, the target retains his normal attitude, but will talk, advise, offer limited help, or advocate on your behalf while intimidated. The target cooperates, but won't necessarily obey your every whim or do anything that would directly endanger him.\n\nDemoralizing: You can use Intimidation in combat as a standard action to undermine an opponent's confidence. Make an Intimidation check as a standard action. If it succeeds, your target is impaired (a -2 circumstance penalty on checks) until the end of your next round. With four or more degrees of success, the target is disabled (a -5 penalty) until the end of your next round.\n\nIntimidating Minions: You can intimidate a whole group of minions - who can all see and hear you - with a single check. If the group has you at a disadvantage, you suffer the usual circumstance penalty on your check. Compare your check result against a single resistance check made by the GM for the entire group. Your Intimidation check must have the same effect on every member of the group.",
-                     "cost": {
-                        "_text": "5 PP",
-                        "_value": "5"
-                     },
-                     "_name": "Intimidation",
-                     "_attrbonus": "8",
-                     "_value": "+18",
-                     "_base": "10"
-                  },
-                  {
-                     "description": "You know how to search for and study clues, gather information through interviews and surveillance, and analyze evidence to help solve crimes. The GM may make Investigation checks for you in secret, so you do not know exactly what you have found, or if you may have missed something.\n\nSearch: You can search an area for clues, hidden items, traps, and other details. Perception allows you to immediately notice things, while an Investigation check allows you to pick up on details with some effort.\n\nGather Evidence: To collect a piece of evidence for analysis, make an Investigation check (DC 15). If the check succeeds, the evidence can be analyzed (see the following). If the check fails, an analysis can be done, but with a -5 penalty for highly unfavorable circumstances. With more than one degree of failure, the evidence is ruined and no analysis can be done. On the other hand, two or more degrees of success provide a +2 circumstance bonus to later analysis.\n\nAnalyze Evidence: You can make an Investigation check to apply forensic knowledge to evidence. This function of Investigation does not give you clues where none exist. It simply allows you to extract useful information from evidence and clues you have found.\n\nGather Information: You know how to make contacts, collect gossip and rumors, question informants, and otherwise get information from people.\n\nSurveillance: You can set up surveillance of a particular area, watching from a stationary location. The DC of the subject's Stealth check to evade your notice is equal to the result of your Investigation check. For actively following a subject, see Tailing in the Stealth skill description.",
-                     "cost": {
-                        "_text": "5.5 PP",
-                        "_value": "5.5"
-                     },
-                     "_name": "Investigation",
-                     "_attrbonus": "7",
-                     "_value": "+18",
-                     "_base": "11",
-                     "_trainedonly": "yes"
-                  },
-                  {
                      "description": "Use this skill to notice and pick up on things. Discerning details - such as clearly hearing conversation or reading fine text - requires at least three degrees of success on the Perception check.\n\nHearing: Make a check against a DC based on how loud the noise is or against an opposed Stealth check. Normal conversation is DC 0, a soft noise DC 10. Listening through a door is +5 DC, +15 for a solid wall. While you're asleep, hearing something well enough to wake up is +10 DC.\n\nSeeing: Make a check against a DC based on how visible the object is or against an opposed Stealth check. Something in plain sight is DC 0, while something subtle or easily overlooked may be DC 5, 10 or more. Visual perception is also used to detect someone in disguise (see the Deception skill) or to notice a concealed object (see the Sleight of Hand skill).\n\nOther Senses: You can make Perception checks involving other sense types as well (see the Powers chapter for more on sense types). Noticing something obvious to a sense is DC 0. Less obvious things are DC 10 or so, hidden things DC 20 or more, and discerning details requires at least three degrees of success, as usual.",
                      "cost": {
-                        "_text": "6 PP",
-                        "_value": "6"
+                        "_text": "0 PP",
+                        "_value": "0"
                      },
                      "_name": "Perception",
                      "_attrbonus": "4",
-                     "_value": "+16",
-                     "_base": "12"
+                     "_value": "+4",
+                     "_base": "-"
                   },
                   {
                      "description": "You're skilled in dealing with people, from etiquette and social graces to a way with words and public speaking, all of which helps to get your point across, make a good impression, negotiate, and generally win people over to your way of seeing things. In negotiations, all participants roll Persuasion checks to see who gains the advantage. Opposed checks also resolve cases where two advocates plead opposing cases before a third party. Non-player characters each have an initial attitude towards you or your cause. The GM chooses the character's initial attitude based on circumstances. Most of the time, people are favorable or indifferent toward heroes, but a specific circumstance or complication may call for a different attitude.",
                      "cost": {
-                        "_text": "6.5 PP",
-                        "_value": "6.5"
+                        "_text": "3 PP",
+                        "_value": "3"
                      },
                      "_name": "Persuasion",
-                     "_attrbonus": "8",
-                     "_value": "+21",
-                     "_base": "13"
+                     "_attrbonus": "6",
+                     "_value": "+12",
+                     "_base": "6"
                   },
                   {
                      "description": "You're trained with a particular type of ranged attack, giving you a bonus to your attack checks with it equal to your skill rank (see Attack Check in The Basics and in the Action & Adventure chapter). Each ranged attack is a separate Ranged Combat skill with its own rank, and encompasses a single weapon or power, although an array may be considered one power, at the Gamemaster's discretion (see Arrays in the Powers chapter for more information).",
                      "cost": {
-                        "_text": "7 PP",
-                        "_value": "7"
+                        "_text": "5 PP",
+                        "_value": "5"
                      },
-                     "_name": "Ranged Combat: Ran 1",
-                     "_attrbonus": "6",
-                     "_value": "+20",
-                     "_base": "14"
-                  },
-                  {
-                     "description": "You're trained with a particular type of ranged attack, giving you a bonus to your attack checks with it equal to your skill rank (see Attack Check in The Basics and in the Action & Adventure chapter). Each ranged attack is a separate Ranged Combat skill with its own rank, and encompasses a single weapon or power, although an array may be considered one power, at the Gamemaster's discretion (see Arrays in the Powers chapter for more information).",
-                     "cost": {
-                        "_text": "7.5 PP",
-                        "_value": "7.5"
-                     },
-                     "_name": "Ranged Combat: Ran 2",
-                     "_attrbonus": "6",
-                     "_value": "+21",
-                     "_base": "15"
+                     "_name": "Ranged Combat: Vector Throws",
+                     "_attrbonus": "5",
+                     "_value": "+15",
+                     "_base": "10"
                   },
                   {
                      "description": "You can perform dexterous feats of legerdemain such as palming small objects, picking pockets, slipping out of restraints, and so forth. Stage magicians use Sleight of Hand legitimately as a performance skill, but it is most commonly known for its criminal applications.\n\nConcealing: You can use Sleight of Hand to conceal a small item on your person, making your check result the DC of an Investigation or Perception check to find it.\n\nContorting: Make a DC 30 Sleight of Hand check to fit through a tight space wide enough for your head but too narrow for the width of your shoulders, or to reach through an opening wide enough for your hand, but too narrow for your arm.\n\nEscaping: Make a Sleight of Hand check to slip out of various restraints. This takes at least a minute per check.\n\nLegerdemain: Minor feats of Sleight of Hand, such as making a coin or playing card 'vanish', have a DC of 10 unless an observer is focused on noticing what you are doing. When you perform this skill under observation, your check is opposed by the observer's Perception check to see if they notice the trick.\n\nStealing: To covertly take something from another person make a Sleight of Hand check (DC 20). Your target makes a Perception check and notices the attempt if his check result beats yours, whether you succeed in taking the object or not. You can also make a Sleight of Hand check to plant a small object on someone, slip  something into their pocket, drop something into their drink, place a tiny radio tracer on them, and so forth.",
                      "cost": {
-                        "_text": "8 PP",
-                        "_value": "8"
+                        "_text": "0 PP",
+                        "_value": "0"
                      },
                      "_name": "Sleight of Hand",
-                     "_attrbonus": "6",
-                     "_value": "+22",
-                     "_base": "16",
-                     "_trainedonly": "yes"
+                     "_attrbonus": "5",
+                     "_value": "-",
+                     "_base": "-",
+                     "_trainedonly": "yes",
+                     "_usable": "no"
                   },
                   {
                      "description": "You're skilled in going unnoticed. While using Stealth, you can move at your speed rank minus 1 with no penalty. Faster than that, up to your full speed, you take a -5 circumstance penalty to your Stealth checks.\n\nHiding: If you have cover or concealment, make a Stealth check, opposed by an observer's Perception check, to hide and go unnoticed.\n\nTailing: You can use Stealth to tail someone at your normal speed. This assumes you have some cover or concealment (crowds of people, shadows, fog, etc.). If the subject is worried about being followed, he can make a Perception check (opposed by your Stealth check) every time he changes course (goes around a street corner, exits a building, and so on). If he is unsuspecting, he only gets one Perception check for the scene.",
                      "cost": {
-                        "_text": "8.5 PP",
-                        "_value": "8.5"
+                        "_text": "0 PP",
+                        "_value": "0"
                      },
                      "_name": "Stealth",
-                     "_attrbonus": "2",
-                     "_value": "+19",
-                     "_base": "17"
+                     "_attrbonus": "4",
+                     "_value": "+4",
+                     "_base": "-"
                   },
                   {
                      "description": "Technology covers operating, building, repairing, and generally working with technological devices and equipment. Without the proper tools or equipment, you take a -5 penalty to Technology checks for highly unfavorable circumstances.\n\nOperating: Most routine operations of technological equipment don't require a skill check and can be done untrained. Using an unfamiliar device does require a check, with the DC determined by how foreign or unusual the device is, from simple (DC 10) to highly advanced (DC 25 or more).\n\nBuilding: The difficulty and time required to make an item depends on its complexity, as shown on the Building Items table. If your Technology check succeeds, you have made the item after the necessary time.\n\nRepairing: You can also use Technology to repair damaged items, with a -5 to the DC to build the item and -2 to the time rank required. So you can perform repairs on a complex item in eight hours (time rank 12) with a DC of 20.\n\nJury-rigging: You can also attempt jury-rigged, or temporary, repairs. Doing this reduces the repair DC by an additional 5 (for a total of -10 to the DC to build the item), and allows you to make the Technology check as a standard action. However, a jury-rigged repair can only fix a single problem, and the repair only lasts until the end of the scene.\n\nDemolitions: Careful placement of an explosive against a fixed structure can maximize damage by exploiting vulnerabilities in the structure. This requires at least a minute and a DC 10 Technology check. The GM makes the check, so you don't know exactly how well you have done until the explosive goes off.\n\nInventing: If you have the Inventor advantage (see the Advantages chapter), you can use Technology to create inventions, temporary devices. See Inventing, page 145, for details.\n\nSecurity: You can use Technology to disarm or sabotage various security devices, including locks, traps, and sensors. This takes at least a minute, possibly longer, at the GM's discretion. The GM makes your Technology check secretly, so you don't necessarily know right away if you have succeeded.",
                      "cost": {
-                        "_text": "9 PP",
-                        "_value": "9"
+                        "_text": "0 PP",
+                        "_value": "0"
                      },
                      "_name": "Technology",
-                     "_attrbonus": "7",
-                     "_value": "+25",
-                     "_base": "18",
-                     "_trainedonly": "yes"
+                     "_attrbonus": "2",
+                     "_value": "-",
+                     "_base": "-",
+                     "_trainedonly": "yes",
+                     "_usable": "no"
                   },
                   {
                      "description": "You're trained in treating injuries and ailments.\n\nDiagnosis: You can diagnose injuries and ailments with an eye toward further treatment. This takes at least a minute. At the GM's discretion, a successful diagnosis provides a +2 bonus for favorable circumstances on further Treatment checks.\n\nProvide Care: Providing care means treating an injured patient for a day or more. If successful, the patient further reduces the recovery time by 1 rank (see Recovery in the Action & Adventure chapter). You can provide care for up to your Treatment rank in patients at one time.\n\nRevive: You can remove the dazed or stunned conditions from a subject (see Conditions in the Action & Adventure chapter). The check to revive is a standard action. A successful check removes the condition.\n\nStabilize: As a standard action, a successful Treatment check stabilizes a dying character.\n\nTreat Disease and Poison: You can treat a character afflicted with a disease or poison. Each time the character makes a resistance check against the ailment, you make a Treatment check. One degree of success provides the patient with a +2 circumstance bonus to the resistance check, three or more degrees of success provides a +5 circumstance bonus.",
                      "cost": {
-                        "_text": "9.5 PP",
-                        "_value": "9.5"
+                        "_text": "0 PP",
+                        "_value": "0"
                      },
                      "_name": "Treatment",
-                     "_attrbonus": "7",
-                     "_value": "+26",
-                     "_base": "19",
-                     "_trainedonly": "yes"
+                     "_attrbonus": "2",
+                     "_value": "-",
+                     "_base": "-",
+                     "_trainedonly": "yes",
+                     "_usable": "no"
                   },
                   {
                      "description": "Use this skill to operate vehicles, from ground vehicles like cars to boats, planes, or even spaceships! See Vehicles in the Gadgets & Gear chapter for details.\n\nRoutine tasks, such as ordinary operation of known vehicles, don't require a check and may even be done untrained for some vehicles, particularly common ones like cars. Make a check only when operating the vehicle in a stressful or dramatic situation like being chased or attacked, or trying to reach a destination in a limited amount of time.",
                      "cost": {
-                        "_text": "10 PP",
-                        "_value": "10"
+                        "_text": "0 PP",
+                        "_value": "0"
                      },
                      "_name": "Vehicles",
-                     "_attrbonus": "6",
-                     "_value": "+26",
-                     "_base": "20",
-                     "_trainedonly": "yes"
+                     "_attrbonus": "5",
+                     "_value": "-",
+                     "_base": "-",
+                     "_trainedonly": "yes",
+                     "_usable": "no"
                   }
                ]
             },
             "advantages": {
-               "advantage": {
-                  "description": "You have 5 points per rank in this advantage to spend on equipment. This includes vehicles and headquarters. See the Gadgets & Gear chapter for details on equipment and its costs. Many heroes rely almost solely on Equipment in conjunction with their skills and other advantages.",
-                  "advantagecategory": "General",
-                  "cost": {
-                     "_text": "8 PP",
-                     "_value": "8"
+               "advantage": [
+                  {
+                     "description": "By dint of your diplomatic status, you cannot be prosecuted for crimes in nations other than your own. All another nation can do is deport you to your home nation.",
+                     "advantagecategory": [
+                        "General"
+                     ],
+                     "cost": {
+                        "_text": "1 PP",
+                        "_value": "1"
+                     },
+                     "_name": "Benefit, Diplomatic Immunity",
+                     "_categorytext": "General"
                   },
-                  "_name": "Equipment 8",
-                  "_categorytext": "General",
-                  "_useradded": "no"
-               }
+                  {
+                     "description": "You have access to classified government information, installations, and possibly equipment and personnel.",
+                     "advantagecategory": [
+                        "General",
+                        "Ranked"
+                     ],
+                     "cost": {
+                        "_text": "1 PP",
+                        "_value": "1"
+                     },
+                     "_name": "Benefit, Security Clearance: Military",
+                     "_categorytext": "General, Ranked",
+                     "_ranks": "1"
+                  },
+                  {
+                     "description": "You have greater than average wealth or material resources, such as Well-off (rank 1), Independently Wealthy (rank 2), Millionaire (rank 3), Multimillionaire (rank 4), or Billionaire (rank 5).",
+                     "advantagecategory": [
+                        "General",
+                        "Ranked"
+                     ],
+                     "cost": {
+                        "_text": "3 PP",
+                        "_value": "3"
+                     },
+                     "_name": "Benefit, Wealth 3 (millionare)",
+                     "_categorytext": "General, Ranked",
+                     "_ranks": "3"
+                  },
+                  {
+                     "description": "If you successfully grab and restrain an opponent (see Grab), you can apply a chokehold, causing your opponent to begin suffocating for as long as you continue to restrain your target (see Suffocation).",
+                     "advantagecategory": [
+                        "Combat"
+                     ],
+                     "cost": {
+                        "_text": "1 PP",
+                        "_value": "1"
+                     },
+                     "_name": "Chokehold",
+                     "_categorytext": "Combat"
+                  },
+                  {
+                     "description": "You have a +2 circumstance bonus to Dodge resistance checks to avoid area effects (see the Area extra in the Powers chapter). If you have 2 ranks in this advantage, your circumstance bonus increases to +5.",
+                     "advantagecategory": [
+                        "General",
+                        "Ranked"
+                     ],
+                     "cost": {
+                        "_text": "2 PP",
+                        "_value": "2"
+                     },
+                     "_name": "Evasion 2",
+                     "_categorytext": "General, Ranked",
+                     "_ranks": "2"
+                  },
+                  {
+                     "description": "When you take a standard action to aim, you gain an improved circumstance bonus: +10 for a close attack or ranged attack adjacent to the target, +5 for a ranged attack at a greater distance.",
+                     "advantagecategory": [
+                        "Combat"
+                     ],
+                     "cost": {
+                        "_text": "1 PP",
+                        "_value": "1"
+                     },
+                     "_name": "Improved Aim",
+                     "_categorytext": "Combat"
+                  },
+                  {
+                     "description": "Increase your critical threat range with a particular attack (chosen when you acquire this advantage) by 1, allowing you to score a critical hit on a natural 19 or 20. Only a natural 20 is an automatic hit, however, and an attack that misses is not a critical. Each additional rank applies to a different attack or increases your threat range with an existing attack by one more, to a maximum threat range of 16-20 with 4 ranks.",
+                     "advantagecategory": [
+                        "Combat",
+                        "Ranked"
+                     ],
+                     "cost": {
+                        "_text": "4 PP",
+                        "_value": "4"
+                     },
+                     "_name": "Improved Critical 4: Vector-Attacks",
+                     "_categorytext": "Combat, Ranked",
+                     "_ranks": "4"
+                  },
+                  {
+                     "description": "You have no penalty to your attack check when attempting to disarm an opponent and they do not get the opportunity to disarm you (see Disarm in the Action & Adventure chapter).",
+                     "advantagecategory": [
+                        "Combat"
+                     ],
+                     "cost": {
+                        "_text": "1 PP",
+                        "_value": "1"
+                     },
+                     "_name": "Improved Disarm",
+                     "_categorytext": "Combat"
+                  },
+                  {
+                     "description": "You can make grab attacks with only one arm, leaving the other free. You can also maintain the grab while using your other hand to perform actions. You are not vulnerable while grabbing (see Grabbing in the Action & Adventure chapter).",
+                     "advantagecategory": [
+                        "Combat"
+                     ],
+                     "cost": {
+                        "_text": "1 PP",
+                        "_value": "1"
+                     },
+                     "_name": "Improved Grab",
+                     "_categorytext": "Combat"
+                  },
+                  {
+                     "description": "Your grab attacks are particularly difficult to escape. Opponents you grab suffer a -5 circumstance penalty on checks to escape.",
+                     "advantagecategory": [
+                        "Combat"
+                     ],
+                     "cost": {
+                        "_text": "1 PP",
+                        "_value": "1"
+                     },
+                     "_name": "Improved Hold",
+                     "_categorytext": "Combat"
+                  },
+                  {
+                     "description": "You have a +4 bonus to your initiative checks per rank in this advantage.",
+                     "advantagecategory": [
+                        "Combat",
+                        "Ranked"
+                     ],
+                     "cost": {
+                        "_text": "3 PP",
+                        "_value": "3"
+                     },
+                     "_name": "Improved Initiative 3",
+                     "_categorytext": "Combat, Ranked",
+                     "_ranks": "3"
+                  },
+                  {
+                     "description": "You have no penalty to your attack check to trip an opponent and they do not get the opportunity to trip you. When making a trip attack, make an opposed check of your Acrobatics or Athletics against your opponent's Acrobatics or Athletics, you choose which your opponent uses to defend, rather than the target choosing (see Trip in the Action & Adventure chapter). This is a good martial arts advantage for unarmed fighters.",
+                     "advantagecategory": [
+                        "Combat"
+                     ],
+                     "cost": {
+                        "_text": "1 PP",
+                        "_value": "1"
+                     },
+                     "_name": "Improved Trip",
+                     "_categorytext": "Combat"
+                  },
+                  {
+                     "description": "You can speak and understand additional languages. With one rank in this advantage, you know an additional language. For each additional rank, you double your additional known languages: two at rank 2, four at rank 3, eight at rank 4, etc. So a character with Languages 7 is fluent in 64 languages! Characters are assumed to be fluent in any languages they know, including being able to read and write in them.\n\nFor the ability to understand any language, see the Comprehend effect in the Powers chapter.",
+                     "advantagecategory": [
+                        "Skill"
+                     ],
+                     "cost": {
+                        "_text": "1 PP",
+                        "_value": "1"
+                     },
+                     "_name": "Languages 1",
+                     "_categorytext": "Skill",
+                     "_useradded": "no"
+                  },
+                  {
+                     "description": "Your presence reassures and lends courage to your allies. As a standard action, you can spend a hero point to remove one of the following conditions from an ally with whom you can interact: dazed, fatigued, or stunned.",
+                     "advantagecategory": [
+                        "Fortune"
+                     ],
+                     "cost": {
+                        "_text": "1 PP",
+                        "_value": "1"
+                     },
+                     "_name": "Leadership",
+                     "_categorytext": "Fortune"
+                  },
+                  {
+                     "description": "When taking a standard action and a move action you can move both before and after your standard action, provided the total distance moved isn't greater than your normal movement speed.",
+                     "advantagecategory": [
+                        "Combat"
+                     ],
+                     "cost": {
+                        "_text": "1 PP",
+                        "_value": "1"
+                     },
+                     "_name": "Move-by Action",
+                     "_categorytext": "Combat"
+                  },
+                  {
+                     "description": "When you make a power attack (see Maneuvers) you can take a penalty of up to -5 on your attack bonus and add the same number (up to +5) to the effect bonus of your attack.",
+                     "advantagecategory": [
+                        "Combat"
+                     ],
+                     "cost": {
+                        "_text": "1 PP",
+                        "_value": "1"
+                     },
+                     "_name": "Power Attack",
+                     "_categorytext": "Combat"
+                  },
+                  {
+                     "description": "If you render a minion incapacitated with an attack, you get an immediate extra attack as a free action against another minion within range and adjacent to the previous target's location. The extra attack is with the same attack and damage bonus as the first. You can continue using this advantage until you miss or there are no more minions within range of your attack or your last target.\n\nA second rank in this advantage allows you to attack non-adjacent minion targets, moving between attacks if necessary to do so. You cannot move more than your total speed in the round, regardless of the number of attacks you make. You stop attacking once you miss, run out of movement, or there are no more minions within range of your attack.",
+                     "advantagecategory": [
+                        "Combat",
+                        "Ranked"
+                     ],
+                     "cost": {
+                        "_text": "2 PP",
+                        "_value": "2"
+                     },
+                     "_name": "Takedown 2",
+                     "_categorytext": "Combat, Ranked",
+                     "_ranks": "2"
+                  }
+               ]
             },
-            "powers": "",
+            "powers": {
+               "power": [
+                  {
+                     "cost": {
+                        "_text": "78 PP",
+                        "_value": "78"
+                     },
+                     "description": "Select this power to add multiple effects as a single power. The total cost is the cost of all the effects.",
+                     "chainedadvantages": "",
+                     "usernotes": "",
+                     "alternatepowers": "",
+                     "otherpowers": {
+                        "power": [
+                           {
+                              "cost": {
+                                 "_text": "20 PP",
+                                 "_value": "20"
+                              },
+                              "description": "Protection shields you against damage, giving you +1 to your Toughness defense per rank. So Protection 4 gives you +4 Toughness.",
+                              "chainedadvantages": "",
+                              "extras": {
+                                 "extra": [
+                                    {
+                                       "description": "A defense with this modifier is highly resistant. Any effect with a resistance difficulty modifier equal to or less the Impervious rank has no effect. So, for example, Impervious Toughness 9 ignores any Damage with a rank of 9 or less. Penetrating effects can overcome Impervious Resistance (see the Penetrating extra description).",
+                                       "_name": "Impervious",
+                                       "_info": ""
+                                    }
+                                 ]
+                              },
+                              "usernotes": "",
+                              "alternatepowers": "",
+                              "_name": "Air-Buffer: Protection 4",
+                              "_info": "+4 Toughness",
+                              "_ranks": "4",
+                              "_range": "",
+                              "_displaylevel": "1",
+                              "_summary": "+4 Toughness; Impervious [4 extra ranks]",
+                              "_active": "yes"
+                           },
+                           {
+                              "cost": {
+                                 "_text": "32 PP",
+                                 "_value": "32"
+                              },
+                              "description": "You have an enhancement to a non-effect trait, such as an ability (including saving throws) or skill (including attack or defense bonus). Since Toughness save cannot be increased on its own,use the Protection effect instead of Enhanced Toughness (see Protection later in this chapter).",
+                              "traitmods": {
+                                 "traitmod": [
+                                    {
+                                       "_name": "Dodge",
+                                       "_bonus": "+16"
+                                    },
+                                    {
+                                       "_name": "Parry",
+                                       "_bonus": "+16"
+                                    }
+                                 ]
+                              },
+                              "chainedadvantages": "",
+                              "usernotes": "",
+                              "alternatepowers": "",
+                              "_name": "Re-Vectoring Aura: Enhanced Trait 32",
+                              "_info": "",
+                              "_ranks": "32",
+                              "_range": "",
+                              "_displaylevel": "1",
+                              "_summary": "Traits: Dodge +16 (+20), Parry +16 (+20)",
+                              "_active": "yes"
+                           },
+                           {
+                              "cost": {
+                                 "_text": "10 PP",
+                                 "_value": "10"
+                              },
+                              "description": "You have a special form of movement.",
+                              "options": {
+                                 "option": [
+                                    {
+                                       "description": "You can pass through solid objects as if they weren't there. For 1 rank, you can move at speed rank -2 through any physical object. For 2 ranks, you can move at speed rank -1 and for 3 ranks, you move at your normal speed through any obstacles. You cannot breathe while completely inside a solid object, so you either need Immunity to Suffocation or have to hold your breath. You may also need Penetrates Concealment Senses to know where you're going, since you cannot see inside solid objects, either.",
+                                       "_name": "Permeate",
+                                       "_ranks": "3",
+                                       "_info": "full speed"
+                                    },
+                                    {
+                                       "description": "So long as you are capable of action, you can fall any distance without harm. You can also stop your fall at any point along a distance so long as there is a handhold or projection for you to grab (such as a ledge, flagpole, branch, etc.). If you have the Wall-crawling power (later in Movement), any surface you can climb provides you with a handhold. Safe Fall may be Limited to only when you are near a surface (such as the side of a building); you're assumed to be using the surface to help slow your fall.",
+                                       "_name": "Safe Fall"
+                                    },
+                                    {
+                                       "description": "You can climb walls and ceilings at your ground speed rank -1 with no chance of falling and no need for an Athletics check. You are still vulnerable while climbing, however. An additional rank of this effect means you climb at your full speed rank and are not vulnerable while climbing.",
+                                       "_name": "Wall-crawling",
+                                       "_ranks": "1",
+                                       "_info": "-1 speed rank"
+                                    }
+                                 ]
+                              },
+                              "chainedadvantages": "",
+                              "usernotes": "",
+                              "alternatepowers": "",
+                              "_name": "Vector Moves: Movement 5",
+                              "_info": "",
+                              "_ranks": "5",
+                              "_range": "",
+                              "_displaylevel": "1",
+                              "_summary": "Permeate 3: full speed, Safe Fall, Wall-crawling 1: -1 speed rank",
+                              "_active": "yes"
+                           },
+                           {
+                              "cost": {
+                                 "_text": "16 PP",
+                                 "_value": "16"
+                              },
+                              "description": "You can temporarily improve one of your existing traits, chosen when you take this effect. While this effect is active, you increase the affected trait by its rank. So, for example, Enhanced Strength 5 increases your Strength by +5 while it is active. Your enhanced trait is still subject to power level limits, so your unenhanced rank must be below the limit by at least the amount of the enhancement to accommodate it.",
+                              "elements": {
+                                 "element": [
+                                    {
+                                       "_name": "Ability: Strength",
+                                       "_info": "Strength"
+                                    }
+                                 ]
+                              },
+                              "chainedadvantages": "",
+                              "usernotes": "",
+                              "alternatepowers": "",
+                              "_name": "Vector Strength: Enhanced Strength 8",
+                              "_info": "+8 STR",
+                              "_ranks": "8",
+                              "_range": "",
+                              "_displaylevel": "1",
+                              "_summary": "+8 STR",
+                              "_active": "yes"
+                           }
+                        ]
+                     },
+                     "_name": "Passive Vectorkinesis",
+                     "_info": "",
+                     "_ranks": "1",
+                     "_range": "",
+                     "_displaylevel": "0",
+                     "_summary": "",
+                     "_active": "yes"
+                  },
+                  {
+                     "cost": {
+                        "_text": "72 PP",
+                        "_value": "72"
+                     },
+                     "description": "An array is a set of powers, of which only one can be used at a time.",
+                     "chainedadvantages": "",
+                     "usernotes": "",
+                     "alternatepowers": "",
+                     "otherpowers": {
+                        "power": [
+                           {
+                              "cost": {
+                                 "_text": "2 PP",
+                                 "_value": "2"
+                              },
+                              "description": "Nullify can counter effects of a particular descriptor, such as fire effects, magical effects, mental effects, and so forth (see Countering Effects, at the start of this chapter). You can counter one effect of your chosen descriptor per use of Nullify. You can't nullify innate effects (see the Innate modifier description).\n\nMake a ranged attack check to hit the target. Then make an opposed check of your Nullify rank and the targeted effect's rank or the target's Will defense, whichever is higher. If you are targeting the subject of an effect rather than the effect's user, make an opposed check of Nullify rank vs. effect rank. If you win, the targeted effect turns off, although the user can re-activate it normally. If you lose the opposed check, you do not Nullify the effect. With two or more degrees of failure, trying again against the same subject in the same scene requires extra effort.",
+                              "elements": {
+                                 "element": [
+                                    {
+                                       "_name": "Counters: Gravity",
+                                       "_info": "Gravity"
+                                    }
+                                 ]
+                              },
+                              "chainedadvantages": "",
+                              "extras": {
+                                 "extra": [
+                                    {
+                                       "description": "The effect fills a sphere with a 30-foot radius (distance rank 0). Bursts on level surfaces (like the ground) create hemispheres 30 feet in radius and height.",
+                                       "_name": "Area (Burst)",
+                                       "_info": "30 feet radius sphere, DC 22"
+                                    },
+                                    {
+                                       "description": "Broad Nullify can counter effects of a particularly broad descriptor like magical, metahuman, or technological effects. This modifier is available only with the Gamemaster's permission and may depend on the effects available in the series.",
+                                       "_name": "Broad",
+                                       "_info": ""
+                                    },
+                                    {
+                                       "description": "Effects have a standard duration: instant, sustained, continuous, or permanent. This modifier increases an effect's duration.",
+                                       "_name": "Increased Duration",
+                                       "_info": "concentration"
+                                    },
+                                    {
+                                       "description": "A resistible effect with this extra is discriminating, allowing you to decide who is and is not affected by it. This is most useful for area effects (see the Area extra). You must be able to accurately perceive a target in order to decide whether or not to affect it. For a degree of selectivity with non-resistible effects, use the Precise modifier.",
+                                       "_name": "Selective",
+                                       "_info": ""
+                                    }
+                                 ]
+                              },
+                              "usernotes": "",
+                              "alternatepowers": "",
+                              "_name": "Nullify Vector Interaction: Burst Area Nullify 12",
+                              "_info": "",
+                              "_ranks": "12",
+                              "_range": "300/600/1200 ft.",
+                              "_displaylevel": "1",
+                              "_summary": "[0 active, 0/61 PP, 5/r], Counters: Gravity, DC 22; Burst Area: 30 feet radius sphere, DC 22, Broad, Increased Duration: concentration, Selective",
+                              "_dynamic": "yes"
+                           },
+                           {
+                              "cost": {
+                                 "_text": "2 PP",
+                                 "_value": "2"
+                              },
+                              "description": "You can move faster than normal. You have a ground speed rank equal to your effect rank. This also improves all forms of movement based on ground speed.",
+                              "chainedadvantages": "",
+                              "usernotes": "",
+                              "alternatepowers": "",
+                              "_name": "Self-Vector Flight: Speed 10",
+                              "_info": "Speed: 2000 miles/hour, 4 miles/round",
+                              "_ranks": "10",
+                              "_range": "",
+                              "_displaylevel": "1",
+                              "_summary": "[0 active, 0/61 PP, 1/r], Speed: 2000 miles/hour, 4 miles/round",
+                              "_dynamic": "yes"
+                           },
+                           {
+                              "cost": {
+                                 "_text": "2 PP",
+                                 "_value": "2"
+                              },
+                              "description": "You can temporarily improve one of your existing traits, chosen when you take this effect. While this effect is active, you increase the affected trait by its rank. So, for example, Enhanced Strength 5 increases your Strength by +5 while it is active. Your enhanced trait is still subject to power level limits, so your unenhanced rank must be below the limit by at least the amount of the enhancement to accommodate it.",
+                              "elements": {
+                                 "element": [
+                                    {
+                                       "_name": "Ability: Strength",
+                                       "_info": "Strength"
+                                    }
+                                 ]
+                              },
+                              "chainedadvantages": "",
+                              "flaws": {
+                                 "flaw": {
+                                    "description": "Your lifting and carrying capacity is out of proportion with the rest of your Strength. Each rank in this power gives you +1 to your Strength rank for determining how much weight you can lift and carry, but does not increase your Strength damage or other effects of your Strength rank.",
+                                    "_name": "Limited to Lifting",
+                                    "_info": ""
+                                 }
+                              },
+                              "usernotes": "",
+                              "alternatepowers": "",
+                              "_name": "Self-Vector Lifting: Enhanced Strength 6",
+                              "_info": "+6 STR",
+                              "_ranks": "6",
+                              "_range": "",
+                              "_displaylevel": "1",
+                              "_summary": "[0 active, 0/61 PP, 1/r], +6 STR; Limited to Lifting",
+                              "_dynamic": "yes"
+                           },
+                           {
+                              "cost": {
+                                 "_text": "2 PP",
+                                 "_value": "2"
+                              },
+                              "description": "You can fly through the air, including hovering in place. You have a flight speed rank equal to your effect rank - 4.",
+                              "chainedadvantages": "",
+                              "extras": {
+                                 "extra": [
+                                    {
+                                       "description": "You can move underwater as easily as in the air. You have a water speed equal to your Flight rank, minus 2, subject to the usual rules for swimming (see the Athletics skill description for details). You can make Athletics checks to swim as routine checks. This power does not allow you to breathe underwater (for that see Immunity, page 102). This is the Swimming power as an Alternate Effect.",
+                                       "_name": "Aquatic",
+                                       "_info": ""
+                                    },
+                                    {
+                                       "description": "Subtle effects are not as noticeable. A subtle effect may be used to catch a target unaware and may in some cases qualify for a surprise attack. Rank 1 makes an effect difficult to notice; a DC 20 Perception check is required, or the effect is noticeable only to certain exotic senses (at the GM's discretion). Rank 2 makes the effect completely undetectable.",
+                                       "_name": "Subtle",
+                                       "_ranks": "2",
+                                       "_info": "undetectable"
+                                    }
+                                 ]
+                              },
+                              "flaws": {
+                                 "flaw": {
+                                    "description": "Applied to a sustained duration effect, this modifier makes it concentration duration, requiring a standard action, rather than a free action, each turn to maintain.",
+                                    "_name": "Concentration",
+                                    "_info": ""
+                                 }
+                              },
+                              "usernotes": "",
+                              "alternatepowers": "",
+                              "_name": "Self-Vector Movement: Flight 15",
+                              "_info": "Speed: 250 miles/hour, 8 miles/round",
+                              "_ranks": "15",
+                              "_range": "",
+                              "_displaylevel": "1",
+                              "_summary": "[0 active, 0/61 PP, 1/r+3], Speed: 250 miles/hour, 8 miles/round; Aquatic, Subtle 2: undetectable; Concentration",
+                              "_dynamic": "yes"
+                           },
+                           {
+                              "cost": {
+                                 "_text": "2 PP",
+                                 "_value": "2"
+                              },
+                              "description": "You can impose some debilitating condition or conditions on a target by making a close attack. You set the conditions your Affliction causes at each degree when you acquire it and they may not be changed. Higher degree conditions replace lower degree conditions and do not stack with them. See the possible conditions for each degree under the Affliction Resistance Check table. The target resists with Fortitude or Will defense (chosen when you take the effect).",
+                              "elements": {
+                                 "element": [
+                                    {
+                                       "_name": "1st degree: Hindered",
+                                       "_info": "Hindered"
+                                    },
+                                    {
+                                       "_name": "2nd degree: Immobile",
+                                       "_info": "Immobile"
+                                    },
+                                    {
+                                       "_name": "3rd degree: Paralyzed",
+                                       "_info": "Paralyzed"
+                                    },
+                                    {
+                                       "_name": "Resisted by: Fortitude",
+                                       "_info": "Fortitude"
+                                    }
+                                 ]
+                              },
+                              "chainedadvantages": "",
+                              "extras": {
+                                 "extra": [
+                                    {
+                                       "description": "Once you have hit with a Concentration Affliction, so long as you continue to take a standard action each turn to maintain the effect, the target must make a new resistance check against it on your turn, with no attack check required.",
+                                       "_name": "Concentration",
+                                       "_info": ""
+                                    },
+                                    {
+                                       "description": "Effects have a standard range: personal, close, ranged, or perception. See Range at the start of this chapter for details. This modifier increases an effect's range. Increasing the range of an effect from personal to close requires either the Affects Others or Attack extras (see their descriptions). Making a close effect into a perception ranged effect requires two applications of this extra, for +2 cost per rank.",
+                                       "_name": "Increased Range",
+                                       "_info": "ranged"
+                                    },
+                                    {
+                                       "description": "This modifier causes an Affliction to increase incrementally without any effort from you. If the target fails a resistance check to end the Affliction, it not only persists, but increases in effect by one degree! So a target affected by the first degree of a Progressive Affliction who fails to resist progresses to the second degree of the effect at the start of his next round. A successful resistance check still ends the Affliction, as usual.",
+                                       "_name": "Progressive",
+                                       "_info": ""
+                                    }
+                                 ]
+                              },
+                              "flaws": {
+                                 "flaw": {
+                                    "description": "Similar to the Reversible extra, the target of an Affliction effect with this modifier recovers automatically, no check required, at the end of the round in which the duration ends. So, for example, an instant duration Affliction only lasts one round, while a sustained duration Affliction lasts until no longer sustained.",
+                                    "_name": "Instant Recovery",
+                                    "_info": ""
+                                 }
+                              },
+                              "usernotes": "",
+                              "alternatepowers": "",
+                              "_name": "Stop Vectors: Concentration Progressive Affliction 15",
+                              "_info": "",
+                              "_ranks": "15",
+                              "_range": "375/750/1500 ft.",
+                              "_displaylevel": "1",
+                              "_summary": "[0 active, 0/61 PP, 4/r], 1st degree: Hindered, 2nd degree: Immobile, 3rd degree: Paralyzed, Resisted by: Fortitude, DC 25; Concentration, Increased Range: ranged, Progressive; Instant Recovery",
+                              "_dynamic": "yes"
+                           },
+                           {
+                              "cost": {
+                                 "_text": "62 PP",
+                                 "_value": "62"
+                              },
+                              "description": "You can inflict damage by making a close attack. The exact nature of your Damage is up to you; it can be anything from a powerful impact to razor claws, energy fields, or some other damaging medium with the GM's permission. The target resists Damage with Toughness.",
+                              "descriptors": {
+                                 "descriptor": [
+                                    {
+                                       "_name": "Ballistic"
+                                    },
+                                    {
+                                       "_name": "Electricity"
+                                    },
+                                    {
+                                       "_name": "Kinetic"
+                                    },
+                                    {
+                                       "_name": "Projectile"
+                                    },
+                                    {
+                                       "_name": "Telekinetic"
+                                    }
+                                 ]
+                              },
+                              "chainedadvantages": "",
+                              "extras": {
+                                 "extra": [
+                                    {
+                                       "description": "An effect with this modifier has a different resistance than usual. The resistance check difficulty class remains the same, only the resistance differs. If the change is to a generally lower (and therefore more advantageous) resistance, this extra increases cost per rank by +1. If, in the GM's opinion, there is no real increase in effectiveness, just a chance to the resistance, it has a net modifier of +0.\n\nNote: To set this extra's modifier to +0, set its ranks to 0.",
+                                       "_name": "Alternate Resistance: Dodge",
+                                       "_info": "Dodge"
+                                    },
+                                    {
+                                       "description": "This modifier grants a ranged effect an additional opportunity to hit. If an attack check with a Homing effect fails, it attempts to hit again on the start of your next turn, requiring only a free action to maintain and allowing you to take other actions, including making another attack. Each rank in Homing grants the effect one additional attack check, but it still only gets one check per round.",
+                                       "_name": "Homing",
+                                       "_info": "1 extra attempt"
+                                    },
+                                    {
+                                       "description": "Effects have a standard range: personal, close, ranged, or perception. See Range at the start of this chapter for details. This modifier increases an effect's range. Increasing the range of an effect from personal to close requires either the Affects Others or Attack extras (see their descriptions). Making a close effect into a perception ranged effect requires two applications of this extra, for +2 cost per rank.",
+                                       "_name": "Increased Range",
+                                       "_info": "ranged"
+                                    },
+                                    {
+                                       "description": "Your effect overcomes Impervious Resistance to a degree; the target must make a resistance check against an effect rank equal to your Penetrating rank. So, if a rank 4 (Penetrating 2) effect hits a target with Impervious 9, the target must resist a rank 2 effect (equal to the Penetrating rank). If the effect were rank 6, the target would have to resist the full effect anyway, since its rank is greater than half the Impervious rank. You cannot have a Penetrating rank greater than your effect rank.",
+                                       "_name": "Penetrating",
+                                       "_ranks": "15",
+                                       "_info": ""
+                                    },
+                                    {
+                                       "description": "Subtle effects are not as noticeable. A subtle effect may be used to catch a target unaware and may in some cases qualify for a surprise attack. Rank 1 makes an effect difficult to notice; a DC 20 Perception check is required, or the effect is noticeable only to certain exotic senses (at the GM's discretion). Rank 2 makes the effect completely undetectable.",
+                                       "_name": "Subtle",
+                                       "_info": "subtle"
+                                    }
+                                 ]
+                              },
+                              "flaws": {
+                                 "flaw": {
+                                    "description": "A Quirk is some minor nuisance attached to an effect, essentially the reverse of a Feature (see Feature under Extras). A Quirk is generally worth, at most, 2-3 power points, and many are simply 1-point flaws.\n\nAs with Features, the GM should ensure a Quirk is truly a flaw (albeit a minor one) and not simply part of the power's descriptors. For example, the fact that an attack with a 'sonic' descriptor likely will not travel through a vacuum is not a Quirk, simply part of the 'sonic' descriptor (especially since the attack may be enhanced by a medium such as water). On the other hand, a shapeshifter unable to change color (losing some of the power's utility), or a telepath unable to lie while using Mental Communication, do have Quirks to their powers.",
+                                    "_name": "Quirk: Shoots projectiles, depending on the material they can get destroyed before hitting the targe",
+                                    "_info": "Shoots projectiles, depending on the material they can get destroyed before hitting the target"
+                                 }
+                              },
+                              "usernotes": "",
+                              "alternatepowers": "",
+                              "_name": "Vector-Propelling: Damage 15",
+                              "_info": "",
+                              "_ranks": "15",
+                              "_range": "375/750/1500 ft.",
+                              "_displaylevel": "1",
+                              "_summary": "[0 active, 0/61 PP, 3/r+16], ballistic, electricity, kinetic, projectile, telekinetic, DC 30; Alternate Resistance: Dodge, Homing: 1 extra attempt, Increased Range: ranged, Penetrating 15, Subtle: subtle; Quirk: Shoots projectiles, depending on the material they can get destroyed before hitting the target",
+                              "_dynamic": "yes"
+                           }
+                        ]
+                     },
+                     "_name": "Vectorkinesis",
+                     "_info": "",
+                     "_ranks": "1",
+                     "_range": "",
+                     "_displaylevel": "0",
+                     "_summary": "",
+                     "_active": "yes"
+                  }
+               ]
+            },
             "attacks": {
                "attack": [
                   {
                      "description": "You can make a Grab attack to restrain or bind your opponent.",
                      "_name": "Grab",
-                     "_attack": "+5",
-                     "_dc": "11",
+                     "_attack": "+18",
+                     "_dc": "22",
                      "_crit": "20",
                      "_special": "",
                      "_descriptor": "Bludgeon"
                   },
                   {
-                     "description": "A small automatic weapon, usable in one hand.",
-                     "_name": "Machine Pistol",
-                     "_attack": "+6",
-                     "_dc": "18",
-                     "_crit": "20",
+                     "description": "Nullify can counter effects of a particular descriptor, such as fire effects, magical effects, mental effects, and so forth (see Countering Effects, at the start of this chapter). You can counter one effect of your chosen descriptor per use of Nullify. You can't nullify innate effects (see the Innate modifier description).\n\nMake a ranged attack check to hit the target. Then make an opposed check of your Nullify rank and the targeted effect's rank or the target's Will defense, whichever is higher. If you are targeting the subject of an effect rather than the effect's user, make an opposed check of Nullify rank vs. effect rank. If you win, the targeted effect turns off, although the user can re-activate it normally. If you lose the opposed check, you do not Nullify the effect. With two or more degrees of failure, trying again against the same subject in the same scene requires extra effort.",
+                     "_name": "Nullify Vector Interaction: Burst Area Nullify 12",
+                     "_attack": "+15",
+                     "_dc": "22",
+                     "_crit": "16-20",
                      "_special": "",
-                     "_descriptor": "Ballistic / Multiattack"
+                     "_descriptor": ""
                   },
                   {
-                     "description": "A rocket-launcher is generally an anti-tank weapon, although they also make useful anti-super-hero weapons as well. The primary target hit by the rocket resists explosive Damage 10, while all other targets in the burst area resist Damage 7. Some 'tank-killer' rockets are also Penetrating, to help overcome Impervious armor Protection, although the rocket's Damage typically does most of that work. Most rocket launchers can fire only one or two shots before they must be reloaded (standard action, meaning the launcher cannot fire that turn).",
-                     "_name": "Rocket Launcher",
-                     "_attack": "+20",
+                     "description": "You can impose some debilitating condition or conditions on a target by making a close attack. You set the conditions your Affliction causes at each degree when you acquire it and they may not be changed. Higher degree conditions replace lower degree conditions and do not stack with them. See the possible conditions for each degree under the Affliction Resistance Check table. The target resists with Fortitude or Will defense (chosen when you take the effect).",
+                     "_name": "Stop Vectors: Concentration Progressive Affliction 15",
+                     "_attack": "+15",
                      "_dc": "25",
-                     "_crit": "20",
-                     "_special": "Burst Area 7",
-                     "_descriptor": "Explosive"
+                     "_crit": "16-20",
+                     "_special": "",
+                     "_descriptor": ""
                   },
                   {
                      "description": "Your basic thrown attack.",
                      "_name": "Throw",
-                     "_attack": "+21",
-                     "_dc": "16",
+                     "_attack": "+5",
+                     "_dc": "27",
                      "_crit": "20",
                      "_special": "",
                      "_descriptor": "Bludgeon"
@@ -531,11 +1161,20 @@
                   {
                      "description": "Your basic unarmed attack.",
                      "_name": "Unarmed",
-                     "_attack": "+6",
-                     "_dc": "16",
+                     "_attack": "+18",
+                     "_dc": "27",
                      "_crit": "20",
                      "_special": "",
                      "_descriptor": "Bludgeon"
+                  },
+                  {
+                     "description": "You can inflict damage by making a close attack. The exact nature of your Damage is up to you; it can be anything from a powerful impact to razor claws, energy fields, or some other damaging medium with the GM's permission. The target resists Damage with Toughness.",
+                     "_name": "Vector-Propelling: Damage 15",
+                     "_attack": "+15",
+                     "_dc": "30",
+                     "_crit": "16-20",
+                     "_special": "",
+                     "_descriptor": "Ballistic / Electricity / Kinetic / Projectile / Telekinetic"
                   }
                ]
             },
@@ -557,24 +1196,6 @@
                      },
                      "description": "You can make a Grab attack to restrain or bind your opponent.",
                      "_name": "Grab",
-                     "_quantity": "1"
-                  },
-                  {
-                     "cost": {
-                        "_text": "9 ep",
-                        "_value": "9"
-                     },
-                     "description": "A small automatic weapon, usable in one hand.",
-                     "_name": "Machine Pistol",
-                     "_quantity": "1"
-                  },
-                  {
-                     "cost": {
-                        "_text": "27 ep",
-                        "_value": "27"
-                     },
-                     "description": "A rocket-launcher is generally an anti-tank weapon, although they also make useful anti-super-hero weapons as well. The primary target hit by the rocket resists explosive Damage 10, while all other targets in the burst area resist Damage 7. Some 'tank-killer' rockets are also Penetrating, to help overcome Impervious armor Protection, although the rocket's Damage typically does most of that work. Most rocket launchers can fire only one or two shots before they must be reloaded (standard action, meaning the launcher cannot fire that turn).",
-                     "_name": "Rocket Launcher",
                      "_quantity": "1"
                   },
                   {
@@ -603,18 +1224,22 @@
                   "description": "",
                   "_name": "Title",
                   "_gamedate": "0",
-                  "_realdate": "20230627",
+                  "_realdate": "20220910",
                   "_pp": "0",
                   "_pl": "0",
                   "_wealth": "0"
                }
             },
-            "images": "",
+            "images": {
+               "image": {
+                  "_filename": "Lightning_Hawk-image001.jpg"
+               }
+            },
             "validation": {
                "report": ""
             },
             "settings": {
-               "_summary": "Sourcebooks -> Cosmic Handbook: Cosmic Handbook; Sourcebooks -> Gadget Guides: Gadget Guides; Sourcebooks -> Hero High: Hero High; Sourcebooks -> Supernatural Handbook: Supernatural Handbook Equipment & Complications; Sourcebooks -> Gamemaster's Guide: Gamemaster's Guide Equipment"
+               "_summary": "Sourcebooks -> Cosmic Handbook: Cosmic Handbook; Sourcebooks -> Hero High: Hero High; Sourcebooks -> Supernatural Handbook: Supernatural Handbook Equipment & Complications; Sourcebooks -> Gamemaster's Guide: Gamemaster's Guide Equipment"
             },
             "npc": {
                "description": "",
@@ -628,9 +1253,9 @@
             "_characterindex": "1",
             "_nature": "normal",
             "_role": "npc",
-            "_relationship": "enemy",
+            "_relationship": "ally",
             "_type": "Hero",
-            "_name": "AAAABBAAAA",
+            "_name": "Lightning Hawk",
             "_playername": ""
          }
       }
