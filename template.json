@@ -127,16 +127,6 @@
                 }
             },
             "skills":{
-                "ath": {
-                    "default": 0,
-                    "ability": "str",
-                    "purchased": 0,
-                    "misc": 0,
-                    "auto": 0,
-                    "total": "",
-                    "untrained": true,
-                    "mastery": false
-                },
                 "acr": {
                     "default": 0,
                     "ability": "agl",
@@ -145,6 +135,16 @@
                     "auto": 0,
                     "total": "",
                     "untrained": false,
+                    "mastery": false
+                },
+                "ath": {
+                    "default": 0,
+                    "ability": "str",
+                    "purchased": 0,
+                    "misc": 0,
+                    "auto": 0,
+                    "total": "",
+                    "untrained": true,
                     "mastery": false
                 },
                 "clc1": {

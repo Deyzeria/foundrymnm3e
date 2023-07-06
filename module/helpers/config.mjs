@@ -31,8 +31,8 @@ MNM3E.abilityAbbreviations = {
 preLocalize("abilityAbbreviations");
 
 MNM3E.skills = {
-	ath: "MNM3E.SkillAth",
 	acr: "MNM3E.SkillAcr",
+	ath: "MNM3E.SkillAth",
 	clc1: "MNM3E.SkillClc",
 	clc2: "MNM3E.SkillClc",
 	dec: "MNM3E.SkillDec",

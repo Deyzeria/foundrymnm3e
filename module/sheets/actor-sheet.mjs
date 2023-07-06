@@ -84,6 +84,11 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
     // Handle skills scores.
     for (let [k, v] of Object.entries(context.system.skills)) {
       v.label = game.i18n.localize(CONFIG.MNM3E.skills[k]) ?? k;
+      if (v.hasOwnProperty("subtype")){
+        if(v.subtype != ""){
+          v.label = v.subtype;
+        }
+      }
     }
   }
 
