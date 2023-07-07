@@ -190,6 +190,7 @@ export class FoundryMnM3eActor extends Actor {
  * @param {string} abilityId    The ability id (e.g. "str")
  * @param {object} options      Options which configure how ability tests or saving throws are rolled
  */  
+// FIXME: Add Debilitated, Absent check and roll change
   async rollAbility(abilityId, options={}) {
     const label = game.i18n.localize(CONFIG.MNM3E.abilities[abilityId]) ?? "";
     const abl = this.system.abilities[abilityId];
@@ -213,19 +214,61 @@ export class FoundryMnM3eActor extends Actor {
       rollData.parts = parts.concat(options.parts ?? []);
 
     const roll = await d20Roll(rollData);
-    console.debug("HIT After const roll");
-    console.debug(roll);
     return roll;
   }
 
-  rollDefense(defenseId, options={}) {
-    const label = CONFIG.MNM3E.defenses[defenseId] ?? "";
-    console.debug(label);
+  // FIXME: Add Disabled check and roll change
+  async rollDefense(defenseId, options={}) {
+    const label = game.i18n.localize(CONFIG.MNM3E.defenses[defenseId]) ?? "";
+    const def = this.system.defenses[defenseId];
+    const parts = [];
+    const data = this.getRollData();
+
+    parts.push("@total");
+    data.total = def?.total ?? 0;
+
+    // Roll and return
+    const flavor = game.i18n.format("MNM3E.DefensePromptTitle", {defense: label});
+    const rollData = foundry.utils.mergeObject({
+      data,
+      title: `${flavor}: ${this.name}`,
+      flavor,
+      messageData: {
+        speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
+        "flags.foundrymnm3e.roll": {type: "defeense", defenseId}
+      }
+      }, options);
+      rollData.parts = parts.concat(options.parts ?? []);
+    
+    const roll = await d20Roll(rollData);
+    return roll;
   }
 
-  rollSkill(skillId, options={}) {
-    const label = CONFIG.MNM3E.skills[skillId] ?? "";
-    console.debug(label);
+  // FIXME: Add Disabled check and roll change
+  async rollSkill(skillId, options={}) {
+    const skl = this.system.skills[skillId];
+    const label = skl.subtype != null ? skl.subtype : game.i18n.localize(CONFIG.MNM3E.skills[skillId]);
+    const parts = [];
+    const data = this.getRollData();
+
+    parts.push("@total");
+    data.total = skl?.total ?? 0;
+
+    // Roll and return
+    const flavor = game.i18n.format("MNM3E.SkillPromptTitle", {skill: label});
+    const rollData = foundry.utils.mergeObject({
+      data,
+      title: `${flavor}: ${this.name}`,
+      flavor,
+      messageData: {
+        speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
+        "flags.foundrymnm3e.roll": {type: "skill", skillId}
+      }
+      }, options);
+      rollData.parts = parts.concat(options.parts ?? []);
+    
+    const roll = await d20Roll(rollData);
+    return roll;
   }
 
 }

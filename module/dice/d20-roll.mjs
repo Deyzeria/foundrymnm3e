@@ -35,7 +35,7 @@ export default class D20Roll extends Roll {
   * @type {boolean}
   */
   get hasImproved() {
-      return this.options.mode === D20Roll.MODE.IMPROVED;
+      return this.options.improved === D20Roll.MODE.IMPROVED;
   }
 
   /**
@@ -79,10 +79,10 @@ export default class D20Roll extends Roll {
       d20.modifiers = [];
       d20.number = 1;
 
+      //call this by adding improved: 1
       if ( this.hasImproved ) 
       {
         d20.modifiers.push("imp");
-        d20.options.improved = true;
       }
       
 
@@ -104,7 +104,6 @@ export default class D20Roll extends Roll {
     messageData.flavor = messageData.flavor || this.options.flavor;
     if (this.hasImproved) messageData.flavor += ` (${game.i18n.localize("MNM3E.ImprovedRoll")})`
 
-    console.debug(messageData);
     // Record the preferred rollMode
     //options.rollMode = options.rollMode ?? this.options.rollMode;
     return super.toMessage(messageData, options);

@@ -60,6 +60,8 @@ Hooks.once('init', async function() {
   };
 
   // Define custom Document classes
+  CONFIG.Dice.rolls.push(dice.D20Roll);
+
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);

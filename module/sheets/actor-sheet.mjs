@@ -93,7 +93,7 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
       def.label = game.i18n.localize(CONFIG.MNM3E.defenses[k]) ?? k;
       def.disabled = context.system.abilities[def.ability].disabled && def.immune != true;
       // This will break if in different language.
-      if (def.disabled && def.label == ` ${game.i18n.localize("MNM3E.Toughness")}`){
+      if (def.disabled && def.label == `${game.i18n.localize("MNM3E.Toughness")}`){
         def.disabled = false;
       }
     }

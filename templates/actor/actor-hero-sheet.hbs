@@ -16,14 +16,14 @@
         <li class="attribute pl">
           <h4 class="attribute-name box-title">Power Level</h4>
           <center>
-          <input class="attribute-value" type="text" name="system.generic.pl" value="{{system.generic.pl}}" data-dtype="Number"/>
+          <input class="attribute-value" oninput="setDefaultToZero(this)" type="text" name="system.generic.pl" value="{{system.generic.pl}}" data-dtype="Number"/>
           </center>
         </li>
 
         <li class="attribute extpp">
           <h4 class="attribute-name box-title">Extra PP</h4>
           <center>
-          <input class="attribute-value" type="text" name="system.generic.extrapp" value="{{system.generic.extrapp}}" data-dtype="Number"/>
+          <input class="attribute-value" oninput="setDefaultToZero(this)" type="text" name="system.generic.extrapp" value="{{system.generic.extrapp}}" data-dtype="Number"/>
           </center>
         </li>
 
@@ -41,7 +41,7 @@
         <li class="attribute hp">
           <h4 class="attribute-name box-title">Hero Points</h4>
           <center>
-          <input class="attribute-value" type="text" name="system.generic.hero_point" value="{{system.generic.hero_point}}" data-dtype="Number"/>
+          <input class="attribute-value" oninput="setDefaultToZero(this)" type="text" name="system.generic.hero_point" value="{{system.generic.hero_point}}" data-dtype="Number"/>
           </center>
         </li>
       </ul>
@@ -165,7 +165,6 @@
             </li>
             {{/each}}
           </ul>
-
 
         </aside>
       </section>

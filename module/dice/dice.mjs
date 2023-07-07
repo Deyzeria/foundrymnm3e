@@ -34,18 +34,17 @@ export async function d20Roll({
   });
 
   // Prompt a Dialog to further configure the D20Roll
-//   if ( !fastForward ) {
-//     const configured = await roll.configureDialog({
-//       title,
-//       defaultRollMode,
-//       template
-//     }, dialogOptions);
-//     if ( configured === null ) return null;
-//   } else 
-  roll.options.rollMode ??= defaultRollMode;
+  if ( !fastForward ) {
+    const configured = await roll.configureDialog({
+      title,
+      defaultRollMode,
+      template
+    }, dialogOptions);
+    if ( configured === null ) return null;
+  } else roll.options.rollMode ??= defaultRollMode;
+  
   await roll.evaluate({async: true});
-  console.debug("TESTING: ");
-  console.debug(roll);
+
   // Create a Chat Message
   if ( roll && chatMessage ) await roll.toMessage(messageData);
   return roll;
