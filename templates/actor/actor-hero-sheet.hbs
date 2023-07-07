@@ -11,7 +11,7 @@
         <h1 class="charname"><input name="system.realidentity" type="text" value="{{system.realidentity}}" placeholder="Clark Kent"/></h1>
       </div>
 
-      {{!-- Power Level, Power Points Total, Extra Power Points, Hero Points --}}
+      {{!-- Power Level,  Extra Power Points, Power Points Spent, Hero Points --}}
       <ul class="attributes flexrow">
         <li class="attribute pl">
           <h4 class="attribute-name box-title">Power Level</h4>
@@ -24,6 +24,17 @@
           <h4 class="attribute-name box-title">Extra PP</h4>
           <center>
           <input class="attribute-value" type="text" name="system.generic.extrapp" value="{{system.generic.extrapp}}" data-dtype="Number"/>
+          </center>
+        </li>
+
+        <li class="attribute ppspent">
+          <h4 class="attribute-name box-title">Spent</h4>
+          <center>
+          <div id="pptotal" class="attribute-value multiple">
+            <input class="spenttotal" type="text" name="system.generic.pp_spent" value="{{system.generic.pp_spent}}" data-dtype="Number" disabled="true"/>
+            <span class="sep"> / </span>
+            <input type="text" name="system.generic.pp" value="{{system.generic.pp}}" data-dtype="Number" disabled="true"/>
+          </div>
           </center>
         </li>
 
@@ -70,17 +81,6 @@
           <input class="attribute-value" type="text" name="system.generic.pp_powers" value="{{system.generic.pp_powers}}" data-dtype="Number" disabled="true"/>
           </center>
         </li>
-
-        <li class="attribute ppspent">
-          <h4 class="attribute-name box-title">Spent</h4>
-          <center>
-          <div id="pptotal" class="attribute-value multiple">
-            <input class="spenttotal" type="text" name="system.generic.pp_spent" value="{{system.generic.pp_spent}}" data-dtype="Number" disabled="true"/>
-            <span class="sep"> / </span>
-            <input type="text" name="system.generic.pp" value="{{system.generic.pp}}" data-dtype="Number" disabled="true"/>
-          </div>
-          </center>
-        </li>
       </ul>
     </div>
   </header>
@@ -98,59 +98,123 @@
 
     {{!-- Owned Features Tab --}}
     <div class="tab features" data-group="primary" id="maintab" data-tab="features">
-      <section class="grid grid-2col">
+      <section class="grid flexcol">
+        {{!-- Abilities --}}
         <aside class="sidebar">
-
-          {{!-- The grid classes are defined in scss/global/_grid.scss. To use,
-          use both the "grid" and "grid-Ncol" class where "N" can be any number
-          from 1 to 12 and will create that number of columns.  --}}
-          
-            {{#each system.abilities as |ability key|}}
-            <div class="ability flexrow flex-group-left">
-              <label class="resource-label rollable flexlarge align-center" data-roll="d20+@abilities.{{key}}.total" data-label="{{ability.label}}">{{ability.label}}</label>
-              <input width="30" title="Purchased" type="text" name="system.abilities.{{key}}.purchased" value="{{ability.purchased}}" data-dtype="Number"/>
-              <input width="30" title="Misc Bonuses" type="text" name="system.abilities.{{key}}.misc" value="{{ability.misc}}" data-dtype="Number"/>
-              <input width="30" title="Automatic" type="text" disabled="true" name="system.abilities.{{key}}.auto" value="{{ability.auto}}" data-dtype="Number"/>
-              <span class="ability-total rollable" data-roll="d20+@abilities.{{key}}.total" data-label="{{abilities}}">{{numberFormat ability.total decimals=0 sign=true}}</span>
-            </div>
-            {{/each}}
+          <ul class="ability-list">
+            {{!-- Headers --}}
+            <li class="flexrow features-header">
+              <div class="resource-label flexexlargeheader flexrow"></div>
+              <div class="ability-value" data-tooltip="MNM3E.Purchased" data-tooltip-direction="UP">Purc</div>
+              <div class="ability-value" data-tooltip="MNM3E.Misc" data-tooltip-direction="UP">Misc</div>
+              <div class="ability-value" data-tooltip="MNM3E.Auto" data-tooltip-direction="UP">Auto</div>
+              <div class="ability-value" data-tooltip="MNM3E.Total" data-tooltip-direction="UP">Total</div>
+            </li>
+             {{#each system.abilities as |ability key|}}
+               <li class="flexrow ability" data-ability="{{key}}">
+                <label class="resource-label rollable-ability rollable flexexlarge align-center" data-roll="d20+@abilities.{{key}}.total" data-label="{{ability.label}}">{{ability.label}}</label>
+                <input class="ability-value purchased" type="text" name="system.abilities.{{key}}.purchased" oninput="setDefaultToZero(this)" value="{{ability.purchased}}" data-dtype="Number"/>
+                <div class="flexrow ability-div">
+                  {{#if ability.disabled}}
+                  <input class="ability-value disabler" type="text" disabled="true" name="absent" value="{{ability.status}}" data-dtype="Text"/>
+                  {{else}}
+                  <input class="ability-value misc" oninput="setDefaultToZero(this)" type="text" name="system.abilities.{{key}}.misc" value="{{ability.misc}}" data-dtype="Number"/>
+                  <input class="ability-value auto" disabled="true" type="text" name="system.abilities.{{key}}.auto" value="{{ability.auto}}" data-dtype="Number"/>
+                  <input class="ability-value total" disabled="true" type="text" name="system.abilities.{{key}}.total" value="{{ability.total}}" data-dtype="Number"/>                  
+                  {{/if}}
+                </div>
+               </li>
+             {{/each}}
+          </ul>
         </aside>
 
-        {{!-- Skills --}}
+        {{!-- Defenses --}}
         <aside class="sidebar">
-          {{#each system.defenses as |defense key|}}
-          <section class="defense flexrow flex-group-left">
-            <label class="resource-label rollable flexlarge align-center" data-roll="d20+@defenses.{{key}}.total" data-label="{{defense.label}}">{{defense.label}}</label>
-            <input width="30" title="From Original Stat" type="text" disabled="true" name="system.defenses.{{key}}.default" value="{{defense.default}}" data-dtype="Number"/>
-            <input width="30" title="Purchased" type="text" name="system.defenses.{{key}}.purchased" value="{{defense.purchased}}" data-dtype="Number"/>
-            <input width="30" title="Misc Bonuses" type="text" name="system.defenses.{{key}}.misc" value="{{defense.misc}}" data-dtype="Number"/>
-            <input width="30" title="Automatic" type="text" disabled="true" name="system.defenses.{{key}}.auto" value="{{defense.auto}}" data-dtype="Number"/>
-            <span class="defense-total rollable" data-roll="d20+@defenses.{{key}}.total" data-label="{{defenses}}">{{numberFormat defense.total decimals=0 sign=true}}</span>
-            <input width="30" title="AC" type="text" disabled="true" name="system.defenses.{{key}}.ac" value="{{defense.ac}}" data-dtype="Number"/>
-          </section>
-          {{/each}}
+          <ul class="defense-list">
+            {{!-- Headers --}}
+            <li class="flexrow features-header">
+              <div class="resource-label flexexlarge flexrow"></div>
+              <div class="defense-value" data-tooltip="MNM3E.Original" data-tooltip-direction="UP">Stat</div>
+              <div class="defense-value" data-tooltip="MNM3E.Purchased" data-tooltip-direction="UP">Purc</div>
+              <div class="defense-value" data-tooltip="MNM3E.Misc" data-tooltip-direction="UP">Misc</div>
+              <div class="defense-value" data-tooltip="MNM3E.Auto" data-tooltip-direction="UP">Auto</div>
+              <div class="defense-value" data-tooltip="MNM3E.Total" data-tooltip-direction="UP">Total</div>
+              <div class="defense-value" data-tooltip="MNM3E.AC" data-tooltip-direction="UP">AC</div>
+              <div class="defense-value" data-tooltip="MNM3E.Impervious" data-tooltip-direction="UP">Imp</div>
+            </li>
+            {{#each system.defenses as |defense key|}}
+            <li class="flexrow defense" data-defense="{{key}}">
+              <label class="resource-label rollable-defense rollable flexexlarge align-center" data-roll="d20+@defenses.{{key}}.total" data-label="{{defense.label}}">{{defense.label}}</label>
+              <div class="flexrow defense-div">
+                {{#if defense.immune}}
+                <input class="defense-value disabler" type="text" disabled="true" name="immune" value="MNM3E.Immune" data-dtype="Text"/>
+                {{else}}
+                {{#if defense.disabled}}
+                <input class="defense-value disabler" type="text" disabled="true" name="disabled" value="Disabled" data-dtype="Text"/>
+                {{else}}
+                <input class="defense-value originalstat" type="text" disabled="true" name="system.defenses.{{key}}.default" value="{{defense.default}}" data-dtype="Number"/>
+                <input class="defense-value purchased" oninput="setDefaultToZero(this)" type="text" name="system.defenses.{{key}}.purchased" value="{{defense.purchased}}" data-dtype="Number"/>
+                <input class="defense-value misc"  oninput="setDefaultToZero(this)" type="text" name="system.defenses.{{key}}.misc" value="{{defense.misc}}" data-dtype="Number"/>
+                <input class="defense-value auto" disabled="true"  type="text" name="system.defenses.{{key}}.auto" value="{{defense.auto}}" data-dtype="Number"/>
+                <input class="defense-value total" disabled="true"  type="text" name="system.defenses.{{key}}.total" value="{{defense.total}}" data-dtype="Number"/>                            
+                <input class="defense-value ac" type="text" disabled="true" name="system.defenses.{{key}}.ac" value="{{defense.ac}}" data-dtype="Number"/>
+                <input class="defense-value impervious" type="text" disabled="true" name="system.defenses.{{key}}.impervious" value="{{defense.impervious}}" data-dtype="Number"/>
+                {{/if}}
+                {{/if}}
+              </div>
+            </li>
+            {{/each}}
+          </ul>
+
+
         </aside>
       </section>
 
       {{!-- Skills --}}
       <ul class="skills-list">
+        {{!-- Headers --}}
+        <li class="flexrow features-header">
+          <div class="skill-name-controls">
+            <div class="resource-label flexexlarge flexrow"></div>
+          </div>
+          <div class="skill-ability abl" data-tooltip="Original Ability" data-tooltip-direction="UP">Abl</div>
+          <div class="skill-original-ability" data-tooltip="Original Ability" data-tooltip-direction="UP">Stat</div>
+          <div class="skill-value" data-tooltip="Purchased" data-tooltip-direction="UP">Purc</div>
+          <div class="skill-value" data-tooltip="Misc" data-tooltip-direction="UP">Misc</div>
+          <div class="skill-value" data-tooltip="Automatic" data-tooltip-direction="UP">Auto</div>
+          <div class="skill-value" data-tooltip="Total" data-tooltip-direction="UP">Total</div>
+          <div class="checkmarks">
+            <div class="toggle1" data-tooltip="Untrained?" data-tooltip-direction="UP">U</div>
+            <div class="toggle2" data-tooltip="Mastery?" data-tooltip-direction="UP">M</div>
+          </div>
+        </li>
       {{#each system.skills as |skill key|}}
-        <li class="skill flexrow">
+        <li class="skill flexrow" data-skill="{{key}}">
             <div class="skill-name-controls">
-              <i class="fa-solid fa-dice-d20 roll-button rollable flexexlarge align-center" data-roll="d20+@skills.{{key}}.total"></i>
-              <label class="resource-label flexexlarge align-center" data-label="{{skill.label}}">{{skill.label}}</label>
+              <label class="resource-label rollable-skill rollable flexexlarge align-center" data-roll="d20+@skills.{{key}}.total" data-label="{{skill.label}}">{{skill.label}}</label>
               <a class="config-button" data-action="skill" data-tooltip="Configure">
                 <i class="fas fa-cog"></i>
               </a>
             </div>
-            <label class="skill-ability" title="Original Ability">{{skill.ability}}</label>
-            <label class="skill-original-ability" title="From Original Stat">+{{skill.default}}</label>
-            <input title="Purchased" type="text" name="system.skills.{{key}}.purchased" value="{{skill.purchased}}" data-dtype="Number"/>
+            <label class="skill-ability" >{{skill.ability}}</label>
+            <div class="flexrow">
+              {{#if skill.disabled}}
+              <input class="skill-value disabler" type="text" disabled="true" name="disabled" value="Disabled" data-dtype="Text"/>
+              {{else}}
+              <input class="skill-value originalstat" type="text" disabled="true" name="system.skills.{{key}}.default" value="{{skill.default}}" data-dtype="Number"/>
+              <input class="skill-value purchased" oninput="setDefaultToZero(this)" type="text" name="system.skills.{{key}}.purchased" value="{{skill.purchased}}" data-dtype="Number"/>
+              <input class="skill-value misc" oninput="setDefaultToZero(this)" type="text" name="system.skills.{{key}}.misc" value="{{skill.misc}}" data-dtype="Number"/>
+              <input class="skill-value auto" type="text" disabled="true" name="system.skills.{{key}}.auto" value="{{skill.auto}}" data-dtype="Number"/>
+              <input class="skill-value total" type="text" disabled="true" name="system.skills.{{key}}.total" value="{{skill.total}}" data-dtype="Number"/>
+              {{/if}}
+            </div>
+            <div class="checkmarks">
+              <i class="toggle1" >{{{skill.untrainedIcon}}}</i>
+              <i class="toggle2" >{{{skill.masteryIcon}}}</i>
+            </div>
         </li>
       {{/each}}
       </ul>
-
-
     </div>
 
     {{!-- https://stackoverflow.com/questions/6199773/how-to-enable-disable-an-html-button-based-on-scenarios --}}
@@ -172,5 +236,14 @@
     </div>
 
   </section>
+
+  <pre>
+    <script>
+      function setDefaultToZero(input) {
+        if (input.value == '') {
+          input.value = '0';
+        }}
+    </script>
+  </pre>
 </form>
 

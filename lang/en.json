@@ -1,5 +1,6 @@
 {
   "MNM3E.SheetHero": "Hero",
+  "MNM3E.SheetNpc": "NPC",
   "MNM3E.SheetVehicle": "Vehicle",
   "MNM3E.SheetBase": "Base",
   "MNM3E.SheetItem": "Item",
@@ -22,6 +23,7 @@
   "MNM3E.AbilityAweAbbr": "awe",
   "MNM3E.AbilityPreAbbr": "pre",
 
+  "MNM3E.Original": "Original Stat",
   "MNM3E.Purchased": "Purchased",
   "MNM3E.Misc": "Misc",
   "MNM3E.Auto": "Auto",
@@ -42,9 +44,17 @@
   "MNM3E.Fortitude": "Fortitude",
   "MNM3E.Will": "Will",
 
-  "MNM3E.AC": "AC",
+  "MNM3E.AC": "Armor Class",
   "MNM3E.Immune": "Immune",
-  "MNM3E.Imprevious": "Imprevious",
+  "MNM3E.Disabled": "Disabled",
+  "MNM3E.Debilitated": "Debilitated",
+  "MNM3E.Absent": "Absent",
+  "MNM3E.Impervious": "Impervious",
+  "MNM3E.ImprovedRoll": "Improved Roll",
+
+  "MNM3E.AbilityPromptTitle": "{ability} Ability Check",
+  "MNM3E.SkillPromptTitle": "{skill} Skill Check",
+  "MNM3E.DefensePromptTitle": "{Defense} Defense Check",
 
   "MNM3E.Wounds": "Wounds",
 
@@ -205,11 +215,11 @@
   "MNM3E.pTransform": "Transform",
   "MNM3E.pVariable": "Variable",
   "MNM3E.pWeaken": "Weaken",
-  "MNM3E.pImpreviousDodge": "Imprevious Dodge",
-  "MNM3E.pImpreviousParry": "Imprevious Parry",
-  "MNM3E.pImpreviousToughness": "Imprevious Toughness",
-  "MNM3E.pImpreviousFortitude": "Imprevious Fortitude",
-  "MNM3E.pImpreviousWill": "Imprevious Will",
+  "MNM3E.pImperviousDodge": "Impervious Dodge",
+  "MNM3E.pImperviousParry": "Impervious Parry",
+  "MNM3E.pImperviousToughness": "Impervious Toughness",
+  "MNM3E.pImperviousFortitude": "Impervious Fortitude",
+  "MNM3E.pImperviousWill": "Impervious Will",
 
   "MNM3E.exAccurate": "Accurate",
   "MNM3E.exAffectsCorporeal": "Affects Corporeal",

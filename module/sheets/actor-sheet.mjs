@@ -13,7 +13,7 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
     return mergeObject(super.defaultOptions, {
       classes: ["foundrymnm3e", "sheet", "actor"],
       template: "systems/foundrymnm3e/templates/actor/actor-sheet.hbs",
-      width: 800,
+      width: 775,
       height: 800,
       tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "features" }]
     });
@@ -72,24 +72,61 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
    */
    _prepareCharacterData(context) {
     // Handle ability scores.
-    for (let [k, v] of Object.entries(context.system.abilities)) {
-      v.label = game.i18n.localize(CONFIG.MNM3E.abilities[k]) ?? k;
-    }
-
-    // Handle defense scores.
-    for (let [k, v] of Object.entries(context.system.defenses)) {
-      v.label = game.i18n.localize(CONFIG.MNM3E.defenses[k]) ?? k;
-    }
-
-    // Handle skills scores.
-    for (let [k, v] of Object.entries(context.system.skills)) {
-      v.label = game.i18n.localize(CONFIG.MNM3E.skills[k]) ?? k;
-      if (v.hasOwnProperty("subtype")){
-        if(v.subtype != ""){
-          v.label = v.subtype;
+    for (let [k, abi] of Object.entries(context.system.abilities)) {
+      abi.label = game.i18n.localize(CONFIG.MNM3E.abilities[k]) ?? k;
+      abi.disabled = abi.purchased < -5 || abi.auto < -5;
+      if (abi.disabled) 
+      {
+        if(abi.purchased < -5)
+        {
+          abi.status = ` ${game.i18n.localize("MNM3E.Absent")}`;
+        }
+        else
+        {
+          abi.status = ` ${game.i18n.localize("MNM3E.Debilitated")}`;
         }
       }
     }
+
+    // Handle defense scores.
+    for (let [k, def] of Object.entries(context.system.defenses)) {
+      def.label = game.i18n.localize(CONFIG.MNM3E.defenses[k]) ?? k;
+      def.disabled = context.system.abilities[def.ability].disabled && def.immune != true;
+      // This will break if in different language.
+      if (def.disabled && def.label == ` ${game.i18n.localize("MNM3E.Toughness")}`){
+        def.disabled = false;
+      }
+    }
+
+    // Handle skills scores.
+    for (let [k, skl] of Object.entries(context.system.skills)) {
+      skl.untrainedIcon = this._getCheckmarkIcon(skl.untrained);
+      skl.masteryIcon = this._getMasteryIcon(skl.mastery);
+      skl.label = game.i18n.localize(CONFIG.MNM3E.skills[k]) ?? k;
+      skl.disabled = context.system.abilities[skl.ability].disabled;
+
+      if (skl.hasOwnProperty("subtype")){
+        if(skl.subtype != ""){
+          skl.label = skl.subtype;
+        }
+      }
+    }
+  }
+
+  _getCheckmarkIcon(level){
+    const icons = {
+      false: '<i class="fa-solid fa-xmark"></i>',
+      true: '<i class="fas fa-check"></i>',
+    }
+    return icons[level] || icons[0];
+  }
+
+  _getMasteryIcon(level){
+    const icons = {
+      false: '<i class="far fa-book"></i>',
+      true: '<i class="fas fa-solid fa-book"></i>',
+    }
+    return icons[level] || icons[0];
   }
 
   /**
@@ -149,7 +186,7 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
 
     // -------------------------------------------------------------
     // Everything below here is only needed if the sheet is editable
-    if (!this.isEditable){
+    if (this.isEditable){
 
       // Add Inventory Item
       html.find('.item-create').click(this._onItemCreate.bind(this));
@@ -165,13 +202,15 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
       // Active Effect management
       html.find(".effect-control").click(ev => onManageActiveEffect(ev, this.actor));
 
-      // Rollable abilities.
-      html.find('.rollable').click(this._onRoll.bind(this));
-
-      html.find(".config-button").click(this._onConfigMenu.bind(this));
+      //html.find(".config-button").click(this._onConfigMenu.bind(this));
 
       // Drag events for macros.
       if (this.actor.isOwner) {
+        // Rollable abilities.
+        html.find('.rollable-ability').click(event => this._onRollAbilityTest(event));
+        html.find('.rollable-defense').click(event => this._onRollDefenseTest(event));
+        html.find('.rollable-skill').click(event => this._onRollSkillTest(event));
+
         let handler = ev => this._onDragStart(ev);
         html.find('li.item').each((i, li) => {
           if (li.classList.contains("inventory-header")) return;
@@ -180,6 +219,25 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
         });
       }
     }
+  }
+
+
+  _onRollAbilityTest(event) {
+    event.preventDefault();
+    let ability = event.currentTarget.parentElement.dataset.ability;
+    return this.actor.rollAbility(ability, {event: event});
+  }
+
+  _onRollDefenseTest(event) {
+    event.preventDefault();
+    let defense = event.currentTarget.parentElement.dataset.defense;
+    return this.actor.rollDefense(defense, {event: event});
+  }
+
+  _onRollSkillTest(event){
+    event.preventDefault();
+    const skill = event.currentTarget.closest("[data-skill]").dataset.skill;
+    return this.actor.rollSkill(skill, {event: event});
   }
 
   _onConfigMenu(event) {

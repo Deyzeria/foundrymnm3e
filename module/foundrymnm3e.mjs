@@ -1,4 +1,5 @@
 // Import document classes.
+import { MNM3E } from "./helpers/config.mjs";
 import { FoundryMnM3eActor } from "./documents/actor.mjs";
 import { FoundryMnM3eItem } from "./documents/item.mjs";
 // Import sheet classes.
@@ -6,14 +7,23 @@ import { FoundryMnM3eActorSheet } from "./sheets/actor-sheet.mjs";
 import { FoundryMnM3eItemSheet } from "./sheets/item-sheet.mjs";
 // Import helper/utility classes and constants.
 import { preloadHandlebarsTemplates } from "./helpers/templates.mjs";
-import { MNM3E } from "./helpers/config.mjs";
 import { ParserAccess } from "./helpers/HeroLabParser.mjs";
+import * as dice from "./dice/_module.mjs";
+import * as canvas from "./canvas/_module.mjs";
+
+globalThis.foundrymnm3e = {
+  canvas,
+  config: MNM3E,
+  dice,
+};
+
 
 /* -------------------------------------------- */
 /*  Init Hook                                   */
 /* -------------------------------------------- */
 
 Hooks.once('init', async function() {
+  globalThis.foundrymnm3e = game.foundrymnm3e = Object.assign(game.system, globalThis.foundrymnm3e);
   // Add utility classes to the global game object so that they're more easily
   // accessible in global contexts.
   game.foundrymnm3e = {
@@ -22,8 +32,24 @@ Hooks.once('init', async function() {
     rollItemMacro
   };
 
+  // Custom Die modifier
+  // For now will be usually hardcoded to just do d20imp, adding a die with the result of 10 if the result is below 11(1-10)
+  Die.MODIFIERS.imp = function(modifier) 
+  { 
+    const rgx = /imp/i;
+    const match = modifier.match(rgx);
+    if ( !match ) return false;
+    if (this.results[0].result < 11) 
+    {
+      this.results.push( { "result": 10, "active": true, "exploded": true } );
+    }
+  }
+
   // Add custom constants for configuration.
   CONFIG.MNM3E = MNM3E;
+  CONFIG.Actor.documentClass = FoundryMnM3eActor;
+  CONFIG.Item.documentClass = FoundryMnM3eItem;
+  CONFIG.Dice.D20Roll = dice.D20Roll;
 
   /**
    * Set an initiative formula for the system
@@ -34,8 +60,6 @@ Hooks.once('init', async function() {
   };
 
   // Define custom Document classes
-  CONFIG.Actor.documentClass = FoundryMnM3eActor;
-  CONFIG.Item.documentClass = FoundryMnM3eItem;
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
@@ -44,6 +68,12 @@ Hooks.once('init', async function() {
       types: ["hero"],
       makeDefault: true,
       label: "MNM3E.SheetHero"
+    });
+    Actors.registerSheet("foundrymnm3e", FoundryMnM3eActorSheet, 
+    {  
+      types: ["npc"],
+      makeDefault: true,
+      label: "MNM3E.SheetNpc"
     });
   Actors.registerSheet("foundrymnm3e", FoundryMnM3eActorSheet, 
     {  
@@ -57,6 +87,7 @@ Hooks.once('init', async function() {
       makeDefault: true,
       label: "MNM3E.SheetBase"
     });
+  
   Items.unregisterSheet("core", ItemSheet);
   Items.registerSheet("foundrymnm3e", FoundryMnM3eItemSheet, 
   { 

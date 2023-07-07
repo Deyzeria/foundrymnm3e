@@ -159,11 +159,11 @@ preLocalize("skills");
 	transform: "MNM3E.pTransform",
 	variable: "MNM3E.pVariable",
 	weaken: "MNM3E.pWeaken",
-	impdodge: "MNM3E.pImpreviousDodge",
-	impparry: "MNM3E.pImpreviousParry",
-	imptoughness: "MNM3E.pImpreviousToughness",
-	impfortitude: "MNM3E.pImpreviousFortitude",
-	impwill: "MNM3E.pImpreviousWill",
+	impdodge: "MNM3E.pImperviousDodge",
+	impparry: "MNM3E.pImperviousParry",
+	imptoughness: "MNM3E.pImperviousToughness",
+	impfortitude: "MNM3E.pImperviousFortitude",
+	impwill: "MNM3E.pImperviousWill",
    };
    preLocalize("defaultPowerEffects");
 

@@ -1,3 +1,5 @@
+import { d20Roll } from "../dice/dice.mjs";
+
 /**
  * Extend the base Actor document by defining a custom roll data structure which is ideal for the Simple system.
  * @extends {Actor}
@@ -95,7 +97,7 @@ export class FoundryMnM3eActor extends Actor {
     systemData.generic.pp = Math.max(systemData.generic.pl * 15, 15) + systemData.generic.extrapp;
 
     for (let [key, ability] of Object.entries(systemData.abilities)) {
-      if(ability.purchased > -5)
+      if(ability.purchased >= -5)
       {
         ability.total = ability.purchased + ability.misc + ability.auto;
         systemData.generic.pp_ability += ability.purchased * 2;
@@ -108,14 +110,30 @@ export class FoundryMnM3eActor extends Actor {
     }
 
     for (let [key, defense] of Object.entries(systemData.defenses)) {
-      defense.default = systemData.abilities[defense.ability].total;
-      defense.total = defense.purchased + defense.misc + defense.auto + defense.default;
-      defense.ac = 10 + parseFloat(defense.total);
+      if(systemData.abilities[defense.ability].total > -6)
+      {
+        defense.default = systemData.abilities[defense.ability].total;
+        defense.total = defense.purchased + defense.misc + defense.auto + defense.default;
+        defense.ac = 10 + parseInt(defense.total);
+      }
+      else
+      {
+        defense.default = 0;
+        if(key == 'toughness')
+        {
+          defense.total = defense.misc + defense.auto;
+          defense.ac = 10 + parseInt(defense.total);
+        } 
+        else 
+        {
+          defense.total = -100;
+        }
+      }
       systemData.generic.pp_defenses += defense.purchased;
     }
 
     for (let [key, skill] of Object.entries(systemData.skills)) {
-      skill.default = systemData.abilities[skill.ability].total;
+      skill.default = systemData.abilities[skill.ability].purchased > -6 ? systemData.abilities[skill.ability].total : 0;
       skill.total = skill.default + skill.purchased + skill.misc + skill.auto;
       systemData.generic.pp_skills += skill.purchased / 2;
     }
@@ -151,7 +169,7 @@ export class FoundryMnM3eActor extends Actor {
    * Override getRollData() that's supplied to rolls.
    */
   getRollData() {
-    const data = super.getRollData();
+    const data = {...super.getRollData()};
 
     // Prepare character roll data.
     this._getCharacterRollData(data);
@@ -162,9 +180,54 @@ export class FoundryMnM3eActor extends Actor {
   /**
    * Prepare character roll data.
    */
-   _getCharacterRollData(data) {
-    if (this.type !== 'hero') return;
-    }
+  _getCharacterRollData(data) {
+  if (this.type !== 'hero') return;
+  }
+
+  /**
+ * Roll a generic ability test or saving throw.
+ * Prompt the user for input on which variety of roll they want to do.
+ * @param {string} abilityId    The ability id (e.g. "str")
+ * @param {object} options      Options which configure how ability tests or saving throws are rolled
+ */  
+  async rollAbility(abilityId, options={}) {
+    const label = game.i18n.localize(CONFIG.MNM3E.abilities[abilityId]) ?? "";
+    const abl = this.system.abilities[abilityId];
+    const parts = [];
+    const data = this.getRollData();
+
+    parts.push("@total");
+    data.total = abl?.total ?? 0;
+
+    // Roll and return
+    const flavor = game.i18n.format("MNM3E.AbilityPromptTitle", {ability: label});
+    const rollData = foundry.utils.mergeObject({
+      data,
+      title: `${flavor}: ${this.name}`,
+      flavor,
+      messageData: {
+        speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
+        "flags.foundrymnm3e.roll": {type: "ability", abilityId}
+      }
+      }, options);
+      rollData.parts = parts.concat(options.parts ?? []);
+
+    const roll = await d20Roll(rollData);
+    console.debug("HIT After const roll");
+    console.debug(roll);
+    return roll;
+  }
+
+  rollDefense(defenseId, options={}) {
+    const label = CONFIG.MNM3E.defenses[defenseId] ?? "";
+    console.debug(label);
+  }
+
+  rollSkill(skillId, options={}) {
+    const label = CONFIG.MNM3E.skills[skillId] ?? "";
+    console.debug(label);
+  }
+
 }
 
 Hooks.on("renderActorSheet", (app, html, data) => {

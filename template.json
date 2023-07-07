@@ -71,59 +71,59 @@
             },
             "defenses": {
                 "dodge": {
-                "purchased": 0,
-                "default": 0,
-                "ability": "agl",
-                "misc": 0,
-                "auto": 0,
-                "total": "",
-                "ac": 0,
-                "immune": "",
-                "imprevious": 0
+                    "purchased": 0,
+                    "default": 0,
+                    "ability": "agl",
+                    "misc": 0,
+                    "auto": 0,
+                    "total": "",
+                    "ac": 0,
+                    "immune": false,
+                    "impervious": 0
                 },
                 "parry": {
-                "purchased": 0,
-                "default": 0,
-                "ability": "fgt",
-                "misc": 0,
-                "auto": 0,
-                "total": "",
-                "ac": 0,
-                "immune": "",
-                "imprevious": 0
+                    "purchased": 0,
+                    "default": 0,
+                    "ability": "fgt",
+                    "misc": 0,
+                    "auto": 0,
+                    "total": "",
+                    "ac": 0,
+                    "immune": false,
+                    "impervious": 0
                 },
                 "fortitude": {
-                "purchased": 0,
-                "default": 0,
-                "ability": "sta",
-                "misc": 0,
-                "auto": 0,
-                "total": "",
-                "ac": 0,
-                "immune": "",
-                "imprevious": 0
+                    "purchased": 0,
+                    "default": 0,
+                    "ability": "sta",
+                    "misc": 0,
+                    "auto": 0,
+                    "total": "",
+                    "ac": 0,
+                    "immune": false,
+                    "impervious": 0
                 },
                 "toughness": {
-                "purchased": 0,
-                "default": 0,
-                "ability": "sta",
-                "misc": 0,
-                "auto": 0,
-                "total": "",
-                "ac": 0,
-                "immune": "",
-                "imprevious": 0
+                    "purchased": 0,
+                    "default": 0,
+                    "ability": "sta",
+                    "misc": 0,
+                    "auto": 0,
+                    "total": "",
+                    "ac": 0,
+                    "immune": false,
+                    "impervious": 0
                 },
                 "will": {
-                "purchased": 0,
-                "default": 0,
-                "ability": "awe",
-                "misc": 0,
-                "auto": 0,
-                "total": "",
-                "ac": 0,
-                "immune": "",
-                "imprevious": 0
+                    "purchased": 0,
+                    "default": 0,
+                    "ability": "awe",
+                    "misc": 0,
+                    "auto": 0,
+                    "total": "",
+                    "ac": 0,
+                    "immune": false,
+                    "impervious": 0
                 }
             },
             "skills":{
@@ -420,6 +420,9 @@
         }
     },
     "hero": {
+        "templates": ["common", "movement", "details"]
+    },
+    "npc": {
         "templates": ["common", "movement", "details"]
     },
     "vehicle": {

@@ -1,47 +1,48 @@
 export async function ParserAccess(requestURL){
+    // ---REMOVE---
+    const manualSwitch = false;
+    if(manualSwitch){
+
     requestURL = "https://raw.githubusercontent.com/Sinantrarion/foundrymnm3e/main/module/helpers/charactertest.json";
     const request = new Request(requestURL);
 
     const response = await fetch(request);
     const dataActor = await response.json();  
 
-            console.log(dataActor);
-    var actorJson = await GenerateActor(dataActor);
+    console.log(dataActor);
+    var actorJson = await GenerateActor(dataActor, "hero");
     
     actorJson = PopulateActorData(actorJson, dataActor);
-            console.log(actorJson); 
-    //await Actor.create(actorJson);
+    console.log(actorJson); 
+    await Actor.create(actorJson);
+    }
 }
 
-async function GenerateActor(dataActor){
-    return new Actor({name: dataActor.document.public.character._name, type:"hero"}).toObject()
+async function GenerateActor(dataActor, actorType){
+    return new Actor({name: dataActor.document.public.character._name, type:actorType}).toObject()
 }
 
 function PopulateActorData(actorStub, dataActor){
     const dataBase = dataActor.document.public.character;
 
     // ----ABILITIES----
-    actorStub.system.abilities.str.purchased = parseInt(dataBase.attributes.attribute[0]._base);
-    actorStub.system.abilities.sta.purchased = parseInt(dataBase.attributes.attribute[1]._base);
-    actorStub.system.abilities.agl.purchased = parseInt(dataBase.attributes.attribute[2]._base);
-    actorStub.system.abilities.dex.purchased = parseInt(dataBase.attributes.attribute[3]._base);
-    actorStub.system.abilities.fgt.purchased = parseInt(dataBase.attributes.attribute[4]._base);
-    actorStub.system.abilities.int.purchased = parseInt(dataBase.attributes.attribute[5]._base);
-    actorStub.system.abilities.awe.purchased = parseInt(dataBase.attributes.attribute[6]._base);
-    actorStub.system.abilities.pre.purchased = parseInt(dataBase.attributes.attribute[7]._base);
+    const actorStubAbilitiesList = ['str', 'sta', 'agl', 'dex', 'fgt', 'int', 'awe', 'pre'];
+    for (var i = 0; i < actorStubAbilitiesList.length; i++)
+    {
+        actorStub.system.abilities[actorStubAbilitiesList[i]].purchased = parseInt(dataBase.attributes.attribute[i]._base);
+    }
 
     // ----DEFENCES----
-    actorStub.system.defenses.dodge.purchased = parseInt(dataBase.defenses.defense[0].cost._value);
-    actorStub.system.defenses.parry.purchased = parseInt(dataBase.defenses.defense[1].cost._value);
-    actorStub.system.defenses.fortitude.purchased = parseInt(dataBase.defenses.defense[2].cost._value);
-    actorStub.system.defenses.toughness.purchased = parseInt(dataBase.defenses.defense[3].cost._value);
-    actorStub.system.defenses.will.purchased = parseInt(dataBase.defenses.defense[4].cost._value);
+    const actorStubDefensesList = ['dodge', 'parry', 'fortitude', 'toughness', 'will']
+    for (var i = 0; i < actorStubDefensesList.length; i++)
+    {
+        actorStub.system.defenses[actorStubDefensesList[i]].purchased = parseInt(dataBase.defenses.defense[i].cost._value);
+        actorStub.system.defenses[actorStubDefensesList[i]].impervious = parseInt(dataBase.defenses.defense[i]._impervious);
+    }
     
     // ----SKILLS----
     const skillsList = dataBase.skills.skill;
     const actorStubSkillList = ['acr', 'ath', 'dec', 'inm', 'ins', 'inv', 'prc', 'prs', 'soh', 'ste', 'tec', 'tre', 'veh'];
-
-
     for (var i = 0; i < actorStubSkillList.length; i++)
     {
         var tempValue = skillsList[GetSkill(skillsList, i)]._base;
@@ -118,12 +119,6 @@ function PopulateActorData(actorStub, dataActor){
         var skillName = skillsList[skillArray[i]]._name;
         actorStub.system.skills[comb[i]].subtype = skillName.replace(variant, "EX")
     }
-
-    //'exp1', 'exp2', 'exp3', 'exp4', 'exp5', 
-    // actorStub.system.exp2.purchased = parseInt();
-    // actorStub.system.exp3.purchased = parseInt();
-    // actorStub.system.exp4.purchased = parseInt();
-    // actorStub.system.exp5.purchased = parseInt();
 
     // ----GENERIC----
     actorStub.system.generic.pl = parseInt(dataBase.powerlevel._value);
