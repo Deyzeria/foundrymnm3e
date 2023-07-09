@@ -166,6 +166,20 @@
             {{/each}}
           </ul>
 
+          <ul class="attributes flexrow">
+            <li class="attribute wounds">
+              <h4 class="attribute-name box-title">Wounds</h4>
+              <center>
+              <input class="attribute-value" oninput="setDefaultToZero(this)" type="text" name="system.generic.wounds" value="{{system.generic.wounds}}" data-dtype="Number"/>
+              </center>
+            </li>
+            <li class="attribute initiative">
+              <h4 class="attribute-name box-title">Initiative</h4>
+              <center>
+              <input class="attribute-value" disabled="true" type="text" name="system.generic.initiative" value="{{system.generic.initiative}}" data-dtype="Number"/>
+              </center>
+            </li>
+          </ul>
         </aside>
       </section>
 

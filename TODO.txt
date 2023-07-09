@@ -5,10 +5,14 @@ actor.mjs rollSkill needs to work with Absent
 Impervious color to red if > Defense total?
 
 actor.mjs rollDefense Add panel for DC setting with rolling second roll with degree of successess/failures
+Panel with DC setting needs to include a checkmark if the save is against damaged condition?
+Maybe have it have you input the Effect Rank + there be a large checkmark for Is Damage?
 Panel with DC setting needs to remind of 
 
 actor-hero-sheet add Wounds
 actor-hero-sheet list of immunities?
+
+
 
 
 # HeroLabParser

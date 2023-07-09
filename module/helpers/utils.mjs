@@ -69,3 +69,51 @@ function _localizeObject(obj, keys) {
     }
   }
 }
+
+// This outputs negative results for every degree of failure and positive for every degree of success
+export function checkSuccessFailureCalculator(result, dc)
+{
+  const diff = result - dc;
+  switch (true)
+  {
+    case (diff >= 15):
+      return 4;
+    case (diff >= 10):
+      return 3;
+    case (diff >= 5):
+      return 2;
+    case (diff >= 0):
+      return 1;
+    case (diff <= -16):
+      return -4;
+    case (diff <= -11):
+      return -3;
+    case (diff <= -6):
+      return -2;
+    case (diff < 0):
+      return -1;
+    default:
+      return;
+  }
+}
+
+// This outputs positive results for every degree of failure and 0 for succeess
+export function checkSaveDCCalculator(result, dc)
+{
+  const diff = result - dc;
+  switch (true)
+  {
+    case (diff >= 0):
+      return 0;
+    case (diff <= -16):
+      return 4;
+    case (diff <= -11):
+      return 3;
+    case (diff <= -6):
+      return 2;
+    case (diff < 0):
+      return 1;
+    default:
+      return "Unknown";
+  }
+}

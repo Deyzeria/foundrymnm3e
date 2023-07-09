@@ -105,13 +105,13 @@ export default class D20Roll extends Roll {
     if (this.hasImproved) messageData.flavor += ` (${game.i18n.localize("MNM3E.ImprovedRoll")})`
 
     // Record the preferred rollMode
-    //options.rollMode = options.rollMode ?? this.options.rollMode;
+    options.rollMode = options.rollMode ?? this.options.rollMode;
     return super.toMessage(messageData, options);
   }
 
   
   /* -------------------------------------------- */
-  /*  Configuration Dialog                        */
+  /*  Configuration Dialog    #FIXME:             */
   /* -------------------------------------------- */
 
   /**

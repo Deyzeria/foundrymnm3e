@@ -291,7 +291,6 @@ export class FoundryMnM3eActor extends Actor {
     const roll = await d20Roll(rollData);
     return roll;
   }
-
 }
 
 Hooks.on("renderActorSheet", (app, html, data) => {
