@@ -741,6 +741,9 @@
   border: 1px solid;
   border-radius: 5px;
 }
+.foundrymnm3e.sheet.actor .skills-list .skill .skill-value:disabled{
+  border: transparent;
+}
 .foundrymnm3e.sheet.actor .abl {
   margin-left: -10px;
   margin-right: 3px;

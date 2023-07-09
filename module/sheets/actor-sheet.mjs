@@ -1,6 +1,7 @@
 import {onManageActiveEffect, prepareActiveEffectCategories} from "../helpers/effects.mjs";
 
 import SkillsConfig from "./parts/skills-config.mjs"
+import OnClickSkills from "./parts/skills-config.mjs"
 
 /**
  * Extend the basic ActorSheet with some very simple modifications
@@ -73,24 +74,20 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
    _prepareCharacterData(context) {
     // Handle ability scores.
     for (let [k, abi] of Object.entries(context.system.abilities)) {
-      abi.label = game.i18n.localize(CONFIG.MNM3E.abilities[k]) ?? k;
-      abi.disabled = abi.purchased < -5 || abi.auto < -5;
-      if (abi.disabled) 
-      {
-        if(abi.purchased < -5)
-        {
-          abi.status = ` ${game.i18n.localize("MNM3E.Absent")}`;
-        }
-        else
-        {
-          abi.status = ` ${game.i18n.localize("MNM3E.Debilitated")}`;
-        }
+      abi.label = CONFIG.MNM3E.abilities[k] ?? k;
+      if(abi.purchased < -5) {
+        abi.status = ` ${game.i18n.localize("MNM3E.Absent")}`;
+        abi.disabled = true;
+      }
+      if(abi.auto < -5){
+        abi.status = ` ${game.i18n.localize("MNM3E.Debilitated")}`;
+        abi.disabled = true;
       }
     }
 
     // Handle defense scores.
     for (let [k, def] of Object.entries(context.system.defenses)) {
-      def.label = game.i18n.localize(CONFIG.MNM3E.defenses[k]) ?? k;
+      def.label = CONFIG.MNM3E.defenses[k] ?? k;
       def.disabled = context.system.abilities[def.ability].disabled && def.immune != true;
       // This will break if in different language.
       if (def.disabled && def.label == `${game.i18n.localize("MNM3E.Toughness")}`){
@@ -102,7 +99,7 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
     for (let [k, skl] of Object.entries(context.system.skills)) {
       skl.untrainedIcon = this._getCheckmarkIcon(skl.untrained);
       skl.masteryIcon = this._getMasteryIcon(skl.mastery);
-      skl.label = game.i18n.localize(CONFIG.MNM3E.skills[k]) ?? k;
+      skl.label = CONFIG.MNM3E.skills[k] ?? k;
       skl.disabled = context.system.abilities[skl.ability].disabled;
 
       if (skl.hasOwnProperty("subtype")){
@@ -202,7 +199,7 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
       // Active Effect management
       html.find(".effect-control").click(ev => onManageActiveEffect(ev, this.actor));
 
-      //html.find(".config-button").click(this._onConfigMenu.bind(this));
+      html.find(".config-button").click(this._onConfigMenu.bind(this));
 
       // Drag events for macros.
       if (this.actor.isOwner) {
@@ -247,13 +244,23 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
     let app;
     switch ( button.dataset.action ) {
       case "skill":
-        app = new SkillsConfig(this.actor);
+        const skill = event.currentTarget.closest("[data-skill]").dataset.skill;
+        app = new SkillsConfig(this.actor, {key: skill});
         break;
       default:
         break;
     }
     app?.render(true);
   }
+
+
+
+//------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------
+//------------------------------------Default stuff-----------------------------------------
+//------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------
+
 
   /**
    * Handle creating a new Owned Item for the actor using initial data defined in the HTML dataset

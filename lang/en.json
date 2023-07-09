@@ -51,6 +51,7 @@
   "MNM3E.Absent": "Absent",
   "MNM3E.Impervious": "Impervious",
   "MNM3E.ImprovedRoll": "Improved Roll",
+  "MNM3E.SkillConfig": "Skill Configuration: {skill}",
 
   "MNM3E.AbilityPromptTitle": "{ability} Ability Check",
   "MNM3E.SkillPromptTitle": "{skill} Skill Check",

@@ -10,6 +10,7 @@ import { preloadHandlebarsTemplates } from "./helpers/templates.mjs";
 import { ParserAccess } from "./helpers/HeroLabParser.mjs";
 import * as dice from "./dice/_module.mjs";
 import * as canvas from "./canvas/_module.mjs";
+import * as utils from "./helpers/utils.mjs"
 
 globalThis.foundrymnm3e = {
   canvas,
@@ -123,6 +124,9 @@ Handlebars.registerHelper('toLowerCase', function(str) {
 /* -------------------------------------------- */
 /*  Ready Hook                                  */
 /* -------------------------------------------- */
+
+Hooks.once("i18nInit", () => utils.performPreLocalization(CONFIG.MNM3E));
+
 
 Hooks.once("ready", async function() {
   // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to

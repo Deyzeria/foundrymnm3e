@@ -192,62 +192,83 @@ export class FoundryMnM3eActor extends Actor {
  */  
 // FIXME: Add Debilitated, Absent check and roll change
   async rollAbility(abilityId, options={}) {
-    const label = game.i18n.localize(CONFIG.MNM3E.abilities[abilityId]) ?? "";
+    const label = CONFIG.MNM3E.abilities[abilityId] ?? "";
     const abl = this.system.abilities[abilityId];
-    const parts = [];
-    const data = this.getRollData();
+    if (abl.purchased < -6)
+    {
+      console.debug("Absent");
+    }
+    else if (abl.auto < -6)
+    {
+      console.debug("Debilitated");
+    }
+    else {
+      const parts = [];
+      const data = this.getRollData();
 
-    parts.push("@total");
-    data.total = abl?.total ?? 0;
+      parts.push("@total");
+      data.total = abl?.total ?? 0;
 
-    // Roll and return
-    const flavor = game.i18n.format("MNM3E.AbilityPromptTitle", {ability: label});
-    const rollData = foundry.utils.mergeObject({
-      data,
-      title: `${flavor}: ${this.name}`,
-      flavor,
-      messageData: {
-        speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
-        "flags.foundrymnm3e.roll": {type: "ability", abilityId}
-      }
-      }, options);
-      rollData.parts = parts.concat(options.parts ?? []);
+      // Roll and return
+      const flavor = game.i18n.format("MNM3E.AbilityPromptTitle", {ability: label});
+      const rollData = foundry.utils.mergeObject({
+        data,
+        title: `${flavor}: ${this.name}`,
+        flavor,
+        messageData: {
+          speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
+          "flags.foundrymnm3e.roll": {type: "ability", abilityId}
+        }
+        }, options);
+        rollData.parts = parts.concat(options.parts ?? []);
 
-    const roll = await d20Roll(rollData);
-    return roll;
+      const roll = await d20Roll(rollData);
+      return roll;
+    }
   }
 
   // FIXME: Add Disabled check and roll change
   async rollDefense(defenseId, options={}) {
-    const label = game.i18n.localize(CONFIG.MNM3E.defenses[defenseId]) ?? "";
+    const label = CONFIG.MNM3E.defenses[defenseId] ?? "";
     const def = this.system.defenses[defenseId];
-    const parts = [];
-    const data = this.getRollData();
+    if (def?.immune)
+    {
+      console.debug("Immune");
+    }
+    else if (def.total < -6)
+    {
+      console.debug("Debilitated");
+    }
+    else
+    {
+      const parts = [];
+      const data = this.getRollData();
 
-    parts.push("@total");
-    data.total = def?.total ?? 0;
+      parts.push("@total");
+      data.total = def?.total ?? 0;
 
-    // Roll and return
-    const flavor = game.i18n.format("MNM3E.DefensePromptTitle", {defense: label});
-    const rollData = foundry.utils.mergeObject({
-      data,
-      title: `${flavor}: ${this.name}`,
-      flavor,
-      messageData: {
-        speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
-        "flags.foundrymnm3e.roll": {type: "defeense", defenseId}
-      }
-      }, options);
-      rollData.parts = parts.concat(options.parts ?? []);
-    
-    const roll = await d20Roll(rollData);
-    return roll;
+      // Roll and return
+      const flavor = game.i18n.format("MNM3E.DefensePromptTitle", {defense: label});
+      const rollData = foundry.utils.mergeObject({
+        data,
+        title: `${flavor}: ${this.name}`,
+        flavor,
+        messageData: {
+          speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
+          "flags.foundrymnm3e.roll": {type: "defense", defenseId}
+        }
+        }, options);
+        rollData.parts = parts.concat(options.parts ?? []);
+      
+      const roll = await d20Roll(rollData);
+      return roll;
+    }
   }
 
   // FIXME: Add Disabled check and roll change
   async rollSkill(skillId, options={}) {
     const skl = this.system.skills[skillId];
-    const label = skl.subtype != null ? skl.subtype : game.i18n.localize(CONFIG.MNM3E.skills[skillId]);
+    const label = skl.subtype != null ? skl.subtype : CONFIG.MNM3E.skills[skillId];
     const parts = [];
     const data = this.getRollData();
 

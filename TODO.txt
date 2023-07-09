@@ -1,0 +1,31 @@
+actor.mjs rollAbility needs to work with Absent
+actor.mjs rollDefense needs to work with Absent
+actor.mjs rollSkill needs to work with Absent
+
+Impervious color to red if > Defense total?
+
+actor.mjs rollDefense Add panel for DC setting with rolling second roll with degree of successess/failures
+Panel with DC setting needs to remind of 
+
+actor-hero-sheet add Wounds
+actor-hero-sheet list of immunities?
+
+
+# HeroLabParser
+Languages
+
+Advantages- Search up advantage._name.
+    Specific lookup-
+        Equipment [Number] (Equipment 8)
+        Skill Mastery: [Skill] (Skill Mastery: Athletics)
+
+Powers- 
+
+gear item
+Go over the list and drop stuff that can't be parsed
+    Dropped on ground <- Drop
+    Grab <- Drop
+    Throw <- Drop
+    Unarmed <- Drop
+
+Complications- Eh, copy paste them somehow I dunno.

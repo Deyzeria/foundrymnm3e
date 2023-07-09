@@ -9,11 +9,11 @@ export async function ParserAccess(requestURL){
     const response = await fetch(request);
     const dataActor = await response.json();  
 
-    console.log(dataActor);
+    console.debug(dataActor);
     var actorJson = await GenerateActor(dataActor, "hero");
     
     actorJson = PopulateActorData(actorJson, dataActor);
-    console.log(actorJson); 
+    console.debug(actorJson); 
     await Actor.create(actorJson);
     }
 }

@@ -1,5 +1,24 @@
 <form>
     <div>
-        <label>Skill Config</label>
+        <label>Skills Ability</label>
+        <select name="system.skills.{{key}}.ability">
+            {{selectOptions abilities selected=entry.ability}}
+        </select>
+        {{#if edSubtype}}
+        <input name="system.skills.{{key}}.subtype" type="text" onfocus="addSpecificPart(this, '{{edName}}')" onblur="addSpecificPart(this, '{{edName}}')" value="{{entry.subtype}}">
+        {{/if}}
     </div>
+
+    <button type="submit"><i class="far fa-save"></i> {{localize "Submit"}}</button>
+
+<pre>
+    <script>
+      function addSpecificPart(input, edName) {
+        var specificPart = edName + ": ";
+        if (!input.value.startsWith(specificPart)) {
+            input.value = specificPart + input.value;
+        }
+      }
+    </script>
+</pre>
 </form>
