@@ -76,7 +76,7 @@
                     "ability": "agl",
                     "misc": 0,
                     "auto": 0,
-                    "total": "",
+                    "total": 0,
                     "ac": 0,
                     "immune": false,
                     "impervious": 0
@@ -87,7 +87,7 @@
                     "ability": "fgt",
                     "misc": 0,
                     "auto": 0,
-                    "total": "",
+                    "total": 0,
                     "ac": 0,
                     "immune": false,
                     "impervious": 0
@@ -98,7 +98,7 @@
                     "ability": "sta",
                     "misc": 0,
                     "auto": 0,
-                    "total": "",
+                    "total": 0,
                     "ac": 0,
                     "immune": false,
                     "impervious": 0
@@ -109,7 +109,7 @@
                     "ability": "sta",
                     "misc": 0,
                     "auto": 0,
-                    "total": "",
+                    "total": 0,
                     "ac": 0,
                     "immune": false,
                     "impervious": 0
@@ -120,7 +120,7 @@
                     "ability": "awe",
                     "misc": 0,
                     "auto": 0,
-                    "total": "",
+                    "total": 0,
                     "ac": 0,
                     "immune": false,
                     "impervious": 0
@@ -133,7 +133,7 @@
                     "purchased": 0,
                     "misc": 0,
                     "auto": 0,
-                    "total": "",
+                    "total": 0,
                     "untrained": false,
                     "mastery": false
                 },
@@ -143,7 +143,7 @@
                     "purchased": 0,
                     "misc": 0,
                     "auto": 0,
-                    "total": "",
+                    "total": 0,
                     "untrained": true,
                     "mastery": false
                 },
@@ -153,7 +153,7 @@
                     "purchased": 0,
                     "misc": 0,
                     "auto": 0,
-                    "total": "",
+                    "total": 0,
                     "subtype": "",
                     "untrained": true,
                     "mastery": false
@@ -164,7 +164,7 @@
                     "purchased": 0,
                     "misc": 0,
                     "auto": 0,
-                    "total": "",
+                    "total": 0,
                     "subtype": "",
                     "untrained": true,
                     "mastery": false
@@ -175,7 +175,7 @@
                     "purchased": 0,
                     "misc": 0,
                     "auto": 0,
-                    "total": "",
+                    "total": 0,
                     "untrained": true,
                     "mastery": false
                 },
@@ -185,7 +185,7 @@
                     "purchased": 0,
                     "misc": 0,
                     "auto": 0,
-                    "total": "",
+                    "total": 0,
                     "subtype": "",
                     "untrained": false,
                     "mastery": false
@@ -196,7 +196,7 @@
                     "purchased": 0,
                     "misc": 0,
                     "auto": 0,
-                    "total": "",
+                    "total": 0,
                     "subtype": "",
                     "untrained": false,
                     "mastery": false
@@ -207,7 +207,7 @@
                     "purchased": 0,
                     "misc": 0,
                     "auto": 0,
-                    "total": "",
+                    "total": 0,
                     "subtype": "",
                     "untrained": false,
                     "mastery": false
@@ -218,7 +218,7 @@
                     "purchased": 0,
                     "misc": 0,
                     "auto": 0,
-                    "total": "",
+                    "total": 0,
                     "subtype": "",
                     "untrained": false,
                     "mastery": false
@@ -229,7 +229,7 @@
                     "purchased": 0,
                     "misc": 0,
                     "auto": 0,
-                    "total": "",
+                    "total": 0,
                     "subtype": "",
                     "untrained": false,
                     "mastery": false
@@ -240,7 +240,7 @@
                     "purchased": 0,
                     "misc": 0,
                     "auto": 0,
-                    "total": "",
+                    "total": 0,
                     "untrained": true,
                     "mastery": false
                 },
@@ -250,7 +250,7 @@
                     "purchased": 0,
                     "misc": 0,
                     "auto": 0,
-                    "total": "",
+                    "total": 0,
                     "untrained": true,
                     "mastery": false
                 },
@@ -260,7 +260,7 @@
                     "purchased": 0,
                     "misc": 0,
                     "auto": 0,
-                    "total": "",
+                    "total": 0,
                     "untrained": false,
                     "mastery": false
                 },
@@ -270,7 +270,7 @@
                     "purchased": 0,
                     "misc": 0,
                     "auto": 0,
-                    "total": "",
+                    "total": 0,
                     "untrained": true,
                     "mastery": false
                 },
@@ -280,7 +280,7 @@
                     "purchased": 0,
                     "misc": 0,
                     "auto": 0,
-                    "total": "",
+                    "total": 0,
                     "untrained": true,
                     "mastery": false
                 },
@@ -290,7 +290,7 @@
                     "purchased": 0,
                     "misc": 0,
                     "auto": 0,
-                    "total": "",
+                    "total": 0,
                     "subtype": "",
                     "untrained": true,
                     "mastery": false
@@ -301,7 +301,7 @@
                     "purchased": 0,
                     "misc": 0,
                     "auto": 0,
-                    "total": "",
+                    "total": 0,
                     "subtype": "",
                     "untrained": true,
                     "mastery": false
@@ -312,7 +312,7 @@
                     "purchased": 0,
                     "misc": 0,
                     "auto": 0,
-                    "total": "",
+                    "total": 0,
                     "untrained": false,
                     "mastery": false
                 },
@@ -322,7 +322,7 @@
                     "purchased": 0,
                     "misc": 0,
                     "auto": 0,
-                    "total": "",
+                    "total": 0,
                     "untrained": true,
                     "mastery": false
                 },
@@ -332,7 +332,7 @@
                     "purchased": 0,
                     "misc": 0,
                     "auto": 0,
-                    "total": "",
+                    "total": 0,
                     "untrained": false,
                     "mastery": false
                 },
@@ -342,7 +342,7 @@
                     "purchased": 0,
                     "misc": 0,
                     "auto": 0,
-                    "total": "",
+                    "total": 0,
                     "untrained": false,
                     "mastery": false
                 },
@@ -352,7 +352,7 @@
                     "purchased": 0,
                     "misc": 0,
                     "auto": 0,
-                    "total": "",
+                    "total": 0,
                     "untrained": false,
                     "mastery": false
                 }
@@ -433,45 +433,65 @@
     }
 },
 "Item": {
-    "types": ["power", "advantage", "equipment", "general", "base", "vehicle", "attack"],
+    "types": ["power", "device", "advantage", "general", "base", "vehicle", "attack"],
     "templates": {
         "itemDescription": {
             "Description": ""
         },
-        "power_cost": {
-            "base_cost": 1,
-            "extras": 0,
-            "flaws": 0,
-            "flat": 0,
-            "rank": 0,
-            "final_cost": 0
-        },
         "customisable": {
             "power_effect": "",
             "descriptor": "",
-            "description_mod": "",
-            "extras": 0,
-            "flaws": 0,
-            "flats": 0,
-            "type": "",
-            "action": "",
-            "range": "",
-            "duration": "",
-            "resistance": "",
-            "active_rank": 0,
-            "array": "Normal",
-            "active": false
-        }
+            "type": "attack",
+            "action": {
+                "type": "free",
+                "length": 0
+            },
+            "duration": "instant",
+            "array": 0,
+            "active": false,
+            "power_cost": {
+                "base_cost": 1,
+                "extras": 0,
+                "flaws": 0,
+                "flat": 0,
+                "rank": 0,
+                "final_cost": 0,
+                "active_rank": 0,
+                "manual_purchase": true
+            }
+        },
+        "combat": {
+            "ranges": {
+                "range": "personal",
+                "close": 0,
+                "medium": 0,
+                "far": 0
+            },
+            "save": {
+                "resistance": "",
+                "effect": null
+            },
+            "damage":{
+                "resistance": "",
+                "effect": null
+            },
+            "attack": {
+                "skill": "",
+                "type": "",
+                "auto": 0,
+                "total": 0
+            }
+        }  
     },
         "power": {
-            "templates": ["itemDescription", "power_cost", "customisable"]
+            "templates": ["itemDescription", "customisable", "combat"]
         },
-        "equipment": {
-            "templates": ["itemDescription", "power_cost", "customisable"]
+        "device": {
+            "templates": ["itemDescription", "customisable", "combat"]
         },
         "general": {
             "templates": ["itemDescription"],
-            "cost": 0
+            "final_cost": 0
         },
         "vehicle": {
             "templates": ["itemDescription"],
@@ -482,7 +502,7 @@
             "toughness": 5,
             "features": 0,
             "feature_desc": "",
-            "cost": 0
+            "final_cost": 0
         },
         "base": {
             "templates": ["itemDescription"],
@@ -490,28 +510,28 @@
             "toghness": 6,
             "features": 0,
             "feature_desc": "",
-            "cost": 0
+            "final_cost": 0
         },
         "advantage": {
             "templates": ["itemDescription"],
             "ranks": 1,
+            "type": "combat",
             "ranked": false,
             "additionalDesc": "",
             "effect": "",
             "enchanced": false
         },
         "attack": {
-            "templates": ["itemDescription"],
-            "name": "",
-            "action": "",
-            "type": "",
-            "effect": null,
-            "range": 0,
-            "range_medium": 0,
-            "range_far": 0,
-            "power": 0,
+            "templates": ["itemDescription", "range"],
+            "action": {
+                "type": "free",
+                "length": "0"
+            },
+            "power_effect": "",
+            "descriptor": "",
+            "effect": 0,
             "misc_to_hit": 0,
-            "dc": null,
+            "dc": 0,
             "other_mods": ""
         }
     }

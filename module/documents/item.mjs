@@ -10,21 +10,6 @@ export class FoundryMnM3eItem extends Item {
     // As with the actor class, items are documents that can have their data
     // preparation methods overridden (such as prepareBaseData()).
     super.prepareData();
-    //this.populateLists();
-  }
-
-  /**
-   * Prepare a data object which is passed to any Roll formulas which are created related to this Item
-   * @private
-   */
-   getRollData() {
-    // If present, return the actor's roll data.
-    if ( !this.actor ) return null;
-    const rollData = this.actor.getRollData();
-    // Grab the item's system data as well.
-    rollData.item = foundry.utils.deepClone(this.system);
-
-    return rollData;
   }
 
   /* -------------------------------------------- */
@@ -34,13 +19,120 @@ export class FoundryMnM3eItem extends Item {
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
-    if(this.isOwned)
-    {
-      this.prepareFinalAttributes();
-    }
+    this.labels = {};
+
+    // switch ( this.type ) {
+    //   case "power":
+    //     this.preparePower(); break;
+    // }
+
+    this._prepareActivation();
+
+    // Un-owned items can have their final preparation done here, otherwise this needs to happen in the owning Actor
+    if ( !this.isOwned ) this.prepareFinalAttributes();
   }
 
-  prepareFinalAttributes(){
+  /**
+   * Prepare a data object which is passed to any Roll formulas which are created related to this Item
+   * @private
+   */
+  getRollData() {
+    // If present, return the actor's roll data.
+    if ( !this.actor ) return null;
+    const rollData = this.actor.getRollData();
+    // Grab the item's system data as well.
+    rollData.item = foundry.utils.deepClone(this.system);
+
+    return rollData;
+  }
+
+  _prepareActivation() {
+    if ( !("action" in this.system) ) return;
+    const C = CONFIG.MNM3E;
+
+    // Activation label
+    const act = this.system.action ?? {};
+    this.labels.activate = act.type  ? [act.length, C.powerActivationEnum[act.type]].filterJoin(" ") : "";
+
+    // Range label
+    const rng = this.system.ranges ?? {};
+    if ( [null, "personal", "perception", "rank"].includes(rng.range) )
+    {
+      rng.close = rng.medium = rng.far = null;
+      this.labels.range = C.powerRangeEnum[rng.range];
+    }
+    else if (rng.medium == 0 && rng.medium != null)
+    {
+      this.labels.range = rng.close + " " + C.distanceUnits['m']; // FIXME: Change to use setting from the settings
+    }
+    else
+    {
+      this.labels.range = rng.close + "/" + rng.medium + "/" + rng.far + " " + C.distanceUnits['m']; // FIXME: Change to use setting from the settings
+    }
+
+    // Duration label
+    this.labels.duration = C.powerDurationEnum[this.system.duration] ?? "";
+
+    this.labels.basepower = C.defaultPowerEffects['damage'] ?? "";
+  }
+
+  /**
+   * Compute item attributes which might depend on prepared actor data. If this item is embedded this method will
+   * be called after the actor's data is prepared.
+   * Otherwise, it will be called at the end of `Item5e#prepareDerivedData`.
+   */
+  prepareFinalAttributes() {
+    // Other Saving throws
+    this.getSaveDC();
+
+    // Damage Saving Throws
+    this.getDamageDC();
+
+    this.prepareCostTotal();
+
+    // To Hit
+    //this.getAttackToHit();
+  }
+
+  getSaveDC() {
+    if ( this.system.save.resistance == "" ||  this.system.save.effect == "" || this.system.save.effect == null ) return null;
+
+    const save = this.system.save;
+    const dc =  parseInt(save.effect) + 10;
+
+    const abl = CONFIG.MNM3E.abilities[save.resistance]?.label ?? "";
+    this.labels.save = game.i18n.format("MNM3E.SaveDC", {dc: dc || "", ability: abl});
+    return dc;
+  }
+
+  getDamageDC() {
+    if ( this.system.damage.resistance == "" ||  this.system.damage.effect == "" ||  this.system.damage.effect == null) return null;
+
+    const save = this.system.damage;
+    const dc = parseInt(save.effect) + 15;
+
+    const abl = CONFIG.MNM3E.abilities[save.resistance]?.label ?? "";
+    this.labels.damage = game.i18n.format("MNM3E.SaveDamageDC", {dc: dc || "", ability: abl});
+    return dc;
+  }
+
+  getAttackToHit() {
+    if (this.system.attack.type == "") return null;
+    const rollData = this.getRollData();
+    const parts = [];
+
+    if ( !this.isOwned ) return {rollData, parts};
+
+    parts.push("@total");
+
+    // Condense the resulting attack bonus formula into a simplified label
+    const roll = new Roll(parts.join("+"), rollData);
+    const formula = simplifyRollFormula(roll.formula) || "0";
+    this.labels.toHit = !/^[+-]/.test(formula) ? `+ ${formula}` : formula;
+    return {rollData, parts};
+  }
+
+  prepareCostTotal(){
     const pcost = this.system.power_cost;
 
     var combinedPerRank = 0

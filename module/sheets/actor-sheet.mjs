@@ -38,31 +38,32 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
     // Use a safe clone of the actor data for further operations.
     const actorData = this.actor.toObject(false);
 
-  // Add the actor's data to context.data for easier access, as well as flags.
-  context.system = actorData.system;
-  context.flags = actorData.flags;
+    // Add the actor's data to context.data for easier access, as well as flags.
+    context.system = actorData.system;
+    context.flags = actorData.flags;
+    context.labels = this._getLabels();
 
-    // Prepare character data and items.
-    if (actorData.type == 'hero') {
-      this._prepareItems(context);
-      this._prepareCharacterData(context);
+      // Prepare character data and items.
+      if (actorData.type == 'hero') {
+        this._prepareItems(context);
+        this._prepareCharacterData(context);
+      }
+
+      // Prepare NPC data and items.
+      if (actorData.type == 'vehicle') {
+      }
+
+      if (actorData.type == 'base') {
+      }
+
+      // Add roll data for TinyMCE editors.
+      context.rollData = context.actor.getRollData();
+
+      // Prepare active effects
+      context.effects = prepareActiveEffectCategories(this.actor.effects);
+
+      return context;
     }
-
-    // Prepare NPC data and items.
-    if (actorData.type == 'vehicle') {
-    }
-
-    if (actorData.type == 'base') {
-    }
-
-    // Add roll data for TinyMCE editors.
-    context.rollData = context.actor.getRollData();
-
-    // Prepare active effects
-    context.effects = prepareActiveEffectCategories(this.actor.effects);
-
-    return context;
-  }
 
   /**
    * Organize and classify Items for Character sheets.
@@ -166,6 +167,11 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
     context.advantage = advantage;
     context.equipment = equipment;
     context.attack = attack;
+  }
+
+  _getLabels() {
+    const labels = {...this.actor.labels};
+    return labels;
   }
 
   /* -------------------------------------------- */

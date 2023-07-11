@@ -28,27 +28,70 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
   /* -------------------------------------------- */
 
   /** @override */
-  getData() {
+  async getData() {
     // Retrieve base data structure.
-    const context = super.getData();
+    const context = await super.getData();
+    const item = context.item;
+    const source = item.toObject();
+
+    context.config = CONFIG.MNM3E;
+
 
     // Use a safe clone of the item data for further operations.
     const itemData = context.item;
 
-    // Retrieve the roll data for TinyMCE editors.
-    context.rollData = {};
-    let actor = this.object?.parent ?? null;
-    if (actor) {
-      context.rollData = actor.getRollData();
-    }
+    foundry.utils.mergeObject(context, {
+      source: source.system,
+      system: item.system,
+      labels: item.labels,
+      isEmbedded: item.isEmbedded,
+      advancementEditable: (this.advancementConfigurationMode || !item.isEmbedded) && context.editable,
+      rollData: this.item.getRollData(),
 
-    // Add the actor's data to context.data for easier access, as well as flags.
-    context.system = itemData.system;
-    context.flags = itemData.flags;
+      itemType: game.i18n.localize(CONFIG.Item.typeLabels[this.item.type]),
+      itemStatus: this._getItemStatus(),
+      itemProperties: this._getItemProperties()
+
+      //effects: ActiveEffect5e.prepareActiveEffectCategories(item.effects)
+    });
 
     return context;
   }
 
+  /* -------------------------------------------- */
+
+  /**
+   * Get the Array of item properties which are used in the small sidebar of the description tab.
+   * @returns {string[]}   List of property labels to be shown.
+   * @private
+   */
+  _getItemProperties() {
+    const props = [];
+    const labels = this.item.labels;
+    switch ( this.item.type ) {
+      case "device":
+      case "power":
+        props.push(CONFIG.MNM3E.powerActivationEnum[this.item.system.action.type]);
+        props.push(CONFIG.MNM3E.powerRangeEnum[this.item.system.ranges.range])
+        props.push(CONFIG.MNM3E.powerDurationEnum[this.item.system.duration])
+        props.push(CONFIG.MNM3E.abilities[this.item.system.save.resistance])
+        break;
+    }
+
+    props.push(labels.activate, labels.range, labels.duration, labels.basepower);
+    return props.filter(p => !!p);
+  }
+
+  _getItemStatus()
+  {
+    switch ( this.item.type ) {
+      case "power":
+        return CONFIG.MNM3E.powerTypeEnum[this.item.system.type]
+      case "advantage":
+        return CONFIG.MNM3E.advantageTypeEnum[this.item.system.type]
+    }
+    return null;
+  }
   /* -------------------------------------------- */
 
   /** @override */

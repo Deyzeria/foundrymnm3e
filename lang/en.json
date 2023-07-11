@@ -5,6 +5,14 @@
   "MNM3E.SheetBase": "Base",
   "MNM3E.SheetItem": "Item",
 
+  "ITEM.Item.power": "Power",
+  "ITEM.Item.equipment": "Attack",
+  "ITEM.Item.general": "General",
+  "ITEM.Item.vehicle": "Vehicle",
+  "ITEM.Item.base": "Base",
+  "ITEM.Item.advantage": "Advantage",
+  "ITEM.Item.attack": "Attack",
+
   "MNM3E.AbilityStr": "Strength",
   "MNM3E.AbilitySta": "Stamina",
   "MNM3E.AbilityAgl": "Agility",
@@ -56,6 +64,12 @@
   "MNM3E.AbilityPromptTitle": "{ability} Ability Check",
   "MNM3E.SkillPromptTitle": "{skill} Skill Check",
   "MNM3E.DefensePromptTitle": "{defense} Defense Check",
+  "MNM3E.SaveDC": "DC {dc} {ability}",
+  "MNM3E.SaveDamageDC": "Damage DC {dc} {ability}",
+  "MNM3E.DistFt": "Feet",
+  "MNM3E.DistKm": "Kilometers",
+  "MNM3E.DistM": "Meters",
+  "MNM3E.DistMi": "Miles",
 
   "MNM3E.Wounds": "Wounds",
 
@@ -123,10 +137,10 @@
 
   "MNM3E.Action": "Action",
 
-  "MNM3E.ActionStandard": "Standard Action",
-  "MNM3E.ActionMove": "Move Action",
+  "MNM3E.ActionStandard": "Standard",
+  "MNM3E.ActionMove": "Move",
   "MNM3E.ActionReaction": "Reaction",
-  "MNM3E.ActionFree": "Free Action",
+  "MNM3E.ActionFree": "Free",
   "MNM3E.ActionNone": "None",
 
   "MNM3E.Range": "Range",
@@ -178,13 +192,17 @@
   "MNM3E.Add": "Add",
 
   "MNM3E.pAffliction ": "Affliction",
+  "MNM3E.pAlternateForm": "Alternate Form",
   "MNM3E.pBurrowing": "Burrowing",
   "MNM3E.pCommunication": "Communication",
   "MNM3E.pComprehend": "Comprehend",
   "MNM3E.pConcealment": "Concealment",
   "MNM3E.pCreate": "Create",
+  "MNM3E.pDamage": "Damage",
   "MNM3E.pDeflect": "Deflect",
   "MNM3E.pElongation": "Elongation",
+  "MNM3E.pEnhancedAbility": "Enhanced Ability",
+  "MNM3E.pEnhancedExtra": "Enhanced Extra",
   "MNM3E.pEnhancedTrait": "Enhanced Trait",
   "MNM3E.pEnvironment": "Environment",
   "MNM3E.pExtraLimbs": "Extra Limbs",
@@ -195,6 +213,7 @@
   "MNM3E.pIllusion": "Illusion",
   "MNM3E.pImmortality": "Immortality",
   "MNM3E.pImmunity": "Immunity",
+  "MNM3E.pImpreviousDefense": "Impervious Defense",
   "MNM3E.pInsubstantial": "Insubstantial",
   "MNM3E.pLeaping": "Leaping",
   "MNM3E.pLuckControl": "Luck Control",
@@ -216,11 +235,6 @@
   "MNM3E.pTransform": "Transform",
   "MNM3E.pVariable": "Variable",
   "MNM3E.pWeaken": "Weaken",
-  "MNM3E.pImperviousDodge": "Impervious Dodge",
-  "MNM3E.pImperviousParry": "Impervious Parry",
-  "MNM3E.pImperviousToughness": "Impervious Toughness",
-  "MNM3E.pImperviousFortitude": "Impervious Fortitude",
-  "MNM3E.pImperviousWill": "Impervious Will",
 
   "MNM3E.exAccurate": "Accurate",
   "MNM3E.exAffectsCorporeal": "Affects Corporeal",
@@ -500,5 +514,10 @@
   "MNM3E.advDescStartle": "Use Intimidation to feint in combat.",
   "MNM3E.advDescTaunt": "Use Deception to demoralize in combat.",
   "MNM3E.advDescTracking": "Use Perception to follow tracks.",
-  "MNM3E.advDescWellInformed": "Immediate Investigation or Persuasion to know something."
+  "MNM3E.advDescWellInformed": "Immediate Investigation or Persuasion to know something.",
+
+  "MNM3E.advTypeCombat": "Combat",
+  "MNM3E.advTypeFortune": "Fortune",
+  "MNM3E.advTypeGeneral": "General",
+  "MNM3E.advTypeSkill": "Skill"
 }

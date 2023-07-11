@@ -103,6 +103,20 @@ preLocalize("skills");
    };
    preLocalize("powerRangeEnum");
 
+   MNM3E.movementUnits = {
+	ft: "MNM3E.DistFt",
+	mi: "MNM3E.DistMi",
+	m: "MNM3E.DistM",
+	km: "MNM3E.DistKm"
+  };
+  preLocalize("movementUnits");
+   
+   MNM3E.distanceUnits = {
+	...MNM3E.powerRangeEnum,
+	...MNM3E.movementUnits
+   }
+   preLocalize("distanceUnits");
+
    MNM3E.powerDurationEnum = {
 	instant: "MNM3E.DurationInstant",
 	concentration: "MNM3E.DurationConcentration",
@@ -121,13 +135,17 @@ preLocalize("skills");
    
    MNM3E.defaultPowerEffects = {
 	affliction: "MNM3E.pAffliction",
+	alternateform: "MNM3E.pAlternateForm",
 	burrowing: "MNM3E.pBurrowing",
 	communication: "MNM3E.pCommunication",
 	comprehend: "MNM3E.pComprehend",
 	concealment: "MNM3E.pConcealment",
 	create: "MNM3E.pCreate",
+	damage: "MNM3E.pDamage",
 	deflect: "MNM3E.pDeflect",
 	elongation: "MNM3E.pElongation",
+	enhancedability: "MNM3E.pEnhancedAbility",
+	enhancedextra: "MNM3E.pEnhancedExtra",
 	enhanced: "MNM3E.pEnhancedTrait",
 	environment: "MNM3E.pEnvironment",
 	limbs: "MNM3E.pExtraLimbs",
@@ -138,6 +156,7 @@ preLocalize("skills");
 	illusion: "MNM3E.pIllusion",
 	immortality: "MNM3E.pImmortality",
 	immunity: "MNM3E.pImmunity",
+	impervious: "MNM3E.pImpreviousDefense",
 	insubstantial: "MNM3E.pInsubstantial",
 	leaping: "MNM3E.pLeaping",
 	luckcontrol: "MNM3E.pLuckControl",
@@ -159,11 +178,6 @@ preLocalize("skills");
 	transform: "MNM3E.pTransform",
 	variable: "MNM3E.pVariable",
 	weaken: "MNM3E.pWeaken",
-	impdodge: "MNM3E.pImperviousDodge",
-	impparry: "MNM3E.pImperviousParry",
-	imptoughness: "MNM3E.pImperviousToughness",
-	impfortitude: "MNM3E.pImperviousFortitude",
-	impwill: "MNM3E.pImperviousWill",
    };
    preLocalize("defaultPowerEffects");
 
@@ -289,3 +303,10 @@ preLocalize("skills");
    };
    preLocalize("AdvantageEnum");
 
+   MNM3E.advantageTypeEnum = {
+	combat: "MNM3E.advTypeCombat",
+	fortune: "MNM3E.advTypeFortune",
+	general: "MNM3E.advTypeGeneral",
+	skill: "MNM3E.advTypeSkill"
+   };
+   preLocalize("advantageTypeEnum");

@@ -4,6 +4,7 @@
  * @return {Promise}
  */
  export const preloadHandlebarsTemplates = async function() {
+
   return loadTemplates([
 
     // Actor partials.
@@ -12,5 +13,9 @@
     "systems/foundrymnm3e/templates/actor/parts/actor-powers.hbs",
     "systems/foundrymnm3e/templates/actor/parts/actor-spells.hbs",
     "systems/foundrymnm3e/templates/actor/parts/actor-effects.hbs",
+
+    // Arrays
+    "systems/foundrymnm3e/templates/actor/parts/actor-array-list.hbs",
+    "systems/foundrymnm3e/templates/actor/parts/actor-array.hbs"
   ]);
 };

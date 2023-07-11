@@ -281,6 +281,13 @@
   height: 50px;
   margin-right: 5px;
 }
+.foundrymnm3e .sheet-header .power-img {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 100px;
+  flex: 0 0 50px;
+  height: 50px;
+  margin-right: 5px;
+}
 .foundrymnm3e .sheet-header .header-fields {
   -webkit-box-flex: 1;
   -ms-flex: 1;
@@ -476,6 +483,90 @@
   color: rgb(68, 0, 255);
   text-shadow: 0 0 8px blue;
   cursor: pointer;
+}
+.foundrymnm3e.chat-card{
+  font-style: normal;
+  font-size: 12px;
+}
+.foundrymnm3e.chat-card .card-header {
+  padding: 3px 0;
+  border-top: 2px groove #FFF;
+  border-bottom: 2px groove #FFF;
+}
+.foundrymnm3e.chat-card .card-header img {
+  flex: 0 0 36px;
+  margin-right: 5px;
+}
+.foundrymnm3e.chat-card .card-header h3 {
+  flex: 1;
+  margin: 0;
+  line-height: 36px;
+  font-family: "Modesto Condensed", "Palatino Linotype", serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #4b4a44;
+}
+.foundrymnm3e.chat-card .card-header h3:hover {
+  color: #111;
+  text-shadow: 0 0 10px red;
+}
+.foundrymnm3e.chat-card .card-content {
+  margin: 5px 0;
+}
+.foundrymnm3e.chat-card .card-content h3 {
+  font-size: 12px;
+  margin: 0;
+  font-weight: bold;
+}
+.foundrymnm3e.chat-card .card-content > * {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+.foundrymnm3e.chat-card .card-buttons {
+  margin: 5px 0;
+}
+.foundrymnm3e.chat-card .card-buttons span {
+  display: block;
+  line-height: 28px;
+  text-align: center;
+  border: 1px solid #CCC;
+}
+.foundrymnm3e.chat-card .card-buttons button {
+  font-size: 12px;
+  height: 24px;
+  line-height: 20px;
+  margin: 2px 0;
+}
+.foundrymnm3e.chat-card .card-footer {
+  padding: 3px 0 0;
+  border-top: 2px groove #FFF;
+}
+.foundrymnm3e.chat-card .card-footer span {
+  border-right: 2px groove #FFF;
+  padding: 0 3px 0 0;
+  font-size: 10px;
+}
+.foundrymnm3e.chat-card .card-footer span:last-child {
+  border-right: none;
+  padding-right: 0;
+}
+.dice-roll .dice-total.success {
+  color: inherit;
+  background: #c7d0c0;
+  border: 1px solid #006c00;
+}
+.dice-roll .dice-total.failure {
+  color: inherit;
+  background: #ffdddd;
+  border: 1px solid #6e0000;
+}
+.dice-roll .dice-total.critical {
+  color: green;
+}
+.dice-roll .dice-total.fumble {
+  color: red;
 }
 .foundrymnm3e.sheet.actor .config-button {
   color: #4b4a44;

@@ -1,13 +1,8 @@
 <form class="{{cssClass}}" autocomplete="off">
   <header class="sheet-header">
-    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+    <img class="power-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
     <div class="header-fields">
       <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
-      <div class="resource">
-        <label class="resource-label">Power</label>
-        <select name="powers" id="powers">
-        </select>
-      </div>
     </div>
   </header>
 
@@ -32,7 +27,7 @@
         {{!-- As you add new fields, add them in here! --}}
         <div class="resource flex-group-center">
           <label class="resource-label">Base cost</label>
-          <input type="text" name="system.power_cost.base_cost" value="{{system.power_cost.base_cost}}" data-dtype="Number" placeholder="0"/>
+          <input type="text" name="system.power_cost.base_cost" value="{{system.power_cost.base_cost}}" data-dtype="Number"/>
         </div>
         <div class="resource flex-group-center">
           <label class="resource-label">Extras</label>

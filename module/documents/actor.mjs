@@ -8,11 +8,9 @@ export class FoundryMnM3eActor extends Actor {
 
   /** @override */
   prepareData() {
-    // Prepare data for the actor. Calling the super version of this executes
-    // the following, in order: data reset (to clear active effects),
-    // prepareBaseData(), prepareEmbeddedDocuments() (including active effects),
-    // prepareDerivedData().
+    if ( !game.template.Actor.types.includes(this.type) ) return;
     super.prepareData();
+    this.items.forEach(item => item.prepareFinalAttributes());
   }
 
   /** @override */
@@ -44,8 +42,8 @@ export class FoundryMnM3eActor extends Actor {
   prepareDerivedData() {
     const actorData = this;
     const systemData = actorData.system;
-    const flags = actorData.flags.boilerplate || {};
-
+    const flags = actorData.flags.foundrymnm3e || {};
+    this.labels = {};
 
     // Make separate methods for each Actor type (character, npc, etc.) to keep
     // things organized.

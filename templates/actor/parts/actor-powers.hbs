@@ -1,9 +1,10 @@
 <ol class="items-list">
   <li class="item flexrow items-header">
     <div class="item-name">Name</div>
+    <div class="item-base">Base Power</div>
     <div class="item-action">Action</div>
-    <div class="item-rank">Rank</div>
-    <div class="item-cost">Cost</div>
+    <div class="item-rank">Range</div>
+    <div class="item-cost">Duration</div>
     <div class="item-active">Active</div>
     <div class="item-controls">
       <a class="item-control item-create" title="Add Power" data-type="power"><i class="fas fa-plus"></i> Add power</a>
@@ -17,10 +18,11 @@
         </div>
         <h4>{{item.name}}</h4>
       </div>
-      <div class="item-action item-prop">{{item.system.customizable.action}}</div>
-      <div class="item-rank item-prop">{{item.system.customizable.active_rank}}</div>
+      <div class="item-base item-prop">{{item.labels.basepower}}</div>
+      <div class="item-action item-prop">{{item.labels.activate}}</div>
+      <div class="item-rank item-prop">{{item.labels.range}}</div>
+      <div class="item-action item-prop">{{item.labels.duration}}</div>
       <div class="item-cost item-prop">{{item.system.power_cost.final_cost}}</div>
-      <div class="item-active item-prop">{{item.system.customizable.active}}</div>
       <div class="item-controls">
         <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
         <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>

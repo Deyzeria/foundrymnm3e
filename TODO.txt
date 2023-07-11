@@ -7,12 +7,12 @@ Impervious color to red if > Defense total?
 actor.mjs rollDefense Add panel for DC setting with rolling second roll with degree of successess/failures
 Panel with DC setting needs to include a checkmark if the save is against damaged condition?
 Maybe have it have you input the Effect Rank + there be a large checkmark for Is Damage?
-Panel with DC setting needs to remind of 
 
-actor-hero-sheet add Wounds
 actor-hero-sheet list of immunities?
 
+_prepareActivation distanceUnits needs to usee value from settings
 
+Speed table
 
 
 # HeroLabParser
@@ -22,6 +22,8 @@ Advantages- Search up advantage._name.
     Specific lookup-
         Equipment [Number] (Equipment 8)
         Skill Mastery: [Skill] (Skill Mastery: Athletics)
+
+    Have second list for Free ones, acquireed from Enhanced Trait or other Powers
 
 Powers- 
 
@@ -33,3 +35,73 @@ Go over the list and drop stuff that can't be parsed
     Unarmed <- Drop
 
 Complications- Eh, copy paste them somehow I dunno.
+
+
+{
+    "Description": "",
+    "base_cost": 1,
+    "extras": 0,
+    "flaws": 0,
+    "flat": 0,
+    "rank": 0,
+    "final_cost": 0,
+    "power_effect": "",
+    "descriptor": "",
+    "type": "",
+    "action": "",
+    "range": "",
+    "duration": "",
+    "resistance": "",
+    "active_rank": 0,
+    "array": 0,
+    "active": false,
+    "ligma": 0
+}
+
+Addtions- look up how Damage field in dnd5e is made
+Every single unique part of a power-
+Affliction- 3 degrees, "Resisted By" save Dropdown (Add ability to add and remove saves? Maybe up to 3 per level? Have a value of "AddMoreSaves and If's?)
+Alternate Form- Activation Dropdown (It only affects powers cost of rest of powers in array) Better to make it an array type?
+Burrowing- None
+Communication- "Sense Type: ", Dropdown, Input. Limited to 5 ranks
+Comprehend- Power Options additions.
+Concealment- Power Options additions.
+Create- None
+Damage- Strength Based?
+Deflect- None
+Elongation- None
+Enhanced Ability- Select ability dropdown(one)
+Enhanced Extra- Something funky going on. Basically this is for extras and flaws which affect descriptors.For now can be ignored
+Enhanced Trait- Enhanced Traits & Enhanced Advantages
+Environment- Power Options additions.
+Extra Limbs- None, but adds Improved Grab
+Feature- Just give it a text field
+Flight- None
+Growth- None
+Healing- None
+Illusion- "Affects" Dropdown
+Immortality- None
+Immunity- Power Options additions.
+Impervious Defense- Defense dropdown
+Insubstantial- Max 4 ranks. Rank 2+ Disable Strength, Immunity to Physical. Rank 3 Immunity to Energy Type. 
+    Rank 4 Immunity to all Physical and Energy, Choose Descriptor which affects you. 
+Leaping- None
+Luck Control- Power Options additions.
+Mind Reading- None
+Morph- None
+Move Object- None
+Movement- Power Options additions.
+Nullify- "Counters: " Input
+Protection- None
+Quickness- None
+Regeneration- None
+Remote Sensing- "Affects" Dropdown
+Senses- Power Options additions.
+Shrinking- None
+Speed- None
+Summon- None
+Swimming- None
+Teleport- None
+Transform- "Affects" Dropdown
+Variable- None
+Weaken- "Affects: " Input, "Resisted By" save Dropdown

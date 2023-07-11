@@ -396,3 +396,15 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+module/data UNDONE/_module.mjs
+module/data UNDONE/abstract.mjs
+module/data UNDONE/actor/_module.mjs
+module/data UNDONE/item/_module.mjs
+module/data UNDONE/item/advantage.mjs
+module/data UNDONE/item/base.mjs
+module/data UNDONE/item/device.mjs
+module/data UNDONE/item/general.mjs
+module/data UNDONE/item/power.mjs
+module/data UNDONE/item/vehicle.mjs
+module/data UNDONE/item/templates/customisable.mjs
+module/data UNDONE/item/templates/item-description.mjs
