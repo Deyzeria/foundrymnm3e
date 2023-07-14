@@ -1,3 +1,5 @@
+import GetPowerData from "../helpers/PowersData.mjs"
+
 /**
  * Extend the basic ItemSheet with some very simple modifications
  * @extends {ItemSheet}
@@ -7,7 +9,7 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
   /** @override */
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
-      classes: ["foundrymnm3e", "sheet", "item"],
+      classes: ["item-sheet", "foundrymnm3e", "sheet", "item"],
       width: 520,
       height: 480,
       tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description" }]
@@ -17,11 +19,6 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
   /** @override */
   get template() {
     const path = "systems/foundrymnm3e/templates/item";
-    // Return a single sheet for all item types.d
-    // return `${path}/item-sheet.html`;
-
-    // Alternatively, you could use the following return statement to do a
-    // unique item sheet by type, like `weapon-sheet.html`.
     return `${path}/item-${this.item.type}-sheet.hbs`;
   }
 
@@ -40,6 +37,21 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
     // Use a safe clone of the item data for further operations.
     const itemData = context.item;
 
+    var powerData = {
+      cost: 0,
+      type: "",
+      action: "",
+      range: "",
+      duration: "",
+      savingthrow: ""
+    }
+    console.debug(this.item.system.power_effect == "");
+    if(this.item.system.power_effect != "")
+    {
+      powerData = GetPowerData(this.item.system.power_effect);
+    }
+    console.debug(powerData);
+
     foundry.utils.mergeObject(context, {
       source: source.system,
       system: item.system,
@@ -50,11 +62,24 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
 
       itemType: game.i18n.localize(CONFIG.Item.typeLabels[this.item.type]),
       itemStatus: this._getItemStatus(),
-      itemProperties: this._getItemProperties()
+      itemProperties: this._getItemProperties(),
 
-      //effects: ActiveEffect5e.prepareActiveEffectCategories(item.effects)
+      powers: context.config.defaultPowerEffects,
+      type: context.config.powerTypeEnum,
+      action: context.config.powerActivationEnum,
+      range: context.config.powerRangeEnum,
+      duration: context.config.powerDurationEnum,
+      savingthrow: context.config.defenses,
+
+      selected_powers: this.item.system.power_effect,
+      selected_type: powerData.type,
+      selected_action: powerData.action,
+      selected_range: powerData.range,
+      selected_duration: powerData.duration,
+      selected_savingthrow: powerData.savingthrow,
+
+      // effects: ActiveEffect5e.prepareActiveEffectCategories(item.effects)
     });
-
     return context;
   }
 

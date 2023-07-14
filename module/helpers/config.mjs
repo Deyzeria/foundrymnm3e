@@ -126,6 +126,7 @@ preLocalize("skills");
    };
    preLocalize("powerDurationEnum");
 
+   // Add Alternate form somewhere here
    MNM3E.arrayTypes = {
 	normal: "MNM3E.ArrayNormal",
 	alternative: "MNM3E.ArrayAlternative",
@@ -135,7 +136,6 @@ preLocalize("skills");
    
    MNM3E.defaultPowerEffects = {
 	affliction: "MNM3E.pAffliction",
-	alternateform: "MNM3E.pAlternateForm",
 	burrowing: "MNM3E.pBurrowing",
 	communication: "MNM3E.pCommunication",
 	comprehend: "MNM3E.pComprehend",
@@ -146,7 +146,7 @@ preLocalize("skills");
 	elongation: "MNM3E.pElongation",
 	enhancedability: "MNM3E.pEnhancedAbility",
 	enhancedextra: "MNM3E.pEnhancedExtra",
-	enhanced: "MNM3E.pEnhancedTrait",
+	enhancedtrait: "MNM3E.pEnhancedTrait",
 	environment: "MNM3E.pEnvironment",
 	limbs: "MNM3E.pExtraLimbs",
 	feature: "MNM3E.pFeature",

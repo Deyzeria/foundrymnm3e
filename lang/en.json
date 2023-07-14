@@ -46,6 +46,7 @@
   "MNM3E.initiative": "Initiative",
   "MNM3E.size": "Size",
 
+  "MNM3E.None": "None",
   "MNM3E.Dodge": "Dodge",
   "MNM3E.Parry": "Parry",
   "MNM3E.Toughness": "Toughness",
@@ -191,7 +192,7 @@
 
   "MNM3E.Add": "Add",
 
-  "MNM3E.pAffliction ": "Affliction",
+  "MNM3E.pAffliction": "Affliction",
   "MNM3E.pAlternateForm": "Alternate Form",
   "MNM3E.pBurrowing": "Burrowing",
   "MNM3E.pCommunication": "Communication",
@@ -217,7 +218,7 @@
   "MNM3E.pInsubstantial": "Insubstantial",
   "MNM3E.pLeaping": "Leaping",
   "MNM3E.pLuckControl": "Luck Control",
-  "MNM3E.pMindReading": "Mind REading",
+  "MNM3E.pMindReading": "Mind Reading",
   "MNM3E.pMorph": "Morph",
   "MNM3E.pMoveObject": "Move Object",
   "MNM3E.pMovement": "Movement",

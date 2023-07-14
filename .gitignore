@@ -408,3 +408,4 @@ module/data UNDONE/item/power.mjs
 module/data UNDONE/item/vehicle.mjs
 module/data UNDONE/item/templates/customisable.mjs
 module/data UNDONE/item/templates/item-description.mjs
+.vscode/settings.json

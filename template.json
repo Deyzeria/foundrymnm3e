@@ -441,12 +441,12 @@
         "customisable": {
             "power_effect": "",
             "descriptor": "",
-            "type": "attack",
+            "type": "",
             "action": {
-                "type": "free",
+                "type": "",
                 "length": 0
             },
-            "duration": "instant",
+            "duration": "",
             "array": 0,
             "active": false,
             "power_cost": {
@@ -457,12 +457,13 @@
                 "rank": 0,
                 "final_cost": 0,
                 "active_rank": 0,
-                "manual_purchase": true
+                "manual_purchase": true,
+                "max_ranks": 0
             }
         },
         "combat": {
             "ranges": {
-                "range": "personal",
+                "range": "",
                 "close": 0,
                 "medium": 0,
                 "far": 0

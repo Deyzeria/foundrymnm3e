@@ -29,7 +29,7 @@ export class FoundryMnM3eItem extends Item {
     this._prepareActivation();
 
     // Un-owned items can have their final preparation done here, otherwise this needs to happen in the owning Actor
-    if ( !this.isOwned ) this.prepareFinalAttributes();
+    //if ( !this.isOwned ) this.prepareFinalAttributes();
   }
 
   /**

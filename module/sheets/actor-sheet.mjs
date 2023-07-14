@@ -273,26 +273,24 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
    * @param {Event} event   The originating click event
    * @private
    */
-   async _onItemCreate(event) {
+  _onItemCreate(event) {
     event.preventDefault();
     const header = event.currentTarget;
-    // Get the type of item to create.
     const type = header.dataset.type;
-    // Grab any data associated with this control.
-    const data = duplicate(header.dataset);
+
     // Initialize a default name.
     const name = `New ${type.capitalize()}`;
     // Prepare the item object.
     const itemData = {
       name: name,
       type: type,
-      system: data
+      system: foundry.utils.expandObject({ ...header.dataset })
     };
     // Remove the type from the dataset since it's in the itemData.type prop.
-    delete itemData.system["type"];
+    delete itemData.system.type;
 
     // Finally, create the item!
-    return await Item.create(itemData, {parent: this.actor});
+    return this.actor.createEmbeddedDocuments("Item", [itemData]);
   }
 
   /**
