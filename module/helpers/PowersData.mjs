@@ -354,6 +354,14 @@ const PowerEffects =
         }
     };
 
+    const C = CONFIG.MNM3E;
+
+    const afflictionData = {
+        rank1: [],
+        rank2: [],
+        rank3: [],
+    }
+
 export default function GetPowerData(request){
     return PowerEffects[request]; 
 }

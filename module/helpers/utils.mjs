@@ -11,7 +11,7 @@ const _preLocalizationRegistrations = {};
 
 /**
  * Mark the provided config key to be pre-localized during the init stage.
- * @param {string} configKeyPath          Key path within `CONFIG.DND5E` to localize.
+ * @param {string} configKeyPath          Key path within `CONFIG.MNM3E` to localize.
  * @param {object} [options={}]
  * @param {string} [options.key]          If each entry in the config enum is an object,
  *                                        localize and sort using this property.

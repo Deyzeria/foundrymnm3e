@@ -34,60 +34,61 @@
         </li>
         <li class="power flexrow">
           <label class="resource-label">Type</label>
-          <select class="power-value" name="system.type">
-            {{selectOptions type selected=selected_type blank=""}}
-          </select>          
+          <label class="resource-label" data-value="selected_type">{{selected_type}}</label>
         </li>
         <li class="power flexrow">
           <label class="resource-label">Action</label>
-          <select class="power-value" name="system.action.type">
-            {{selectOptions action selected=selected_action blank=""}}
-          </select>          
+          <label class="resource-label" data-value="selected_action">{{selected_action}}</label>
         </li>
         <li class="power flexrow">
           <label class="resource-label">Range</label>
-          <select class="power-value" name="system.ranges.range">
-            {{selectOptions range selected=selected_range blank=""}}
-          </select>          
+          <label class="resource-label" data-value="selected_range">{{selected_range}}</label>
         </li>
         <li class="power flexrow">
           <label class="resource-label">Duration</label>
-          <select class="power-value" name="system.duration">
-            {{selectOptions duration selected=selected_duration blank=""}}
-          </select>          
+          <label class="resource-label" data-value="selected_duration">{{selected_duration}}</label> 
         </li>
         <li class="power flexrow">
           <label class="resource-label">Saving Throw</label>
+          <label class="resource-label" data-value="selected_savingthrow">{{selected_savingthrow}}</label>
+          {{#if saveVariant}}
           <select class="power-value" name="system.save.resistance">
             {{selectOptions savingthrow selected=selected_savingthrow blank=""}}
-          </select>          
+          </select>
+          {{/if}}         
         </li>
+        {{#if saveDamage}}
+        <li class="power flexrow">
+          <label class="resource-label">Damage Saving Throw</label>
+          <label class="resource-label" data-value="selected_damage">{{selected_damage}}</label>
+        </li>
+        {{/if}}
       </ul>
 
       <ul class="cost-list">
         <li class="cost flexrow">
           <label class="resource-label">Rank</label>
-          <input class="cost-value rank" type="text" name="system.power_cost.rank" value="{{system.power_cost.rank}}" data-dtype="Number"/>
+          <input class="cost-value rank" type="number" name="system.power_cost.rank" value="{{system.power_cost.rank}}" min="0" max="{{max_ranks}}" data-dtype="Number"/>
         </li>
         <li class="cost flexrow">
           <label class="resource-label">Base cost</label>
-          <input class="cost-value base" type="text" name="system.power_cost.base_cost" value="{{system.power_cost.base_cost}}" data-dtype="Number"/>
+          <input class="cost-value base" type="text" disabled name="system.power_cost.base_cost" value="{{system.power_cost.base_cost}}" data-dtype="Number"/>
         </li>
         <li class="cost flexrow">
           <label class="resource-label">Extras</label>
-          <input class="cost-value extra" type="text" name="system.power_cost.extras" value="{{system.power_cost.extras}}" data-dtype="Number"/>
+          <input class="cost-value extra" type="text" disabled name="system.power_cost.extras" value="{{system.power_cost.extras}}" data-dtype="Number"/>
         </li>
         <li class="cost flexrow">
           <label class="resource-label">Flaws</label>
-          <input class="cost-value flaw" type="text" name="system.power_cost.flaws" value="{{system.power_cost.flaws}}" data-dtype="Number"/>
+          <input class="cost-value flaw" type="text" disabled name="system.power_cost.flaws" value="{{system.power_cost.flaws}}" data-dtype="Number"/>
         </li>
         <li class="cost flexrow">
           <label class="resource-label">Flat</label>
-          <input class="cost-value flat" type="text" name="system.power_cost.flat" value="{{system.power_cost.flat}}" data-dtype="Number"/>
+          <input class="cost-value flat" type="text" disabled name="system.power_cost.flat" value="{{system.power_cost.flat}}" data-dtype="Number"/>
         </li>
         <li class="cost flexrow">
           <label class="resource-label">Final cost</label>
-          <input class="cost-value final" type="text" disabled="true" name="system.power_cost.final_cost" value="{{system.power_cost.final_cost}}" data-dtype="Number"/>
+          <input class="cost-value final" type="text" disabled name="system.power_cost.final_cost" value="{{system.power_cost.final_cost}}" data-dtype="Number"/>
         </li>
       </ul>
     </div>

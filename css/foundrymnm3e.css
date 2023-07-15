@@ -913,6 +913,10 @@
 .foundrymnm3e ul.power-types li.power:nth-child(even) {
   background: rgba(0, 0, 0, 0.07);
 }
+.foundrymnm3e ul.power-types li.power .resource-label {
+  text-transform: capitalize;
+  margin-top: 1px;
+}
 .foundrymnm3e ul.power-types li.power .power-value {
   display: flex;
   justify-content: left;

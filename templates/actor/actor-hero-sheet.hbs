@@ -31,9 +31,9 @@
           <h4 class="attribute-name box-title">Spent</h4>
           <center>
           <div id="pptotal" class="attribute-value multiple">
-            <input class="spenttotal" type="text" name="system.generic.pp_spent" value="{{system.generic.pp_spent}}" data-dtype="Number" disabled="true"/>
+            <input class="spenttotal" type="text" name="system.generic.pp_spent" value="{{system.generic.pp_spent}}" data-dtype="Number" disabled/>
             <span class="sep"> / </span>
-            <input type="text" name="system.generic.pp" value="{{system.generic.pp}}" data-dtype="Number" disabled="true"/>
+            <input type="text" name="system.generic.pp" value="{{system.generic.pp}}" data-dtype="Number" disabled/>
           </div>
           </center>
         </li>
@@ -50,35 +50,35 @@
         <li class="attribute ppabilities">
           <h4 class="attribute-name box-title">Abilities</h4>
           <center>
-          <input class="attribute-value" type="text" name="system.generic.pp_ability" value="{{system.generic.pp_ability}}" data-dtype="Number" disabled="true"/>
+          <input class="attribute-value" type="text" name="system.generic.pp_ability" value="{{system.generic.pp_ability}}" data-dtype="Number" disabled/>
           </center>
         </li>
 
         <li class="attribute ppdefences">
           <h4 class="attribute-name box-title">Defences</h4>
           <center>
-          <input class="attribute-value" type="text" name="system.generic.pp_defenses" value="{{system.generic.pp_defenses}}" data-dtype="Number" disabled="true"/>
+          <input class="attribute-value" type="text" name="system.generic.pp_defenses" value="{{system.generic.pp_defenses}}" data-dtype="Number" disabled/>
           </center>
         </li>
 
         <li class="attribute ppskills">
           <h4 class="attribute-name box-title">Skills</h4>
           <center>
-          <input class="attribute-value skillsspent" type="text" name="system.generic.pp_skills" value="{{system.generic.pp_skills}}" data-dtype="Number" disabled="true"/>
+          <input class="attribute-value skillsspent" type="text" name="system.generic.pp_skills" value="{{system.generic.pp_skills}}" data-dtype="Number" disabled/>
           </center>
         </li>
 
         <li class="attribute ppadvantages">
           <h4 class="attribute-name box-title">Advantages</h4>
           <center>
-          <input class="attribute-value" type="text" name="system.generic.pp_advantages" value="{{system.generic.pp_advantages}}" data-dtype="Number" disabled="true"/>
+          <input class="attribute-value" type="text" name="system.generic.pp_advantages" value="{{system.generic.pp_advantages}}" data-dtype="Number" disabled/>
           </center>
         </li>
 
         <li class="attribute pppowers">
           <h4 class="attribute-name box-title">Powers</h4>
           <center>
-          <input class="attribute-value" type="text" name="system.generic.pp_powers" value="{{system.generic.pp_powers}}" data-dtype="Number" disabled="true"/>
+          <input class="attribute-value" type="text" name="system.generic.pp_powers" value="{{system.generic.pp_powers}}" data-dtype="Number" disabled/>
           </center>
         </li>
       </ul>
@@ -116,11 +116,11 @@
                 <input class="ability-value purchased" type="text" name="system.abilities.{{key}}.purchased" oninput="setDefaultToZero(this)" value="{{ability.purchased}}" data-dtype="Number"/>
                 <div class="flexrow ability-div">
                   {{#if ability.disabled}}
-                  <input class="ability-value disabler" type="text" disabled="true" name="absent" value="{{ability.status}}" data-dtype="Text"/>
+                  <input class="ability-value disabler" type="text" disabled name="absent" value="{{ability.status}}" data-dtype="Text"/>
                   {{else}}
                   <input class="ability-value misc" oninput="setDefaultToZero(this)" type="text" name="system.abilities.{{key}}.misc" value="{{ability.misc}}" data-dtype="Number"/>
-                  <input class="ability-value auto" disabled="true" type="text" name="system.abilities.{{key}}.auto" value="{{ability.auto}}" data-dtype="Number"/>
-                  <input class="ability-value total" disabled="true" type="text" name="system.abilities.{{key}}.total" value="{{ability.total}}" data-dtype="Number"/>                  
+                  <input class="ability-value auto" disabled type="text" name="system.abilities.{{key}}.auto" value="{{ability.auto}}" data-dtype="Number"/>
+                  <input class="ability-value total" disabled type="text" name="system.abilities.{{key}}.total" value="{{ability.total}}" data-dtype="Number"/>                  
                   {{/if}}
                 </div>
                </li>
@@ -147,18 +147,18 @@
               <label class="resource-label rollable-defense rollable flexexlarge align-center" data-roll="d20+@defenses.{{key}}.total" data-label="{{defense.label}}">{{defense.label}}</label>
               <div class="flexrow defense-div">
                 {{#if defense.immune}}
-                <input class="defense-value disabler" type="text" disabled="true" name="immune" value="Immune" data-dtype="Text"/>
+                <input class="defense-value disabler" type="text" disabled name="immune" value="Immune" data-dtype="Text"/>
                 {{else}}
                 {{#if defense.disabled}}
-                <input class="defense-value disabler" type="text" disabled="true" name="disabled" value="Disabled" data-dtype="Text"/>
+                <input class="defense-value disabler" type="text" disabled name="disabled" value="Disabled" data-dtype="Text"/>
                 {{else}}
-                <input class="defense-value originalstat" type="text" disabled="true" name="system.defenses.{{key}}.default" value="{{defense.default}}" data-dtype="Number"/>
+                <input class="defense-value originalstat" type="text" disabled name="system.defenses.{{key}}.default" value="{{defense.default}}" data-dtype="Number"/>
                 <input class="defense-value purchased" oninput="setDefaultToZero(this)" type="text" name="system.defenses.{{key}}.purchased" value="{{defense.purchased}}" data-dtype="Number"/>
                 <input class="defense-value misc"  oninput="setDefaultToZero(this)" type="text" name="system.defenses.{{key}}.misc" value="{{defense.misc}}" data-dtype="Number"/>
-                <input class="defense-value auto" disabled="true"  type="text" name="system.defenses.{{key}}.auto" value="{{defense.auto}}" data-dtype="Number"/>
-                <input class="defense-value total" disabled="true"  type="text" name="system.defenses.{{key}}.total" value="{{defense.total}}" data-dtype="Number"/>                            
-                <input class="defense-value ac" type="text" disabled="true" name="system.defenses.{{key}}.ac" value="{{defense.ac}}" data-dtype="Number"/>
-                <input class="defense-value impervious" type="text" disabled="true" name="system.defenses.{{key}}.impervious" value="{{defense.impervious}}" data-dtype="Number"/>
+                <input class="defense-value auto" disabled  type="text" name="system.defenses.{{key}}.auto" value="{{defense.auto}}" data-dtype="Number"/>
+                <input class="defense-value total" disabled  type="text" name="system.defenses.{{key}}.total" value="{{defense.total}}" data-dtype="Number"/>                            
+                <input class="defense-value ac" type="text" disabled name="system.defenses.{{key}}.ac" value="{{defense.ac}}" data-dtype="Number"/>
+                <input class="defense-value impervious" type="text" disabled name="system.defenses.{{key}}.impervious" value="{{defense.impervious}}" data-dtype="Number"/>
                 {{/if}}
                 {{/if}}
               </div>
@@ -176,7 +176,7 @@
             <li class="attribute initiative">
               <h4 class="attribute-name box-title">Initiative</h4>
               <center>
-              <input class="attribute-value" disabled="true" type="text" name="system.generic.initiative" value="{{system.generic.initiative}}" data-dtype="Number"/>
+              <input class="attribute-value" disabled type="text" name="system.generic.initiative" value="{{system.generic.initiative}}" data-dtype="Number"/>
               </center>
             </li>
           </ul>
@@ -212,13 +212,13 @@
             <label class="skill-ability" >{{skill.ability}}</label>
             <div class="flexrow">
               {{#if skill.disabled}}
-              <input class="skill-value disabler" type="text" disabled="true" name="disabled" value="Disabled" data-dtype="Text"/>
+              <input class="skill-value disabler" type="text" disabled name="disabled" value="Disabled" data-dtype="Text"/>
               {{else}}
-              <input class="skill-value originalstat" type="text" disabled="true" name="system.skills.{{key}}.default" value="{{skill.default}}" data-dtype="Number"/>
+              <input class="skill-value originalstat" type="text" disabled name="system.skills.{{key}}.default" value="{{skill.default}}" data-dtype="Number"/>
               <input class="skill-value purchased" oninput="setDefaultToZero(this)" type="text" name="system.skills.{{key}}.purchased" value="{{skill.purchased}}" data-dtype="Number"/>
               <input class="skill-value misc" oninput="setDefaultToZero(this)" type="text" name="system.skills.{{key}}.misc" value="{{skill.misc}}" data-dtype="Number"/>
-              <input class="skill-value auto" type="text" disabled="true" name="system.skills.{{key}}.auto" value="{{skill.auto}}" data-dtype="Number"/>
-              <input class="skill-value total" type="text" disabled="true" name="system.skills.{{key}}.total" value="{{skill.total}}" data-dtype="Number"/>
+              <input class="skill-value auto" type="text" disabled name="system.skills.{{key}}.auto" value="{{skill.auto}}" data-dtype="Number"/>
+              <input class="skill-value total" type="text" disabled name="system.skills.{{key}}.total" value="{{skill.total}}" data-dtype="Number"/>
               {{/if}}
             </div>
             <div class="checkmarks">

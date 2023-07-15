@@ -1,5 +1,3 @@
-import GetPowerData from "../helpers/PowersData.mjs"
-
 /**
  * Extend the basic ItemSheet with some very simple modifications
  * @extends {ItemSheet}
@@ -37,25 +35,10 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
     // Use a safe clone of the item data for further operations.
     const itemData = context.item;
 
-    var powerData = {
-      cost: 0,
-      type: "",
-      action: "",
-      range: "",
-      duration: "",
-      savingthrow: ""
-    }
-    console.debug(this.item.system.power_effect == "");
-    if(this.item.system.power_effect != "")
-    {
-      powerData = GetPowerData(this.item.system.power_effect);
-    }
-    console.debug(powerData);
-
     foundry.utils.mergeObject(context, {
       source: source.system,
       system: item.system,
-      labels: item.labels,
+      labels: this.item.labels,
       isEmbedded: item.isEmbedded,
       advancementEditable: (this.advancementConfigurationMode || !item.isEmbedded) && context.editable,
       rollData: this.item.getRollData(),
@@ -65,19 +48,18 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
       itemProperties: this._getItemProperties(),
 
       powers: context.config.defaultPowerEffects,
-      type: context.config.powerTypeEnum,
-      action: context.config.powerActivationEnum,
-      range: context.config.powerRangeEnum,
-      duration: context.config.powerDurationEnum,
-      savingthrow: context.config.defenses,
 
       selected_powers: this.item.system.power_effect,
-      selected_type: powerData.type,
-      selected_action: powerData.action,
-      selected_range: powerData.range,
-      selected_duration: powerData.duration,
-      selected_savingthrow: powerData.savingthrow,
+      selected_type: this.item.system.type,
+      selected_action: this.item.system.action.type,
+      selected_range: this.item.system.ranges.range,
+      selected_duration: this.item.system.duration,
+      selected_savingthrow: this.item.system.save.resistance,
+      selected_damage: this.item.system.damage.resistance,
+      saveDamage: this.item.system.damage.resistance != "",
 
+      max_ranks: this.item.system.power_cost.max_ranks,
+      purchase: this._canBePurchased()
       // effects: ActiveEffect5e.prepareActiveEffectCategories(item.effects)
     });
     return context;
@@ -116,6 +98,11 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
         return CONFIG.MNM3E.advantageTypeEnum[this.item.system.type]
     }
     return null;
+  }
+
+  _canBePurchased(){
+    const returnV = this.item.system.power_cost.manual_purchase ? false : true;
+    return returnV;
   }
   /* -------------------------------------------- */
 

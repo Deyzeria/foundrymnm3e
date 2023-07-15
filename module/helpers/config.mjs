@@ -110,9 +110,19 @@ preLocalize("skills");
 	km: "MNM3E.DistKm"
   };
   preLocalize("movementUnits");
+
+  MNM3E.movementUnitsAbbr = {
+	ftAb: "MNM3E.DistFtAbbr",
+	miAb: "MNM3E.DistMiAbbr",
+	mAb: "MNM3E.DistMAbbr",
+	kmAb: "MNM3E.DistKmAbbr"
+  }
+  preLocalize("movementUnitsAbbr");
+
    
    MNM3E.distanceUnits = {
 	...MNM3E.powerRangeEnum,
+	...MNM3E.movementUnitsAbbr,
 	...MNM3E.movementUnits
    }
    preLocalize("distanceUnits");
@@ -310,3 +320,35 @@ preLocalize("skills");
 	skill: "MNM3E.advTypeSkill"
    };
    preLocalize("advantageTypeEnum");
+
+   MNM3E.conditions = {
+	compelled: "MNM3E.condCompelled",
+	controlled: "MNM3E.condControlled",
+	dazed: "MNM3E.condDazed",
+	debilitated: "MNM3E.condDebilitated",
+	defenseless: "MNM3E.condDefenseless",
+	disabled: "MNM3E.condDisabled",
+	fatigued: "MNM3E.condFatigued",
+	hindered: "MNM3E.condHindered",
+	immobile: "MNM3E.condImmobile",
+	impaired: "MNM3E.condImpaired",
+	normal: "MNM3E.condNormal",
+	stunned: "MNM3E.condStunned",
+	transformed: "MNM3E.condTransformed",
+	unaware: "MNM3E.condUnaware",
+	vulnerable: "MNM3E.condVulnerable",
+	weakened: "MNM3E.condWeakened",
+	asleep: "MNM3E.condAsleep",
+	blind: "MNM3E.condBlind",
+	bound: "MNM3E.condBound",
+	deaf: "MNM3E.condDeaf",
+	dying: "MNM3E.condDying",
+	entranced: "MNM3E.condEntranced",
+	exhausted: "MNM3E.condExhausted",
+	incapacitated: "MNM3E.condIncapacitated",
+	paralyzed: "MNM3E.condParalyzed",
+	prone: "MNM3E.condProne",
+	restrained: "MNM3E.condRestrained",
+	staggered: "MNM3E.condStaggered",
+	surprised: "MNM3E.condSurprised"	
+   }

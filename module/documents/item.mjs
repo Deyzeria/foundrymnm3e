@@ -1,14 +1,11 @@
+import GetPowerData from "../helpers/PowersData.mjs"
+
 /**
  * Extend the basic Item with some very simple modifications.
  * @extends {Item}
  */
 export class FoundryMnM3eItem extends Item {
-  /**
-   * Augment the basic Item data model with additional dynamic data.
-   */
   prepareData() {
-    // As with the actor class, items are documents that can have their data
-    // preparation methods overridden (such as prepareBaseData()).
     super.prepareData();
   }
 
@@ -21,14 +18,17 @@ export class FoundryMnM3eItem extends Item {
     super.prepareDerivedData();
     this.labels = {};
 
-    // switch ( this.type ) {
-    //   case "power":
-    //     this.preparePower(); break;
-    // }
+    switch ( this.type ) {
+      case "power":
+        if(this.system.power_effect != "")
+        {
+        this.preparePower(); 
+        }
+        break;
+    }
 
     this._prepareActivation();
 
-    // Un-owned items can have their final preparation done here, otherwise this needs to happen in the owning Actor
     //if ( !this.isOwned ) this.prepareFinalAttributes();
   }
 
@@ -56,31 +56,42 @@ export class FoundryMnM3eItem extends Item {
 
     // Range label
     const rng = this.system.ranges ?? {};
-    if ( [null, "personal", "perception", "rank"].includes(rng.range) )
+    if ( [null, "personal", "perception", "rank", ""].includes(rng.range) )
     {
       rng.close = rng.medium = rng.far = null;
-      this.labels.range = C.powerRangeEnum[rng.range];
+      this.labels.range = C.powerRangeEnum[rng.range] ?? "";
     }
     else if (rng.medium == 0 && rng.medium != null)
     {
-      this.labels.range = rng.close + " " + C.distanceUnits['m']; // FIXME: Change to use setting from the settings
+      this.prepareRanges();
+      this.labels.range = rng.close + " " + C.distanceUnits['mAb']; // FIXME: Change to use setting from the settings
     }
     else
     {
-      this.labels.range = rng.close + "/" + rng.medium + "/" + rng.far + " " + C.distanceUnits['m']; // FIXME: Change to use setting from the settings
+      this.prepareRanges();
+      this.labels.range = rng.close + "/" + rng.medium + "/" + rng.far + " " + C.distanceUnits['mAb']; // FIXME: Change to use setting from the settings
     }
 
     // Duration label
     this.labels.duration = C.powerDurationEnum[this.system.duration] ?? "";
 
-    this.labels.basepower = C.defaultPowerEffects['damage'] ?? "";
+    this.labels.basepower = C.defaultPowerEffects[this.system.power_effect] ?? "";
   }
 
-  /**
-   * Compute item attributes which might depend on prepared actor data. If this item is embedded this method will
-   * be called after the actor's data is prepared.
-   * Otherwise, it will be called at the end of `Item5e#prepareDerivedData`.
-   */
+  prepareRanges(){
+    const rng = this.system.ranges ?? {};
+    if (rng.range == 'close')
+    {
+      rng.close = 1;
+    }
+    else
+    {
+      rng.close = this.system.power_cost.rank * 25;
+      rng.medium = this.system.power_cost.rank * 50;
+      rng.far = this.system.power_cost.rank * 100;
+    }
+  }
+
   prepareFinalAttributes() {
     // Other Saving throws
     this.getSaveDC();
@@ -92,6 +103,32 @@ export class FoundryMnM3eItem extends Item {
 
     // To Hit
     //this.getAttackToHit();
+  }
+
+  preparePower() {
+    var powerData = {
+      cost: 0,
+      type: "",
+      action: "",
+      range: "",
+      duration: "",
+      savingthrow: ""
+    }
+    if(this.system.power_effect != "")
+    {
+      powerData = GetPowerData(this.system.power_effect);
+    }
+
+    this.system.power_cost.base_cost = powerData.cost;
+    this.system.action.type = powerData.action;
+    this.system.duration = powerData.duration;
+    this.system.ranges.range = powerData.range;
+    this.system.type = powerData.type;
+    this.system.save.resistance = powerData.savingthrow;
+    this.system.damage.resistance = powerData.damage ?? "";
+
+    this.system.power_cost.manual_purchase = powerData.manual_purchase ?? true
+    this.system.power_cost.max_ranks = powerData.max_ranks ?? 50;
   }
 
   getSaveDC() {
