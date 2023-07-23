@@ -11,8 +11,8 @@
     "systems/foundrymnm3e/templates/actor/parts/actor-attacks.hbs",
     "systems/foundrymnm3e/templates/actor/parts/actor-features.hbs",
     "systems/foundrymnm3e/templates/actor/parts/actor-powers.hbs",
-    "systems/foundrymnm3e/templates/actor/parts/actor-spells.hbs",
     "systems/foundrymnm3e/templates/actor/parts/actor-effects.hbs",
+    "systems/foundrymnm3e/templates/actor/parts/actor-advantages.hbs",
 
     // Arrays
     "systems/foundrymnm3e/templates/actor/parts/actor-array-list.hbs",

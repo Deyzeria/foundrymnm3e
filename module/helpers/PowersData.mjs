@@ -6,7 +6,14 @@ const PowerEffects =
             action: 'standard',
             range: 'close',
             duration: 'instant',
-            savingthrow: 'fortitude' //Add here selection
+            savingthrow: 'fortitude',
+            data: 
+            {
+                rank1: ['dazed', 'fatigued', 'hindered', 'impaired', 'vulnerable', 'entranced'],
+                rank2: ['compelled', 'defenseless', 'disabled', 'immobile', 'stunned', 'exhausted', 'prone'],
+                rank3: ['controller', 'transformed', 'unaware', 'asleep', 'incapacitated', 'paralyzed'],
+                resistance: ['fortitude', 'will']
+            }
         },
         burrowing: {
             cost: 1,
@@ -14,7 +21,8 @@ const PowerEffects =
             action: 'free',
             range: 'personal',
             duration: 'sustained',
-            savingthrow: 'none'
+            savingthrow: 'none',
+            data: false
         },
         communication: {
             cost: 4,
@@ -23,7 +31,8 @@ const PowerEffects =
             range: 'rank',
             duration: 'sustained',
             savingthrow: 'none',
-            max_ranks: 5
+            max_ranks: 5,
+            data: true
         },
         comprehend: {
             cost: 2,
@@ -31,7 +40,8 @@ const PowerEffects =
             action: 'none',
             range: 'personal',
             duration: 'permanent',
-            savingthrow: 'none'
+            savingthrow: 'none',
+            data: true
         },
         concealment: {
             cost: 2,
@@ -41,6 +51,7 @@ const PowerEffects =
             duration: 'sustained',
             savingthrow: 'none',
             manual_purchase: false,
+            data: true
         },
         create: {
             cost: 2,
@@ -48,7 +59,8 @@ const PowerEffects =
             action: 'standard',
             range: 'ranged',
             duration: 'sustained',
-            savingthrow: 'none'
+            savingthrow: 'none',
+            data: false
         },
         damage: {
             cost: 1,
@@ -57,7 +69,8 @@ const PowerEffects =
             range: 'close',
             duration: 'instant',
             savingthrow: 'none',
-            damage: 'toughness'
+            damage: 'toughness',
+            data: true
         },
         deflect: {
             cost: 1,
@@ -65,7 +78,8 @@ const PowerEffects =
             action: 'standard',
             range: 'ranged',
             duration: 'instant',
-            savingthrow: 'none'
+            savingthrow: 'none',
+            data: false
         },
         elongation: {
             cost: 1,
@@ -73,7 +87,8 @@ const PowerEffects =
             action: 'free',
             range: 'personal',
             duration: 'sustained',
-            savingthrow: 'none'
+            savingthrow: 'none',
+            data: false
         },
         enhancedability: {
             cost: 2,
@@ -83,6 +98,7 @@ const PowerEffects =
             duration: 'sustained',
             savingthrow: 'none',
             manual_purchase: false,
+            data: true
         },
         enhancedextra: {
             cost: 1,
@@ -92,6 +108,7 @@ const PowerEffects =
             duration: 'sustained',
             savingthrow: 'none',
             manual_purchase: false,
+            data: true
         },
         enhancedtrait: {
             cost: 1,
@@ -101,6 +118,7 @@ const PowerEffects =
             duration: 'sustained',
             savingthrow: 'none',
             manual_purchase: false,
+            data: true
         },
         environment: {
             cost: 0,
@@ -108,7 +126,8 @@ const PowerEffects =
             action: 'standard',
             range: 'rank',
             duration: 'sustained',
-            savingthrow: 'none'
+            savingthrow: 'none',
+            data: true
         },
         limbs: {
             cost: 1,
@@ -116,7 +135,8 @@ const PowerEffects =
             action: 'none',
             range: 'personal',
             duration: 'permanent',
-            savingthrow: 'none'
+            savingthrow: 'none',
+            data: false
         },
         feature: {
             cost: 1,
@@ -124,7 +144,8 @@ const PowerEffects =
             action: 'none',
             range: 'personal',
             duration: 'permanent',
-            savingthrow: 'none'
+            savingthrow: 'none',
+            data: true
         },
         flight: {
             cost: 2,
@@ -132,7 +153,8 @@ const PowerEffects =
             action: 'free',
             range: 'personal',
             duration: 'sustained',
-            savingthrow: 'none'
+            savingthrow: 'none',
+            data: false
         },
         growth: {
             cost: 2,
@@ -140,7 +162,8 @@ const PowerEffects =
             action: 'free',
             range: 'personal',
             duration: 'sustained',
-            savingthrow: 'none'
+            savingthrow: 'none',
+            data: false
         },
         healing: {
             cost: 2,
@@ -148,7 +171,8 @@ const PowerEffects =
             action: 'standard',
             range: 'c;pse',
             duration: 'instant',
-            savingthrow: 'none'
+            savingthrow: 'none',
+            data: false
         },
         illusion: {
             cost: 0,
@@ -157,7 +181,8 @@ const PowerEffects =
             range: 'perception',
             duration: 'sustained',
             savingthrow: 'none',
-            manual_purchase: false
+            manual_purchase: false,
+            data: true
         },
         immortality: {
             cost: 2,
@@ -165,7 +190,8 @@ const PowerEffects =
             action: 'none',
             range: 'personal',
             duration: 'permanent',
-            savingthrow: 'none'
+            savingthrow: 'none',
+            data: false
         },
         immunity: {
             cost: 1,
@@ -173,7 +199,8 @@ const PowerEffects =
             action: 'none',
             range: 'personal',
             duration: 'permanent',
-            savingthrow: 'none'
+            savingthrow: 'none',
+            data: true
         },
         impervious: {
             cost: 1,
@@ -181,7 +208,8 @@ const PowerEffects =
             action: 'free',
             range: 'personal',
             duration: 'continuous',
-            savingthrow: 'none'
+            savingthrow: 'none',
+            data: true
         },
         insubstantial: {
             cost: 5,
@@ -190,7 +218,8 @@ const PowerEffects =
             range: 'personal',
             duration: 'sustained',
             savingthrow: 'none',
-            max_ranks: 4
+            max_ranks: 4,
+            data: true
         },
         leaping: {
             cost: 1,
@@ -198,7 +227,8 @@ const PowerEffects =
             action: 'free',
             range: 'personal',
             duration: 'instant',
-            savingthrow: 'none'
+            savingthrow: 'none',
+            data: false
         },
         luckcontrol: {
             cost: 3,
@@ -206,7 +236,8 @@ const PowerEffects =
             action: 'reaction',
             range: 'perception',
             duration: 'instant',
-            savingthrow: 'none'
+            savingthrow: 'none',
+            data: true
         },
         mindreading: {
             cost: 2,
@@ -214,7 +245,8 @@ const PowerEffects =
             action: 'standard',
             range: 'perception',
             duration: 'sustained',
-            savingthrow: 'will'
+            savingthrow: 'will',
+            data: false
         },
         morph: {
             cost: 5,
@@ -222,7 +254,8 @@ const PowerEffects =
             action: 'free',
             range: 'personal',
             duration: 'sustained',
-            savingthrow: 'none'
+            savingthrow: 'none',
+            data: false
         },
         moveobject: {
             cost: 2,
@@ -230,7 +263,8 @@ const PowerEffects =
             action: 'standard',
             range: 'ranged',
             duration: 'sustained',
-            savingthrow: 'none'
+            savingthrow: 'none',
+            data: false
         },
         movement: {
             cost: 2,
@@ -238,7 +272,8 @@ const PowerEffects =
             action: 'free',
             range: 'personal',
             duration: 'sustained',
-            savingthrow: 'none'
+            savingthrow: 'none',
+            data: true
         },
         nullify: {
             cost: 1,
@@ -246,7 +281,8 @@ const PowerEffects =
             action: 'standard',
             range: 'ranged',
             duration: 'instant',
-            savingthrow: 'will'
+            savingthrow: 'will',
+            data: true
         }, // Here it's Will/Rank
         protection: {
             cost: 1,
@@ -254,7 +290,8 @@ const PowerEffects =
             action: 'none',
             range: 'personal',
             duration: 'permanent',
-            savingthrow: 'none'
+            savingthrow: 'none',
+            data: false
         },
         quickness: {
             cost: 1,
@@ -262,7 +299,8 @@ const PowerEffects =
             action: 'free',
             range: 'personal',
             duration: 'sustained',
-            savingthrow: 'none'
+            savingthrow: 'none',
+            data: false
         },
         regeneration: {
             cost: 1,
@@ -270,7 +308,8 @@ const PowerEffects =
             action: 'none',
             range: 'personal',
             duration: 'permanent',
-            savingthrow: 'none'
+            savingthrow: 'none',
+            data: false
         },
         remotesense: {
             cost: 0,
@@ -278,7 +317,8 @@ const PowerEffects =
             action: 'free',
             range: 'rank',
             duration: 'sustained',
-            savingthrow: 'none'
+            savingthrow: 'none',
+            data: true
         },
         senses: {
             cost: 1,
@@ -286,7 +326,8 @@ const PowerEffects =
             action: 'none',
             range: 'personal',
             duration: 'permanent',
-            savingthrow: 'none'
+            savingthrow: 'none',
+            data: true
         },
         shrinking: {
             cost: 2,
@@ -294,7 +335,8 @@ const PowerEffects =
             action: 'free',
             range: 'personal',
             duration: 'permanent',
-            savingthrow: 'none'
+            savingthrow: 'none',
+            data: false
         },
         speed: {
             cost: 1,
@@ -302,7 +344,8 @@ const PowerEffects =
             action: 'free',
             range: 'personal',
             duration: 'sustained',
-            savingthrow: 'none'
+            savingthrow: 'none',
+            data: false
         },
         summon: {
             cost: 1,
@@ -310,7 +353,8 @@ const PowerEffects =
             action: 'standard',
             range: 'close',
             duration: 'sustained',
-            savingthrow: 'none'
+            savingthrow: 'none',
+            data: false
         },
         swimming: {
             cost: 1,
@@ -318,7 +362,8 @@ const PowerEffects =
             action: 'free',
             range: 'personal',
             duration: 'sustained',
-            savingthrow: 'none'
+            savingthrow: 'none',
+            data: false
         },
         teleport: {
             cost: 2,
@@ -326,7 +371,8 @@ const PowerEffects =
             action: 'move',
             range: 'rank',
             duration: 'instant',
-            savingthrow: 'none'
+            savingthrow: 'none',
+            data: false
         },
         transform: {
             cost: 0,
@@ -334,7 +380,8 @@ const PowerEffects =
             action: 'standard',
             range: 'close',
             duration: 'sustained',
-            savingthrow: 'none'
+            savingthrow: 'none',
+            data: true
         },
         variable: {
             cost: 7,
@@ -342,7 +389,8 @@ const PowerEffects =
             action: 'standard',
             range: 'personal',
             duration: 'sustained',
-            savingthrow: 'none'
+            savingthrow: 'none',
+            data: false
         },
         weaken: {
             cost: 1,
@@ -350,18 +398,38 @@ const PowerEffects =
             action: 'standard',
             range: 'close',
             duration: 'instant',
-            savingthrow: 'fortitude'
+            savingthrow: 'fortitude',
+            data: true
         }
     };
 
-    const C = CONFIG.MNM3E;
+    
+    //const cond = C.conditions;
 
-    const afflictionData = {
-        rank1: [],
-        rank2: [],
-        rank3: [],
-    }
+    // const afflictionData = {
+    //     rank1: [cond.dazed, cond.fatigued, cond.hindered, cond.impaired, cond.vulnerable, cond.entranced],
+    //     rank2: [cond.compelled, cond.defenseless, cond.disabled, cond.immobile, cond.stunned, cond.exhausted, cond.prone],
+    //     rank3: [cond.controller, cond.transformed, cond.unaware, cond.asleep, cond.incapacitated, cond.paralyzed],
+    //     resistance: [C.defenses.fortitude, C.defenses.will]
+    // }
 
 export default function GetPowerData(request){
     return PowerEffects[request]; 
+}
+
+export function GetExtraData(request)
+{
+    //const C = CONFIG.MNM3E;
+    //const cond = C.conditions;
+
+    const extraData = {
+        affliction: {
+            rank1: [cond.dazed, cond.fatigued, cond.hindered, cond.impaired, cond.vulnerable, cond.entranced],
+            rank2: [cond.compelled, cond.defenseless, cond.disabled, cond.immobile, cond.stunned, cond.exhausted, cond.prone],
+            rank3: [cond.controller, cond.transformed, cond.unaware, cond.asleep, cond.incapacitated, cond.paralyzed],
+            resistance: [C.defenses.fortitude, C.defenses.will]
+        },
+    }
+
+
 }

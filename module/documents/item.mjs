@@ -94,14 +94,14 @@ export class FoundryMnM3eItem extends Item {
 
   prepareFinalAttributes() {
     // Other Saving throws
-    this.getSaveDC();
+    switch ( this.type ) {
+      case "power":
+      this.getSaveDC();
+      this.getDamageDC();
+      this.prepareCostTotal();
+      break
+    }
 
-    // Damage Saving Throws
-    this.getDamageDC();
-
-    this.prepareCostTotal();
-
-    // To Hit
     //this.getAttackToHit();
   }
 
@@ -119,9 +119,9 @@ export class FoundryMnM3eItem extends Item {
       powerData = GetPowerData(this.system.power_effect);
     }
 
-    this.system.power_cost.base_cost = powerData.cost;
-    this.system.action.type = powerData.action;
-    this.system.duration = powerData.duration;
+    this.system.power_cost.base_cost = powerData.cost ?? 0;
+    this.system.action.type = powerData.action ?? '';
+    this.system.duration = powerData.duration ?? '';
     this.system.ranges.range = powerData.range;
     this.system.type = powerData.type;
     this.system.save.resistance = powerData.savingthrow;
@@ -129,6 +129,7 @@ export class FoundryMnM3eItem extends Item {
 
     this.system.power_cost.manual_purchase = powerData.manual_purchase ?? true
     this.system.power_cost.max_ranks = powerData.max_ranks ?? 50;
+    console.debug(powerData);
   }
 
   getSaveDC() {

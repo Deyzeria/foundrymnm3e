@@ -289,14 +289,31 @@
 .foundrymnm3e .sheet-header .power-img {
   -webkit-box-flex: 0;
   -ms-flex: 0 0 100px;
-  flex: 0 0 50px;
-  height: 50px;
+  flex: 0 0 100px;
+  height: 100px;
   margin-right: 5px;
 }
 .foundrymnm3e .sheet-header .header-fields {
   -webkit-box-flex: 1;
   -ms-flex: 1;
   flex: 1;
+}
+.foundrymnm3e .sheet-header .main-header {
+  margin-top: -20px;
+}
+.foundrymnm3e .sheet-header .power-name {
+  padding: 5px;
+}
+.foundrymnm3e .sheet-header .sub-header {
+  height: 50px;
+  padding: 0px;
+  margin: 5px 0;
+  font-size: 25px;
+  text-transform: capitalize;
+  border:#000;
+  border-style: solid;
+  border-radius: 5px;
+  padding: 2px;
 }
 .foundrymnm3e .sheet-header h1.charname {
   height: 50px;
@@ -938,7 +955,6 @@
   border-radius: 5px;
 }
 
-
 .foundrymnm3e ul.cost-list {
   flex: 0 0 180px;
   list-style: none;
@@ -989,6 +1005,96 @@
 }
 .foundrymnm3e .cost-list .cost .flat{
   background: rgba(255, 115, 0, 0.5);
+}
+
+.foundrymnm3e ul.unique-selection {
+  list-style: none;
+  margin: 0 5px 0;
+  padding: 0;
+  border: 2px groove #eeede0;
+  border-radius: 3px;
+  flex: 0 0 300px;
+}
+.foundrymnm3e ul.unique-selection li.unique {
+  height: 24px;
+  padding: 3px 2px;
+}
+.foundrymnm3e ul.unique-selection li.unique:nth-child(even) {
+  background: rgba(0, 0, 0, 0.07);
+}
+.foundrymnm3e ul.unique-selection li.unique .resource-label {
+  text-transform: capitalize;
+  margin-top: 1px;
+}
+.foundrymnm3e ul.unique-selection li.unique .power-value {
+  display: flex;
+  justify-content: left;
+  align-items: end;
+  height: 20px;
+  line-height: 28px;
+  font-family: "Blippo", "Palatino Linotype", serif;
+  font-size: 14px;
+  font-weight: 700;
+  margin-left: 1px;
+  margin-right: 1px;
+}
+.foundrymnm3e .unique-selection .unique .power-value {
+  height: 20px;
+  width: 20px;
+  line-height: 10px;
+  text-align: left;
+  border: 1px solid;
+  border-radius: 5px;
+}
+
+.foundrymnm3e ul.extras-flaws-list {
+  flex: 0 0 280px;
+  list-style: none;
+  margin: 0 5px 0;
+  padding: 0;
+  border: 2px groove #eeede0;
+  border-radius: 3px;
+}
+.foundrymnm3e ul.extras-flaws-list li.extras-flaws {
+  height: 24px;
+  padding: 3px 2px;
+}
+.foundrymnm3e ul.extras-flaws-list li.extras-flaws:nth-child(even) {
+  background: rgba(0, 0, 0, 0.07);
+}
+.foundrymnm3e ul.extras-flaws-list li.extras-flaws .ef-value {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20px;
+  line-height: 28px;
+  font-family: "Blippo", "Palatino Linotype", serif;
+  font-size: 20px;
+  font-weight: 700;
+  margin-left: 1px;
+  margin-right: 1px;
+}
+.foundrymnm3e .extras-flaws-list .extras-flaws .ef-value {
+  height: 20px;
+  width: 20px;
+  line-height: 10px;
+  text-align: center;
+  border: 1px solid;
+  border-radius: 5px;
+}
+.foundrymnm3e ul.extras-flaws-list .add{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 17px;
+}
+.foundrymnm3e .extras-flaws-list .add {
+  text-align: center;
+
+}
+.foundrymnm3e .plusimg {
+  margin-left: 4px;
+  margin-right: 4px;
 }
 
 

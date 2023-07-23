@@ -367,28 +367,29 @@
                 },
                 "burrowing": {
                     "rank": 0,
-                    "distance": 8,
+                    "distance": 0,
                     "units": "m"
                 },
                 "flight": {
                     "rank": 0,
-                    "distance": 8,
+                    "distance": 0,
                     "units": "m"
                 },
                 "leaping": {
                     "rank": 0,
-                    "distance": 8,
+                    "distance": 0,
                     "units": "m"
                 },
                 "swimming": {
                     "rank": 0,
-                    "distance": 8,
+                    "distance": 0,
                     "units": "m"
                 },
                 "teleport": {
                     "rank": 0,
-                    "distance": 8,
-                    "units": "m"
+                    "distance": 0,
+                    "units": "m",
+                    "extended": false
                 }
             }
         },
@@ -403,7 +404,9 @@
             "eyes": "",
             "hair": "",
             "group_affiliation": "",
-            "base_of_operation": ""
+            "base_of_operation": "",
+            "image_one": "",
+            "image_two": ""
         },
         "vehicle": {
             "size": 0,
@@ -436,7 +439,7 @@
     "types": ["power", "device", "advantage", "general", "base", "vehicle", "attack"],
     "templates": {
         "itemDescription": {
-            "Description": ""
+            "description": ""
         },
         "customisable": {
             "power_effect": "",
@@ -459,6 +462,9 @@
                 "active_rank": 0,
                 "manual_purchase": true,
                 "max_ranks": 0
+            },
+            "extrasflaws": {
+                "parts": []
             }
         },
         "combat": {
@@ -516,7 +522,7 @@
         "advantage": {
             "templates": ["itemDescription"],
             "ranks": 1,
-            "type": "combat",
+            "type": "",
             "ranked": false,
             "additionalDesc": "",
             "effect": "",

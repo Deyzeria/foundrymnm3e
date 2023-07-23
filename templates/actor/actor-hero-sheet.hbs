@@ -2,8 +2,8 @@
 
   {{!-- Sheet Header --}}
   <header class="sheet-header">
-    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="150" width="100"/>
-    <img class="secondary-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="50" width="50"/>
+    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{system.heroname}}" height="150" width="100"/>
+    <img class="secondary-img" src="{{actor.img}}" data-edit="img" title="{{system.realidentity}}" height="50" width="50"/>
     <div class="header-fields">
       <div class="flexrow">
         <h1 class="charname"><input name="system.heroname" type="text" value="{{system.heroname}}" placeholder="Superman"/></h1>
@@ -89,6 +89,7 @@
   <nav class="sheet-tabs tabs" data-group="primary">
     <a class="item" data-tab="features">Features</a>
     <a class="item" data-tab="powers">Powers</a>
+    <a class="item" data-tab="advantages">Advantages</a>
     <a class="item" data-tab="description">Description</a>
     <a class="item" data-tab="effects">Effects</a>
   </nav>
@@ -241,6 +242,10 @@
     {{!-- Owned powers Tab --}}
     <div class="tab powers" data-group="primary" data-tab="powers">
        {{> "systems/foundrymnm3e/templates/actor/parts/actor-powers.hbs"}}
+    </div>
+
+    <div class="tab advantages" data-group="primary" data-tab="advantages">
+       {{> "systems/foundrymnm3e/templates/actor/parts/actor-advantages.hbs"}}
     </div>
 
     {{!-- Active Effects Tab --}}

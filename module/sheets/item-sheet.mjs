@@ -35,33 +35,52 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
     // Use a safe clone of the item data for further operations.
     const itemData = context.item;
 
-    foundry.utils.mergeObject(context, {
-      source: source.system,
-      system: item.system,
-      labels: this.item.labels,
-      isEmbedded: item.isEmbedded,
-      advancementEditable: (this.advancementConfigurationMode || !item.isEmbedded) && context.editable,
-      rollData: this.item.getRollData(),
+    switch (this.item.type) {
+      case "power":
+        foundry.utils.mergeObject(context, {
+          source: source.system,
+          system: item.system,
+          labels: this.item.labels,
+          isEmbedded: item.isEmbedded,
+          advancementEditable: (this.advancementConfigurationMode || !item.isEmbedded) && context.editable,
+          rollData: this.item.getRollData(),
 
-      itemType: game.i18n.localize(CONFIG.Item.typeLabels[this.item.type]),
-      itemStatus: this._getItemStatus(),
-      itemProperties: this._getItemProperties(),
+          itemType: game.i18n.localize(CONFIG.Item.typeLabels[this.item.type]),
+          itemStatus: this._getItemStatus(),
+          itemProperties: this._getItemProperties(),
 
-      powers: context.config.defaultPowerEffects,
+          powers: context.config.defaultPowerEffects,
 
-      selected_powers: this.item.system.power_effect,
-      selected_type: this.item.system.type,
-      selected_action: this.item.system.action.type,
-      selected_range: this.item.system.ranges.range,
-      selected_duration: this.item.system.duration,
-      selected_savingthrow: this.item.system.save.resistance,
-      selected_damage: this.item.system.damage.resistance,
-      saveDamage: this.item.system.damage.resistance != "",
+          selected_powers: this.item.system.power_effect,
+          selected_type: this.item.system.type,
+          selected_action: this.item.system.action.type,
+          selected_range: this.item.system.ranges.range,
+          selected_duration: this.item.system.duration,
+          selected_savingthrow: this.item.system.save.resistance,
+          selected_damage: this.item.system.damage.resistance,
+          saveDamage: this.item.system.damage.resistance != "",
 
-      max_ranks: this.item.system.power_cost.max_ranks,
-      purchase: this._canBePurchased()
-      // effects: ActiveEffect5e.prepareActiveEffectCategories(item.effects)
-    });
+          max_ranks: this.item.system.power_cost.max_ranks,
+          purchase: this._canBePurchased(),
+          //uniquefield: this.fillUniqueField()
+          // effects: ActiveEffect5e.prepareActiveEffectCategories(item.effects)
+        });
+      case "advantage":
+        foundry.utils.mergeObject(context, {
+          source: source.system,
+          system: item.system,
+          labels: this.item.labels,
+          isEmbedded: item.isEmbedded,
+          advancementEditable: (this.advancementConfigurationMode || !item.isEmbedded) && context.editable,
+          rollData: this.item.getRollData(),
+
+          itemType: game.i18n.localize(CONFIG.Item.typeLabels[this.item.type]),
+          itemStatus: this._getItemStatus(),
+          itemProperties: this._getItemProperties(),
+        });
+        break;
+  }
+
     return context;
   }
 
@@ -100,6 +119,15 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
     return null;
   }
 
+  fillUniqueField(){
+    switch (this.item.system.power_effect) {
+      case 'affliction':
+        return '<select class="power-value" name="system.power_effect">{{selectOptions powers selected=selected_powers blank=""}}</select>';
+      default:
+        return '<label>Nothing</label>'
+    }
+  }
+
   _canBePurchased(){
     const returnV = this.item.system.power_cost.manual_purchase ? false : true;
     return returnV;
@@ -112,7 +140,25 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
 
     // Everything below here is only needed if the sheet is editable
     if (!this.isEditable) return;
-
+    html.find(".exfl-control").click(this.onExFlControl.bind(this));
     // Roll handlers, click handlers, etc. would go here.
+  }
+
+  async onExFlControl(event){
+    event.preventDefault();
+    const a = event.currentTarget;
+
+    if( a.classList.contains("add-exfl") ) {
+      await this._onSubmit(event);  // Submit any unsaved changes
+      const extrasflaws = this.item.system.extrasflaws;
+      return this.item.update({"system.extrasflaws.parts": extrasflaws.parts.concat([["", ""]])});
+    }
+
+    if ( a.classList.contains("delete-exfl") ) {
+      await this._onSubmit(event);  // Submit any unsaved changes
+      const li = a.closest(".exfl-part");
+      const extrasflaws = foundry.utils.deepClone(this.item.system.extrasflaws);
+      return this.item.update({"system.extrasflaws.parts": extrasflaws.parts});
+    }
   }
 }

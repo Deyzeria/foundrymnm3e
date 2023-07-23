@@ -352,3 +352,4 @@ preLocalize("skills");
 	staggered: "MNM3E.condStaggered",
 	surprised: "MNM3E.condSurprised"	
    }
+   preLocalize("conditions");

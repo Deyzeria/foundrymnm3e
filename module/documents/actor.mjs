@@ -136,24 +136,13 @@ export class FoundryMnM3eActor extends Actor {
       systemData.generic.pp_skills += skill.purchased / 2;
     }
 
+    const items = actorData.items;
+    //const advantageObjects = items.filter(obj => obj.value.type === 'advantage');
+    //const totalAdvantageRanks = advantageObjects.reduce((sum, obj) => sum + obj.value.system.ranks, 0);
+    //systemData.generic.pp_advantages = totalAdvantageRanks;
+
+
     systemData.generic.pp_spent = systemData.generic.pp_ability + systemData.generic.pp_defenses + systemData.generic.pp_skills + systemData.generic.pp_advantages + systemData.generic.pp_powers;
-  }
-
-  //to add later to powers
-  calculatePowerCost(actorData) {
-    const systemData = actorData.system;
-    var combinedPerRank = 0
-
-    combinedPerRank = BaseCost + Extras - Flaws;
-
-    if(combinedPerRank < 1)
-    {
-      TotalCost = Math.ceil(Rank / (2 - combinedPerRank)) + Static;
-    } 
-    else 
-    {
-      TotalCost = combinedPerRank * Rank + Static;
-    }
   }
 
   /**

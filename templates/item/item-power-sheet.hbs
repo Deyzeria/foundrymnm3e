@@ -1,8 +1,9 @@
 <form class="{{cssClass}}" autocomplete="off">
   <header class="sheet-header">
     <img class="power-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
-    <div class="header-fields">
-      <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
+    <div class="header-fields main-header">
+      <h1 class="charname power-name"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
+      <label class="sub-header" name="labels.basepower">{{labels.basepower}}</label>    
     </div>
   </header>
 
@@ -90,6 +91,27 @@
           <label class="resource-label">Final cost</label>
           <input class="cost-value final" type="text" disabled name="system.power_cost.final_cost" value="{{system.power_cost.final_cost}}" data-dtype="Number"/>
         </li>
+      </ul>
+    </div>
+
+    <div class="flexrow">
+      <ul class="unique-selection">
+        <div>{{{uniquefield}}}</div>
+      </ul>
+
+      <ul class="extras-flaws-list">
+        <a class="exfl-control flexrow add-exfl">
+          <label class="add"><i class="fas fa-plus plusimg"></i>Add New Extras or Flaws<i class="fas fa-plus plusimg"></i></label>
+        </a>
+
+        {{#each system.extrasflaws.parts as |part i|}}
+          <li class="exfl-part flexrow" data-exfl-part="{{i}}">
+            <label class="exfl-name" name="system.extrasflaws.parts.{{i}}.0"></label>
+            <input class="exfl-rank" type="number" name="system.extrasflaws.parts.{{i}}.1" value="{{ lookup this "1"}}" min="1" max="5" data-dtype="Number"/>
+            
+            <a class="exfl-control delete-exfl"><i class="fas fa-minus"></i></a>
+          </li>
+        {{/each}}
       </ul>
     </div>
 
