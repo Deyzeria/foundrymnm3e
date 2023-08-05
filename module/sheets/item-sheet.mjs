@@ -62,6 +62,7 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
 
           max_ranks: this.item.system.power_cost.max_ranks,
           purchase: this._canBePurchased(),
+          lock: this._getCheckmarkIcon(this.item.system.locked)
           //uniquefield: this.fillUniqueField()
           // effects: ActiveEffect5e.prepareActiveEffectCategories(item.effects)
         });
@@ -128,6 +129,14 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
     }
   }
 
+  _getCheckmarkIcon(level){
+    const icons = {
+      true: '<i class="fa-solid fa-lock"></i>',
+      false: '<i class="fa-solid fa-lock-open"></i>',
+    }
+    return icons[level] || icons[0];
+  }
+
   _canBePurchased(){
     const returnV = this.item.system.power_cost.manual_purchase ? false : true;
     return returnV;
@@ -141,9 +150,12 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
     // Everything below here is only needed if the sheet is editable
     if (!this.isEditable) return;
     html.find(".exfl-control").click(this.onExFlControl.bind(this));
+
+    html.find(".lockbutton").click(this.lockSheet.bind(this));
     // Roll handlers, click handlers, etc. would go here.
   }
 
+  // Adding and removing extras and flaws
   async onExFlControl(event){
     event.preventDefault();
     const a = event.currentTarget;
@@ -160,5 +172,11 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
       const extrasflaws = foundry.utils.deepClone(this.item.system.extrasflaws);
       return this.item.update({"system.extrasflaws.parts": extrasflaws.parts});
     }
+  }
+
+  async lockSheet(event){
+    event.preventDefault();
+    await this._onSubmit(event);
+    return this.item.update({"system.locked": true})
   }
 }

@@ -452,6 +452,7 @@
             "duration": "",
             "array": 0,
             "active": false,
+            "locked": false,
             "power_cost": {
                 "base_cost": 1,
                 "extras": 0,
@@ -459,6 +460,7 @@
                 "flat": 0,
                 "rank": 0,
                 "final_cost": 0,
+                "active_cost": 0,
                 "active_rank": 0,
                 "manual_purchase": true,
                 "max_ranks": 0
@@ -526,7 +528,8 @@
             "ranked": false,
             "additionalDesc": "",
             "effect": "",
-            "enchanced": false
+            "enchanced": false,
+            "max_ranks": 1
         },
         "attack": {
             "templates": ["itemDescription", "range"],

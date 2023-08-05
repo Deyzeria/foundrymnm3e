@@ -47,8 +47,10 @@ export class FoundryMnM3eActor extends Actor {
 
     // Make separate methods for each Actor type (character, npc, etc.) to keep
     // things organized.
-    this._prepareCharacterData(actorData);
+    this._preparePowerCost(actorData);
 
+
+    this._prepareCharacterData(actorData);
     //this._prepareNpcData(actorData);
   }
 
@@ -90,7 +92,7 @@ export class FoundryMnM3eActor extends Actor {
     {
       actorData.name = systemData.heroname;
     }
-    
+  
 
     systemData.generic.pp = Math.max(systemData.generic.pl * 15, 15) + systemData.generic.extrapp;
 
@@ -136,13 +138,32 @@ export class FoundryMnM3eActor extends Actor {
       systemData.generic.pp_skills += skill.purchased / 2;
     }
 
-    const items = actorData.items;
-    //const advantageObjects = items.filter(obj => obj.value.type === 'advantage');
-    //const totalAdvantageRanks = advantageObjects.reduce((sum, obj) => sum + obj.value.system.ranks, 0);
-    //systemData.generic.pp_advantages = totalAdvantageRanks;
+
+    // This here is my initial version of how to handle combined cost of all advantages as an example. Most likely will need a better way.
+    // const items = actorData.items;
+    // const entriesArray = Object.values(items)[4];
+    // const advantageObjects = entriesArray.filter(obj => obj.type === 'advantage');
+    // const totalAdvantageRanks = advantageObjects.reduce((sum, obj) => sum + obj.system.ranks, 0);
+    // systemData.generic.pp_advantages = totalAdvantageRanks;
 
 
     systemData.generic.pp_spent = systemData.generic.pp_ability + systemData.generic.pp_defenses + systemData.generic.pp_skills + systemData.generic.pp_advantages + systemData.generic.pp_powers;
+  }
+
+  _preparePowerCost(actorData){
+    const systemData = actorData.system;
+
+    const powerTypes = ["power"];
+    let cost = this.items.reduce((cost, i) => {
+      if ( !powerTypes.includes(i.type) ) return cost;
+      // Replace here to Active cost
+      console.debug(i.system.power_cost);
+      console.debug("Final Cost:", i.system.power_cost.base_cost);
+      const c = i.system.power_cost.final_cost || 0;
+      return cost + c;
+    }, 0)
+
+    systemData.generic.pp_powers = cost;
   }
 
   /**

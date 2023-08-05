@@ -129,7 +129,6 @@ export class FoundryMnM3eItem extends Item {
 
     this.system.power_cost.manual_purchase = powerData.manual_purchase ?? true
     this.system.power_cost.max_ranks = powerData.max_ranks ?? 50;
-    console.debug(powerData);
   }
 
   getSaveDC() {
@@ -185,6 +184,10 @@ export class FoundryMnM3eItem extends Item {
     {
       pcost.final_cost = combinedPerRank * pcost.rank + pcost.flat;
     }
+  }
+
+  prepareAdvantage(){
+    
   }
 
   /**

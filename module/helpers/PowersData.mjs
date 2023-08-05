@@ -169,7 +169,7 @@ const PowerEffects =
             cost: 2,
             type: 'general',
             action: 'standard',
-            range: 'c;pse',
+            range: 'close',
             duration: 'instant',
             savingthrow: 'none',
             data: false

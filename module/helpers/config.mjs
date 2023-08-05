@@ -231,10 +231,6 @@ preLocalize("skills");
    };
    preLocalize("ExtrasGeneral");
 
-   MNM3E.ExtrasAffliction = {
-	cumulative: "MNM3E.exPCumulative"
-   };
-
    MNM3E.AdvantageEnum = {
 	accurateatt: "MNM3E.advAccurateAttack",
 	allaoutatt: "MNM3E.advAllOutAttack",

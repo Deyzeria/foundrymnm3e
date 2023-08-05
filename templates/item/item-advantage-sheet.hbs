@@ -22,7 +22,12 @@
 
     {{!-- Attributes Tab --}}
     <div class="tab attributes" data-group="primary" data-tab="attributes">
-      
+      {{#if ranked}}
+       <li class="cost flexrow">
+          <label class="resource-label">Rank</label>
+          <input class="cost-value rank" type="number" name="system.ranks" value="{{system.ranks}}" min="0" max="1" data-dtype="Number"/>
+        </li>
+      {{/if}}
     </div>
   </section>
 
