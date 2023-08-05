@@ -490,7 +490,7 @@
                 "auto": 0,
                 "total": 0
             }
-        }  
+        }
     },
         "power": {
             "templates": ["itemDescription", "customisable", "combat"]

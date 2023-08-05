@@ -1,3 +1,6 @@
+console.debug(JSON.stringify(i.system.power_cost));
+
+
 actor.mjs rollAbility needs to work with Absent
 actor.mjs rollDefense needs to work with Absent
 actor.mjs rollSkill needs to work with Absent

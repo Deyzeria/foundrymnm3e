@@ -3,7 +3,10 @@
     <img class="power-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
     <div class="header-fields main-header">
       <h1 class="charname power-name"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
-      <label class="sub-header" name="labels.basepower">{{labels.basepower}}</label>    
+      <div class="flexrow">
+        <label class="sub-header" name="labels.basepower">{{labels.basepower}}</label>    
+        <label class="active_ranks" data-value="active_ranks">{{system.power_cost.active_cost}}</label>
+      </div>
     </div>
   </header>
 
@@ -32,7 +35,6 @@
           <select class="power-value" name="system.power_effect">
             {{selectOptions powers selected=selected_powers blank=""}}
           </select>
-          <input type="checkbox" name="system.locked" {{system.locked}}>
         </li>
         <li class="power flexrow">
           <label class="resource-label">Type</label>

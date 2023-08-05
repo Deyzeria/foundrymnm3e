@@ -305,7 +305,8 @@
   padding: 5px;
 }
 .foundrymnm3e .sheet-header .sub-header {
-  height: 50px;
+  height: 40px;
+  flex: 0 0 250px;
   padding: 0px;
   margin: 5px 0;
   font-size: 25px;
@@ -1101,6 +1102,12 @@
   margin-right: 5px;
   margin-left: 5px;
   margin-top: 2px;
+}
+.foundrymnm3e .active_ranks{
+  padding: 0px;
+  margin: 5px 0;
+  margin-left: 50px;
+  font-size: 25px;
 }
 
 

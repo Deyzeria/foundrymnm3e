@@ -24,10 +24,10 @@ export class FoundryMnM3eItem extends Item {
         {
         this.preparePower(); 
         }
+        this.prepareCostTotal();
+        this._prepareActivation();
         break;
     }
-
-    this._prepareActivation();
 
     //if ( !this.isOwned ) this.prepareFinalAttributes();
   }
@@ -98,7 +98,7 @@ export class FoundryMnM3eItem extends Item {
       case "power":
       this.getSaveDC();
       this.getDamageDC();
-      this.prepareCostTotal();
+      //this.prepareCostTotal();
       break
     }
 
@@ -184,10 +184,13 @@ export class FoundryMnM3eItem extends Item {
     {
       pcost.final_cost = combinedPerRank * pcost.rank + pcost.flat;
     }
+
+    // Check if array
+    pcost.active_cost = pcost.final_cost;
   }
 
   prepareAdvantage(){
-    
+
   }
 
   /**

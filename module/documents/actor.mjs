@@ -153,17 +153,21 @@ export class FoundryMnM3eActor extends Actor {
   _preparePowerCost(actorData){
     const systemData = actorData.system;
 
-    const powerTypes = ["power"];
-    let cost = this.items.reduce((cost, i) => {
-      if ( !powerTypes.includes(i.type) ) return cost;
-      // Replace here to Active cost
-      console.debug(i.system.power_cost);
-      console.debug("Final Cost:", i.system.power_cost.base_cost);
-      const c = i.system.power_cost.final_cost || 0;
-      return cost + c;
+    let powcost = this.items.reduce((powcost, i) => {
+      if ( i.type != "power" ) return powcost;
+      const c = i.system.power_cost.active_cost || 0;
+      return powcost + c;
     }, 0)
 
-    systemData.generic.pp_powers = cost;
+    systemData.generic.pp_powers = powcost;
+
+    let advcost = this.items.reduce((advcost, i) => {
+      if ( i.type != "advantage" ) return advcost;
+      const c = i.system.ranks || 0;
+      return advcost + c;
+    }, 0)
+
+    systemData.generic.pp_advantages = advcost;
   }
 
   /**
