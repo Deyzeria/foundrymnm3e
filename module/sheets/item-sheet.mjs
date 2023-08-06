@@ -141,6 +141,22 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
     const returnV = this.item.system.power_cost.manual_purchase ? false : true;
     return returnV;
   }
+
+  /* -------------------------------------------- */
+  /*  Form Submission                             */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _getSubmitData(updateData={}) {
+    const formData = foundry.utils.expandObject(super._getSubmitData(updateData));
+
+    // Handle Extras and Flaws
+    const exfl = formData.system?.extrasflaws;
+    if (exfl) exfl.parts = Object.values(exfl?.parts || {}).map(d => [d[0] || "", d[1] || "", d[2] || ""]);
+
+    return foundry.utils.flattenObject(formData);
+  }
+
   /* -------------------------------------------- */
 
   /** @override */
@@ -163,13 +179,15 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
     if( a.classList.contains("add-exfl") ) {
       await this._onSubmit(event);  // Submit any unsaved changes
       const extrasflaws = this.item.system.extrasflaws;
-      return this.item.update({"system.extrasflaws.parts": extrasflaws.parts.concat([["", ""]])});
+      return this.item.update({"system.extrasflaws.parts": extrasflaws.parts.concat([["", "", 1]])});
     }
 
     if ( a.classList.contains("delete-exfl") ) {
       await this._onSubmit(event);  // Submit any unsaved changes
       const li = a.closest(".exfl-part");
+      const value = li.getAttribute('data-exfl-part'); 
       const extrasflaws = foundry.utils.deepClone(this.item.system.extrasflaws);
+      extrasflaws.parts.splice(value, 1)
       return this.item.update({"system.extrasflaws.parts": extrasflaws.parts});
     }
   }

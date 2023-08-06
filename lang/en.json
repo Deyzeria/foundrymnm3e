@@ -241,6 +241,11 @@
   "MNM3E.pVariable": "Variable",
   "MNM3E.pWeaken": "Weaken",
 
+  "MNM3E.Extra": "Extra",
+  "MNM3E.ExtraF": "Extra Flat",
+  "MNM3E.Flaw": "Flaw",
+  "MNM3E.FlawF": "Flaw Flat",
+
   "MNM3E.exAccurate": "Accurate",
   "MNM3E.exAffectsCorporeal": "Affects Corporeal",
   "MNM3E.exAffectsInsubstantial": "Affects Insubstantial",

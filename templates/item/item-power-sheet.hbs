@@ -4,8 +4,9 @@
     <div class="header-fields main-header">
       <h1 class="charname power-name"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
       <div class="flexrow">
-        <label class="sub-header" name="labels.basepower">{{labels.basepower}}</label>    
-        <label class="active_ranks" data-value="active_ranks">{{system.power_cost.active_cost}}</label>
+        <label class="sub-header" name="labels.basepower">{{labels.basepower}}</label>  
+        <label class="active_ranks">Cost: {{system.power_cost.active_cost}}</label>
+        <label class="active_ranks">Rank: {{system.power_cost.active_rank}}</label>
       </div>
     </div>
   </header>
@@ -109,10 +110,14 @@
 
         {{#each system.extrasflaws.parts as |part i|}}
           <li class="exfl-part flexrow" data-exfl-part="{{i}}">
-            <label class="exfl-name" name="system.extrasflaws.parts.{{i}}.0"></label>
-            <input class="exfl-rank" type="number" name="system.extrasflaws.parts.{{i}}.1" value="{{ lookup this "1"}}" min="1" max="5" data-dtype="Number"/>
-            
-            <a class="exfl-control delete-exfl"><i class="fas fa-minus"></i></a>
+            <input class="exfl-name" type="text" name="system.extrasflaws.parts.{{i}}.0" value="{{ lookup this "0"}}">
+            <select name="system.extrasflaws.parts.{{i}}.1">
+              {{#select (lookup this "1")}}
+                {{selectOptions @root.config.ExtrasFlawsTypes}}
+              {{/select}}
+            </select>
+            <input class="exfl-rank" type="number" name="system.extrasflaws.parts.{{i}}.2" value="{{ lookup this "2"}}" min="1" max="5" data-dtype="Number"/>
+            <a class="exfl-control delete-exfl" name="{{i}}"><i class="fas fa-minus"></i></a>
           </li>
         {{/each}}
       </ul>

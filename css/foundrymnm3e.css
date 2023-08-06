@@ -1106,8 +1106,9 @@
 .foundrymnm3e .active_ranks{
   padding: 0px;
   margin: 5px 0;
-  margin-left: 50px;
+  margin-left: 5px;
   font-size: 25px;
+  padding: 6px;
 }
 
 

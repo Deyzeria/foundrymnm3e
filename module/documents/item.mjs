@@ -96,10 +96,11 @@ export class FoundryMnM3eItem extends Item {
     // Other Saving throws
     switch ( this.type ) {
       case "power":
-      this.getSaveDC();
-      this.getDamageDC();
-      //this.prepareCostTotal();
-      break
+        this.getSaveDC();
+        this.getDamageDC();
+        //this.getDerivedExtraFlawLabel();
+        //this.prepareCostTotal();
+      break;
     }
 
     //this.getAttackToHit();
@@ -172,9 +173,7 @@ export class FoundryMnM3eItem extends Item {
   prepareCostTotal(){
     const pcost = this.system.power_cost;
 
-    var combinedPerRank = 0
-
-    combinedPerRank = pcost.base_cost + pcost.extras - pcost.flaws;
+    var combinedPerRank = pcost.base_cost + pcost.extras - pcost.flaws;
 
     if(combinedPerRank < 1)
     {
@@ -187,10 +186,11 @@ export class FoundryMnM3eItem extends Item {
 
     // Check if array
     pcost.active_cost = pcost.final_cost;
+    pcost.active_rank = pcost.rank;
   }
 
   prepareAdvantage(){
-
+    // Whatever
   }
 
   /**

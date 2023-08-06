@@ -450,7 +450,9 @@
                 "length": 0
             },
             "duration": "",
-            "array": 0,
+            "array": {
+                
+            },
             "active": false,
             "locked": false,
             "power_cost": {

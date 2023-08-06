@@ -191,6 +191,14 @@ preLocalize("skills");
    };
    preLocalize("defaultPowerEffects");
 
+   MNM3E.ExtrasFlawsTypes = {
+	extra: "MNM3E.Extra",
+	extraflat: "MNM3E.ExtraF",
+	flaw: "MNM3E.Flaw",
+	flawflat: "MNM3E.FlawF",
+   }
+   preLocalize("ExtrasFlawsTypes");
+
    MNM3E.ExtrasGeneral = {
 	accurate: "MNM3E.exAccurate",
 	affcorporeasl: "MNM3E.exAffectsCorporeal",
