@@ -194,8 +194,8 @@ preLocalize("skills");
    MNM3E.ExtrasFlawsTypes = {
 	extra: "MNM3E.Extra",
 	extraflat: "MNM3E.ExtraF",
-	flaw: "MNM3E.Flaw",
-	flawflat: "MNM3E.FlawF",
+	flaws: "MNM3E.Flaw",
+	flawsflat: "MNM3E.FlawF",
    }
    preLocalize("ExtrasFlawsTypes");
 

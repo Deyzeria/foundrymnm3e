@@ -22,8 +22,9 @@ export class FoundryMnM3eItem extends Item {
       case "power":
         if(this.system.power_effect != "")
         {
-        this.preparePower(); 
+        this.preparePower();
         }
+        this.prepareExtrasFlaws();
         this.prepareCostTotal();
         this._prepareActivation();
         break;
@@ -168,6 +169,36 @@ export class FoundryMnM3eItem extends Item {
     const formula = simplifyRollFormula(roll.formula) || "0";
     this.labels.toHit = !/^[+-]/.test(formula) ? `+ ${formula}` : formula;
     return {rollData, parts};
+  }
+
+  prepareExtrasFlaws(){
+    let extras = this.system.extrasflaws.parts.reduce((extras, i) => {
+      if (i[1] != "extra") return extras;
+      const c = i[2] || 0;
+      return extras + c
+    }, 0);
+    this.system.power_cost.extras = extras;
+
+    let flaws = this.system.extrasflaws.parts.reduce((flaws, i) => {
+      if (i[1] != "flaws") return flaws;
+      const c = i[2] || 0;
+      return flaws + c
+    }, 0);
+    this.system.power_cost.flaws = flaws;
+
+    const flatsTypes = ["extraflat", "flawsflat"];
+    let flat = this.system.extrasflaws.parts.reduce((flat, i) => {
+      if (!flatsTypes.includes(i[1])) return flat;
+      if (i[1] == "flawsflat")
+      {
+        const c = i[2] || 0;
+        return flat - c
+      }
+      const c = i[2] || 0;
+      return flat + c
+    }, 0);
+
+    this.system.power_cost.flat = flat;
   }
 
   prepareCostTotal(){

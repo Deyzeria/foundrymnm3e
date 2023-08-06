@@ -179,7 +179,7 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
     if( a.classList.contains("add-exfl") ) {
       await this._onSubmit(event);  // Submit any unsaved changes
       const extrasflaws = this.item.system.extrasflaws;
-      return this.item.update({"system.extrasflaws.parts": extrasflaws.parts.concat([["", "", 1]])});
+      return this.item.update({"system.extrasflaws.parts": extrasflaws.parts.concat([["", "", null]])});
     }
 
     if ( a.classList.contains("delete-exfl") ) {
