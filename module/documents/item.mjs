@@ -1,4 +1,5 @@
 import GetPowerData from "../helpers/PowersData.mjs"
+import GetAdvantagesData from "../helpers/AdvantagesData.mjs"
 
 /**
  * Extend the basic Item with some very simple modifications.
@@ -24,10 +25,21 @@ export class FoundryMnM3eItem extends Item {
         {
         this.preparePower();
         }
-        this.prepareExtrasFlaws();
+        this.prepareExtrasFlawsCostAddition();
         this.prepareCostTotal();
         this._prepareActivation();
-        break;
+      break;
+
+      case "advantage":
+        if(this.system.id != "")
+        {
+          this.prepareAdvantage();
+        }
+        if(this.system.ranked == false)
+        {
+          this.system.ranks = 1;
+        }
+      break;
     }
 
     //if ( !this.isOwned ) this.prepareFinalAttributes();
@@ -81,15 +93,26 @@ export class FoundryMnM3eItem extends Item {
 
   prepareRanges(){
     const rng = this.system.ranges ?? {};
+
+    //ChatGPT code
+    // var RangeIncrease = 1;
+    // RangeIncrease = RangeIncrease * Math.pow(2, rng.rangeincrease);
+    
     if (rng.range == 'close')
     {
       rng.close = 1;
+      //rng.close = 1 * RangeIncrease;
     }
     else
     {
       rng.close = this.system.power_cost.rank * 25;
       rng.medium = this.system.power_cost.rank * 50;
       rng.far = this.system.power_cost.rank * 100;
+
+      // const baseRange = this.system.power_cost.rank * RangeIncrease;
+      // rng.close = baseRange * 25;
+      // rng.medium = baseRange * 50;
+      // rng.far = baseRange * 100;
     }
   }
 
@@ -101,6 +124,9 @@ export class FoundryMnM3eItem extends Item {
         this.getDamageDC();
         //this.getDerivedExtraFlawLabel();
         //this.prepareCostTotal();
+      break;
+      case "advantage":
+        this.setAdvantageItemName();
       break;
     }
 
@@ -133,7 +159,78 @@ export class FoundryMnM3eItem extends Item {
     this.system.power_cost.max_ranks = powerData.max_ranks ?? 50;
   }
 
-  getSaveDC() {
+  prepareAdvantage(){
+    var advantageData = {
+      max_ranks: 1,
+      type: "",
+      extradesc: false,
+      ranked: false,
+      effect: false
+    }
+    if(this.system.id != null){
+      advantageData = GetAdvantagesData(this.system.id);
+    }
+
+    this.system.max_ranks = advantageData.max_ranks ?? 1;
+    this.system.type = advantageData.type ?? "";
+    this.system.extradesc = advantageData.extradesc ?? false;
+    this.system.ranked = advantageData.ranked ?? false;
+    this.system.effect = advantageData.effect ?? false;
+    
+    if (advantageData.extradesc == "input")
+    {
+      this.system.description = advantageData.description ?? "";
+    }
+    else if (advantageData.extradesc == "dropdown")
+    {
+      var arr = new Object();
+      const skl = CONFIG.MNM3E.skills;
+      const dt = advantageData.dropdown;
+
+      if (Array.isArray(dt) && dt.length)
+      {
+        dt.forEach(element => {
+          const subtypeValue = this.actor.system.skills[element].subtype;
+          const val = (subtypeValue !== undefined && subtypeValue !== '') ? subtypeValue : skl[element];
+          arr[element] = val;
+        });
+      }
+      else
+      {
+        Object.keys(skl).forEach(element => {
+          const subtypeValue = this.actor.system.skills[element].subtype;
+          const val = (subtypeValue !== undefined && subtypeValue !== '') ? subtypeValue : skl[element];
+          arr[element] = val;
+        });
+      }
+      this.system.dropdown = arr;
+    }
+  }
+
+  setAdvantageItemName()
+  {
+    if (this.system.id != "custom")
+    {
+      const conf = CONFIG.MNM3E;
+      if(this.system.extradesc == false)
+      {
+        this.name = conf.AdvantageEnum[this.system.id];
+      }
+      else if(this.system.extradesc == "input")
+      {
+        this.name = conf.AdvantageEnum[this.system.id] + " (" + this.system.additionalDesc + ")";
+      }
+      else if(this.system.extradesc == "dropdown")
+      {
+        const subtypeValue = this.actor.system.skills[this.system.additionalDesc].subtype;
+        const val = (subtypeValue !== undefined && subtypeValue !== '') ? subtypeValue : conf.skills[this.system.additionalDesc];
+        this.name = conf.AdvantageEnum[this.system.id] + " (" + val + ")";
+      }
+    }  
+  }
+
+  getSaveDC() 
+  {
     if ( this.system.save.resistance == "" ||  this.system.save.effect == "" || this.system.save.effect == null ) return null;
 
     const save = this.system.save;
@@ -144,7 +241,8 @@ export class FoundryMnM3eItem extends Item {
     return dc;
   }
 
-  getDamageDC() {
+  getDamageDC() 
+  {
     if ( this.system.damage.resistance == "" ||  this.system.damage.effect == "" ||  this.system.damage.effect == null) return null;
 
     const save = this.system.damage;
@@ -155,7 +253,8 @@ export class FoundryMnM3eItem extends Item {
     return dc;
   }
 
-  getAttackToHit() {
+  getAttackToHit() 
+  {
     if (this.system.attack.type == "") return null;
     const rollData = this.getRollData();
     const parts = [];
@@ -171,7 +270,8 @@ export class FoundryMnM3eItem extends Item {
     return {rollData, parts};
   }
 
-  prepareExtrasFlaws(){
+  prepareExtrasFlawsCostAddition()
+  {
     let extras = this.system.extrasflaws.parts.reduce((extras, i) => {
       if (i[1] != "extra") return extras;
       const c = i[2] || 0;
@@ -218,10 +318,6 @@ export class FoundryMnM3eItem extends Item {
     // Check if array
     pcost.active_cost = pcost.final_cost;
     pcost.active_rank = pcost.rank;
-  }
-
-  prepareAdvantage(){
-    // Whatever
   }
 
   /**

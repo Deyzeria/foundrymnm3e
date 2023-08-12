@@ -121,6 +121,19 @@ Handlebars.registerHelper('toLowerCase', function(str) {
   return str.toLowerCase();
 });
 
+// Handlebars showing various datas
+Handlebars.registerHelper('isinput', function (value) {
+  return value == "input";
+});
+
+Handlebars.registerHelper('isdropdown', function (value) {
+  return value == "dropdown";
+});
+
+Handlebars.registerHelper('isnotfalse', function (value) {
+  return value != false;
+});
+
 /* -------------------------------------------- */
 /*  Ready Hook                                  */
 /* -------------------------------------------- */

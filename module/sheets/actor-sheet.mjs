@@ -127,6 +127,18 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
     return icons[level] || icons[0];
   }
 
+  _getMovementIcon(leve){
+    const icons = {
+      walk: '<i class="fa-solid fa-person-walking"></i>',
+      burrow: '<i class="fa-solid fa-person-walking-dashed-line-arrow-right"></i>',
+      flight: '<i class="fa-solid fa-plane"></i>',
+      leaping: '<i class="fa-solid fa-person-falling"></i>',
+      swimming: '<i class="fa-solid fa-person-swimming"></i>',
+      teleport: '<i class="fa-solid fa-arrow-right-to-bracket"></i>'
+    }
+    return icons[level] || icons[0];
+  }
+
   /**
    * Organize and classify Items for Character sheets.
    *

@@ -162,7 +162,7 @@ export class FoundryMnM3eActor extends Actor {
     systemData.generic.pp_powers = powcost;
 
     let advcost = this.items.reduce((advcost, i) => {
-      if ( i.type != "advantage" ) return advcost;
+      if ( i.type != "advantage" || i.system.enchanced ) return advcost;
       const c = i.system.ranks || 0;
       return advcost + c;
     }, 0)

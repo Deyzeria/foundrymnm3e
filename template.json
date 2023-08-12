@@ -67,7 +67,9 @@
                 "pp_spent": 0,
                 "initiative": 0,
                 "size": -2,
-                "wounds": 0
+                "wounds": 0,
+                "languages": [],
+                "complications": []
             },
             "defenses": {
                 "dodge": {
@@ -476,7 +478,8 @@
                 "range": "",
                 "close": 0,
                 "medium": 0,
-                "far": 0
+                "far": 0,
+                "rangeincrease": 0
             },
             "save": {
                 "resistance": "",
@@ -525,13 +528,15 @@
         },
         "advantage": {
             "templates": ["itemDescription"],
+            "id": "",
             "ranks": 1,
+            "max_ranks": 1,
             "type": "",
-            "ranked": false,
             "additionalDesc": "",
-            "effect": "",
-            "enchanced": false,
-            "max_ranks": 1
+            "extradesc": false,
+            "ranked": false,
+            "effect": false,
+            "enchanced": false
         },
         "attack": {
             "templates": ["itemDescription", "range"],

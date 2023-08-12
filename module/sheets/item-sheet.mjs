@@ -9,7 +9,7 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
     return mergeObject(super.defaultOptions, {
       classes: ["item-sheet", "foundrymnm3e", "sheet", "item"],
       width: 520,
-      height: 480,
+      height: 700,
       tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description" }]
     });
   }
@@ -30,7 +30,6 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
     const source = item.toObject();
 
     context.config = CONFIG.MNM3E;
-
 
     // Use a safe clone of the item data for further operations.
     const itemData = context.item;
@@ -62,11 +61,13 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
 
           max_ranks: this.item.system.power_cost.max_ranks,
           purchase: this._canBePurchased(),
-          lock: this._getCheckmarkIcon(this.item.system.locked)
+          locked: this.item.system.locked,
+          lock: this._getCheckmarkIcon(this.item.system.locked),
           //uniquefield: this.fillUniqueField()
           // effects: ActiveEffect5e.prepareActiveEffectCategories(item.effects)
         });
       case "advantage":
+        const syst = this.item.system;
         foundry.utils.mergeObject(context, {
           source: source.system,
           system: item.system,
@@ -78,10 +79,22 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
           itemType: game.i18n.localize(CONFIG.Item.typeLabels[this.item.type]),
           itemStatus: this._getItemStatus(),
           itemProperties: this._getItemProperties(),
+
+          advantageslist: context.config.AdvantageEnum,
+          selected_id: syst.id,
+
+          max_ranks: syst.max_ranks,
+          type: syst.type,
+          extradesc: syst.extradesc,
+          ranked: syst.ranked,
+          enchanced: syst.enchanced,
+          additionalDesc: syst.additionalDesc,
+
+          descPlaceholder: syst.placeholder ?? '',
+          descDropdown: syst.dropdown ?? [],
         });
         break;
-  }
-
+    }
     return context;
   }
 
@@ -99,13 +112,13 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
       case "device":
       case "power":
         props.push(CONFIG.MNM3E.powerActivationEnum[this.item.system.action.type]);
-        props.push(CONFIG.MNM3E.powerRangeEnum[this.item.system.ranges.range])
-        props.push(CONFIG.MNM3E.powerDurationEnum[this.item.system.duration])
-        props.push(CONFIG.MNM3E.abilities[this.item.system.save.resistance])
+        props.push(CONFIG.MNM3E.powerRangeEnum[this.item.system.ranges.range]);
+        props.push(CONFIG.MNM3E.powerDurationEnum[this.item.system.duration]);
+        props.push(CONFIG.MNM3E.abilities[this.item.system.save.resistance]);
+        props.push(labels.activate, labels.range, labels.duration, labels.basepower);
         break;
     }
 
-    props.push(labels.activate, labels.range, labels.duration, labels.basepower);
     return props.filter(p => !!p);
   }
 
@@ -120,12 +133,13 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
     return null;
   }
 
-  fillUniqueField(){
+  fillUniqueField()
+  {
     switch (this.item.system.power_effect) {
       case 'affliction':
         return '<select class="power-value" name="system.power_effect">{{selectOptions powers selected=selected_powers blank=""}}</select>';
       default:
-        return '<label>Nothing</label>'
+        return '';
     }
   }
 

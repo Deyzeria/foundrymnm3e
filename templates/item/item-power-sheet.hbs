@@ -1,7 +1,7 @@
 <form class="{{cssClass}}" autocomplete="off">
   <header class="sheet-header">
     <img class="power-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
-    <div class="header-fields main-header">
+    <div class="header-fields power-header">
       <h1 class="charname power-name"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
       <div class="flexrow">
         <label class="sub-header" name="labels.basepower">{{labels.basepower}}</label>  
@@ -33,9 +33,13 @@
       <ul class="power-types sectionpower">
         <li class="power flexrow">
           <label class="resource-label">Base Power</label>
+          {{#if locked}}
+          <label class="resource-label" data-value="selected_type">{{selected_powers}}</label>
+          {{else}}
           <select class="power-value" name="system.power_effect">
             {{selectOptions powers selected=selected_powers blank=""}}
           </select>
+          {{/if}}
         </li>
         <li class="power flexrow">
           <label class="resource-label">Type</label>
@@ -111,12 +115,12 @@
         {{#each system.extrasflaws.parts as |part i|}}
           <li class="exfl-part flexrow" data-exfl-part="{{i}}">
             <input class="exfl-name" type="text" name="system.extrasflaws.parts.{{i}}.0" value="{{ lookup this "0"}}">
+            <input type="number" class="exfl-rank"  name="system.extrasflaws.parts.{{i}}.2" value="{{ lookup this "2"}}" min="1" max="5" data-dtype="Number"/>
             <select name="system.extrasflaws.parts.{{i}}.1">
               {{#select (lookup this "1")}}
                 {{selectOptions @root.config.ExtrasFlawsTypes}}
               {{/select}}
             </select>
-            <input type="number" class="exfl-rank"  name="system.extrasflaws.parts.{{i}}.2" value="{{ lookup this "2"}}" min="1" max="5" data-dtype="Number"/>
             <a class="exfl-control delete-exfl" name="{{i}}"><i class="fas fa-minus"></i></a>
           </li>
         {{/each}}
