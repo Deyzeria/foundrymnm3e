@@ -127,7 +127,7 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
     return icons[level] || icons[0];
   }
 
-  _getMovementIcon(leve){
+  _getMovementIcon(level){
     const icons = {
       walk: '<i class="fa-solid fa-person-walking"></i>',
       burrow: '<i class="fa-solid fa-person-walking-dashed-line-arrow-right"></i>',

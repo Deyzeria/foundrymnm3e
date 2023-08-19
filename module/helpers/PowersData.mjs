@@ -110,6 +110,16 @@ const PowerEffects =
         manual_purchase: false,
         data: true
     },
+    enhancedadvantage: {
+        cost: 1,
+        type: 'general',
+        action: 'free',
+        range: 'personal',
+        duration: 'sustained',
+        savingthrow: 'none',
+        manual_purchase: false,
+        data: true
+    },
     enhancedtrait: {
         cost: 1,
         type: 'general',

@@ -134,6 +134,9 @@ Handlebars.registerHelper('isnotfalse', function (value) {
   return value != false;
 });
 
+Handlebars.registerHelper('isaffliction', function (value) { return value == "affliction"; });
+Handlebars.registerHelper('isenhanced', function (value) { return value == "enhancedability" || value == "enhancedtrait" || value == "enhancedadvantage"; });
+
 /* -------------------------------------------- */
 /*  Ready Hook                                  */
 /* -------------------------------------------- */

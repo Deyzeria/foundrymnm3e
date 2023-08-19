@@ -157,6 +157,7 @@ export class FoundryMnM3eItem extends Item {
 
     this.system.power_cost.manual_purchase = powerData.manual_purchase ?? true
     this.system.power_cost.max_ranks = powerData.max_ranks ?? 50;
+    this.preparePowers(powerData.data ?? {});
   }
 
   prepareAdvantage(){
@@ -205,6 +206,32 @@ export class FoundryMnM3eItem extends Item {
       }
       this.system.dropdown = arr;
     }
+  }
+
+  preparePowers(data)
+  {
+    switch (this.system.power_effect) {
+      case 'affliction':        
+        this.system.unique.value_one= this.ListFiller(data.rank1, CONFIG.MNM3E.conditions);
+        this.system.unique.value_two= this.ListFiller(data.rank2, CONFIG.MNM3E.conditions);
+        this.system.unique.value_three= this.ListFiller(data.rank3, CONFIG.MNM3E.conditions);
+        this.system.unique.resistancecheck= this.ListFiller(data.resistance, CONFIG.MNM3E.defenses);
+        this.system.save.resistance = this.system.values.value_five;
+      break;
+    }
+  }
+
+  // Request Listfiller, 
+  // Data- Array with which values to pull
+  // Table- Link to CONFIG.MNM3E.table
+  ListFiller(data, table){
+    var response = new Object();
+    
+    data.forEach(element => {
+      response[element] = table[element];
+    });
+
+    return response;
   }
 
   setAdvantageItemName()

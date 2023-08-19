@@ -1,6 +1,7 @@
 export async function ParserAccess(requestURL){
     // ---REMOVE---
     const manualSwitch = false;
+    const generateActor = false;
     if(manualSwitch){
 
     requestURL = "https://raw.githubusercontent.com/Sinantrarion/foundrymnm3e/main/module/helpers/charactertest.json";
@@ -13,7 +14,9 @@ export async function ParserAccess(requestURL){
     var actorJson = await GenerateActor(dataActor, "hero");
     
     actorJson = PopulateActorData(actorJson, dataActor);
-    console.debug(actorJson); 
+    PopulateActorAdvantages(actorJson, dataActor);
+    //console.debug(actorJson); 
+    if (!generateActor) return;
     await Actor.create(actorJson);
     }
 }
@@ -189,4 +192,41 @@ function GetMultipleSkills(skillsList, skillIndex) {
         .map(obj => obj.index); // Extract the indexes
 
     return matchingIndexes;
+}
+
+function PopulateActorAdvantages(actorStub, dataActor)
+{
+    const advantageList = dataActor.document.public.character.advantages.advantage;
+    var advListToAdd = {};
+    const adconfarray = Object.values(CONFIG.MNM3E.AdvantageEnum);
+    const adconf = Object.keys(CONFIG.MNM3E.AdvantageEnum);
+    for (var i=0; i<advantageList.length; i++)
+    {
+        if (advantageList[i]._useradded == undefined || advantageList[i]._useradded == "yes")
+        {
+            const id = adconfarray.findIndex((adv) => adv == advantageList[i]._name);
+            if (id == -1) continue; // Handle custom names/descriptions
+            advListToAdd[adconf[id]] = adconf[id]; // <- breaks
+        }
+    }
+    console.debug(advListToAdd);
+        /*
+        advantage setup
+        {
+            "description": "When you make an all-out attack (see Maneuvers) you can take a penalty of up to -5 on your active defenses (Dodge and Parry) and add the same number (up to +5) to your attack bonus.",
+            "advantagecategory": [
+                "Combat"
+            ],
+            "cost": {
+                "_text": "1 PP",
+                "_value": "1"
+            },
+            "_name": "All-out Attack",
+            "_categorytext": "Combat"
+            // Potentially can be
+            _useradded: "no"
+        }       
+
+        to use- _name -> ID (Lookup AdvantageEnum for the advantage name)
+        */
 }

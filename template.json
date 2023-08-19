@@ -445,7 +445,7 @@
         },
         "customisable": {
             "power_effect": "",
-            "descriptor": "",
+            "descriptor": [],
             "type": "",
             "action": {
                 "type": "",
@@ -471,6 +471,21 @@
             },
             "extrasflaws": {
                 "parts": []
+            },
+            "values":{
+                "value_one": "",
+                "value_two": "",
+                "value_three": "",
+                "value_four": "",
+                "value_five": "",
+                "value_array": []
+            },
+            "unique":{
+                "value_one": "",
+                "value_two": "",
+                "value_three": "",
+                "value_four": "",
+                "value_five": ""
             }
         },
         "combat": {
