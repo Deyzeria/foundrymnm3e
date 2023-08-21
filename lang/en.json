@@ -1,9 +1,8 @@
 {
-  "MNM3E.SheetHero": "Hero",
-  "MNM3E.SheetNpc": "NPC",
-  "MNM3E.SheetVehicle": "Vehicle",
-  "MNM3E.SheetBase": "Base",
-  "MNM3E.SheetItem": "Item",
+  "ACTOR.SheetHero": "Hero",
+  "ACTOR.SheetNpc": "NPC",
+  "ACTOR.SheetVehicle": "Vehicle",
+  "ACTOR.SheetBase": "Base",
 
   "ITEM.Item.power": "Power",
   "ITEM.Item.equipment": "Attack",
@@ -562,5 +561,10 @@
   "MNM3E.condProne": "Prone",
   "MNM3E.condRestrained": "Restrained",
   "MNM3E.condStaggered": "Staggered",
-  "MNM3E.condSurprised": "Surprised"
+  "MNM3E.condSurprised": "Surprised",
+
+  "SETTINGS.mnmScaleSystem": "Units of Measurement",
+  "SETTINGS.mnmScaleSystemDesc": "Choose which units of measurement MnM should use.",
+  "SETTINGS.mnmScaleSystemMeters": "Meters",
+  "SETTINGS.mnmScaleSystemFeet": "Feet"
 }

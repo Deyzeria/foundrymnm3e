@@ -364,41 +364,44 @@
             "speed": {
                 "walk": {
                     "rank": 0,
-                    "distance": 8,
-                    "units": "m"
+                    "distance": 0,
+                    "active": true
                 },
                 "burrowing": {
                     "rank": 0,
                     "distance": 0,
-                    "units": "m"
+                    "active": false
                 },
                 "flight": {
                     "rank": 0,
                     "distance": 0,
-                    "units": "m"
+                    "active": false
                 },
                 "leaping": {
                     "rank": 0,
                     "distance": 0,
-                    "units": "m"
+                    "active": false
                 },
                 "swimming": {
                     "rank": 0,
                     "distance": 0,
-                    "units": "m"
+                    "active": false
                 },
                 "teleport": {
                     "rank": 0,
                     "distance": 0,
-                    "units": "m",
+                    "active": false,
                     "extended": false
-                }
+                },
+                "extratypes": [],
+                "closescale": "m",
+                "farscale": "km"
             }
         },
         "details": {
             "heroname": "",
             "realidentity": "",
-            "currentPosition": 1,
+            "active_identity": 1,
             "gender": "",
             "age": 0,
             "height": "",
@@ -409,19 +412,6 @@
             "base_of_operation": "",
             "image_one": "",
             "image_two": ""
-        },
-        "vehicle": {
-            "size": 0,
-            "str": 0,
-            "defense": {
-                "bought": 0,
-                "ac": 0
-            },
-            "toughness": 5
-        },
-        "base": {
-            "size": 0,
-            "toghness": 6
         }
     },
     "hero": {
@@ -431,10 +421,19 @@
         "templates": ["common", "movement", "details"]
     },
     "vehicle": {
-        "templates": ["vehicle", "movement"]
+        "templates": ["movement"],
+        "size": 0,
+        "str": 0,
+        "defense": {
+            "bought": 0,
+            "ac": 0
+        },
+        "toughness": 5
     },
     "base": {
-        "templates": ["base"]
+        "templates": ["base"],
+        "size": 0,
+        "toghness": 6
     }
 },
 "Item": {

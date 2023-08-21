@@ -10,7 +10,7 @@
   "authors": [{
     "name": "Sinantrarion"
   }],
-  "esmodules": ["module/foundrymnm3e.mjs"],
+  "esmodules": ["foundrymnm3e.mjs"],
   "styles": ["css/foundrymnm3e.css"],
   "scripts": [],
   "packs": [],

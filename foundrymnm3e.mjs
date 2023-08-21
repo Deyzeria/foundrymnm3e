@@ -1,16 +1,19 @@
 // Import document classes.
-import { MNM3E } from "./helpers/config.mjs";
-import { FoundryMnM3eActor } from "./documents/actor.mjs";
-import { FoundryMnM3eItem } from "./documents/item.mjs";
+import { MNM3E } from "./module/helpers/config.mjs";
+import { FoundryMnM3eActor } from "./module/documents/actor.mjs";
+import { FoundryMnM3eItem } from "./module/documents/item.mjs";
 // Import sheet classes.
-import { FoundryMnM3eActorSheet } from "./sheets/actor-sheet.mjs";
-import { FoundryMnM3eItemSheet } from "./sheets/item-sheet.mjs";
+import { FoundryMnM3eActorSheet } from "./module/sheets/actor-sheet.mjs";
+import { FoundryMnM3eItemSheet } from "./module/sheets/item-sheet.mjs";
 // Import helper/utility classes and constants.
-import { preloadHandlebarsTemplates } from "./helpers/templates.mjs";
-import { ParserAccess } from "./helpers/HeroLabParser.mjs";
-import * as dice from "./dice/_module.mjs";
-import * as canvas from "./canvas/_module.mjs";
-import * as utils from "./helpers/utils.mjs"
+import { preloadHandlebarsTemplates } from "./module/helpers/templates.mjs";
+import { ParserAccess } from "./module/helpers/HeroLabParser.mjs";
+import registerSystemSettings from "./module/settings.mjs";
+import {SetGameValues, GetScale} from "./module/helpers/data-tables.mjs";
+
+import * as dice from "./module/dice/_module.mjs";
+import * as canvas from "./module/canvas/_module.mjs";
+import * as utils from "./module/helpers/utils.mjs"
 
 globalThis.foundrymnm3e = {
   canvas,
@@ -32,6 +35,10 @@ Hooks.once('init', async function() {
     FoundryMnM3eItem,
     rollItemMacro
   };
+
+  //Register System settings
+  registerSystemSettings();
+  SetGameValues(game.settings.get("foundrymnm3e", "measurementsystem"));
 
   // Custom Die modifier
   // For now will be usually hardcoded to just do d20imp, adding a die with the result of 10 if the result is below 11(1-10)
@@ -70,25 +77,25 @@ Hooks.once('init', async function() {
     {  
       types: ["hero"],
       makeDefault: true,
-      label: "MNM3E.SheetHero"
+      label: "ACTOR.SheetHero"
     });
     Actors.registerSheet("foundrymnm3e", FoundryMnM3eActorSheet, 
     {  
       types: ["npc"],
       makeDefault: true,
-      label: "MNM3E.SheetNpc"
+      label: "ACTOR.SheetNpc"
     });
   Actors.registerSheet("foundrymnm3e", FoundryMnM3eActorSheet, 
     {  
       types: ["vehicle"],
       makeDefault: true,
-      label: "MNM3E.SheetVehicle"
+      label: "ACTOR.SheetVehicle"
     });
   Actors.registerSheet("foundrymnm3e", FoundryMnM3eActorSheet, 
     {  
       types: ["base"],
       makeDefault: true,
-      label: "MNM3E.SheetBase"
+      label: "ACTOR.SheetBase"
     });
   
   Items.unregisterSheet("core", ItemSheet);

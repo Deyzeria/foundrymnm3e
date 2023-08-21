@@ -343,6 +343,27 @@ const time_display = [
     "100 years",
     "200 years"
 ];
+const time_value = [
+    0.125,
+    0.25,
+    0.5,
+    1,
+    3,
+    6,
+    12,
+    30,
+    60,
+    120,
+    240,
+    480,
+    900,
+    1800,
+    3600,
+    7200,
+    14400,
+    28800,
+    57600,
+];
 //----volume----------------------
 const volume_cft_display = [
     "1/32 cft.",
@@ -426,8 +447,17 @@ var distance_display = distance_miles_display;
 var mass_values = mass_pounds_values;
 var mass_display = mass_pounds_display;
 var volume_display = volume_cft_display;
+var scale_array=  
+{
+    "distance": distance_values,
+    "distancedisplay": distance_display,
+    "mass": mass_values,
+    "massdisplay": mass_display,
+    "volume": volume_display,
+    "time": time_display,
+};
 
-function SetGameValues(value)
+export function SetGameValues(value)
 {
     if (value == "meters")
     {
@@ -445,31 +475,41 @@ function SetGameValues(value)
         mass_display = mass_pounds_display;
         volume_display = volume_cft_display;
     }
-}
-
-export function GetDistanceValueMeters(value){
-    if (value >= 0 && value <= 35)
+    scale_array = 
     {
-        return distance_values[value-5];
-    } 
-    else if (value > 35) {
-        GetOverLimit(distance_values, value);
-    }
-    else if (value < 0) {
-        GetUnderLimit(distance_values, value);
+        "distance": distance_values,
+        "distancedisplay": distance_display,
+        "mass": mass_values,
+        "massdisplay": mass_display,
+        "volume": volume_display,
+        "time": time_display,
     }
 }
 
-export function GetDistanceDisplayMeters(value){
-    if (value >= 0 && value <= 35)
+/**
+ * a
+ * @param {int} value Rank to return. Rank 1 value for Time = 6 second
+ * @param {string} type Type of list to get. `distance`, `distancedisplay`, `mass`, `massdisplay`, `volume`, `time`
+ * @returns Int or String.
+ */
+export function GetScale(value, type){
+    if (type != null)
     {
-        return distance_display[value-5];
-    } 
-    else if (value > 35) {
-        GetOverLimit(distance_values, value);
-    }
-    else if (value < 0) {
-        GetUnderLimit(distance_values, value);
+        var scale = scale_array[type]
+        var returnvalue = 0;
+        if (value >= 0 && value <= 35)
+        {
+            returnvalue = scale[value+5];
+        } 
+        else if (value > 35)
+        {
+            returnvalue = GetOverLimit(scale, value);
+        }
+        else if (value < 0)
+        {
+            returnvalue = GetUnderLimit(scale, value);
+        }
+        return returnvalue;
     }
 }
 
