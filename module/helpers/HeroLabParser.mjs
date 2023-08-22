@@ -1,4 +1,4 @@
-export async function ParserAccess(requestURL){
+export async function ParserAccess(){
     // ---REMOVE---
     const manualSwitch = false;
     const generateActor = false;
@@ -8,9 +8,9 @@ export async function ParserAccess(requestURL){
     const request = new Request(requestURL);
 
     const response = await fetch(request);
-    const dataActor = await response.json();  
+    const dataActor = await response.json();
 
-    console.debug(dataActor);
+    console.debug("dataActor: ", dataActor);
     var actorJson = await GenerateActor(dataActor, "hero");
     
     actorJson = PopulateActorData(actorJson, dataActor);
@@ -19,6 +19,12 @@ export async function ParserAccess(requestURL){
     if (!generateActor) return;
     await Actor.create(actorJson);
     }
+}
+
+// json file should be passed here.
+function PassedData(jsonfile)
+{
+    console.debug("acquired data", jsonfile);
 }
 
 async function GenerateActor(dataActor, actorType){
@@ -125,6 +131,8 @@ function PopulateActorData(actorStub, dataActor){
 
     // ----GENERIC----
     actorStub.system.generic.pl = parseInt(dataBase.powerlevel._value);
+
+    // Should be removed and moved.
     var extrapp = parseInt(dataBase.powerpoints._value) - parseInt(dataBase.resources._startingpp);
     actorStub.system.generic.extrapp = extrapp;
 
@@ -198,35 +206,112 @@ function PopulateActorAdvantages(actorStub, dataActor)
 {
     const advantageList = dataActor.document.public.character.advantages.advantage;
     var advListToAdd = {};
-    const adconfarray = Object.values(CONFIG.MNM3E.AdvantageEnum);
-    const adconf = Object.keys(CONFIG.MNM3E.AdvantageEnum);
-    for (var i=0; i<advantageList.length; i++)
+    const adConfArray = Object.values(CONFIG.MNM3E.AdvantageEnum);
+    const adConf = Object.keys(CONFIG.MNM3E.AdvantageEnum);
+    var advToAnalyseCustom = [];
+    for (var i=0; i < advantageList.length; i++)
     {
-        if (advantageList[i]._useradded == undefined || advantageList[i]._useradded == "yes")
+        const val = advantageList[i];
+        if (val._useradded == undefined || val._useradded == "yes")
         {
-            const id = adconfarray.findIndex((adv) => adv == advantageList[i]._name);
-            if (id == -1) continue; // Handle custom names/descriptions
-            advListToAdd[adconf[id]] = adconf[id]; // <- breaks
+            var name = val._name;
+            const pattern = /\s+\d+$/;
+            name = name.replace(pattern, '');
+            var id = adConfArray.findIndex((adv) => adv == name);
+            if (id == -1) 
+            {
+                advToAnalyseCustom.push(val);
+                continue;
+            }
+            advListToAdd[adConf[id]] = {type: adConf[id], rank: Number.parseInt(val.cost._value)};
         }
     }
-    console.debug(advListToAdd);
-        /*
-        advantage setup
-        {
-            "description": "When you make an all-out attack (see Maneuvers) you can take a penalty of up to -5 on your active defenses (Dodge and Parry) and add the same number (up to +5) to your attack bonus.",
-            "advantagecategory": [
-                "Combat"
-            ],
-            "cost": {
-                "_text": "1 PP",
-                "_value": "1"
-            },
-            "_name": "All-out Attack",
-            "_categorytext": "Combat"
-            // Potentially can be
-            _useradded: "no"
-        }       
-
-        to use- _name -> ID (Lookup AdvantageEnum for the advantage name)
-        */
+    console.debug("Advantages Sorted: ", advListToAdd);
+    console.debug("Advantages Unsorted: ", advToAnalyseCustom);
 }
+
+function PopulateActorPowers(actorStub, dataActor)
+{
+    const powersList = dataActor.document.public.character.powers.power;
+    var powerListToAdd = {};
+    var powersInArrays = {};
+
+    const powerConfArray = Object.values(CONFIG.MNM3E.defaultPowerEffects);
+    const powerConf = Object.keys(CONFIG.MNM3E.defaultPowerEffects);
+    var powToAnalyseCustom = [];
+
+    for (var i=0; i < powersList.length; i++)
+    {
+        const val = powersList[i];
+        if(val.otherpowers == undefined)
+        {
+            powerListToAdd = buildArray(val);
+        }
+        else
+        {
+            const powerListArray = val.otherpowers.power;
+            powersInArrays.name = val._name;
+            for (var y=0; y < powerListArray.length; y++)
+            {
+                const newval = powerListArray[y];
+                if(newval.otherpowers == undefined)
+                {
+                    powersInArrays = buildArray(newval);
+                }
+            }
+        }
+    }
+
+    console.debug("Powers Sorted: ", powerListToAdd);
+    console.debug("Powers Separate Arrays: ", powersInArrays);
+}
+
+function buildArray(val)
+{
+    const pattern = /:\s+(\w+)\s+\d+$/;
+    var matches = val._name.match(pattern);
+    if (matches && matches.length >= 2) 
+    {
+        var type = matches[1];
+    } 
+    else 
+    {
+        console.warn("Didn't find power type!");
+        return null;
+    }
+
+    var id = powerConfArray.findIndex((pow) => pow == type);
+
+    if (id == -1) 
+    {
+        console.warn("Custom Power!");
+        return null;
+    }
+
+    var powername = removeAfterLastColon(val._name);
+
+    return powerListToAdd[powerConf[id]] = 
+    {
+        type: powerConf[id],
+        name: powername,
+        descriptors: val.descriptors,
+        ranks: Number.parseInt(val._ranks),
+
+        extras: val.extras?.extra ?? [],
+        flaws: val.flaws?.flaw ?? [],
+        options: val.options?.option ?? [],
+        traitoptions: val.traitmods?.traitmod ?? "",
+        chainedadvantages: val.chainedadvantages?.chainedadvantage ?? ""
+    }
+}
+
+function removeAfterLastColon(inputString) {
+    const lastSemicolonIndex = inputString.lastIndexOf(':');
+    
+    if (lastSemicolonIndex !== -1) {
+      return inputString.substring(0, lastSemicolonIndex);
+    } else {
+      return inputString; // No semicolon found, return the original string
+    }
+  }
+  

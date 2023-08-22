@@ -493,24 +493,39 @@ export function SetGameValues(value)
  * @returns Int or String.
  */
 export function GetScale(value, type){
+    var returnvalue = 0;
+    
     if (type != null)
     {
         var scale = scale_array[type]
-        var returnvalue = 0;
         if (value >= 0 && value <= 35)
         {
             returnvalue = scale[value+5];
         } 
         else if (value > 35)
         {
-            returnvalue = GetOverLimit(scale, value);
+            if(type == "distancedisplay" || type == "massdisplay")
+            {
+
+            }
+            else
+            {
+                returnvalue = GetOverLimit(scale, value);
+            }
         }
         else if (value < 0)
         {
-            returnvalue = GetUnderLimit(scale, value);
+            if(type == "distancedisplay" || type == "massdisplay")
+            {
+
+            }
+            else
+            {
+                returnvalue = GetUnderLimit(scale, value);
+            }
         }
-        return returnvalue;
     }
+    return returnvalue;
 }
 
 function GetOverLimit(array, maxValue){

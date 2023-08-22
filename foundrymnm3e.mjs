@@ -38,6 +38,9 @@ Hooks.once('init', async function() {
 
   //Register System settings
   registerSystemSettings();
+
+  // If this doesn't work, then move arrays separately and make this getting right when getting value?
+  console.debug("Measurement System Chosen Setting: ", game.settings.get("foundrymnm3e", "measurementsystem"));
   SetGameValues(game.settings.get("foundrymnm3e", "measurementsystem"));
 
   // Custom Die modifier
