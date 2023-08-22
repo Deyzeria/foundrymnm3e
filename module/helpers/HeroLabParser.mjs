@@ -1,10 +1,10 @@
 export async function ParserAccess(){
     // ---REMOVE---
-    const manualSwitch = false;
+    const manualSwitch = true;
     const generateActor = false;
     if(manualSwitch){
 
-    requestURL = "https://raw.githubusercontent.com/Sinantrarion/foundrymnm3e/main/module/helpers/charactertest.json";
+    var requestURL = "https://raw.githubusercontent.com/Sinantrarion/foundrymnm3e/main/module/helpers/charactertest.json";
     const request = new Request(requestURL);
 
     const response = await fetch(request);
@@ -15,6 +15,7 @@ export async function ParserAccess(){
     
     actorJson = PopulateActorData(actorJson, dataActor);
     PopulateActorAdvantages(actorJson, dataActor);
+    PopulateActorPowers(actorJson, dataActor);
     //console.debug(actorJson); 
     if (!generateActor) return;
     await Actor.create(actorJson);
@@ -202,42 +203,66 @@ function GetMultipleSkills(skillsList, skillIndex) {
     return matchingIndexes;
 }
 
+
+//-------------------------//
+//-------------------------//
+//-------ADVANTAGES--------//
+//-------------------------//
+//-------------------------//
 function PopulateActorAdvantages(actorStub, dataActor)
 {
     const advantageList = dataActor.document.public.character.advantages.advantage;
-    var advListToAdd = {};
-    const adConfArray = Object.values(CONFIG.MNM3E.AdvantageEnum);
-    const adConf = Object.keys(CONFIG.MNM3E.AdvantageEnum);
+    var advListToAdd = [];
     var advToAnalyseCustom = [];
     for (var i=0; i < advantageList.length; i++)
     {
         const val = advantageList[i];
         if (val._useradded == undefined || val._useradded == "yes")
         {
-            var name = val._name;
-            const pattern = /\s+\d+$/;
-            name = name.replace(pattern, '');
-            var id = adConfArray.findIndex((adv) => adv == name);
-            if (id == -1) 
+            var id = FindAdvantageId(val);
+            if (id == -1)
             {
                 advToAnalyseCustom.push(val);
                 continue;
             }
-            advListToAdd[adConf[id]] = {type: adConf[id], rank: Number.parseInt(val.cost._value)};
+            advListToAdd.push({type: FindAdvantageType(id), rank: Number.parseInt(val.cost._value)});
         }
     }
     console.debug("Advantages Sorted: ", advListToAdd);
     console.debug("Advantages Unsorted: ", advToAnalyseCustom);
 }
 
+function FindAdvantageId(val)
+{
+    const adConfArray = Object.values(CONFIG.MNM3E.AdvantageEnum);
+
+    var name = val._name;
+    const pattern = /\s+\d+$/;
+    name = name.replace(pattern, '');
+    var id = adConfArray.findIndex((adv) => adv == name);
+    return id;
+}
+
+function FindAdvantageType(id)
+{
+    const adConf = Object.keys(CONFIG.MNM3E.AdvantageEnum);
+    return adConf[id];
+}
+
+
+//-------------------------//
+//-------------------------//
+//---------POWERS----------//
+//-------------------------//
+//-------------------------//
 function PopulateActorPowers(actorStub, dataActor)
 {
     const powersList = dataActor.document.public.character.powers.power;
-    var powerListToAdd = {};
-    var powersInArrays = {};
+    var powerListToAdd = [];
+    var powersInArrays = [];
 
-    const powerConfArray = Object.values(CONFIG.MNM3E.defaultPowerEffects);
     const powerConf = Object.keys(CONFIG.MNM3E.defaultPowerEffects);
+
     var powToAnalyseCustom = [];
 
     for (var i=0; i < powersList.length; i++)
@@ -245,30 +270,67 @@ function PopulateActorPowers(actorStub, dataActor)
         const val = powersList[i];
         if(val.otherpowers == undefined)
         {
-            powerListToAdd = buildArray(val);
+            var id = FindPowerId(val);
+
+            if (id == -1) 
+            {
+                powToAnalyseCustom.push(val);
+                continue;
+            }
+    
+            var powername = removeAfterLastColon(val._name);
+            var cadv = [];
+            if(val.chainedadvantages != undefined)
+            {
+                console.debug(val.chainedadvantages);
+                if (Array.isArray(val.chainedadvantages.chainedadvantage))
+                {
+                    val.chainedadvantages.chainedadvantage.forEach(element => {
+                    var id = FindAdvantageId(element);
+                    if (id == -1)
+                    {
+                        console.warn("Unknown Chained Advantage ", element);
+                    }
+                    else
+                    {
+                        cadv.push(FindAdvantageType(id));
+                    }
+                    });
+                }
+                else
+                {
+
+                }
+            }
+            powerListToAdd.push({
+                type: powerConf[id],
+                name: powername,
+                descriptors: val.descriptors,
+                ranks: Number.parseInt(val._ranks),
+    
+                extras: val.extras?.extra ?? [], //FIXME: Should actually assign correct values
+                flaws: val.flaws?.flaw ?? [], //FIXME: Should actually assign correct values
+                options: val.options?.option ?? [],
+                traitoptions: val.traitmods?.traitmod ?? "", //FIXME: Should actually assign to correct names
+                chainedadvantages: cadv
+            });
         }
         else
         {
-            const powerListArray = val.otherpowers.power;
-            powersInArrays.name = val._name;
-            for (var y=0; y < powerListArray.length; y++)
-            {
-                const newval = powerListArray[y];
-                if(newval.otherpowers == undefined)
-                {
-                    powersInArrays = buildArray(newval);
-                }
-            }
+            powersInArrays.push(buildArray(val));
         }
     }
 
     console.debug("Powers Sorted: ", powerListToAdd);
     console.debug("Powers Separate Arrays: ", powersInArrays);
+    console.debug("Unknown: ", powToAnalyseCustom);
 }
 
-function buildArray(val)
+function FindPowerId(val)
 {
-    const pattern = /:\s+(\w+)\s+\d+$/;
+    const powerConfArray = Object.values(CONFIG.MNM3E.defaultPowerEffects);
+
+    const pattern = /:\s+([\w\s]+)\s+\d+$/;
     var matches = val._name.match(pattern);
     if (matches && matches.length >= 2) 
     {
@@ -277,32 +339,114 @@ function buildArray(val)
     else 
     {
         console.warn("Didn't find power type!");
-        return null;
+        return;
     }
 
     var id = powerConfArray.findIndex((pow) => pow == type);
+    return id;
+}
 
-    if (id == -1) 
-    {
-        console.warn("Custom Power!");
-        return null;
+// FIXME:
+function FindExtrasFlaws(list, type)
+{
+    datalist = CONFIG.MNM3E.ExtrasAll;
+
+}
+
+function GetArrayType(powersList)
+{
+    var description = powersList.description;
+    var summary = powersList._summary;
+    var response = {
+        type: "multiple",
+        removable: 0,
+        indestructible: false
     }
 
-    var powername = removeAfterLastColon(val._name);
-
-    return powerListToAdd[powerConf[id]] = 
+    if (description.startsWith("An array is a set of powers"))
     {
-        type: powerConf[id],
-        name: powername,
-        descriptors: val.descriptors,
-        ranks: Number.parseInt(val._ranks),
+        response.type = "array";
 
-        extras: val.extras?.extra ?? [],
-        flaws: val.flaws?.flaw ?? [],
-        options: val.options?.option ?? [],
-        traitoptions: val.traitmods?.traitmod ?? "",
-        chainedadvantages: val.chainedadvantages?.chainedadvantage ?? ""
+        if (summary.startsWith("Removable"))
+        {
+            response.removable = 1;
+        }
+        else if (summary.startsWith("Easily Removable"))
+        {
+            response.removable = 2;
+        }
+
+        if(summary.includes("(indestructible)"))
+        {
+            response.indestructible = true;
+        }
     }
+    else if (description.startsWith("Select this power to add multiple effects as a single power"))
+    {
+        response.type = "multiple"
+    }
+    else if (description.startsWith("A device has one or more"))
+    {
+        response.type = "device"
+        response.removable = 1;
+        if (summary.startsWith("Easily Removable"))
+        {
+            response.removable = 2;
+        }
+        if(summary.includes("(indestructible)"))
+        {
+            response.indestructible = true;
+        }
+    }
+    else if (description.startsWith("Select this power to add multiple effects that are all activated"))
+    {
+        response.type = "linked";
+    }
+
+    return response;
+}
+
+function buildArray(datatable)
+{
+    var powersList = datatable.otherpowers.power;
+    var powerListToReturn = [];
+    const powerConf = Object.keys(CONFIG.MNM3E.defaultPowerEffects);
+
+    var arrayTypeData = GetArrayType(datatable);
+
+    powerListToReturn.push({
+        arrayname: datatable._name,
+        arraytype: arrayTypeData.type,
+        removable: arrayTypeData.removable,
+        indestructible: arrayTypeData.indestructible
+    });
+
+    for (var i=0; i < powersList.length; i++)
+    {
+        const val = powersList[i];
+        var id = FindPowerId(val);
+        if (id == -1) 
+        {
+            console.warn("Custom Power!");
+            return null;
+        }
+
+        var powername = removeAfterLastColon(val._name);
+        powerListToReturn.push({
+            type: powerConf[id],
+            name: powername,
+            descriptors: val.descriptors,
+            ranks: Number.parseInt(val._ranks),
+
+            extras: val.extras?.extra ?? [],
+            flaws: val.flaws?.flaw ?? [],
+            options: val.options?.option ?? [],
+            traitoptions: val.traitmods?.traitmod ?? "",
+            chainedadvantages: val.chainedadvantages?.chainedadvantage ?? ""
+        });
+    }
+
+    return powerListToReturn;
 }
 
 function removeAfterLastColon(inputString) {
@@ -313,5 +457,5 @@ function removeAfterLastColon(inputString) {
     } else {
       return inputString; // No semicolon found, return the original string
     }
-  }
+}
   

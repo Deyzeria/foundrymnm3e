@@ -240,6 +240,59 @@ preLocalize("skills");
    };
    preLocalize("ExtrasGeneral");
 
+   MNM3E.ExtrasUnique = {
+	exPCumulative: "MNM3E.exPCumulative",
+	exPExtraCondition: "MNM3E.exPExtraCondition",
+	exPRapid: "MNM3E.exPRapid",
+	exPMovable: "MNM3E.exPMovable",
+	exPStationary: "MNM3E.exPStationary",
+	exPTether: "MNM3E.exPTether",
+	exPReflect: "MNM3E.exPReflect",
+	exPRedirect: "MNM3E.exPRedirect",
+	exPProjection: "MNM3E.exPProjection",
+	exPAquatic: "MNM3E.exPAquatic",
+	exPAction: "MNM3E.exPAction",
+	exPEnergizing: "MNM3E.exPEnergizing",
+	exPPersistent: "MNM3E.exPPersistent",
+	exPRestorative: "MNM3E.exPRestorative",
+	exPResurrection: "MNM3E.exPResurrection",
+	exPStabilize: "MNM3E.exPStabilize",
+	exPIndependent: "MNM3E.exPIndependent",
+	exPProgressive: "MNM3E.exPProgressive",
+	exPEffortless: "MNM3E.exPEffortless",
+	exPSensoryLink: "MNM3E.exPSensoryLink",
+	exPMetamorph: "MNM3E.exPMetamorph",
+	exPDamaging: "MNM3E.exPDamaging",
+	exPBroad: "MNM3E.exPBroad",
+	exPRandomize: "MNM3E.exPRandomize",
+	exPNoconduit: "MNM3E.exPNoconduit",
+	exPSimultaneous: "MNM3E.exPSimultaneous",
+	exPAtomic: "MNM3E.exPAtomic",
+	exPNormalStrength: "MNM3E.exPNormalStrength",
+	exPActive: "MNM3E.exPActive",
+	exPControlled: "MNM3E.exPControlled",
+	exPHeroic: "MNM3E.exPHeroic",
+	exPHorde: "MNM3E.exPHorde",
+	exPMultipleMinions: "MNM3E.exPMultipleMinions",
+	exPMentalLink: "MNM3E.exPMentalLink",
+	exPSacrifice: "MNM3E.exPSacrifice",
+	exPVariableType: "MNM3E.exPVariableType",
+	exPChangeDirection: "MNM3E.exPChangeDirection",
+	exPChangeVelocity: "MNM3E.exPChangeVelocity",
+	exPEasy: "MNM3E.exPEasy",
+	exPExtended: "MNM3E.exPExtended",
+	exPIncreasedMass: "MNM3E.exPIncreasedMass",
+	exPPortal: "MNM3E.exPPortal",
+	exPTurnabout: "MNM3E.exPTurnabout",
+   };
+   preLocalize("ExtrasUnique");
+
+   MNM3E.ExtrasAll = {
+	...MNM3E.ExtrasGeneral,
+	...MNM3E.ExtrasUnique
+   }
+   preLocalize("ExtrasAll");
+
    MNM3E.AdvantageEnum = {
 	custom: "MNM3E.advCustom",
 	accurateatt: "MNM3E.advAccurateAttack",
