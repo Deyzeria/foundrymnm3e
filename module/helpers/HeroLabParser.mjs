@@ -1,38 +1,81 @@
-import { xml2json } from "xml-js";
-
 export async function ParserAccess(){
     // ---REMOVE---
     const manualSwitch = true;
     const generateActor = false;
-    if(manualSwitch){
-
-    var requestURL = "https://raw.githubusercontent.com/Sinantrarion/foundrymnm3e/main/module/helpers/charactertest.json";
-    const request = new Request(requestURL);
-
-    const response = await fetch(request);
-    const dataActor = await response.json();
-
-    console.debug("dataActor: ", dataActor);
-    var actorJson = await GenerateActor(dataActor, "hero");
-    
-    actorJson = PopulateActorData(actorJson, dataActor);
-    PopulateActorAdvantages(actorJson, dataActor);
-    PopulateActorPowers(actorJson, dataActor);
-    //console.debug(actorJson); 
-    if (!generateActor) return;
-    await Actor.create(actorJson);
-    }
+    var dataActor;
+    xmlfetcher()
+        .then(async xmlDoc => {
+            const parsed = xmlToJson(xmlDoc);
+            console.debug(parsed);
+            if(manualSwitch){
+                var actorJson = await GenerateActor(parsed, "hero");
+                
+                actorJson = PopulateActorData(actorJson, parsed);
+                PopulateActorAdvantages(actorJson, parsed);
+                PopulateActorPowers(actorJson, parsed);
+                //console.debug(actorJson); 
+                if (!generateActor) return;
+                await Actor.create(actorJson);
+            }
+        });
 }
 
 // xml file should be passed here.
-async function PassedData(xmlfile)
+async function xmlfetcher()
 {
-    const jsonfile = xml2json(xmlfile, { spaces: 2, compact: true });
-    console.debug("acquired data", jsonfile);
+    try {
+        const xmlFileUrl = 'https://raw.githubusercontent.com/Sinantrarion/codecollection/main/AAAABBAAAA.xml';
+        // Fetch the XML file using the fetch() API
+        const response = await fetch(xmlFileUrl);
+        const xmlText = await response.text();
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
+        return xmlDoc;
+    }
+    catch (error) {
+        console.error("Error parsing XML:", error);
+        throw error;
+    }
+}
+
+function xmlToJson(xml) {
+	var obj = {};
+
+	if (xml.nodeType == 1) { // element
+		// do attributes
+		if (xml.attributes.length > 0) {
+		obj = {};
+			for (var j = 0; j < xml.attributes.length; j++) {
+				var attribute = xml.attributes.item(j);
+				obj[attribute.nodeName] = attribute.nodeValue;
+			}
+		}
+	} else if (xml.nodeType == 3) { // text
+		obj = xml.nodeValue;
+	}
+
+	// do children
+	if (xml.hasChildNodes()) {
+		for(var i = 0; i < xml.childNodes.length; i++) {
+			var item = xml.childNodes.item(i);
+			var nodeName = item.nodeName;
+			if (typeof(obj[nodeName]) == "undefined") {
+				obj[nodeName] = xmlToJson(item);
+			} else {
+				if (typeof(obj[nodeName].push) == "undefined") {
+					var old = obj[nodeName];
+					obj[nodeName] = [];
+					obj[nodeName].push(old);
+				}
+				obj[nodeName].push(xmlToJson(item));
+			}
+		}
+	}
+	return obj;
 }
 
 async function GenerateActor(dataActor, actorType){
-    return new Actor({name: dataActor.document.public.character._name, type:actorType}).toObject()
+    return new Actor({name: dataActor.document.public.character.name, type:actorType}).toObject()
 }
 
 function PopulateActorData(actorStub, dataActor){
@@ -42,15 +85,15 @@ function PopulateActorData(actorStub, dataActor){
     const actorStubAbilitiesList = ['str', 'sta', 'agl', 'dex', 'fgt', 'int', 'awe', 'pre'];
     for (var i = 0; i < actorStubAbilitiesList.length; i++)
     {
-        actorStub.system.abilities[actorStubAbilitiesList[i]].purchased = parseInt(dataBase.attributes.attribute[i]._base);
+        actorStub.system.abilities[actorStubAbilitiesList[i]].purchased = parseInt(dataBase.attributes.attribute[i].base);
     }
 
     // ----DEFENCES----
     const actorStubDefensesList = ['dodge', 'parry', 'fortitude', 'toughness', 'will']
     for (var i = 0; i < actorStubDefensesList.length; i++)
     {
-        actorStub.system.defenses[actorStubDefensesList[i]].purchased = parseInt(dataBase.defenses.defense[i].cost._value);
-        actorStub.system.defenses[actorStubDefensesList[i]].impervious = parseInt(dataBase.defenses.defense[i]._impervious);
+        actorStub.system.defenses[actorStubDefensesList[i]].purchased = parseInt(dataBase.defenses.defense[i].cost.value);
+        actorStub.system.defenses[actorStubDefensesList[i]].impervious = parseInt(dataBase.defenses.defense[i].impervious);
     }
     
     // ----SKILLS----
@@ -58,7 +101,7 @@ function PopulateActorData(actorStub, dataActor){
     const actorStubSkillList = ['acr', 'ath', 'dec', 'inm', 'ins', 'inv', 'prc', 'prs', 'soh', 'ste', 'tec', 'tre', 'veh'];
     for (var i = 0; i < actorStubSkillList.length; i++)
     {
-        var tempValue = skillsList[GetSkill(skillsList, i)]._base;
+        var tempValue = skillsList[GetSkill(skillsList, i)].base;
         tempValue = (tempValue === "-") ? 0 : parseInt(tempValue);
         actorStub.system.skills[actorStubSkillList[i]].purchased = tempValue;
     }
@@ -73,12 +116,12 @@ function PopulateActorData(actorStub, dataActor){
         var skillArray = GetMultipleSkills(skillsList, numb[i]);
         for (var y = 0; y < skillArray.length; y++)
         {
-            var tempValue = skillsList[skillArray[y]]._base;
+            var tempValue = skillsList[skillArray[y]].base;
             tempValue = (tempValue === "-") ? 0 : parseInt(tempValue);
             actorStub.system.skills[comb[y+numb[i]]].purchased = tempValue;
 
-            if(skillsList[skillArray[y]]._name !== ""){
-                var skillName = skillsList[skillArray[y]]._name;
+            if(skillsList[skillArray[y]].name !== ""){
+                var skillName = skillsList[skillArray[y]].name;
                 actorStub.system.skills[comb[y+numb[i]]].subtype = skillName.replace(namb[i], namr[i]);
             }
         }
@@ -88,11 +131,11 @@ function PopulateActorData(actorStub, dataActor){
     var skillArray = GetMultipleSkills(skillsList, 1);
     for (var i = 0; i < skillArray.length; i++)
     {
-        var tempValue = skillsList[skillArray[i]]._base;
+        var tempValue = skillsList[skillArray[i]].base;
         tempValue = (tempValue === "-") ? 0 : parseInt(tempValue);
         actorStub.system.skills[comb[i]].purchased = tempValue;
 
-        const variant = skillsList[skillArray[i]]._name.split(":")[0].trim(); 
+        const variant = skillsList[skillArray[i]].name.split(":")[0].trim(); 
         switch(variant) {
             case "Expertise (AGL)":
                 console.log("Matched Expertise (AGL)");
@@ -129,19 +172,19 @@ function PopulateActorData(actorStub, dataActor){
                 console.warn(variant, " does not exist as a valid Expertise")
             break;
         }
-        var skillName = skillsList[skillArray[i]]._name;
+        var skillName = skillsList[skillArray[i]].name;
         actorStub.system.skills[comb[i]].subtype = skillName.replace(variant, "EX")
     }
 
     // ----GENERIC----
-    actorStub.system.generic.pl = parseInt(dataBase.powerlevel._value);
+    actorStub.system.generic.pl = parseInt(dataBase.powerlevel.value);
 
     // Should be removed and moved.
-    var extrapp = parseInt(dataBase.powerpoints._value) - parseInt(dataBase.resources._startingpp);
+    var extrapp = parseInt(dataBase.powerpoints.value) - parseInt(dataBase.resources.startingpp);
     actorStub.system.generic.extrapp = extrapp;
 
     var disposition = 0;
-    switch(dataActor.document.public.character._relationship) {
+    switch(dataActor.document.public.character.relationship) {
         case 'ally':
         disposition = 1;
         break;
@@ -157,13 +200,13 @@ function PopulateActorData(actorStub, dataActor){
     actorStub.prototypeToken.disposition = disposition;
 
     // ----DETAILS----
-    actorStub.system.age = parseInt(dataBase.personal._age);
-    actorStub.system.hair = dataBase.personal._hair;
-    actorStub.system.eyes = dataBase.personal._eyes;
-    actorStub.system.height = dataBase.personal.charheight._text; // Maybe to change. There is _value, which you int(_value/12) for feet and (_value%12) for inches.
-    actorStub.system.weight = parseInt(dataBase.personal.charweight._value); 
-    actorStub.system.gender = dataBase.personal._gender;
-    actorStub.system.heroname = dataActor.document.public.character._name;
+    actorStub.system.age = parseInt(dataBase.personal.age);
+    actorStub.system.hair = dataBase.personal.hair;
+    actorStub.system.eyes = dataBase.personal.eyes;
+    actorStub.system.height = dataBase.personal.charheight.text; // Maybe to change. There is value, which you int(value/12) for feet and (value%12) for inches.
+    actorStub.system.weight = parseInt(dataBase.personal.charweight.value); 
+    actorStub.system.gender = dataBase.personal.gender;
+    actorStub.system.heroname = dataActor.document.public.character.name;
 
     // = parseInt(dataBase.);
     return actorStub;
@@ -186,7 +229,7 @@ function GetSkill(skillsList, skillIndex) {
         'Vehicles'
     ];
 
-    const matchingIndexes = skillsList.map(e=>e._name).indexOf(skillNames[skillIndex])
+    const matchingIndexes = skillsList.map(e=>e.name).indexOf(skillNames[skillIndex])
 
     return matchingIndexes;
 }
@@ -199,8 +242,8 @@ function GetMultipleSkills(skillsList, skillIndex) {
     ];
 
     const matchingIndexes = skillsList
-        .map((e, index) => ({ _name: e._name, index })) // Map objects to include both name and index
-        .filter(obj => obj._name.includes(skillNames[skillIndex])) // Filter objects with names containing the keyword
+        .map((e, index) => ({ name: e.name, index })) // Map objects to include both name and index
+        .filter(obj => obj.name.includes(skillNames[skillIndex])) // Filter objects with names containing the keyword
         .map(obj => obj.index); // Extract the indexes
 
     return matchingIndexes;
@@ -220,7 +263,7 @@ function PopulateActorAdvantages(actorStub, dataActor)
     for (var i=0; i < advantageList.length; i++)
     {
         const val = advantageList[i];
-        if (val._useradded == undefined || val._useradded == "yes")
+        if (val.useradded == undefined || val.useradded == "yes")
         {
             var id = FindAdvantageId(val);
             if (id == -1)
@@ -228,33 +271,33 @@ function PopulateActorAdvantages(actorStub, dataActor)
                 advToAnalyseCustom.push(val);
                 continue;
             }
-            advListToAdd.push({type: FindAdvantageType(id), rank: Number.parseInt(val.cost._value)});
+            advListToAdd.push({type: FindAdvantageType(id), rank: Number.parseInt(val.cost.value)});
         }
     }
     console.debug("Advantages Sorted: ", advListToAdd);
     console.debug("Advantages Unsorted: ", advToAnalyseCustom);
 
     const advantagelist = CONFIG.MNM3E.AdvantageEnum;
-    advListToAdd.forEach(element => {
-        const itemData = {
-            name: advantagelist[element.type],
-            type: 'advantage',
-            system: foundry.utils.expandObject({ ...header.dataset })
-        }
-        delete itemData.system.type;
-        //itemData.system.id = element.type;
-        //itemData.system.ranks = element.rank;
-        console.debug("PopulateActorAdvantages: ", itemData);
-        //actorStub.createEmbeddedDocuments("Item", [itemData]);
-        console.debug("PopulateActorAdvantages actorStub: ", actorStub);
-    });
+    // advListToAdd.forEach(element => {
+    //     const itemData = {
+    //         name: advantagelist[element.type],
+    //         type: 'advantage',
+    //         system: foundry.utils.expandObject({ ...header.dataset })
+    //     }
+    //     delete itemData.system.type;
+    //     //itemData.system.id = element.type;
+    //     //itemData.system.ranks = element.rank;
+    //     console.debug("PopulateActorAdvantages: ", itemData);
+    //     //actorStub.createEmbeddedDocuments("Item", [itemData]);
+    //     console.debug("PopulateActorAdvantages actorStub: ", actorStub);
+    // });
 }
 
 function FindAdvantageId(val)
 {
     const adConfArray = Object.values(CONFIG.MNM3E.AdvantageEnum);
 
-    var name = val._name;
+    var name = val.name;
     const pattern = /\s+\d+$/;
     name = name.replace(pattern, '');
     var id = adConfArray.findIndex((adv) => adv == name);
@@ -296,7 +339,7 @@ function PopulateActorPowers(actorStub, dataActor)
                 continue;
             }
     
-            var powername = removeAfterLastColon(val._name);
+            var powername = removeAfterLastColon(val.name);
             var cadv = [];
             if(val.chainedadvantages != undefined)
             {
@@ -324,7 +367,7 @@ function PopulateActorPowers(actorStub, dataActor)
                 type: powerConf[id],
                 name: powername,
                 descriptors: val.descriptors,
-                ranks: Number.parseInt(val._ranks),
+                ranks: Number.parseInt(val.ranks),
     
                 extras: FindExtrasFlaws(val.extras.extra, true), //FIXME: Should actually assign correct values
                 flaws: FindExtrasFlaws(val.flaws.flaw, false), //FIXME: Should actually assign correct values
@@ -343,19 +386,19 @@ function PopulateActorPowers(actorStub, dataActor)
     console.debug("Powers Separate Arrays: ", powersInArrays);
     console.debug("Unknown: ", powToAnalyseCustom);
 
-    advListToAdd.forEach(element => {
-        var itemData = {
-            name: element.name,
-            type: 'power',
-            system: foundry.utils.expandObject({ ...header.dataset })
-        }
-        delete itemData.system.type;
-        //itemData.system.power_effect = element.type;
-        //itemData.system.power_cost.rank = element.ranks;
-        console.debug("PopulateActorPowers: ", itemData);
-        //console.debug("PopulateActorPowers actorStub: ", actorStub);
-        //actorStub.createEmbeddedDocuments("Item", [itemData]);
-    });
+    // advListToAdd.forEach(element => {
+    //     var itemData = {
+    //         name: element.name,
+    //         type: 'power',
+    //         system: foundry.utils.expandObject({ ...header.dataset })
+    //     }
+    //     delete itemData.system.type;
+    //     //itemData.system.powereffect = element.type;
+    //     //itemData.system.powercost.rank = element.ranks;
+    //     console.debug("PopulateActorPowers: ", itemData);
+    //     //console.debug("PopulateActorPowers actorStub: ", actorStub);
+    //     //actorStub.createEmbeddedDocuments("Item", [itemData]);
+    // });
 }
 
 function FindPowerId(val)
@@ -363,7 +406,7 @@ function FindPowerId(val)
     const powerConfArray = Object.values(CONFIG.MNM3E.defaultPowerEffects);
 
     const pattern = /:\s+([\w\s]+)\s+\d+$/;
-    var matches = val._name.match(pattern);
+    var matches = val.name.match(pattern);
     if (matches && matches.length >= 2) 
     {
         var type = matches[1];
@@ -406,7 +449,7 @@ function FindExtrasFlaws(list, type)
     for (var i=0; i < list.length; i++)
     {
         const val = list[i];
-        var id = datalist.findIndex((exfl) => exfl == val._name);
+        var id = datalist.findIndex((exfl) => exfl == val.name);
         responselist.push(datalist[id]);
     }
     return responselist;
@@ -415,7 +458,7 @@ function FindExtrasFlaws(list, type)
 function GetArrayType(powersList)
 {
     var description = powersList.description;
-    var summary = powersList._summary;
+    var summary = powersList.summary;
     var response = {
         type: "multiple",
         removable: 0,
@@ -474,7 +517,7 @@ function buildArray(datatable)
     var arrayTypeData = GetArrayType(datatable);
 
     powerListToReturn.push({
-        arrayname: datatable._name,
+        arrayname: datatable.name,
         arraytype: arrayTypeData.type,
         removable: arrayTypeData.removable,
         indestructible: arrayTypeData.indestructible
@@ -490,12 +533,12 @@ function buildArray(datatable)
             return null;
         }
 
-        var powername = removeAfterLastColon(val._name);
+        var powername = removeAfterLastColon(val.name);
         powerListToReturn.push({
             type: powerConf[id],
             name: powername,
             descriptors: val.descriptors,
-            ranks: Number.parseInt(val._ranks),
+            ranks: Number.parseInt(val.ranks),
 
             extras: val.extras?.extra ?? [],
             flaws: val.flaws?.flaw ?? [],

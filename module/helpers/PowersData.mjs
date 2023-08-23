@@ -413,31 +413,6 @@ const PowerEffects =
     }
 };
 
-    
-    //const cond = C.conditions;
-
-    // const afflictionData = {
-    //     rank1: [cond.dazed, cond.fatigued, cond.hindered, cond.impaired, cond.vulnerable, cond.entranced],
-    //     rank2: [cond.compelled, cond.defenseless, cond.disabled, cond.immobile, cond.stunned, cond.exhausted, cond.prone],
-    //     rank3: [cond.controller, cond.transformed, cond.unaware, cond.asleep, cond.incapacitated, cond.paralyzed],
-    //     resistance: [C.defenses.fortitude, C.defenses.will]
-    // }
-
 export default function GetPowerData(request){
     return PowerEffects[request]; 
-}
-
-export function GetExtraData(request)
-{
-    //const C = CONFIG.MNM3E;
-    //const cond = C.conditions;
-
-    const extraData = {
-        affliction: {
-            rank1: [cond.dazed, cond.fatigued, cond.hindered, cond.impaired, cond.vulnerable, cond.entranced],
-            rank2: [cond.compelled, cond.defenseless, cond.disabled, cond.immobile, cond.stunned, cond.exhausted, cond.prone],
-            rank3: [cond.controller, cond.transformed, cond.unaware, cond.asleep, cond.incapacitated, cond.paralyzed],
-            resistance: [C.defenses.fortitude, C.defenses.will]
-        },
-    }
 }

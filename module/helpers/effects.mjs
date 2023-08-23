@@ -11,7 +11,7 @@
   switch ( a.dataset.action ) {
     case "create":
       return owner.createEmbeddedDocuments("ActiveEffect", [{
-        label: "New Effect",
+        name: "New Effect",
         icon: "icons/svg/aura.svg",
         origin: owner.uuid,
         "duration.rounds": li.dataset.effectType === "temporary" ? 1 : undefined,
