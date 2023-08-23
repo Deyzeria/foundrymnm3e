@@ -1,3 +1,5 @@
+import { xml2json } from "xml-js";
+
 export async function ParserAccess(){
     // ---REMOVE---
     const manualSwitch = true;
@@ -22,9 +24,10 @@ export async function ParserAccess(){
     }
 }
 
-// json file should be passed here.
-function PassedData(jsonfile)
+// xml file should be passed here.
+async function PassedData(xmlfile)
 {
+    const jsonfile = xml2json(xmlfile, { spaces: 2, compact: true });
     console.debug("acquired data", jsonfile);
 }
 
@@ -230,6 +233,21 @@ function PopulateActorAdvantages(actorStub, dataActor)
     }
     console.debug("Advantages Sorted: ", advListToAdd);
     console.debug("Advantages Unsorted: ", advToAnalyseCustom);
+
+    const advantagelist = CONFIG.MNM3E.AdvantageEnum;
+    advListToAdd.forEach(element => {
+        const itemData = {
+            name: advantagelist[element.type],
+            type: 'advantage',
+            system: foundry.utils.expandObject({ ...header.dataset })
+        }
+        delete itemData.system.type;
+        //itemData.system.id = element.type;
+        //itemData.system.ranks = element.rank;
+        console.debug("PopulateActorAdvantages: ", itemData);
+        //actorStub.createEmbeddedDocuments("Item", [itemData]);
+        console.debug("PopulateActorAdvantages actorStub: ", actorStub);
+    });
 }
 
 function FindAdvantageId(val)
@@ -308,8 +326,8 @@ function PopulateActorPowers(actorStub, dataActor)
                 descriptors: val.descriptors,
                 ranks: Number.parseInt(val._ranks),
     
-                extras: val.extras?.extra ?? [], //FIXME: Should actually assign correct values
-                flaws: val.flaws?.flaw ?? [], //FIXME: Should actually assign correct values
+                extras: FindExtrasFlaws(val.extras.extra, true), //FIXME: Should actually assign correct values
+                flaws: FindExtrasFlaws(val.flaws.flaw, false), //FIXME: Should actually assign correct values
                 options: val.options?.option ?? [],
                 traitoptions: val.traitmods?.traitmod ?? "", //FIXME: Should actually assign to correct names
                 chainedadvantages: cadv
@@ -324,6 +342,20 @@ function PopulateActorPowers(actorStub, dataActor)
     console.debug("Powers Sorted: ", powerListToAdd);
     console.debug("Powers Separate Arrays: ", powersInArrays);
     console.debug("Unknown: ", powToAnalyseCustom);
+
+    advListToAdd.forEach(element => {
+        var itemData = {
+            name: element.name,
+            type: 'power',
+            system: foundry.utils.expandObject({ ...header.dataset })
+        }
+        delete itemData.system.type;
+        //itemData.system.power_effect = element.type;
+        //itemData.system.power_cost.rank = element.ranks;
+        console.debug("PopulateActorPowers: ", itemData);
+        //console.debug("PopulateActorPowers actorStub: ", actorStub);
+        //actorStub.createEmbeddedDocuments("Item", [itemData]);
+    });
 }
 
 function FindPowerId(val)
@@ -343,14 +375,41 @@ function FindPowerId(val)
     }
 
     var id = powerConfArray.findIndex((pow) => pow == type);
+
+    if(id == -1)
+    {
+        const words = matches[1].match(/\w+/g);
+        words.forEach(element => {
+            id = powerConfArray.findIndex((pow) => pow == element);
+            if(id > -1) return id;
+        });
+        return -1;
+    }
+
     return id;
 }
 
 // FIXME:
 function FindExtrasFlaws(list, type)
 {
-    datalist = CONFIG.MNM3E.ExtrasAll;
-
+    var datalist;
+    if(type)
+    {
+        datalist = Object.values(CONFIG.MNM3E.ExtrasAll);
+    }
+    else
+    {
+        datalist = Object.values(CONFIG.MNM3E.FlawsAll);
+    }
+    
+    var responselist = [];
+    for (var i=0; i < list.length; i++)
+    {
+        const val = list[i];
+        var id = datalist.findIndex((exfl) => exfl == val._name);
+        responselist.push(datalist[id]);
+    }
+    return responselist;
 }
 
 function GetArrayType(powersList)

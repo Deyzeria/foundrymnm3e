@@ -43,6 +43,8 @@ Hooks.once('init', async function() {
   console.debug("Measurement System Chosen Setting: ", game.settings.get("foundrymnm3e", "measurementsystem"));
   SetGameValues(game.settings.get("foundrymnm3e", "measurementsystem"));
 
+  console.debug(GetScale(0, 'distance'));
+
   // Custom Die modifier
   // For now will be usually hardcoded to just do d20imp, adding a die with the result of 10 if the result is below 11(1-10)
   Die.MODIFIERS.imp = function(modifier) 
@@ -82,7 +84,7 @@ Hooks.once('init', async function() {
       makeDefault: true,
       label: "ACTOR.SheetHero"
     });
-    Actors.registerSheet("foundrymnm3e", FoundryMnM3eActorSheet, 
+  Actors.registerSheet("foundrymnm3e", FoundryMnM3eActorSheet, 
     {  
       types: ["npc"],
       makeDefault: true,
@@ -155,9 +157,9 @@ Hooks.once("i18nInit", () => utils.performPreLocalization(CONFIG.MNM3E));
 
 
 Hooks.once("ready", async function() {
-  // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
   ParserAccess();
 
+  // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
   Hooks.on("hotbarDrop", (bar, data, slot) => createItemMacro(data, slot));
 });
 

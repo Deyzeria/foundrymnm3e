@@ -20,5 +20,8 @@
     "gulp-sass": "^5.1.0",
     "gulp-sourcemaps": "^3.0.0",
     "sass": "^1.53.0"
+  },
+  "dependencies": {
+    "xml-js": "^1.6.11"
   }
 }
