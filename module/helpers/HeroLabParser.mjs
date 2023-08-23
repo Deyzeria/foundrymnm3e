@@ -406,6 +406,7 @@ function FindPowerId(val)
     const powerConfArray = Object.values(CONFIG.MNM3E.defaultPowerEffects);
 
     const pattern = /:\s+([\w\s]+)\s+\d+$/;
+    console.debug(val);
     var matches = val.name.match(pattern);
     if (matches && matches.length >= 2) 
     {
@@ -465,52 +466,61 @@ function GetArrayType(powersList)
         indestructible: false
     }
 
-    if (description.startsWith("An array is a set of powers"))
-    {
-        response.type = "array";
+    // if (description.startsWith("An array is a set of powers"))
+    // {
+    //     response.type = "array";
 
-        if (summary.startsWith("Removable"))
-        {
-            response.removable = 1;
-        }
-        else if (summary.startsWith("Easily Removable"))
-        {
-            response.removable = 2;
-        }
+    //     if (summary.startsWith("Removable"))
+    //     {
+    //         response.removable = 1;
+    //     }
+    //     else if (summary.startsWith("Easily Removable"))
+    //     {
+    //         response.removable = 2;
+    //     }
 
-        if(summary.includes("(indestructible)"))
-        {
-            response.indestructible = true;
-        }
-    }
-    else if (description.startsWith("Select this power to add multiple effects as a single power"))
-    {
-        response.type = "multiple"
-    }
-    else if (description.startsWith("A device has one or more"))
-    {
-        response.type = "device"
-        response.removable = 1;
-        if (summary.startsWith("Easily Removable"))
-        {
-            response.removable = 2;
-        }
-        if(summary.includes("(indestructible)"))
-        {
-            response.indestructible = true;
-        }
-    }
-    else if (description.startsWith("Select this power to add multiple effects that are all activated"))
-    {
-        response.type = "linked";
-    }
+    //     if(summary.includes("(indestructible)"))
+    //     {
+    //         response.indestructible = true;
+    //     }
+    // }
+    // else if (description.startsWith("Select this power to add multiple effects as a single power"))
+    // {
+    //     response.type = "multiple"
+    // }
+    // else if (description.startsWith("A device has one or more"))
+    // {
+    //     response.type = "device"
+    //     response.removable = 1;
+    //     if (summary.startsWith("Easily Removable"))
+    //     {
+    //         response.removable = 2;
+    //     }
+    //     if(summary.includes("(indestructible)"))
+    //     {
+    //         response.indestructible = true;
+    //     }
+    // }
+    // else if (description.startsWith("Select this power to add multiple effects that are all activated"))
+    // {
+    //     response.type = "linked";
+    // }
 
     return response;
 }
 
 function buildArray(datatable)
 {
-    var powersList = datatable.otherpowers.power;
+    var powersList = [];
+    if (Array.isArray(datatable.otherpowers.power))
+    {
+        powersList = datatable.otherpowers.power;
+    }
+    else
+    {
+        powersList.push(datatable.otherpowers.power);
+    }
+
     var powerListToReturn = [];
     const powerConf = Object.keys(CONFIG.MNM3E.defaultPowerEffects);
 
