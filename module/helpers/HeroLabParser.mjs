@@ -51,7 +51,7 @@ function xmlToJson(xml) {
 			}
 		}
 	} else if (xml.nodeType == 3) { // text
-		obj = xml.nodeValue;
+		obj["text"] = xml.nodeValue.trim();
 	}
 
 	// do children

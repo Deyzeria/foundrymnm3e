@@ -197,25 +197,25 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
   }
 
     // Adding and removing extras and flaws
-    async onEnchControl(event){
-      event.preventDefault();
-      const a = event.currentTarget;
-  
-      if( a.classList.contains("add-ench") ) {
-        await this._onSubmit(event);  // Submit any unsaved changes
-        const values = this.item.system.values;
-        return this.item.update({"system.extrasflaws.value_array": values.value_array.concat([["", "", null]])});
-      }
-  
-      if ( a.classList.contains("delete-ench") ) {
-        await this._onSubmit(event);  // Submit any unsaved changes
-        const li = a.closest(".ench-part");
-        const value = li.getAttribute('data-ench-part'); 
-        const values = foundry.utils.deepClone(this.item.system.values);
-        values.value_array.splice(value, 1)
-        return this.item.update({"system.extrasflaws.value_array": values.value_array});
-      }
+  async onEnchControl(event){
+    event.preventDefault();
+    const a = event.currentTarget;
+
+    if( a.classList.contains("add-ench") ) {
+      await this._onSubmit(event);  // Submit any unsaved changes
+      const values = this.item.system.values;
+      return this.item.update({"system.extrasflaws.value_array": values.value_array.concat([["", "", null]])});
     }
+
+    if ( a.classList.contains("delete-ench") ) {
+      await this._onSubmit(event);  // Submit any unsaved changes
+      const li = a.closest(".ench-part");
+      const value = li.getAttribute('data-ench-part'); 
+      const values = foundry.utils.deepClone(this.item.system.values);
+      values.value_array.splice(value, 1)
+      return this.item.update({"system.extrasflaws.value_array": values.value_array});
+    }
+  }
 
   // Adding and removing extras and flaws
   async onExFlControl(event){

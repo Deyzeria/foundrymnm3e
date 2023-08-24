@@ -486,9 +486,31 @@ export function SetGameValues(value)
     }
 }
 
+
+export function GetDistanceName(fullname)
+{
+    const C = CONFIG.MNM3E.distanceUnits;
+    if(game.settings.get("foundrymnm3e", "measurementsystem") == "meters")
+    {
+        if(fullname)
+        {
+            return C[m];
+        }
+        return C[mAb];
+    }
+    else
+    {
+        if(fullname)
+        {
+            return C[ft];
+        }
+        return C[ftAb];
+    }
+}
+
 /**
- * a
- * @param {int} value Rank to return. Rank 1 value for Time = 6 second
+ * Function to request the return of one of scales
+ * @param {int} value Rank to return. Rank 0 value for Time = 6 second
  * @param {string} type Type of list to get. `distance`, `distancedisplay`, `mass`, `massdisplay`, `volume`, `time`
  * @returns Int or String.
  */
@@ -510,7 +532,7 @@ export function GetScale(value, type){
             }
             else
             {
-                returnvalue = GetOverLimit(scale, value);
+                returnvalue = GetOverLimit(scale, value+5);
             }
         }
         else if (value < 0)
@@ -521,7 +543,7 @@ export function GetScale(value, type){
             }
             else
             {
-                returnvalue = GetUnderLimit(scale, value);
+                returnvalue = GetUnderLimit(scale, value+5);
             }
         }
     }

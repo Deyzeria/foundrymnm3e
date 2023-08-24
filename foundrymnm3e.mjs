@@ -43,8 +43,6 @@ Hooks.once('init', async function() {
   console.debug("Measurement System Chosen Setting: ", game.settings.get("foundrymnm3e", "measurementsystem"));
   SetGameValues(game.settings.get("foundrymnm3e", "measurementsystem"));
 
-  console.debug(GetScale(0, 'distance'));
-
   // Custom Die modifier
   // For now will be usually hardcoded to just do d20imp, adding a die with the result of 10 if the result is below 11(1-10)
   Die.MODIFIERS.imp = function(modifier) 

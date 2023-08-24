@@ -1,5 +1,6 @@
 import GetPowerData from "../helpers/PowersData.mjs"
 import GetAdvantagesData from "../helpers/AdvantagesData.mjs"
+import { GetDistanceName } from "../helpers/data-tables.mjs";
 
 /**
  * Extend the basic Item with some very simple modifications.
@@ -37,7 +38,7 @@ export class FoundryMnM3eItem extends Item {
         }
         if(this.system.ranked == false)
         {
-          this.system.ranks = 1;
+          this.actor.update({'system.ranks': 1}); // FIXME: Check if works
         }
       break;
     }
@@ -60,7 +61,7 @@ export class FoundryMnM3eItem extends Item {
   }
 
   _prepareActivation() {
-    if ( !("action" in this.system) ) return;
+    //if ( !("action" in this.system) ) return;
     const C = CONFIG.MNM3E;
 
     // Activation label
@@ -74,15 +75,15 @@ export class FoundryMnM3eItem extends Item {
       rng.close = rng.medium = rng.far = null;
       this.labels.range = C.powerRangeEnum[rng.range] ?? "";
     }
-    else if (rng.medium == 0 && rng.medium != null)
+    else if (rng.range == "close")
     {
       this.prepareRanges();
-      this.labels.range = rng.close + " " + C.distanceUnits['mAb']; // FIXME: Change to use setting from the settings
+      this.labels.range = rng.close + " " + GetDistanceName(false); 
     }
     else
     {
       this.prepareRanges();
-      this.labels.range = rng.close + "/" + rng.medium + "/" + rng.far + " " + C.distanceUnits['mAb']; // FIXME: Change to use setting from the settings
+      this.labels.range = rng.close + "/" + rng.medium + "/" + rng.far + " " + GetDistanceName(false);
     }
 
     // Duration label
@@ -94,25 +95,18 @@ export class FoundryMnM3eItem extends Item {
   prepareRanges(){
     const rng = this.system.ranges ?? {};
 
-    //ChatGPT code
-    // var RangeIncrease = 1;
-    // RangeIncrease = RangeIncrease * Math.pow(2, rng.rangeincrease);
+    const RangeIncrease = Math.pow(2, rng.rangeincrease);
     
     if (rng.range == 'close')
     {
-      rng.close = 1;
-      //rng.close = 1 * RangeIncrease;
+      rng.close = 1 * RangeIncrease;
     }
     else
     {
-      rng.close = this.system.power_cost.rank * 25;
-      rng.medium = this.system.power_cost.rank * 50;
-      rng.far = this.system.power_cost.rank * 100;
-
-      // const baseRange = this.system.power_cost.rank * RangeIncrease;
-      // rng.close = baseRange * 25;
-      // rng.medium = baseRange * 50;
-      // rng.far = baseRange * 100;
+      const baseRange = this.system.power_cost.rank * RangeIncrease;
+      rng.close = baseRange * 25;
+      rng.medium = baseRange * 50;
+      rng.far = baseRange * 100;
     }
   }
 

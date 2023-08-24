@@ -116,13 +116,13 @@
           <li class="power flexrow">
             <label>2nd Degree: </label>
             <select class="power-value" name="system.values.value_two">
-              {{selectOptions value_one selected=setvaluetwo blank=""}}
+              {{selectOptions value_two selected=setvaluetwo blank=""}}
             </select>
           </li>
           <li class="power flexrow">
             <label>3rd Degree: </label>
             <select class="power-value" name="system.values.value_three">
-              {{selectOptions value_one selected=setvaluethree blank=""}}
+              {{selectOptions value_three selected=setvaluethree blank=""}}
             </select>
           </li>
           <li class="power flexrow">
@@ -138,7 +138,7 @@
           <a class="ench-control flexrow add-ench">
             <label class="add">Add Enhanced<i class="fas fa-plus plusimg"></i></label>
           </a>
-          {{#each system.values.value_four as |part i|}}
+          {{#each system.values.value_array as |part i|}}
             <li class="ench-part flexrow" data-ench-part="{{i}}">
 
             <a class="ench-control delete-ench" name="{{i}}"><i class="fas fa-minus"></i></a>
