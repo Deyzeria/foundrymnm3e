@@ -1,13 +1,13 @@
 export async function ParserAccess(){
     // ---REMOVE---
-    const manualSwitch = true;
+    const manualSwitch = false;
     const generateActor = false;
+    if(manualSwitch){
     var dataActor;
     xmlfetcher()
         .then(async xmlDoc => {
             const parsed = xmlToJson(xmlDoc);
             console.debug(parsed);
-            if(manualSwitch){
                 var actorJson = await GenerateActor(parsed, "hero");
                 
                 actorJson = PopulateActorData(actorJson, parsed);
@@ -16,8 +16,8 @@ export async function ParserAccess(){
                 //console.debug(actorJson); 
                 if (!generateActor) return;
                 await Actor.create(actorJson);
-            }
         });
+    }
 }
 
 // xml file should be passed here.

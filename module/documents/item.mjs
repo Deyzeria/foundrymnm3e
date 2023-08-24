@@ -38,7 +38,7 @@ export class FoundryMnM3eItem extends Item {
         }
         if(this.system.ranked == false)
         {
-          this.actor.update({'system.ranks': 1}); // FIXME: Check if works
+          //this.actor.update({'system.ranks': 1}); // FIXME: Check if works
         }
       break;
     }

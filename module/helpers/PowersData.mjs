@@ -11,7 +11,7 @@ const PowerEffects =
         {
             rank1: ['dazed', 'fatigued', 'hindered', 'impaired', 'vulnerable', 'entranced'],
             rank2: ['compelled', 'defenseless', 'disabled', 'immobile', 'stunned', 'exhausted', 'prone'],
-            rank3: ['controller', 'transformed', 'unaware', 'asleep', 'incapacitated', 'paralyzed'],
+            rank3: ['controlled', 'transformed', 'unaware', 'asleep', 'incapacitated', 'paralyzed'],
             resistance: ['fortitude', 'will']
         }
     },

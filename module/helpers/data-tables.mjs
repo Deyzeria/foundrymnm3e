@@ -494,17 +494,17 @@ export function GetDistanceName(fullname)
     {
         if(fullname)
         {
-            return C[m];
+            return C['m'];
         }
-        return C[mAb];
+        return C['mAb'];
     }
     else
     {
         if(fullname)
         {
-            return C[ft];
+            return C['ft'];
         }
-        return C[ftAb];
+        return C['ftAb'];
     }
 }
 
