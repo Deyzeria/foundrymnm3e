@@ -15,7 +15,7 @@ const AdvantagesEffects =
         ranked: false,
         effect: true
     },
-    allaoutatt: {
+    alloutatt: {
         max_ranks: 1,
         type: "combat",
         extradesc: false,

@@ -141,8 +141,13 @@
           </a>
           {{#each system.values.value_array as |part i|}}
             <li class="ench-part flexrow" data-ench-part="{{i}}">
-
-            <a class="ench-control delete-ench" name="{{i}}"><i class="fas fa-minus"></i></a>
+              <select name="system.value_array.parts.{{i}}.0">
+                {{#select (lookup this "0")}}
+                  {{selectOptions @root.config.abilities blank=""}}
+                {{/select}}
+              </select>
+              <input class="ench-name" type="text" name="system.values.value_array.{{i}}.1" value="{{ lookup this "1"}}">
+              <a class="ench-control delete-ench" name="{{i}}"><i class="fas fa-minus"></i></a>
             </li>
           {{/each}}
         </div>

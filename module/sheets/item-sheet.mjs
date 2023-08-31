@@ -175,8 +175,8 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
     if (exfl) exfl.parts = Object.values(exfl?.parts || {}).map(d => [d[0] || "", d[1] || "", d[2] || ""]);
 
     const ench = formData.system?.values;
-    if (ench) ench.value_array = Object.values(ench?.value_array || {}).map(d => [d[0] || "", d[1] || "", d[2] || ""]);
-
+    if (ench) ench.value_array = Object.values(ench?.value_array || {}).map(e => [e[0] || "", e[1] || ""]);
+    console.debug(ench);
 
     return foundry.utils.flattenObject(formData);
   }
@@ -204,7 +204,7 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
     if( a.classList.contains("add-ench") ) {
       await this._onSubmit(event);  // Submit any unsaved changes
       const values = this.item.system.values;
-      return this.item.update({"system.extrasflaws.value_array": values.value_array.concat([["", "", null]])});
+      return this.item.update({"system.values.value_array": values.value_array.concat([["", ""]])});
     }
 
     if ( a.classList.contains("delete-ench") ) {
@@ -213,7 +213,7 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
       const value = li.getAttribute('data-ench-part'); 
       const values = foundry.utils.deepClone(this.item.system.values);
       values.value_array.splice(value, 1)
-      return this.item.update({"system.extrasflaws.value_array": values.value_array});
+      return this.item.update({"system.values.value_array": values.value_array});
     }
   }
 

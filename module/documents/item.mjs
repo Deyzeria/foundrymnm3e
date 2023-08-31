@@ -38,7 +38,9 @@ export class FoundryMnM3eItem extends Item {
         }
         if(this.system.ranked == false)
         {
-          //this.actor.update({'system.ranks': 1}); // FIXME: Check if works
+          //this.system.ranks = 1;
+          //console.debug(this);
+          this.update({'system.ranks': 1});
         }
       break;
     }
@@ -242,7 +244,7 @@ export class FoundryMnM3eItem extends Item {
 
   setAdvantageItemName()
   {
-    if (this.system.id != "custom")
+    if (this.system.id != "custom" && this.system.id != "")
     {
       const conf = CONFIG.MNM3E;
       if(this.system.extradesc == false)
