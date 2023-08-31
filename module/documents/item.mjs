@@ -212,12 +212,24 @@ export class FoundryMnM3eItem extends Item {
         this.system.unique.resistancecheck= this.ListFiller(data.resistance, CONFIG.MNM3E.defenses);
         this.system.save.resistance = this.system.values.value_five;
       break;
+      case 'enhancedability':
+        this.system.unique.value_one = this.ListFiller(data, CONFIG.MNM3E.abilities);
+      break;
+      case 'enhancedextra':
+        
+      break;
+      case 'enhancedtrait':
+        this.system.unique.value_one = this.ListFiller(data.skills, this.skillsWithCharacterNames());
+        this.system.unique.value_two = CONFIG.MNM3E.AdvantageEnum;
+      break;
     }
   }
 
-  // Request Listfiller, 
-  // Data- Array with which values to pull
-  // Table- Link to CONFIG.MNM3E.table
+  /**
+   * @param {array} data Array with values from where to pull value names
+   * @param {object} table Config object to use
+   * @returns Object
+   */
   ListFiller(data, table){
     var response = new Object();
     
@@ -243,9 +255,8 @@ export class FoundryMnM3eItem extends Item {
       }
       else if(this.system.extradesc == "dropdown")
       {
-        const subtypeValue = this.actor.system.skills[this.system.additionalDesc].subtype;
-        const val = (subtypeValue !== undefined && subtypeValue !== '') ? subtypeValue : conf.skills[this.system.additionalDesc];
-        this.name = conf.AdvantageEnum[this.system.id] + " (" + val + ")";
+        const val = this.skillsWithCharacterNames();
+        this.name = conf.AdvantageEnum[this.system.id] + " (" + val[this.system.additionalDesc] + ")";
       }
     }  
   }
@@ -339,6 +350,27 @@ export class FoundryMnM3eItem extends Item {
     // Check if array
     pcost.active_cost = pcost.final_cost;
     pcost.active_rank = pcost.rank;
+  }
+
+  addActiveEffects(){
+    if (key.system.power_effect == 'enhancedability')
+    {
+      
+    }
+    if (key.system.power_effect == 'enhancedtrait')
+    {
+
+    }
+  }
+
+  skillsWithCharacterNames(){
+    var returnObject = new Object();
+    const skillsactor = this.actor.system.skills;
+    Object.keys(CONFIG.MNM3E.skills).forEach(element => {
+      const subtypeValue = this.actor.system.skills[element].subtype;
+      returnObject[element] = (subtypeValue !== undefined && subtypeValue !== '') ? subtypeValue : CONFIG.MNM3E.skills[element];
+    });
+    return returnObject;
   }
 
   /**

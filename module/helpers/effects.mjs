@@ -61,3 +61,20 @@ export function prepareActiveEffectCategories(effects) {
     }
     return categories;
 }
+
+export function addActiveEffectItems(state, list, effect, uuid, owner)
+{
+  if(state)
+  {
+    var eff = [];
+    effect.forEach(element => {
+      const val = `system.${list}.${element.name}.auto`;
+      console.debug(val);
+      //eff.push({val, 'add', element.value})
+    });
+  }
+  else
+  {
+
+  }
+}

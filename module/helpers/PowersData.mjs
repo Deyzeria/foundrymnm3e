@@ -98,7 +98,7 @@ const PowerEffects =
         duration: 'sustained',
         savingthrow: 'none',
         manual_purchase: false,
-        data: true
+        data: ['str', 'agl', 'dex', 'fgt', 'int', 'awe', 'pre']
     },
     enhancedextra: {
         cost: 1,
