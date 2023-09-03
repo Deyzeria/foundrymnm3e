@@ -176,7 +176,6 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
 
     const ench = formData.system?.values;
     if (ench) ench.value_array = Object.values(ench?.value_array || {}).map(e => [e[0] || "", e[1] || ""]);
-    console.debug(ench);
 
     return foundry.utils.flattenObject(formData);
   }

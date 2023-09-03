@@ -139,15 +139,15 @@
           <a class="ench-control flexrow add-ench">
             <label class="add">Add Enhanced<i class="fas fa-plus plusimg"></i></label>
           </a>
-          {{#each system.values.value_array as |part i|}}
-            <li class="ench-part flexrow" data-ench-part="{{i}}">
-              <select name="system.value_array.parts.{{i}}.0">
+          {{#each system.values.value_array as |part a|}}
+            <li class="ench-part flexrow" data-ench-part="{{a}}">
+              <select name="system.values.value_array.{{a}}.0">
                 {{#select (lookup this "0")}}
-                  {{selectOptions @root.config.abilities blank=""}}
+                  {{selectOptions @root.config.abilities}}
                 {{/select}}
               </select>
-              <input class="ench-name" type="text" name="system.values.value_array.{{i}}.1" value="{{ lookup this "1"}}">
-              <a class="ench-control delete-ench" name="{{i}}"><i class="fas fa-minus"></i></a>
+              <input class="ench-name" type="text" name="system.values.value_array.{{a}}.1" value="{{ lookup this "1"}}">
+              <a class="ench-control delete-ench" name="{{a}}"><i class="fas fa-minus"></i></a>
             </li>
           {{/each}}
         </div>
