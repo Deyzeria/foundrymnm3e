@@ -1,6 +1,7 @@
 import GetPowerData from "../helpers/PowersData.mjs"
 import GetAdvantagesData from "../helpers/AdvantagesData.mjs"
 import { GetDistanceName } from "../helpers/data-tables.mjs";
+import ActiveEffectMnm3e from "../helpers/effects.mjs";
 
 /**
  * Extend the basic Item with some very simple modifications.
@@ -22,20 +23,12 @@ export class FoundryMnM3eItem extends Item {
 
     switch ( this.type ) {
       case "power":
-        if(this.system.power_effect != "")
-        {
-        this.preparePower();
-        }
         this.prepareExtrasFlawsCostAddition();
         this.prepareCostTotal();
         this._prepareActivation();
       break;
 
       case "advantage":
-        if(this.system.id != "")
-        {
-          this.prepareAdvantage();
-        }
         if(this.system.ranked == false)
         {
           //this.system.ranks = 1;
@@ -46,6 +39,28 @@ export class FoundryMnM3eItem extends Item {
     }
 
     //if ( !this.isOwned ) this.prepareFinalAttributes();
+  }
+
+  /** @inheritdoc */
+  _onUpdate(data, options, userId) {
+    super._onUpdate(data, options, userId);
+
+    // Power updates
+    if(data.system?.power_effect != undefined)
+    {
+      this.clearValueAndUnique();
+      this.preparePower();
+    }
+    if(data.system?.values?.value_array != undefined)
+    {
+      this.addActiveEffects();
+    }
+
+    // Advantages
+    if(data.system?.id != undefined && data.system?.id != "")
+    {
+      this.prepareAdvantage();
+    }
   }
 
   /**
@@ -118,7 +133,7 @@ export class FoundryMnM3eItem extends Item {
       case "power":
         this.getSaveDC();
         this.getDamageDC();
-        //this.getDerivedExtraFlawLabel();
+        this.prepareTransformativeDataPowers();
         //this.prepareCostTotal();
       break;
       case "advantage":
@@ -143,16 +158,25 @@ export class FoundryMnM3eItem extends Item {
       powerData = GetPowerData(this.system.power_effect);
     }
 
-    this.system.power_cost.base_cost = powerData.cost ?? 0;
-    this.system.action.type = powerData.action ?? '';
-    this.system.duration = powerData.duration ?? '';
-    this.system.ranges.range = powerData.range;
-    this.system.type = powerData.type;
-    this.system.save.resistance = powerData.savingthrow;
-    this.system.damage.resistance = powerData.damage ?? "";
+    var updateData = {};
 
-    this.system.power_cost.manual_purchase = powerData.manual_purchase ?? true
-    this.system.power_cost.max_ranks = powerData.max_ranks ?? 50;
+    updateData["system.power_cost.base_cost"] = powerData.cost ?? 0;
+    updateData["system.action.type"] = powerData.action ?? '';
+    updateData["system.duration"] = powerData.duration ?? '';
+    updateData["system.ranges.range"] = powerData.range;
+    updateData["system.type"] = powerData.type;
+    updateData["system.save.resistance"] = powerData.savingthrow;
+    updateData["system.damage.resistance"] = powerData.damage ?? "";
+
+    updateData["system.power_cost.manual_purchase"] = powerData.manual_purchase ?? true
+    updateData["system.power_cost.max_ranks"] = powerData.max_ranks ?? 50;
+
+    //console.debug(updateData);
+
+    this.update(updateData);
+
+    if(powerData == false) return;
+
     this.preparePowers(powerData.data ?? {});
   }
 
@@ -168,15 +192,17 @@ export class FoundryMnM3eItem extends Item {
       advantageData = GetAdvantagesData(this.system.id);
     }
 
-    this.system.max_ranks = advantageData.max_ranks ?? 1;
-    this.system.type = advantageData.type ?? "";
-    this.system.extradesc = advantageData.extradesc ?? false;
-    this.system.ranked = advantageData.ranked ?? false;
-    this.system.effect = advantageData.effect ?? false;
+    var updateData = {};
+
+    updateData["system.max_ranks"] = advantageData.max_ranks ?? 1;
+    updateData["system.type"] = advantageData.type ?? "";
+    updateData["system.extradesc"] = advantageData.extradesc ?? false;
+    updateData["system.ranked"] = advantageData.ranked ?? false;
+    updateData["system.effect"] = advantageData.effect ?? false;
     
     if (advantageData.extradesc == "input")
     {
-      this.system.description = advantageData.description ?? "";
+      updateData["system.description"] = advantageData.description ?? "";
     }
     else if (advantageData.extradesc == "dropdown")
     {
@@ -200,31 +226,41 @@ export class FoundryMnM3eItem extends Item {
           arr[element] = val;
         });
       }
-      this.system.dropdown = arr;
+      updateData["system.dropdown"] = arr;
     }
+
+    this.update(updateData);
   }
 
   preparePowers(data)
   {
+    var updateData = {};
     switch (this.system.power_effect) {
       case 'affliction':        
-        this.system.unique.value_one= this.ListFiller(data.rank1, CONFIG.MNM3E.conditions);
-        this.system.unique.value_two= this.ListFiller(data.rank2, CONFIG.MNM3E.conditions);
-        this.system.unique.value_three= this.ListFiller(data.rank3, CONFIG.MNM3E.conditions);
-        this.system.unique.resistancecheck= this.ListFiller(data.resistance, CONFIG.MNM3E.defenses);
-        this.system.save.resistance = this.system.values.value_five;
-      break;
+        updateData["system.unique.value_one"]= this.ListFiller(data.rank1, CONFIG.MNM3E.conditions);
+        updateData["system.unique.value_two"]= this.ListFiller(data.rank2, CONFIG.MNM3E.conditions);
+        updateData["system.unique.value_three"]= this.ListFiller(data.rank3, CONFIG.MNM3E.conditions);
+        updateData["system.unique.resistancecheck"]= this.ListFiller(data.resistance, CONFIG.MNM3E.defenses);
+        break;
+      case 'damage':
+        updateData["system.values.value_one"] = false;
+        break;
       case 'enhancedability':
-        this.system.unique.value_one = this.ListFiller(data, CONFIG.MNM3E.abilities);
-      break;
+        updateData["system.unique.value_one"] = this.ListFiller(data, CONFIG.MNM3E.abilities);
+        break;
       case 'enhancedextra':
         
-      break;
+        break;
       case 'enhancedtrait':
-        this.system.unique.value_one = this.ListFiller(data.skills, this.skillsWithCharacterNames());
-        this.system.unique.value_two = CONFIG.MNM3E.AdvantageEnum;
-      break;
+        updateData["system.unique.value_one"] = {
+          ...CONFIG.MNM3E.defenses,
+          ...this.skillsWithCharacterNames()
+        };
+        updateData["system.unique.value_two"] = CONFIG.MNM3E.AdvantageEnum;
+        break;
     }
+
+    this.update(updateData);
   }
 
   /**
@@ -234,7 +270,6 @@ export class FoundryMnM3eItem extends Item {
    */
   ListFiller(data, table){
     var response = new Object();
-    
     data.forEach(element => {
       response[element] = table[element];
     });
@@ -335,8 +370,38 @@ export class FoundryMnM3eItem extends Item {
     this.system.power_cost.flat = flat;
   }
 
+  prepareTransformativeDataPowers()
+  {
+    if(this.system.power_effect == 'affliction')
+    {
+      this.system.save.resistance = this.system.values.value_five;
+    }
+  }
+
+  clearValueAndUnique()
+  {
+    var updateData = {};
+    updateData["system.values.value_one"] = "";
+    updateData["system.values.value_two"] = "";
+    updateData["system.values.value_three"] = "";
+    updateData["system.values.value_four"] = "";
+    updateData["system.values.value_five"] = "";
+
+    updateData["system.values.value_array"] = [];
+
+    updateData["system.unique.value_one"] = "";
+    updateData["system.unique.value_two"] = "";
+    updateData["system.unique.value_three"] = "";
+    updateData["system.unique.value_four"] = "";
+    updateData["system.unique.value_five"] = "";
+
+    this.update(updateData);
+  }
+
   prepareCostTotal(){
     const pcost = this.system.power_cost;
+
+    if(!pcost.manual_purchase) this.calculateRanksNonManual();
 
     var combinedPerRank = pcost.base_cost + pcost.extras - pcost.flaws;
 
@@ -354,15 +419,118 @@ export class FoundryMnM3eItem extends Item {
     pcost.active_rank = pcost.rank;
   }
 
-  addActiveEffects(){
-    if (key.system.power_effect == 'enhancedability')
-    {
-      
-    }
-    if (key.system.power_effect == 'enhancedtrait')
-    {
+  calculateRanksNonManual()
+  {
+    const pcost = this.system.power_cost;
 
+    switch (this.system.power_effect) {
+      case 'concealment':
+        
+        break;
+      case 'enhancedtrait':
+      case 'enhancedability':
+        pcost.rank = this.system.values.value_array.reduce((accumulator, currentArray) => {
+          var n = parseInt(currentArray[1]) || 0;
+          return accumulator + n;
+        }, 0);
+        break;
+
+      case 'enhancedextra':
+        
+        break;
+
+      case 'enhancedadvantage':
+        
+        break;
+
+      case 'illusion':
+        
+        break;
+
+      default:
+        break;
     }
+  }
+
+  addActiveEffects(){
+    //if (!this.system.active) return;
+    const effects = [];
+
+    const aefs = Object.entries(this.effects)[4][1];
+
+    //Clear remaining active effects if all elements in value array are deleted
+    if(this.system.values.value_array.length == 0 && aefs.length != 0)
+    {
+      this.clearItemActiveEffects(aefs);
+      return;
+    }
+    
+    if (this.system.power_effect == 'enhancedability' || this.system.power_effect == 'enhancedtrait')
+    {
+      const defenses = Object.keys(CONFIG.MNM3E.defenses);
+      const skills = Object.keys(CONFIG.MNM3E.skills);
+
+      this.system.values.value_array.forEach(element => {
+        const name = element[0] != '' ? element[0] : 'str';
+        var typeBonus = '';
+        if(this.system.power_effect == 'enhancedability')
+        {
+          typeBonus = 'abilities';
+        }
+        else if (defenses.includes(name))
+        {
+          typeBonus = 'defenses';
+        }
+        else if (skills.includes(name))
+        {
+          typeBonus = 'skills';
+        }
+
+        const val = {
+          key:`system.${typeBonus}.${name}.auto`,
+          mode: 2,
+          value: element[1] != '' ? element[1] : '0'
+        }
+        effects.push(val);
+      });
+    }
+
+    if(aefs.length == 0)
+    {
+      this.createItemActiveEffects(effects);
+    }
+    else
+    {
+      this.updateItemActiveEffects(aefs, effects);
+    }
+  }
+  
+  createItemActiveEffects(effects)
+  {
+    this.createEmbeddedDocuments("ActiveEffect", [{
+        name: this.name,
+        icon: "icons/svg/aura.svg",
+        origin: this.uuid,
+        "duration.rounds": undefined,
+        disabled: false,
+        changes: effects
+      }]);
+  }
+
+  async updateItemActiveEffects(list, effects)
+  {
+    const updates = [{
+      _id: list[0]._id,
+      changes: effects
+    }];
+    await this.updateEmbeddedDocuments("ActiveEffect", updates);
+  }
+
+  clearItemActiveEffects(list)
+  {
+    var updates = [];
+    updates.push(list[0]._id);
+    this.deleteEmbeddedDocuments("ActiveEffect", updates);
   }
 
   skillsWithCharacterNames(){

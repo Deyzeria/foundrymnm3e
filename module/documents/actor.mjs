@@ -1,4 +1,5 @@
 import { d20Roll } from "../dice/dice.mjs";
+import ActiveEffectMnm3e from "../helpers/effects.mjs";
 
 /**
  * Extend the base Actor document by defining a custom roll data structure which is ideal for the Simple system.
@@ -168,6 +169,18 @@ export class FoundryMnM3eActor extends Actor {
     }, 0)
 
     systemData.generic.pp_advantages = advcost;
+  }
+
+  /**
+   * 
+   * @param {bool} state Activation state
+   * @param {string} list Which list to apply to
+   * @param {*} effect 
+   * @param {*} uuid 
+   */
+  addActiveEffect(name, state, list, effect, uuid){
+    //console.debug(ActiveEffectMnm3e.addActiveEffectItems());
+    ActiveEffectMnm3e.addActiveEffectItems(name, state, list, effect, uuid, this);
   }
 
   /**

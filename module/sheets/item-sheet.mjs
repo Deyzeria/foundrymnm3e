@@ -10,7 +10,7 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
       classes: ["item-sheet", "foundrymnm3e", "sheet", "item"],
       width: 520,
       height: 700,
-      tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description" }]
+      tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "attributes" }]
     });
   }
 
@@ -76,10 +76,11 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
 
           max_ranks: this.item.system.power_cost.max_ranks,
           purchase: this._canBePurchased(),
+          active: this.item.system.active,
+          activestate: this._getActiveIcon(this.item.system.locked),
           locked: this.item.system.locked,
           lock: this._getCheckmarkIcon(this.item.system.locked),
           //uniquefield: this.fillUniqueField()
-          // effects: ActiveEffect5e.prepareActiveEffectCategories(item.effects)
         });
       break;
       case "advantage":
@@ -157,6 +158,14 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
     return icons[level] || icons[0];
   }
 
+  _getActiveIcon(level){
+    const icons = {
+      false: '<i class="fa-solid fa-circle-xmark"></i>',
+      true: '<i class="fa-solid fa-circle-check"></i>',
+    }
+    return icons[level] || icons[0];
+  }
+
   _canBePurchased(){
     const returnV = this.item.system.power_cost.manual_purchase ? false : true;
     return returnV;
@@ -180,6 +189,14 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
     return foundry.utils.flattenObject(formData);
   }
 
+  _disableOverriddenFields(html){
+    if(!this.item.system.power_cost.manual_purchase)
+    {
+      const toggle = html.find(`.rank`);
+      toggle[0].disabled = true;
+    }
+  }
+
   /* -------------------------------------------- */
 
   /** @override */
@@ -193,6 +210,10 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
 
     html.find(".lockbutton").click(this.lockSheet.bind(this));
     // Roll handlers, click handlers, etc. would go here.
+    if(this.item.type == "power")
+    {
+      this._disableOverriddenFields(html);
+    }
   }
 
     // Adding and removing extras and flaws

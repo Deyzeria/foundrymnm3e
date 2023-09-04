@@ -2,7 +2,10 @@
   <header class="sheet-header">
     <img class="power-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
     <div class="header-fields power-header">
-      <h1 class="charname power-name"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
+      <div class="flexrow">
+        <a class="toggle active-toggle">{{{activestate}}}</a>
+        <h1 class="charname power-name"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
+      </div>
       <div class="flexrow">
         <label class="sub-header" name="labels.basepower">{{labels.basepower}}</label>  
         <label class="active_ranks">Cost: {{system.power_cost.active_cost}}</label>
@@ -13,20 +16,16 @@
 
   {{!-- Sheet Tab Navigation --}}
   <nav class="sheet-tabs tabs" data-group="primary">
-    <a class="item" data-tab="description">Description</a>
     <a class="item" data-tab="attributes">Attributes</a>
   </nav>
 
   {{!-- Sheet Body --}}
   <section class="sheet-body">
 
-    {{!-- Description Tab --}}
-    <div class="tab" data-group="primary" data-tab="description">
-      {{!-- To render inline rolls in a TinyMCE editor, you need to pass the parent actor's (if any) roll data to the rollData prop. --}}
-      {{editor system.description target="system.description" rollData=rollData button=true owner=owner editable=editable}}
+    <div>
+      <h3>Description</h3>
+      <textarea name="system.description" rows="4">{{system.description}}</textarea>
     </div>
-
-    <div class="tab attributes" data-group="primary" data-tab="attributes">
     
     {{!-- Power Effect Data Setup --}}
     <div class="flexrow">
@@ -103,31 +102,31 @@
     </div>
 
     <div class="flexrow">
-      <ul class="unique-selection power-types sectionpower">
+      <ul class="unique-selection extras-types sectionpower">
         {{!-- Affliction Unique --}}
         {{#if (isaffliction selected_powers)}}
         <div>
-          <li class="power flexrow">
+          <li class="extras flexrow">
             <label>1st Degree: </label>
-            <select class="power-value" name="system.values.value_one">
+            <select class="extras-value" name="system.values.value_one">
               {{selectOptions value_one selected=setvalueone blank=""}}
             </select>
           </li>
-          <li class="power flexrow">
+          <li class="extras flexrow">
             <label>2nd Degree: </label>
-            <select class="power-value" name="system.values.value_two">
+            <select class="extras-value" name="system.values.value_two">
               {{selectOptions value_two selected=setvaluetwo blank=""}}
             </select>
           </li>
-          <li class="power flexrow">
+          <li class="extras flexrow">
             <label>3rd Degree: </label>
-            <select class="power-value" name="system.values.value_three">
+            <select class="extras-value" name="system.values.value_three">
               {{selectOptions value_three selected=setvaluethree blank=""}}
             </select>
           </li>
-          <li class="power flexrow">
+          <li class="extras flexrow">
             <label>Resisted by: </label>
-            <select class="power-value" name="system.values.value_five">
+            <select class="extras-value" name="system.values.value_five">
               {{selectOptions resistancearray selected=setvaluefive blank=""}}
             </select>
           </li>
@@ -137,43 +136,43 @@
         {{#if (isenhanced selected_powers)}}
         <div>
           <a class="ench-control flexrow add-ench">
-            <label class="add">Add Enhanced<i class="fas fa-plus plusimg"></i></label>
+            <label class="add"><i class="fas fa-plus plusimg"></i>Add Enhanced<i class="fas fa-plus plusimg"></i></label>
           </a>
           {{#each system.values.value_array as |part a|}}
-            <li class="ench-part flexrow" data-ench-part="{{a}}">
-              <select name="system.values.value_array.{{a}}.0">
+            <li class="extras ench-part flexrow" data-ench-part="{{a}}">
+              <select class="extras-value" name="system.values.value_array.{{a}}.0">
                 {{#select (lookup this "0")}}
-                  {{selectOptions @root.config.abilities}}
+                  {{selectOptions @root.system.unique.value_one}}
                 {{/select}}
               </select>
-              <input class="ench-name" type="text" name="system.values.value_array.{{a}}.1" value="{{ lookup this "1"}}">
-              <a class="ench-control delete-ench" name="{{a}}"><i class="fas fa-minus"></i></a>
+              <input class="ench-name extras-value" type="text" name="system.values.value_array.{{a}}.1" min="0" value="{{ lookup this "1"}}">
+              <a class="ench-control delete-ench delete-symbol" name="{{a}}"><i class="fas fa-minus"></i></a>
             </li>
           {{/each}}
         </div>
         {{/if}}
+
+        
       </ul>
 
-      <ul class="extras-flaws-list">
+      <ul class="extras-types extras-flaws-list">
         <a class="exfl-control flexrow add-exfl">
           <label class="add"><i class="fas fa-plus plusimg"></i>Add New Extras or Flaws<i class="fas fa-plus plusimg"></i></label>
         </a>
 
         {{#each system.extrasflaws.parts as |part i|}}
-          <li class="exfl-part flexrow" data-exfl-part="{{i}}">
-            <input class="exfl-name" type="text" name="system.extrasflaws.parts.{{i}}.0" value="{{ lookup this "0"}}">
-            <input type="number" class="exfl-rank"  name="system.extrasflaws.parts.{{i}}.2" value="{{ lookup this "2"}}" min="1" max="5" data-dtype="Number"/>
-            <select name="system.extrasflaws.parts.{{i}}.1">
+          <li class="extras exfl-part flexrow" data-exfl-part="{{i}}">
+            <input class="extras-value" class="exfl-name" type="text" name="system.extrasflaws.parts.{{i}}.0" value="{{ lookup this "0"}}">
+            <input type="number" class="exfl-rank extras-value"  name="system.extrasflaws.parts.{{i}}.2" value="{{ lookup this "2"}}" min="1" max="5" data-dtype="Number"/>
+            <select class="extras-value" name="system.extrasflaws.parts.{{i}}.1">
               {{#select (lookup this "1")}}
                 {{selectOptions @root.config.ExtrasFlawsTypes}}
               {{/select}}
             </select>
-            <a class="exfl-control delete-exfl" name="{{i}}"><i class="fas fa-minus"></i></a>
+            <a class="exfl-control delete-exfl delete-symbol" name="{{i}}"><i class="fas fa-minus"></i></a>
           </li>
         {{/each}}
       </ul>
-    </div>
-
     </div>
   </section>
 </form>

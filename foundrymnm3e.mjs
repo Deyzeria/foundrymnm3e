@@ -14,11 +14,13 @@ import {SetGameValues, GetScale} from "./module/helpers/data-tables.mjs";
 import * as dice from "./module/dice/_module.mjs";
 import * as canvas from "./module/canvas/_module.mjs";
 import * as utils from "./module/helpers/utils.mjs"
+import * as documents from "./module/helpers/_module.mjs"
 
 globalThis.foundrymnm3e = {
   canvas,
   config: MNM3E,
   dice,
+  documents
 };
 
 
@@ -40,7 +42,6 @@ Hooks.once('init', async function() {
   registerSystemSettings();
 
   // If this doesn't work, then move arrays separately and make this getting right when getting value?
-  console.debug("Measurement System Chosen Setting: ", game.settings.get("foundrymnm3e", "measurementsystem"));
   SetGameValues(game.settings.get("foundrymnm3e", "measurementsystem"));
 
   // Custom Die modifier
@@ -58,6 +59,7 @@ Hooks.once('init', async function() {
 
   // Add custom constants for configuration.
   CONFIG.MNM3E = MNM3E;
+  CONFIG.ActiveEffect.documentClass = documents.ActiveEffectMnm3e;
   CONFIG.Actor.documentClass = FoundryMnM3eActor;
   CONFIG.Item.documentClass = FoundryMnM3eItem;
   CONFIG.Dice.D20Roll = dice.D20Roll;

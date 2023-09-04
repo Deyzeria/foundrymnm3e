@@ -1,4 +1,4 @@
-import {onManageActiveEffect, prepareActiveEffectCategories} from "../helpers/effects.mjs";
+import ActiveEffectMnm3e from "../helpers/effects.mjs";
 
 import SkillsConfig from "./parts/skills-config.mjs"
 import OnClickSkills from "./parts/skills-config.mjs"
@@ -60,7 +60,7 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
       context.rollData = context.actor.getRollData();
 
       // Prepare active effects
-      context.effects = prepareActiveEffectCategories(this.actor.effects);
+      context.effects = ActiveEffectMnm3e.prepareActiveEffectCategories(this.actor.effects);
 
       return context;
     }
@@ -215,7 +215,7 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
       });
 
       // Active Effect management
-      html.find(".effect-control").click(ev => onManageActiveEffect(ev, this.actor));
+      html.find(".effect-control").click(ev => ActiveEffectMnm3e.onManageActiveEffect(ev, this.actor));
 
       html.find(".config-button").click(this._onConfigMenu.bind(this));
 

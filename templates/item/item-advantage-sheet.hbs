@@ -8,50 +8,45 @@
 
   {{!-- Sheet Tab Navigation --}}
   <nav class="sheet-tabs tabs" data-group="primary">
-    <a class="item" data-tab="description">Description</a>
     <a class="item" data-tab="attributes">Attributes</a>
   </nav>
 
   {{!-- Sheet Body --}}
   <section class="sheet-body">
 
-    {{!-- Description Tab --}}
-    <div class="tab" data-group="primary" data-tab="description">
-      {{editor system.description target="system.description" rollData=rollData button=true owner=owner editable=editable}}
+    <div>
+      <h3>Description</h3>
+      <textarea name="system.description" rows="4">{{system.description}}</textarea>
     </div>
 
-    {{!-- Attributes Tab --}}
-    <div class="tab attributes" data-group="primary" data-tab="attributes">
-      <ul class="power-types sectionpower">
-        <li class="power flexrow">
-          <label class="resource-label">Base Advantage</label>
-          <select class="power-value" name="system.id">
-            {{selectOptions advantageslist selected=selected_id blank=""}}
+    <ul class="power-types sectionpower">
+      <li class="power flexrow">
+        <label class="resource-label">Base Advantage</label>
+        <select class="power-value" name="system.id">
+          {{selectOptions advantageslist selected=selected_id blank=""}}
+        </select>
+      </li>
+      {{#if ranked}}
+      <li class="power flexrow">
+        <label class="resource-label">Rank</label>
+        <input class="power-value" type="number" name="system.ranks" value="{{system.ranks}}" min="1" max="{{max_ranks}}" data-dtype="Number"/>
+      </li>
+      {{/if}}
+      {{#if extradesc}}
+      <li class="power flexrow">
+        <label class="resource-label">Extra description</label>
+        {{#if (isinput extradesc)}}
+          <input class="power-value" type="text" name="system.additionalDesc" placeholder="{{descPlaceholder}}" value="{{additionalDesc}}"/>        
+        {{/if}}
+
+        {{#if (isdropdown extradesc)}}
+          <select class="power-value" name="system.additionalDesc">
+            {{selectOptions descDropdown selected=additionalDesc}}
           </select>
-        </li>
-        {{#if ranked}}
-        <li class="power flexrow">
-          <label class="resource-label">Rank</label>
-          <input class="power-value" type="number" name="system.ranks" value="{{system.ranks}}" min="1" max="{{max_ranks}}" data-dtype="Number"/>
-        </li>
         {{/if}}
-        {{#if extradesc}}
-        <li class="power flexrow">
-          <label class="resource-label">Extra description</label>
-          {{#if (isinput extradesc)}}
-            <input class="power-value" type="text" name="system.additionalDesc" placeholder="{{descPlaceholder}}" value="{{additionalDesc}}"/>        
-          {{/if}}
-
-          {{#if (isdropdown extradesc)}}
-            <select class="power-value" name="system.additionalDesc">
-              {{selectOptions descDropdown selected=additionalDesc}}
-            </select>
-          {{/if}}
-        </li>
-        {{/if}}
-      </ul>
-      
-    </div>
+      </li>
+      {{/if}}
+    </ul>
   </section>
 
 </form>
