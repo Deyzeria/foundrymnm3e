@@ -139,15 +139,6 @@ export class FoundryMnM3eActor extends Actor {
       systemData.generic.pp_skills += skill.purchased / 2;
     }
 
-
-    // This here is my initial version of how to handle combined cost of all advantages as an example. Most likely will need a better way.
-    // const items = actorData.items;
-    // const entriesArray = Object.values(items)[4];
-    // const advantageObjects = entriesArray.filter(obj => obj.type === 'advantage');
-    // const totalAdvantageRanks = advantageObjects.reduce((sum, obj) => sum + obj.system.ranks, 0);
-    // systemData.generic.pp_advantages = totalAdvantageRanks;
-
-
     systemData.generic.pp_spent = systemData.generic.pp_ability + systemData.generic.pp_defenses + systemData.generic.pp_skills + systemData.generic.pp_advantages + systemData.generic.pp_powers;
   }
 
@@ -171,16 +162,17 @@ export class FoundryMnM3eActor extends Actor {
     systemData.generic.pp_advantages = advcost;
   }
 
-  /**
-   * 
-   * @param {bool} state Activation state
-   * @param {string} list Which list to apply to
-   * @param {*} effect 
-   * @param {*} uuid 
-   */
-  addActiveEffect(name, state, list, effect, uuid){
-    //console.debug(ActiveEffectMnm3e.addActiveEffectItems());
-    ActiveEffectMnm3e.addActiveEffectItems(name, state, list, effect, uuid, this);
+  prepareSpeeds()
+  {
+    const speeds = this.system.speed;
+    const v = 'distance';
+    speeds.walk.distance = ScaleTable.GetScale(speeds.walk.rank, v);
+
+    const types = ['burrowing', 'flight', 'leaping', 'swimming', 'teleport'];
+    types.forEach(element => {
+      if(!speeds[element].active) return;
+      speeds[element].distance = ScaleTable.GetScale(speeds[element].rank, v);
+    });
   }
 
   /**

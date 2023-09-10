@@ -147,6 +147,8 @@ Handlebars.registerHelper('isnotfalse', function (value) {
 });
 
 Handlebars.registerHelper('isaffliction', function (value) { return value == "affliction"; });
+Handlebars.registerHelper('isdamage', function (value) { return value == "damage"; });
+Handlebars.registerHelper('iscommunication', function (value) { return value == "communication"; });
 Handlebars.registerHelper('isenhanced', function (value) { return value == "enhancedability" || value == "enhancedtrait" || value == "enhancedadvantage"; });
 
 /* -------------------------------------------- */

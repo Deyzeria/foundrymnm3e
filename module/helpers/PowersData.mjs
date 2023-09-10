@@ -32,7 +32,10 @@ const PowerEffects =
         duration: 'sustained',
         savingthrow: 'none',
         max_ranks: 5,
-        data: true
+        data: 
+        {
+            sensetype: ['visual', 'auditory', 'olfactory', 'tactile', 'radio', 'mental', 'other']
+        }
     },
     comprehend: {
         cost: 2,

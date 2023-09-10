@@ -103,6 +103,18 @@ preLocalize("skills");
    };
    preLocalize("powerRangeEnum");
 
+   MNM3E.attackType = {
+	...MNM3E.powerRangeEnum,
+	areaburst: "MNM3E.AreaBurst",
+	areacloud: "MNM3E.AreaCloud",
+	areacone: "MNM3E.AreaCone",
+	areacylinder: "MNM3E.AreaCylinder",
+	arealine: "MNM3E.AreaLine",
+	areaperception: "MNM3E.AreaPerception",
+	areashapeable: "MNM3E.AreaShapeable"
+   }
+   preLocalize("attackType");
+
    MNM3E.movementUnits = {
 	ft: "MNM3E.DistFt",
 	mi: "MNM3E.DistMi",
@@ -157,7 +169,6 @@ preLocalize("skills");
 	enhancedability: "MNM3E.pEnhancedAbility",
 	enhancedextra: "MNM3E.pEnhancedExtra",
 	enhancedtrait: "MNM3E.pEnhancedTrait",
-	enhancedadvantage: "MNM3E.pEnhancedAdvantage",
 	environment: "MNM3E.pEnvironment",
 	limbs: "MNM3E.pExtraLimbs",
 	feature: "MNM3E.pFeature",
@@ -473,3 +484,14 @@ preLocalize("skills");
 	surprised: "MNM3E.condSurprised"	
    }
    preLocalize("conditions");
+
+   MNM3E.SenseTypes = {
+	visual: "MNM3E.senseVisual",
+	auditory: "MNM3E.senseAuditory",
+	olfactory: "MNM3E.senseOlfactory",
+	tactile: "MNM3E.senseTactile",
+	radio: "MNM3E.senseRadio",
+	mental: "MNM3E.senseMental",
+	other: "MNM3E.senseOther"
+   }
+   preLocalize("SenseTypes");

@@ -32,55 +32,52 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
     context.config = CONFIG.MNM3E;
 
     // Use a safe clone of the item data for further operations.
-    const itemData = context.item;
-
+    const systemData = item.system;
     switch (this.item.type) {
       case "power":
         foundry.utils.mergeObject(context, {
           source: source.system,
           system: item.system,
-          labels: this.item.labels,
+          labels: item.labels,
           isEmbedded: item.isEmbedded,
-          advancementEditable: (this.advancementConfigurationMode || !item.isEmbedded) && context.editable,
           rollData: this.item.getRollData(),
 
-          itemType: game.i18n.localize(CONFIG.Item.typeLabels[this.item.type]),
+          itemType: game.i18n.localize(`ITEM.Item.${this.item.type}`),
           itemStatus: this._getItemStatus(),
           itemProperties: this._getItemProperties(),
 
           // Selectables
           powers: context.config.defaultPowerEffects,
 
-          selected_powers: this.item.system.power_effect,
-          selected_type: this.item.system.type,
-          selected_action: this.item.system.action.type,
-          selected_range: this.item.system.ranges.range,
-          selected_duration: this.item.system.duration,
-          selected_savingthrow: this.item.system.save.resistance,
-          selected_damage: this.item.system.damage.resistance,
-          saveDamage: this.item.system.damage.resistance != "",
+          selected_powers: systemData.power_effect,
+          selected_type: systemData.type,
+          selected_action: systemData.action.type,
+          selected_range: systemData.ranges.range,
+          selected_duration: systemData.duration,
+          selected_savingthrow: systemData.save.resistance,
+          selected_damage: systemData.damage.resistance,
+          saveDamage: systemData.damage.resistance != "",
 
-          setvalueone: this.item.system.values.value_one,
-          setvaluetwo: this.item.system.values.value_two,
-          setvaluethree: this.item.system.values.value_three,
-          setvaluefour: this.item.system.values.value_four,
-          setvaluefive: this.item.system.values.value_five,
+          setvalueone: systemData.values.value_one,
+          setvaluetwo: systemData.values.value_two,
+          setvaluethree: systemData.values.value_three,
+          setvaluefour: systemData.values.value_four,
+          setvaluefive: systemData.values.value_five,
 
-          value_one: this.item.system.unique.value_one ?? '',
-          value_two: this.item.system.unique.value_two ?? '',
-          value_three: this.item.system.unique.value_three ?? '',
-          value_four: this.item.system.unique.value_four ?? '',
-          value_five: this.item.system.unique.value_five ?? '',
+          value_one: systemData.unique.value_one ?? '',
+          value_two: systemData.unique.value_two ?? '',
+          value_three: systemData.unique.value_three ?? '',
+          value_four: systemData.unique.value_four ?? '',
+          value_five: systemData.unique.value_five ?? '',
 
-          resistancearray: this.item.system.unique.resistancecheck ?? {},
+          resistancearray: systemData.unique.resistancecheck ?? {},
 
-          max_ranks: this.item.system.power_cost.max_ranks,
+          max_ranks: systemData.power_cost.max_ranks,
           purchase: this._canBePurchased(),
-          active: this.item.system.active,
-          activestate: this._getActiveIcon(this.item.system.locked),
-          locked: this.item.system.locked,
-          lock: this._getCheckmarkIcon(this.item.system.locked),
-          //uniquefield: this.fillUniqueField()
+          active: systemData.active,
+          activestate: this._getActiveIcon(systemData.locked),
+          locked: systemData.locked,
+          lock: this._getCheckmarkIcon(systemData.locked)
         });
       break;
       case "advantage":
@@ -128,11 +125,10 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
     switch ( this.item.type ) {
       case "device":
       case "power":
-        props.push(CONFIG.MNM3E.powerActivationEnum[this.item.system.action.type]);
-        props.push(CONFIG.MNM3E.powerRangeEnum[this.item.system.ranges.range]);
-        props.push(CONFIG.MNM3E.powerDurationEnum[this.item.system.duration]);
-        props.push(CONFIG.MNM3E.abilities[this.item.system.save.resistance]);
-        props.push(labels.activate, labels.range, labels.duration, labels.basepower);
+        props.push(labels.activate);
+        props.push(labels.range);
+        props.push(labels.duration);
+        props.push(labels.basepower);
         break;
     }
 
@@ -181,10 +177,10 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
 
     // Handle Extras and Flaws
     const exfl = formData.system?.extrasflaws;
-    if (exfl) exfl.parts = Object.values(exfl?.parts || {}).map(d => [d[0] || "", d[1] || "", d[2] || ""]);
+    if (exfl) exfl.parts = Object.values(exfl?.parts || {}).map(d => [d[0] || "", d[1] || "", d[2] || 0]);
 
     const ench = formData.system?.values;
-    if (ench) ench.value_array = Object.values(ench?.value_array || {}).map(e => [e[0] || "", e[1] || ""]);
+    if (ench) ench.value_array = Object.values(ench?.value_array || {}).map(e => [e[0] || "", e[1] || 1]);
 
     return foundry.utils.flattenObject(formData);
   }
@@ -224,7 +220,7 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
     if( a.classList.contains("add-ench") ) {
       await this._onSubmit(event);  // Submit any unsaved changes
       const values = this.item.system.values;
-      return this.item.update({"system.values.value_array": values.value_array.concat([["", ""]])});
+      return this.item.update({"system.values.value_array": values.value_array.concat([["", 1]])});
     }
 
     if ( a.classList.contains("delete-ench") ) {
@@ -245,7 +241,7 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
     if( a.classList.contains("add-exfl") ) {
       await this._onSubmit(event);  // Submit any unsaved changes
       const extrasflaws = this.item.system.extrasflaws;
-      return this.item.update({"system.extrasflaws.parts": extrasflaws.parts.concat([["", "", null]])});
+      return this.item.update({"system.extrasflaws.parts": extrasflaws.parts.concat([["", "", 0]])});
     }
 
     if ( a.classList.contains("delete-exfl") ) {

@@ -503,6 +503,15 @@
                 "resistance": "",
                 "effect": null
             },
+            "area": {
+                "type": "",
+                "save": {
+                    "resistance": "dodge",
+                    "effect": null
+                },
+                "range": null,
+                "range2": null
+            },
             "attack": {
                 "skill": "",
                 "type": "",

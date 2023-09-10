@@ -1,6 +1,6 @@
 import GetPowerData from "../helpers/PowersData.mjs"
 import GetAdvantagesData from "../helpers/AdvantagesData.mjs"
-import { GetDistanceName } from "../helpers/data-tables.mjs";
+import * as ScaleTable from "../helpers/data-tables.mjs";
 import ActiveEffectMnm3e from "../helpers/effects.mjs";
 
 /**
@@ -25,14 +25,13 @@ export class FoundryMnM3eItem extends Item {
       case "power":
         this.prepareExtrasFlawsCostAddition();
         this.prepareCostTotal();
-        this._prepareActivation();
+        this._prepareLabels();
+        this.system.combineddescription= "";
       break;
 
       case "advantage":
         if(this.system.ranked == false)
         {
-          //this.system.ranks = 1;
-          //console.debug(this);
           this.update({'system.ranks': 1});
         }
       break;
@@ -48,7 +47,6 @@ export class FoundryMnM3eItem extends Item {
     // Power updates
     if(data.system?.power_effect != undefined)
     {
-      this.clearValueAndUnique();
       this.preparePower();
     }
     if(data.system?.values?.value_array != undefined)
@@ -77,7 +75,7 @@ export class FoundryMnM3eItem extends Item {
     return rollData;
   }
 
-  _prepareActivation() {
+  _prepareLabels() {
     //if ( !("action" in this.system) ) return;
     const C = CONFIG.MNM3E;
 
@@ -95,12 +93,12 @@ export class FoundryMnM3eItem extends Item {
     else if (rng.range == "close")
     {
       this.prepareRanges();
-      this.labels.range = rng.close + " " + GetDistanceName(false); 
+      this.labels.range = rng.close + " " + ScaleTable.GetDistanceName(false); 
     }
     else
     {
       this.prepareRanges();
-      this.labels.range = rng.close + "/" + rng.medium + "/" + rng.far + " " + GetDistanceName(false);
+      this.labels.range = rng.close + "/" + rng.medium + "/" + rng.far + " " + ScaleTable.GetDistanceName(false);
     }
 
     // Duration label
@@ -131,10 +129,11 @@ export class FoundryMnM3eItem extends Item {
     // Other Saving throws
     switch ( this.type ) {
       case "power":
-        this.getSaveDC();
-        this.getDamageDC();
         this.prepareTransformativeDataPowers();
-        //this.prepareCostTotal();
+        if(this.system.save.resistance != "" && this.system.save.resistance != "none") this.getSaveDC();
+        if(this.system.damage.resistance != "" && this.system.damage.resistance != "none") this.getDamageDC();
+        if(this.system.area.type != "" && this.system.area.type != "none") this.getAreaSaveDC();
+        this.prepareFinalDescription();
       break;
       case "advantage":
         this.setAdvantageItemName();
@@ -166,18 +165,52 @@ export class FoundryMnM3eItem extends Item {
     updateData["system.ranges.range"] = powerData.range;
     updateData["system.type"] = powerData.type;
     updateData["system.save.resistance"] = powerData.savingthrow;
-    updateData["system.damage.resistance"] = powerData.damage ?? "";
+    updateData["system.damage.resistance"] = powerData.damage ?? ''; // FIXME: This quite often just stops working?
 
-    updateData["system.power_cost.manual_purchase"] = powerData.manual_purchase ?? true
+    updateData["system.power_cost.manual_purchase"] = powerData.manual_purchase ?? true;
     updateData["system.power_cost.max_ranks"] = powerData.max_ranks ?? 50;
 
-    //console.debug(updateData);
-
+    //Data is not always updated if you switch too quickly :/
     this.update(updateData);
 
-    if(powerData == false) return;
+    if(powerData.data == false) return;
 
     this.preparePowers(powerData.data ?? {});
+  }
+
+  preparePowers(data)
+  {
+    this.clearValueAndUnique();
+
+    var updateData = {};
+    switch (this.system.power_effect) {
+      case 'affliction':        
+        updateData["system.unique.value_one"]= this.ListFiller(data.rank1, CONFIG.MNM3E.conditions);
+        updateData["system.unique.value_two"]= this.ListFiller(data.rank2, CONFIG.MNM3E.conditions);
+        updateData["system.unique.value_three"]= this.ListFiller(data.rank3, CONFIG.MNM3E.conditions);
+        updateData["system.unique.resistancecheck"]= this.ListFiller(data.resistance, CONFIG.MNM3E.defenses);
+        break;
+      case 'communication':
+        updateData["system.unique.value_one"]= this.ListFiller(data.sensetype, CONFIG.MNM3E.SenseTypes);
+        break;
+      case 'damage':
+        updateData["system.values.value_one"] = false;
+        break;
+      case 'enhancedability':
+        updateData["system.unique.value_one"] = this.ListFiller(data, CONFIG.MNM3E.abilities);
+        break;
+      case 'enhancedextra':
+        
+        break;
+      case 'enhancedtrait':
+        updateData["system.unique.value_one"] = {
+          ...CONFIG.MNM3E.defenses,
+          ...this.skillsWithCharacterNames()
+        };
+        updateData["system.unique.value_two"] = CONFIG.MNM3E.AdvantageEnum;
+        break;
+    }
+    this.update(updateData);
   }
 
   prepareAdvantage(){
@@ -232,37 +265,6 @@ export class FoundryMnM3eItem extends Item {
     this.update(updateData);
   }
 
-  preparePowers(data)
-  {
-    var updateData = {};
-    switch (this.system.power_effect) {
-      case 'affliction':        
-        updateData["system.unique.value_one"]= this.ListFiller(data.rank1, CONFIG.MNM3E.conditions);
-        updateData["system.unique.value_two"]= this.ListFiller(data.rank2, CONFIG.MNM3E.conditions);
-        updateData["system.unique.value_three"]= this.ListFiller(data.rank3, CONFIG.MNM3E.conditions);
-        updateData["system.unique.resistancecheck"]= this.ListFiller(data.resistance, CONFIG.MNM3E.defenses);
-        break;
-      case 'damage':
-        updateData["system.values.value_one"] = false;
-        break;
-      case 'enhancedability':
-        updateData["system.unique.value_one"] = this.ListFiller(data, CONFIG.MNM3E.abilities);
-        break;
-      case 'enhancedextra':
-        
-        break;
-      case 'enhancedtrait':
-        updateData["system.unique.value_one"] = {
-          ...CONFIG.MNM3E.defenses,
-          ...this.skillsWithCharacterNames()
-        };
-        updateData["system.unique.value_two"] = CONFIG.MNM3E.AdvantageEnum;
-        break;
-    }
-
-    this.update(updateData);
-  }
-
   /**
    * @param {array} data Array with values from where to pull value names
    * @param {object} table Config object to use
@@ -300,26 +302,33 @@ export class FoundryMnM3eItem extends Item {
 
   getSaveDC() 
   {
-    if ( this.system.save.resistance == "" ||  this.system.save.effect == "" || this.system.save.effect == null ) return null;
-
     const save = this.system.save;
-    const dc =  parseInt(save.effect) + 10;
+    var dc = this.system.power_cost.active_rank + 10;
 
-    const abl = CONFIG.MNM3E.abilities[save.resistance]?.label ?? "";
-    this.labels.save = game.i18n.format("MNM3E.SaveDC", {dc: dc || "", ability: abl});
-    return dc;
+    this.system.save.effect = dc;
+  }
+
+  getAreaSaveDC() 
+  {
+    const save = this.system.area.save;
+    var dc = this.system.power_cost.active_rank + 10;
+
+    this.system.save.effect = dc;
   }
 
   getDamageDC() 
   {
-    if ( this.system.damage.resistance == "" ||  this.system.damage.effect == "" ||  this.system.damage.effect == null) return null;
-
     const save = this.system.damage;
-    const dc = parseInt(save.effect) + 15;
+    var dc = this.system.power_cost.active_rank + 15;
+
+    if(this.system.values.value_one === true)
+    {
+      dc += this.actor.system.abilities.str.total;
+    }
 
     const abl = CONFIG.MNM3E.abilities[save.resistance]?.label ?? "";
     this.labels.damage = game.i18n.format("MNM3E.SaveDamageDC", {dc: dc || "", ability: abl});
-    return dc;
+    this.system.damage.effect = dc;
   }
 
   getAttackToHit() 
@@ -465,34 +474,143 @@ export class FoundryMnM3eItem extends Item {
       return;
     }
     
-    if (this.system.power_effect == 'enhancedability' || this.system.power_effect == 'enhancedtrait')
-    {
-      const defenses = Object.keys(CONFIG.MNM3E.defenses);
-      const skills = Object.keys(CONFIG.MNM3E.skills);
+    switch (this.system.power_effect) {
+      case 'enhancedability':
+      case 'enhancedtrait':
+        const defenses = Object.keys(CONFIG.MNM3E.defenses);
+        const skills = Object.keys(CONFIG.MNM3E.skills);
 
-      this.system.values.value_array.forEach(element => {
-        const name = element[0] != '' ? element[0] : 'str';
-        var typeBonus = '';
-        if(this.system.power_effect == 'enhancedability')
-        {
-          typeBonus = 'abilities';
-        }
-        else if (defenses.includes(name))
-        {
-          typeBonus = 'defenses';
-        }
-        else if (skills.includes(name))
-        {
-          typeBonus = 'skills';
-        }
+        this.system.values.value_array.forEach(element => {
+          const name = element[0] != '' ? element[0] : 'str';
+          var typeBonus = '';
+          if(this.system.power_effect == 'enhancedability')
+          {
+            typeBonus = 'abilities';
+          }
+          else if (defenses.includes(name))
+          {
+            typeBonus = 'defenses';
+          }
+          else if (skills.includes(name))
+          {
+            typeBonus = 'skills';
+          }
 
-        const val = {
-          key:`system.${typeBonus}.${name}.auto`,
+          const val = {
+            key:`system.${typeBonus}.${name}.auto`,
+            mode: 2,
+            value: element[1] != '' ? element[1] : '0'
+          };
+          effects.push(val);
+        });
+       break;
+      
+      case 'growth':
+        var rank = this.system.power_cost.active_rank;
+
+        if(this.actor.system.abilities.sta.purchased < -5)
+        {
+          // If Absent
+          const conbuff = {
+            key:`system.defenses.toughness.auto`,
+            mode: 2,
+            value: rank
+          };
+          effects.push(conbuff);
+        }
+        else
+        {
+          const conbuff = {
+            key:`system.abilities.sta.auto`,
+            mode: 2,
+            value: rank
+          };
+          effects.push(conbuff);
+        }
+        
+        var growthbonus = [
+        {
+          key:`system.abilities.str.auto`,
           mode: 2,
-          value: element[1] != '' ? element[1] : '0'
+          value: rank
+        },
+        {
+          key:`system.skills.inm.auto`,
+          mode: 2,
+          value: Math.floor(rank/2)
+        },
+        {
+          key:`system.speed.walk.rank`,
+          mode: 2,
+          value: Math.floor(rank/8)
+        },
+        {
+          key:`system.skills.ste.auto`,
+          mode: 2,
+          value: `-${rank}`
+        },
+        {
+          key:`system.skills.ste.auto`,
+          mode: 2,
+          value: `-${rank}`
+        },
+        {
+          key:`system.defenses.dodge.auto`,
+          mode: 2,
+          value: `-${Math.floor(rank/2)}`
+        },
+        {
+          key:`system.defenses.parry.auto`,
+          mode: 2,
+          value: `-${Math.floor(rank/2)}`
         }
-        effects.push(val);
-      });
+        //FIXME: Mass +1 for each rank. Size +1 for each 4 ranks
+        ];
+
+        effects.push(growthbonus);
+        break;
+
+      case 'shrinking':
+        var rank = this.system.power_cost.active_rank;
+
+        var shrinkbonus = [
+        {
+          key:`system.skills.ste.auto`,
+          mode: 2,
+          value: rank
+        },
+        {
+          key:`system.skills.inm.auto`,
+          mode: 2,
+          value: `-${Math.floor(rank/2)}`
+        },
+        {
+          key:`system.defenses.dodge.auto`,
+          mode: 2,
+          value: Math.floor(rank/2)
+        },
+        {
+          key:`system.defenses.parry.auto`,
+          mode: 2,
+          value: Math.floor(rank/2)
+        },
+        {
+          key:`system.speed.walk.rank`,
+          mode: 2,
+          value: `-${Math.floor(rank/8)}`
+        },
+        {
+          key:`system.abilities.str.auto`,
+          mode: 2,
+          value: `-${Math.floor(rank/4)}`
+        }
+        //FIXME: Size -1 for each 4 ranks
+        ];
+        effects.push(shrinkbonus);
+        break;
+
+      default:
+        return;
     }
 
     if(aefs.length == 0)
@@ -581,5 +699,82 @@ export class FoundryMnM3eItem extends Item {
       });
       return roll;
     }
+  }
+
+  /**
+   * This is a vague solution for the small field above the description
+   * which just has all data in short
+   */
+  prepareFinalDescription()
+  {
+    var combdesc = [];
+    const conf = CONFIG.MNM3E;
+    const data = this.system;
+
+    if (data.power_effect == "" && data.power_effect == null) return;
+
+    switch (data.power_effect) {
+      case value:
+        
+        break;
+    
+      default:
+        break;
+    }
+    
+    // Area filler
+    if(data.area.type != "" && data.area.type != null)
+    {
+      switch (data.area.type) {
+        case 'areaburst':
+        case 'areacloud':
+          var rangeString = ScaleTable.GetScale(data.area.range, 'distancedisplay');
+          var areasize = game.i18n.format("MNM3E.areaSphereDescription", {range: rangeString});
+          combdesc.push(game.i18n.format("MNM3E.areaFullDescription", {type: conf.attackType[data.area.type], scale: areasize, dc: data.save.effect || "", ability: conf.defenses[data.save.resistance]}));
+          break;
+
+        case 'areacylinder':
+          var rangeString = ScaleTable.GetScale(data.area.range, 'distancedisplay');
+          var areasize = game.i18n.format("MNM3E.areaCylinderDescription", {range: rangeString});
+          combdesc.push(game.i18n.format("MNM3E.areaFullDescription", {type: conf.attackType[data.area.type], scale: areasize, dc: data.save.effect || "", ability: conf.defenses[data.save.resistance]}));
+          break;
+
+        case 'areacone':
+          var rangeString = ScaleTable.GetScale(data.area.range, 'distancedisplay');
+          var areasize = game.i18n.format("MNM3E.areaConeDescription", {range: rangeString});
+          combdesc.push(game.i18n.format("MNM3E.areaFullDescription", {type: conf.attackType[data.area.type], scale: areasize, dc: data.save.effect || "", ability: conf.defenses[data.save.resistance]}));
+          break;
+
+        case 'arealine':
+          var rangeString = ScaleTable.GetScale(data.area.range, 'distancedisplay');
+          var range2String = ScaleTable.GetScale(data.area.range2, 'distancedisplay');
+          var areasize = game.i18n.format("MNM3E.areaLineDescription", {range: rangeString, range2: range2String});
+          combdesc.push(game.i18n.format("MNM3E.areaFullDescription", {type: conf.attackType[data.area.type], scale: areasize, dc: data.save.effect || "", ability: conf.defenses[data.save.resistance]}));
+          break;
+
+        case 'areashapeable':
+          var rangeString = ScaleTable.GetScale(data.area.range, 'massdisplay');
+          var areasize = game.i18n.format("MNM3E.areaShapeableDescription", {range: rangeString});
+          combdesc.push(game.i18n.format("MNM3E.areaFullDescription", {type: conf.attackType[data.area.type], scale: areasize, dc: data.save.effect || "", ability: conf.defenses[data.save.resistance]}));
+          break;
+
+        case 'areaperception':
+          combdesc.push(game.i18n.format("MNM3E.areaPerceptionDescription", {dc: data.save.effect || "", ability: conf.defenses[data.save.resistance]}));
+          break;
+      }
+    }
+    else if(data.save.resistance != "" && data.save.resistance != "none")
+    {
+      combdesc.push(game.i18n.format("MNM3E.SaveDC", {dc: data.save.effect || "", ability: conf.defenses[data.save.resistance]}));
+    }
+
+    if(data.damage.resistance != "" && data.damage.resistance != "none")
+    {
+      combdesc.push(game.i18n.format("MNM3E.SaveDamageDC", {dc: data.damage.effect || "", ability: conf.defenses[data.damage.resistance]}));
+    }
+
+
+
+    this.system.combineddescription = combdesc.join(', ');
   }
 }
