@@ -1,5 +1,5 @@
-import GetPowerData from "../helpers/PowersData.mjs"
-import GetAdvantagesData from "../helpers/AdvantagesData.mjs"
+import GetPowerData from "../helpers/dataholders/PowersData.mjs"
+import GetAdvantagesData from "../helpers/dataholders/AdvantagesData.mjs"
 import * as ScaleTable from "../helpers/data-tables.mjs";
 import ActiveEffectMnm3e from "../helpers/effects.mjs";
 

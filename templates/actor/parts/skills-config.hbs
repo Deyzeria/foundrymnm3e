@@ -1,27 +1,27 @@
-<form>
+<form autocomplete="off">
+  <div>
+    <label>Skills Ability</label>
+    <select name="system.skills.{{key}}.ability">
+      {{selectOptions abilities selected=entry.ability}}
+    </select>
     <div>
-        <label>Skills Ability</label>
-        <select name="system.skills.{{key}}.ability">
-            {{selectOptions abilities selected=entry.ability}}
-        </select>
-        <div>
-        {{#if edSubtype}}
-        <label>Specific Name:</label>
-        <input name="system.skills.{{key}}.subtype" type="text" onfocus="addSpecificPart(this, '{{edName}}')" onblur="addSpecificPart(this, '{{edName}}')" value="{{entry.subtype}}">
-        {{/if}}
-        </div>
+    {{#if edSubtype}}
+      <label>Specific Name:</label>
+      <input name="system.skills.{{key}}.subtype" type="text" onfocus="addSpecificPart(this, '{{edName}}')" onblur="addSpecificPart(this, '{{edName}}')" value="{{entry.subtype}}">
+    {{/if}}
     </div>
+  </div>
 
-    <button type="submit"><i class="far fa-save"></i> {{localize "Submit"}}</button>
+  <button type="submit"><i class="far fa-save"></i> {{localize "Submit"}}</button>
 
 <pre>
-    <script>
-      function addSpecificPart(input, edName) {
-        var specificPart = edName + ": ";
-        if (!input.value.startsWith(specificPart)) {
-            input.value = specificPart + input.value;
-        }
+  <script>
+    function addSpecificPart(input, edName) {
+      var specificPart = edName + ": ";
+      if (!input.value.startsWith(specificPart)) {
+        input.value = specificPart + input.value;
       }
-    </script>
+    }
+  </script>
 </pre>
 </form>

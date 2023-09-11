@@ -213,7 +213,7 @@ preLocalize("skills");
 
    MNM3E.ExtrasGeneral = {
 	accurate: "MNM3E.exAccurate",
-	affcorporeasl: "MNM3E.exAffectsCorporeal",
+	affcorporeals: "MNM3E.exAffectsCorporeal",
 	affinsubstantial: "MNM3E.exAffectsInsubstantial",
 	affobjects: "MNM3E.exAffectsObjects",
 	affothers: "MNM3E.exAffectsOthers",

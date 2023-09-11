@@ -9,7 +9,7 @@ export default class SkillsConfig extends BaseConfigSheet {
   
       /**
        * Cloned copy of the actor for previewing changes.
-       * @type {Actor5e}
+       * @type {FoundryMnM3eActor}
        */
       this.clone = this.document.clone();
     }
@@ -17,7 +17,7 @@ export default class SkillsConfig extends BaseConfigSheet {
     /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["mnm3e", "skills-config"],
+      classes: ["foundrymnm3e", "skills-config"],
       template: "systems/foundrymnm3e/templates/actor/parts/skills-config.hbs",
       width: 320,
       height: "auto",
@@ -48,7 +48,7 @@ export default class SkillsConfig extends BaseConfigSheet {
       var type = "";
       if(subtypeBool)
       {
-        type = this.isSubtypeType;
+        type = this.isSubtypeType();
       }
       return{
         abilities: CONFIG.MNM3E.abilities,
