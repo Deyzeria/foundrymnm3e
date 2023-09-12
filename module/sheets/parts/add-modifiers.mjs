@@ -6,7 +6,7 @@ export default class ExtrasFlawsSheet extends BaseConfigSheet {
       super(...args);
   
       /**
-       * Cloned copy of the actor for previewing changes.
+       * Cloned copy of the item for previewing changes.
        * @type {FoundryMnM3eItemSheet}
        */
       this.clone = this.document.clone();
@@ -24,14 +24,17 @@ export default class ExtrasFlawsSheet extends BaseConfigSheet {
       });
   }
 
+  get title() {
+    return "Add Extras and Flaws";
+  }
+
   getData(options={})
   {
-    console.debug(this);
     var responseList = GetAllExtrasFlaws(this.options.power_effect);
     for (let i = 0; i < responseList.length; i++) {
-      
-      
+      console.debug(responseList[i]); //FIXME: Fix this thing
     }
+    console.debug(responseList);
 
     return {
       responseList: responseList

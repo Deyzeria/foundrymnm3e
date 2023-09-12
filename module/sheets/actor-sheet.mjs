@@ -1,7 +1,6 @@
 import ActiveEffectMnm3e from "../helpers/effects.mjs";
 
 import SkillsConfig from "./parts/skills-config.mjs"
-import OnClickSkills from "./parts/skills-config.mjs"
 
 /**
  * Extend the basic ActorSheet with some very simple modifications

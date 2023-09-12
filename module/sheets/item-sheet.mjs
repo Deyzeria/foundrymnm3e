@@ -244,7 +244,8 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
       await this._onSubmit(event);  // Submit any unsaved changes
       event.stopPropagation();
       let app;
-      app = new ExtrasFlawsSheet(this.item, {power_effect: this.item.system.power_effect})
+      app = new ExtrasFlawsSheet(this.item);
+      app.render(true);
       // const extrasflaws = this.item.system.extrasflaws;
       // return this.item.update({"system.extrasflaws.parts": extrasflaws.parts.concat([["", "", 0]])});
     }

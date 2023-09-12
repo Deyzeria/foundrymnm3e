@@ -713,14 +713,14 @@ export class FoundryMnM3eItem extends Item {
 
     if (data.power_effect == "" && data.power_effect == null) return;
 
-    switch (data.power_effect) {
-      case value:
+    // switch (data.power_effect) {
+    //   case value:
         
-        break;
+    //     break;
     
-      default:
-        break;
-    }
+    //   default:
+    //     break;
+    // }
     
     // Area filler
     if(data.area.type != "" && data.area.type != null)

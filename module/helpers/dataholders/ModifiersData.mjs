@@ -268,11 +268,11 @@ const ExtrasGeneral = {
     type: "extraflat",
     effect: false
   }
-}
+};
 
 const FlawsGeneral = {
 
-}
+};
 
 /**
  * 
@@ -280,55 +280,58 @@ const FlawsGeneral = {
  * @returns {Object} 
  */
 export default function GetAllExtrasFlaws(power_type) {
-  var returnextras = new Object;
+  var returnextras = 
+  {
+    ...ExtrasGeneral
+  };
 
 
   var defaultMods = {
     ...ExtrasGeneral,
-    ...FlawsGeneral
+    //...FlawsGeneral
   }
 
   return returnextras;
 }
 
-CustomExtrasFlaws()
-{
-  var customExFl = game.settings.get("foundrymnm3e", "customexfl");
-  /*
-    customExFl = [
-      {
-        id: 'accurate',
-        name: 'Accurate',
-        manual_pay: false
-        type: ['','','',''] 'extraflat',
-        cost: 0,
-        maxranks: 0,
-        effect: false
-      }
-    ]
-  */
-  customExFl.forEach(element => {
-    var toAdd = {
-      type: element.type ?? 'extra',
-      cost: element.cost ?? 0,
-      manual_pay: element.manual_pay ?? false,
-      maxranks: element.maxranks ?? null,
-      effect: element.effect == '' ? false : element.effect
-    };
+// CustomExtrasFlaws()
+// {
+//   //var customExFl = game.settings.get("foundrymnm3e", "customexfl");
+//   /*
+//     customExFl = [
+//       {
+//         id: 'accurate',
+//         name: 'Accurate',
+//         manual_pay: false
+//         type: ['','','',''] 'extraflat',
+//         cost: 0,
+//         maxranks: 0,
+//         effect: false
+//       }
+//     ]
+//   */
+//   // customExFl.forEach(element => {
+//   //   var toAdd = {
+//   //     type: element.type ?? 'extra',
+//   //     cost: element.cost ?? 0,
+//   //     manual_pay: element.manual_pay ?? false,
+//   //     maxranks: element.maxranks ?? null,
+//   //     effect: element.effect == '' ? false : element.effect
+//   //   };
 
-    const label = element.name == '' ? element.name.charAt(0).ToUpperCase() + element.name.slice(1) : element.name;
+//   //   const label = element.name == '' ? element.name.charAt(0).ToUpperCase() + element.name.slice(1) : element.name;
 
-    const conf = CONFIG.MNM3E;
+//   //   const conf = CONFIG.MNM3E;
 
-    if (element.type == 'extra' || element.type == 'extraflat') {
-      toAdd.label = label;
-      ExtrasGeneral[element.id] = toAdd;
-      conf.ExtrasGeneral[element.id] = label;
-    }
-    else {
-      toAdd.label = label;
-      FlawsGeneral[element.id] = toAdd;
-      conf.FlawsGeneral[element.id] = label;
-    }
-  });
-}
+//   //   if (element.type == 'extra' || element.type == 'extraflat') {
+//   //     toAdd.label = label;
+//   //     ExtrasGeneral[element.id] = toAdd;
+//   //     conf.ExtrasGeneral[element.id] = label;
+//   //   }
+//   //   else {
+//   //     toAdd.label = label;
+//   //     FlawsGeneral[element.id] = toAdd;
+//   //     conf.FlawsGeneral[element.id] = label;
+//   //   }
+//   // });
+// }
