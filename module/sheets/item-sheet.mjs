@@ -1,3 +1,5 @@
+import ExtrasFlawsSheet from "./parts/add-modifiers.mjs";
+
 /**
  * Extend the basic ItemSheet with some very simple modifications
  * @extends {ItemSheet}
@@ -240,8 +242,11 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
 
     if( a.classList.contains("add-exfl") ) {
       await this._onSubmit(event);  // Submit any unsaved changes
-      const extrasflaws = this.item.system.extrasflaws;
-      return this.item.update({"system.extrasflaws.parts": extrasflaws.parts.concat([["", "", 0]])});
+      event.stopPropagation();
+      let app;
+      app = new ExtrasFlawsSheet(this.item, {power_effect: this.item.system.power_effect})
+      // const extrasflaws = this.item.system.extrasflaws;
+      // return this.item.update({"system.extrasflaws.parts": extrasflaws.parts.concat([["", "", 0]])});
     }
 
     if ( a.classList.contains("delete-exfl") ) {
@@ -252,6 +257,29 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
       extrasflaws.parts.splice(value, 1)
       return this.item.update({"system.extrasflaws.parts": extrasflaws.parts});
     }
+  }
+
+  /**
+   * 
+   * @param {Object} data 
+   * @param {String} data.label Display label
+   * @param {type} data.type extra/extraflat/flaws/flawsflat Modifier
+   * @returns Creates extrasflaws part
+   */
+  async addModifier(data)
+  {
+    const extrasflaws = this.item.system.extrasflaws;
+
+    var toAdd = [
+      data.label, //Display label
+      data.type, //
+      data.cost,
+      data.id,
+      data.max_ranks,
+      data.effect
+    ];
+
+    return this.item.update({"system.extrasflaws.parts": extrasflaws.parts.concat([toAdd])});
   }
 
   async lockSheet(event){

@@ -266,12 +266,26 @@ function PopulateActorAdvantages(actorStub, dataActor)
         if (val.useradded == undefined || val.useradded == "yes")
         {
             var id = FindAdvantageId(val);
+            
+            var additionalDesc = null;
             if (id == -1)
             {
-                advToAnalyseCustom.push(val);
-                continue;
+                response = UniqueAdvantage(val);
+
+                if (response == -1)
+                {
+                    advToAnalyseCustom.push(val);
+                    continue;
+                }
+                additionalDesc
             }
-            advListToAdd.push({type: FindAdvantageType(id), rank: Number.parseInt(val.cost.value)});
+
+            var toAddArray = {
+                type: FindAdvantageType(id),
+                rank: Number.parseInt(val.cost.value),
+                additionalDesc: additionalDesc
+            }
+            advListToAdd.push(toAddArray);
         }
     }
     console.debug("Advantages Sorted: ", advListToAdd);
@@ -302,6 +316,11 @@ function FindAdvantageId(val)
     name = name.replace(pattern, '');
     var id = adConfArray.findIndex((adv) => adv == name);
     return id;
+}
+
+function UniqueAdvantage(val)
+{
+    const responseobj = new Object;
 }
 
 function FindAdvantageType(id)
@@ -369,8 +388,8 @@ function PopulateActorPowers(actorStub, dataActor)
                 descriptors: val.descriptors,
                 ranks: Number.parseInt(val.ranks),
     
-                extras: FindExtrasFlaws(val.extras.extra, true), //FIXME: Should actually assign correct values
-                flaws: FindExtrasFlaws(val.flaws.flaw, false), //FIXME: Should actually assign correct values
+                extras: FindExtrasFlaws(val.extras.extra), //FIXME: Should actually assign correct values
+                flaws: FindExtrasFlaws(val.flaws.flaw), //FIXME: Should actually assign correct values
                 options: val.options?.option ?? [],
                 traitoptions: val.traitmods?.traitmod ?? "", //FIXME: Should actually assign to correct names
                 chainedadvantages: cadv
@@ -434,17 +453,11 @@ function FindPowerId(val)
 }
 
 // FIXME:
-function FindExtrasFlaws(list, type)
+function FindExtrasFlaws(list)
 {
     var datalist;
-    if(type)
-    {
-        datalist = Object.values(CONFIG.MNM3E.ExtrasAll);
-    }
-    else
-    {
-        datalist = Object.values(CONFIG.MNM3E.FlawsAll);
-    }
+    
+    datalist = Object.values(CONFIG.MNM3E.ExtrasFlawsAll);
     
     var responselist = [];
     for (var i=0; i < list.length; i++)

@@ -1,0 +1,18 @@
+<form class="{{cssClass}}" autocomplete="off">
+  <header class="sheet-header">
+    <h1><label>Extras and Flaws list</label></h1>
+  </header>
+  <div>
+    <div class="flexrow">
+      <ul class="modifier-list">
+        {{#each responseList as |item i|}}
+          <li>
+            <a class="modifiers-part modifier" data-part="{{i}}">
+              
+            </a>
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+</form>
