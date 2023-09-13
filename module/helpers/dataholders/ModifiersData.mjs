@@ -271,7 +271,166 @@ const ExtrasGeneral = {
 };
 
 const FlawsGeneral = {
+  activation: {
+      cost: 1,
+      maxranks: 2,
+      manualpay: false,
+      type: "flawsflat",
+      effect: false
+  },
+  checkrequired: {
+      cost: 1,
+      manualpay: true,
+      type: "flawsflat",
+      effect: false
+  },
+  concentration: {
+      cost: 1,
+      manualpay: false,
+      type: "flaws",
+      effect: false
+  },
+  diminishedrange: {
+      cost: 1,
+      manualpay: true,
+      type: "flawsflat",
+      effect: false
+  },
+  distracting: {
+      cost: 1,
+      manualpay: false,
+      type: "flaws",
+      effect: false
+  },
+  fades: {
+      cost: 1,
+      manualpay: false,
+      type: "flaws",
+      effect: false
+  },
+  feedback: {
+      cost: 1,
+      manualpay: false,
+      type: "flaws",
+      effect: false
+  },
+  grabbased: {
+      cost: 1,
+      manualpay: false,
+      type: "flaws",
+      effect: false
+  },
+  increasedaction: {
+      cost: 1,
+      maxranks: 3,
+      manualpay: false,
+      type: "flaws",
+      effect: false
+  },
+  limited: {
+      cost: 1,
+      manualpay: false,
+      type: "flaws",
+      effect: false
+  },
+  noticeable: {
+      cost: 1,
+      manualpay: false,
+      type: "flawsflat",
+      effect: false
+  },
+  permanent: {
+      cost: 1,
+      manualpay: false,
+      type: "flaws",
+      effect: false
+  },
+  quirk: {
+      cost: 1,
+      manualpay: true,
+      type: "flawsflat",
+      effect: false
+  },
+  reducedrange: {
+      cost: 1,
+      maxranks: 2,
+      manualpay: false,
+      type: "flaws",
+      effect: false
+  },
+  resistible: {
+      cost: 1,
+      manualpay: false,
+      type: "flaws",
+      effect: false
+  },
+  sensedependent: {
+      cost: 1,
+      manualpay: false,
+      type: "flaws",
+      effect: false
+  },
+  sideeffect: {
+      cost: 1,
+      maxranks: 2,
+      manualpay: false,
+      type: "flaws",
+      effect: false
+  },
+  tiring: {
+      cost: 1,
+      manualpay: false,
+      type: "flaws",
+      effect: false
+  },
+  uncontrolled: {
+      cost: 1,
+      manualpay: false,
+      type: "flaws",
+      effect: false
+  },
+  unreliable: {
+      cost: 1,
+      manualpay: false,
+      type: "flaws",
+      effect: false
+  }
+};
 
+const Removable = {
+  removable: {
+    uniquecost: 1,
+    effect: true
+  },
+  easilyremovable: {
+    uniquecost: 2,
+    effect: true
+  }
+}
+
+const defaultMods = {
+  ...ExtrasGeneral,
+  ...FlawsGeneral,
+  ...Removable
+};
+
+const ExtrasSpecial = {
+
+};
+
+const FlawsSpecial = {
+
+};
+
+const specialMods = {
+  ...ExtrasSpecial,
+  ...FlawsSpecial
+};
+
+
+const allMods = {
+  ...defaultMods,
+  ...specialMods
 };
 
 /**
@@ -280,18 +439,34 @@ const FlawsGeneral = {
  * @returns {Object} 
  */
 export default function GetAllExtrasFlaws(power_type) {
-  var returnextras = 
-  {
-    ...ExtrasGeneral
-  };
+  const conf = CONFIG.MNM3E.ExtrasFlawsAll;
+  var returnModifiers = new Object();
 
+  var powerTypeMods = this.GetPowerModifiers(power_type);
 
-  var defaultMods = {
-    ...ExtrasGeneral,
-    //...FlawsGeneral
+  var returnModifiers = {
+    ...powerTypeMods,
+    ...defaultMods,
   }
 
-  return returnextras;
+  for(const mod in returnModifiers)
+  {
+    returnModifiers[mod].label = conf[mod] ?? null;
+  }
+
+  return returnModifiers;
+}
+
+function GetPowerModifiers(power_type)
+{
+  let powerModifiers = new Object();
+
+  return powerModifiers;
+}
+
+function GetSpecificModifier(modifier)
+{
+  return allMods[modifier] ?? null;
 }
 
 // CustomExtrasFlaws()
@@ -306,7 +481,8 @@ export default function GetAllExtrasFlaws(power_type) {
 //         type: ['','','',''] 'extraflat',
 //         cost: 0,
 //         maxranks: 0,
-//         effect: false
+//         effect: false,
+//         power_type: dropdown with none/selection from defaultPowerEffects
 //       }
 //     ]
 //   */

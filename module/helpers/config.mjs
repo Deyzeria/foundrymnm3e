@@ -253,7 +253,7 @@ preLocalize("ExtrasGeneral");
 
 MNM3E.ExtrasUnique = {
   cumulative: "MNM3E.exPCumulative",
-  extraCondition: "MNM3E.exPExtraCondition",
+  extracondition: "MNM3E.exPExtraCondition",
   rapid: "MNM3E.exPRapid",
   movable: "MNM3E.exPMovable",
   stationary: "MNM3E.exPStationary",
