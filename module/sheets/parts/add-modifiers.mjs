@@ -1,5 +1,5 @@
 import BaseConfigSheet from "./base-config.mjs";
-import GetAllExtrasFlaws from "../../helpers/dataholders/ModifiersData.mjs";
+import * as mods from "../../helpers/dataholders/ModifiersData.mjs";
 
 export default class ExtrasFlawsSheet extends BaseConfigSheet {
   constructor(...args) {
@@ -10,16 +10,17 @@ export default class ExtrasFlawsSheet extends BaseConfigSheet {
        * @type {FoundryMnM3eItemSheet}
        */
       this.clone = this.document.clone();
+      this.selected = "";
     }
 
 
-      /** @inheritdoc */
+  /** @inheritdoc */
   static get defaultOptions() {
       return foundry.utils.mergeObject(super.defaultOptions, {
-        classes: ["foundrymnm3e", "add-extra", "sheet"],
+        classes: ["add-extra", "foundrymnm3e"],
         template: "systems/foundrymnm3e/templates/window-overlay/add-modifiers.hbs",
         width: 600,
-        height: 800,
+        height: 690,
         sheetConfig: false
       });
   }
@@ -30,17 +31,13 @@ export default class ExtrasFlawsSheet extends BaseConfigSheet {
 
   getData(options={})
   {
-    var responseList = GetAllExtrasFlaws(this.options.power_effect);
-    for (let i = 0; i < responseList.length; i++) {
-      console.debug(responseList[i]); //FIXME: Fix this thing
-    }
-    console.debug(responseList);
-
-    return {
-      responseList: responseList
-    }
+    const context = super.getData(options);
+    
+    return foundry.utils.mergeObject(context, {
+      responseList: mods.GetAllExtrasFlaws(this.options.power_effect)
+    })
   }
-
+  
   activateListeners(html) {
     super.activateListeners(html);
 
@@ -51,22 +48,28 @@ export default class ExtrasFlawsSheet extends BaseConfigSheet {
   async addModifiersToParent(event)
   {
     event.preventDefault();
-    await this._onSubmit(event);  // Submit any unsaved changes
-    const a = event.currentTarget;
-
-    const li = a.closest(".modifiers-part");
-    const value = li.getAttribute('data-part');
+    this.document.addExFl(mods.getSpecificModifier(this.selected));
   }
 
   async showDescription(event)
   {
     event.preventDefault();
-    await this._onSubmit(event);  // Submit any unsaved changes
     const a = event.currentTarget;
+    const value = a.getAttribute('data-part');
+    this.selected = value;
 
-    const li = a.closest(".modifiers-part");
-    const value = li.getAttribute('data-part');
+    const list = a.parentNode.parentNode;
+    const previouslyHighlighted = list.querySelector('.highlighted');
+    if (previouslyHighlighted) {
+      previouslyHighlighted.classList.remove('highlighted');
+    }
 
+    a.parentNode.classList.add('highlighted');
+    
+    var description = `<h3 style="text-align: center;"><b>${CONFIG.MNM3E.ExtrasFlawsAll[value]}</b></h3>`;
+    description += CONFIG.MNM3E.ExtrasFlawsAllDesc[value] ?? "";
 
+    const b = a.parentNode.parentNode.parentNode.childNodes[2].nextSibling.childNodes[1];
+    b.innerHTML = description;
   }
 }

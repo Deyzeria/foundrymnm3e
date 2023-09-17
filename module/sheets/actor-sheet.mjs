@@ -11,7 +11,7 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
   /** @override */
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
-      classes: ["foundrymnm3e", "sheet", "actor"],
+      classes: ["character-sheet", "foundrymnm3e", "sheet", "actor"],
       template: "systems/foundrymnm3e/templates/actor/actor-sheet.hbs",
       width: 775,
       height: 800,
@@ -41,6 +41,7 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
     context.system = actorData.system;
     context.flags = actorData.flags;
     context.labels = this._getLabels();
+    context.items = Array.from(this.actor.items);
 
       // Prepare character data and items.
       if (actorData.type == 'hero') {

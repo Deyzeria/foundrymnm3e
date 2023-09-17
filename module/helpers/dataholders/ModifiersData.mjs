@@ -433,38 +433,68 @@ const allMods = {
   ...specialMods
 };
 
+const modIcons = {
+  extra: '<i class="fa-solid fa-circle-plus"></i>',
+  extraflat: '<i class="fa-solid fa-circle-plus"></i>',
+  flaws: '<i class="fa-solid fa-circle-minus"></i>',
+  flawsflat: '<i class="fa-solid fa-circle-minus"></i>'
+}
+
+export function fillDefaults()
+{
+  for(const mod in allMods)
+  {
+    allMods[mod].label = conf[mod] ?? null;
+    allMods[mod].costlabel = getCostLabel(allMods[mod].type, allMods[mod].cost);
+    allMods[mod].icon = modIcons[allMods[mod].type] ?? null;
+  }
+}
+
 /**
  * 
  * @param {string} power_type 
- * @returns {Object} 
+ * @returns {object} 
  */
-export default function GetAllExtrasFlaws(power_type) {
+export function GetAllExtrasFlaws(power_type) {
   const conf = CONFIG.MNM3E.ExtrasFlawsAll;
   var returnModifiers = new Object();
 
-  var powerTypeMods = this.GetPowerModifiers(power_type);
+  //var powerTypeMods = this.GetPowerModifiers(power_type);
 
   var returnModifiers = {
-    ...powerTypeMods,
+    //...powerTypeMods,
     ...defaultMods,
   }
 
-  for(const mod in returnModifiers)
-  {
-    returnModifiers[mod].label = conf[mod] ?? null;
-  }
+  
 
   return returnModifiers;
 }
 
-function GetPowerModifiers(power_type)
+function getCostLabel(type, cost)
+{
+  switch (type) {
+    case 'extra':
+      return `${cost}/r`;
+    case 'extraflat':
+      return `flat · ${cost}`;
+    case 'flaws':
+        return `-${cost}/r`;
+    case 'flawsflat':
+        return `flat · -${cost}`;
+    default:
+      return null;
+  }
+}
+
+function getPowerModifiers(power_type)
 {
   let powerModifiers = new Object();
 
   return powerModifiers;
 }
 
-function GetSpecificModifier(modifier)
+export function getSpecificModifier(modifier)
 {
   return allMods[modifier] ?? null;
 }

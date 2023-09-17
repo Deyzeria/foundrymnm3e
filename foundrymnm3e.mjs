@@ -10,6 +10,7 @@ import { preloadHandlebarsTemplates } from "./module/helpers/templates.mjs";
 import { ParserAccess } from "./module/helpers/HeroLabParser.mjs";
 import registerSystemSettings from "./module/settings.mjs";
 import {SetGameValues, GetScale} from "./module/helpers/data-tables.mjs";
+import { fillDefaults } from "./module/helpers/dataholders/ModifiersData.mjs";
 
 import * as dice from "./module/dice/_module.mjs";
 import * as canvas from "./module/canvas/_module.mjs";
@@ -109,7 +110,7 @@ Hooks.once('init', async function() {
     makeDefault: true,
     label: "MNM3E.SheetItem"
   });
-
+  fillDefaults();
   // Preload Handlebars templates.
   return preloadHandlebarsTemplates();
 });

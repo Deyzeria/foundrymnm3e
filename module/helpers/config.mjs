@@ -498,3 +498,43 @@ MNM3E.SenseTypes = {
   other: "MNM3E.senseOther"
 }
 preLocalize("SenseTypes");
+
+MNM3E.ExtrasFlawsAllDesc = {
+  accurate: "MNM3E.exAccurateDesc",
+  affcorporeals: "MNM3E.exAffectsCorporealDesc",
+  affinsubstantial: "MNM3E.exAffectsInsubstantialDesc",
+  affobjects: "MNM3E.exAffectsObjectsDesc",
+  affothers: "MNM3E.exAffectsOthersDesc",
+  altresist: "MNM3E.exAlternativeResistanceDesc",
+  area: "MNM3E.exAreaDesc",
+  attack: "MNM3E.exAttackDesc",
+  contagious: "MNM3E.exContagiousDesc",
+  dimensional: "MNM3E.exDimensionalDesc",
+  extendedrange: "MNM3E.exExtendedRangeDesc",
+  feature: "MNM3E.exFeatureDesc",
+  homing: "MNM3E.exHomingDesc",
+  incrduration: "MNM3E.exIncreasedDurationDesc",
+  incrmass: "MNM3E.exIncreasedMassDesc",
+  incrrange: "MNM3E.exIncreasedRangeDesc",
+  incurable: "MNM3E.exIncurableDesc",
+  indirect: "MNM3E.exIndirectDesc",
+  innate: "MNM3E.exInnateDesc",
+  insidious: "MNM3E.exInsidiousDesc",
+  linked: "MNM3E.exLinkedDesc",
+  multiattack: "MNM3E.exMultiattackDesc",
+  penetrating: "MNM3E.exPenetratingDesc",
+  precise: "MNM3E.exPreciseDesc",
+  reach: "MNM3E.exReachDesc",
+  reaction: "MNM3E.exReactionDesc",
+  reversible: "MNM3E.exReversibleDesc",
+  ricochet: "MNM3E.exRicochetDesc",
+  secondeffect: "MNM3E.exSecondaryEffectDesc",
+  selective: "MNM3E.exSelectiveDesc",
+  sleep: "MNM3E.exSleepDesc",
+  split: "MNM3E.exSplitDesc",
+  subtle: "MNM3E.exSubtleDesc",
+  sustained: "MNM3E.exSustainedDesc",
+  triggered: "MNM3E.exTriggeredDesc",
+  vardescriptor: "MNM3E.exVariableDescriptorDesc",
+}
+preLocalize("ExtrasFlawsAllDesc");

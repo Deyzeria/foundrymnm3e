@@ -461,6 +461,11 @@ export class FoundryMnM3eItem extends Item {
     }
   }
 
+  addExFl(mod)
+  {
+    console.debug(mod);
+  }
+
   addActiveEffects(){
     //if (!this.system.active) return;
     const effects = [];
