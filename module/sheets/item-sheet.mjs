@@ -179,7 +179,7 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
 
     // Handle Extras and Flaws
     const exfl = formData.system?.extrasflaws;
-    if (exfl) exfl.parts = Object.values(exfl?.parts || {}).map(d => [d[0] || "", d[1] || "", d[2] || 0]);
+    if (exfl) exfl.parts = Object.values(exfl?.parts || {}).map(d => [d[0] || "", d[1] || "", d[2] || 0], d[3] || "", d[4] || 0, d[5] || false);
 
     const ench = formData.system?.values;
     if (ench) ench.value_array = Object.values(ench?.value_array || {}).map(e => [e[0] || "", e[1] || 1]);
@@ -246,8 +246,6 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
       let app;
       app = new ExtrasFlawsSheet(this.item);
       app.render(true);
-      // const extrasflaws = this.item.system.extrasflaws;
-      // return this.item.update({"system.extrasflaws.parts": extrasflaws.parts.concat([["", "", 0]])});
     }
 
     if ( a.classList.contains("delete-exfl") ) {
@@ -260,28 +258,28 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
     }
   }
 
-  /**
-   * 
-   * @param {Object} data 
-   * @param {String} data.label Display label
-   * @param {type} data.type extra/extraflat/flaws/flawsflat Modifier
-   * @returns Creates extrasflaws part
-   */
-  async addModifier(data)
-  {
-    const extrasflaws = this.item.system.extrasflaws;
+  // /**
+  //  * 
+  //  * @param {Object} data 
+  //  * @param {String} data.label Display label
+  //  * @param {type} data.type extra/extraflat/flaws/flawsflat Modifier
+  //  * @returns Creates extrasflaws part
+  //  */
+  // async addModifier(data)
+  // {
+  //   const extrasflaws = this.item.system.extrasflaws;
 
-    var toAdd = [
-      data.label, //Display label
-      data.type, //
-      data.cost,
-      data.id,
-      data.max_ranks,
-      data.effect
-    ];
+  //   var toAdd = [
+  //     data.label, //Display label
+  //     data.type, //
+  //     data.cost,
+  //     data.id,
+  //     data.max_ranks,
+  //     data.effect
+  //   ];
 
-    return this.item.update({"system.extrasflaws.parts": extrasflaws.parts.concat([toAdd])});
-  }
+  //   return this.item.update({"system.extrasflaws.parts": extrasflaws.parts.concat([toAdd])});
+  // }
 
   async lockSheet(event){
     event.preventDefault();

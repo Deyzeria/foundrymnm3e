@@ -461,9 +461,20 @@ export class FoundryMnM3eItem extends Item {
     }
   }
 
-  addExFl(mod)
+  async addModifierExFl(mod, event)
   {
-    console.debug(mod);
+    await this._onSubmit(event);  // Submit any unsaved changes
+    event.stopPropagation();
+
+    const extrasflaws = this.item.system.extrasflaws;
+    return this.update({"system.extrasflaws.parts": extrasflaws.parts.concat([[
+      mod.label, //Display label
+      mod.type, //
+      mod.cost,
+      mod.id,
+      mod.max_ranks,
+      mod.effect
+    ]])});
   }
 
   addActiveEffects(){

@@ -320,6 +320,12 @@ const FlawsGeneral = {
       type: "flaws",
       effect: false
   },
+  inaccurate: {
+    cost: 1,
+    manualpay: true,
+    type: "flawsflat",
+    effect: false
+},
   increasedaction: {
       cost: 1,
       maxranks: 3,
@@ -445,6 +451,7 @@ export function fillDefaults()
   for(const mod in allMods)
   {
     allMods[mod].label = conf[mod] ?? null;
+    allMods[mod].id = mod;
     allMods[mod].costlabel = getCostLabel(allMods[mod].type, allMods[mod].cost);
     allMods[mod].icon = modIcons[allMods[mod].type] ?? null;
   }
@@ -465,8 +472,6 @@ export function GetAllExtrasFlaws(power_type) {
     //...powerTypeMods,
     ...defaultMods,
   }
-
-  
 
   return returnModifiers;
 }
