@@ -13,16 +13,16 @@
  * @param {boolean} [options.reliableTalent=false]     Allow Reliable Talent to modify this roll?
  */
 export default class D20Roll extends Roll {
-    constructor(formula, data, options) {
-      super(formula, data, options);
-      if ( !this.options.configured ) this.configureModifiers();
+  constructor(formula, data, options) {
+    super(formula, data, options);
+    if (!this.options.configured) this.configureModifiers();
   }
 
   static fromRoll(roll) {
-      const newRoll = new this(roll.formula, roll.data, roll.options);
-      Object.assign(newRoll, roll);
-      return newRoll;
-    }
+    const newRoll = new this(roll.formula, roll.data, roll.options);
+    Object.assign(newRoll, roll);
+    return newRoll;
+  }
 
 
   static MODE = {
@@ -35,7 +35,7 @@ export default class D20Roll extends Roll {
   * @type {boolean}
   */
   get hasImproved() {
-      return this.options.improved === D20Roll.MODE.IMPROVED;
+    return this.options.improved === D20Roll.MODE.IMPROVED;
   }
 
   /**
@@ -49,7 +49,7 @@ export default class D20Roll extends Roll {
   * @type {boolean}
   */
   get validRoll() {
-      return (this.terms[0] instanceof Die) && ((this.terms[0].faces === 20) || (this.terms[0].faces === 10));
+    return (this.terms[0] instanceof Die) && ((this.terms[0].faces === 20) || (this.terms[0].faces === 10));
   }
 
   /**
@@ -57,49 +57,47 @@ export default class D20Roll extends Roll {
   * @type {boolean|void}
   */
   get isCritical() {
-      if ( !this.validRoll || !this._evaluated ) return undefined;
-      if ( !Number.isNumeric(this.options.critical) ) return false;
-      return this.dice[0].total >= this.options.critical;
-    }
+    if (!this.validRoll || !this._evaluated) return undefined;
+    if (!Number.isNumeric(this.options.critical)) return false;
+    return this.dice[0].total >= this.options.critical;
+  }
 
   /**
   * Is this roll a critical failure? Returns undefined if roll isn't evaluated.
   * @type {boolean|void}
   */
   get isFumble() {
-      if ( !this.validRoll || !this._evaluated ) return undefined;
-      if ( !Number.isNumeric(this.options.fumble) ) return false;
-      return this.dice[0].total <= this.options.fumble;
-  } 
+    if (!this.validRoll || !this._evaluated) return undefined;
+    if (!Number.isNumeric(this.options.fumble)) return false;
+    return this.dice[0].total <= this.options.fumble;
+  }
 
   configureModifiers() {
-      if ( !this.validRoll ) return;
+    if (!this.validRoll) return;
 
-      const d20 = this.terms[0];
-      d20.modifiers = [];
-      d20.number = 1;
+    const d20 = this.terms[0];
+    d20.modifiers = [];
+    d20.number = 1;
 
-      //call this by adding improved: 1
-      if ( this.hasImproved ) 
-      {
-        d20.modifiers.push("imp");
-      }
-      
+    //call this by adding improved: 1
+    if (this.hasImproved) {
+      d20.modifiers.push("imp");
+    }
 
-      if ( this.options.critical ) d20.options.critical = this.options.critical;
-      if ( this.options.fumble ) d20.options.fumble = this.options.fumble;
-      if ( this.options.targetValue ) d20.options.target = this.options.targetValue;
 
-      // Re-compile the underlying formula
-      this._formula = this.constructor.getFormula(this.terms);
+    if (this.options.critical) d20.options.critical = this.options.critical;
+    if (this.options.fumble) d20.options.fumble = this.options.fumble;
+    if (this.options.targetValue) d20.options.target = this.options.targetValue;
 
-      // Mark configuration as complete
-      this.options.configured = true;
+    // Re-compile the underlying formula
+    this._formula = this.constructor.getFormula(this.terms);
+
+    // Mark configuration as complete
+    this.options.configured = true;
   }
 
   /** @inheritdoc */
-  async toMessage(messageData={}, options={}) 
-  {
+  async toMessage(messageData = {}, options = {}) {
     // Add appropriate advantage mode message flavor and dnd5e roll flags
     messageData.flavor = messageData.flavor || this.options.flavor;
     if (this.hasImproved) messageData.flavor += ` (${game.i18n.localize("MNM3E.ImprovedRoll")})`
@@ -109,7 +107,7 @@ export default class D20Roll extends Roll {
     return super.toMessage(messageData, options);
   }
 
-  
+
   /* -------------------------------------------- */
   /*  Configuration Dialog    #FIXME:             */
   /* -------------------------------------------- */
@@ -117,7 +115,7 @@ export default class D20Roll extends Roll {
   /**
    * Create a Dialog prompt used to configure evaluation of an existing D20Roll instance.
    */
-  async configureDialog({title, defaultRollMode, template}={}, options={}) {
+  async configureDialog({ title, defaultRollMode, template } = {}, options = {}) {
     // Render the Dialog inner HTML
     const content = await renderTemplate(template ?? this.constructor.EVALUATION_TEMPLATE, {
       formula: `${this.formula} + @total`,
@@ -129,7 +127,7 @@ export default class D20Roll extends Roll {
     });
 
     let defaultButton = "normal";
-    switch ( defaultAction ) {
+    switch (defaultAction) {
       case D20Roll.MODE.IMPROVED: defaultButton = "improved"; break;
     }
 

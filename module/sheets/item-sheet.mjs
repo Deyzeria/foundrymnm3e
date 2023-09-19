@@ -81,7 +81,7 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
           locked: systemData.locked,
           lock: this._getCheckmarkIcon(systemData.locked)
         });
-      break;
+        break;
       case "advantage":
         const syst = this.item.system;
         foundry.utils.mergeObject(context, {
@@ -124,7 +124,7 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
   _getItemProperties() {
     const props = [];
     const labels = this.item.labels;
-    switch ( this.item.type ) {
+    switch (this.item.type) {
       case "device":
       case "power":
         props.push(labels.activate);
@@ -137,9 +137,8 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
     return props.filter(p => !!p);
   }
 
-  _getItemStatus()
-  {
-    switch ( this.item.type ) {
+  _getItemStatus() {
+    switch (this.item.type) {
       case "power":
         return CONFIG.MNM3E.powerTypeEnum[this.item.system.type]
       case "advantage":
@@ -148,7 +147,7 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
     return null;
   }
 
-  _getCheckmarkIcon(level){
+  _getCheckmarkIcon(level) {
     const icons = {
       true: '<i class="fa-solid fa-lock"></i>',
       false: '<i class="fa-solid fa-lock-open"></i>',
@@ -156,7 +155,7 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
     return icons[level] || icons[0];
   }
 
-  _getActiveIcon(level){
+  _getActiveIcon(level) {
     const icons = {
       false: '<i class="fa-solid fa-circle-xmark"></i>',
       true: '<i class="fa-solid fa-circle-check"></i>',
@@ -164,7 +163,7 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
     return icons[level] || icons[0];
   }
 
-  _canBePurchased(){
+  _canBePurchased() {
     const returnV = this.item.system.power_cost.manual_purchase ? false : true;
     return returnV;
   }
@@ -174,7 +173,7 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _getSubmitData(updateData={}) {
+  _getSubmitData(updateData = {}) {
     const formData = foundry.utils.expandObject(super._getSubmitData(updateData));
 
     // Handle Extras and Flaws
@@ -187,9 +186,8 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
     return foundry.utils.flattenObject(formData);
   }
 
-  _disableOverriddenFields(html){
-    if(!this.item.system.power_cost.manual_purchase)
-    {
+  _disableOverriddenFields(html) {
+    if (!this.item.system.power_cost.manual_purchase) {
       const toggle = html.find(`.rank`);
       toggle[0].disabled = true;
     }
@@ -208,39 +206,38 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
 
     html.find(".lockbutton").click(this.lockSheet.bind(this));
     // Roll handlers, click handlers, etc. would go here.
-    if(this.item.type == "power")
-    {
+    if (this.item.type == "power") {
       this._disableOverriddenFields(html);
     }
   }
 
-    // Adding and removing extras and flaws
-  async onEnchControl(event){
+  // Adding and removing extras and flaws
+  async onEnchControl(event) {
     event.preventDefault();
     const a = event.currentTarget;
 
-    if( a.classList.contains("add-ench") ) {
+    if (a.classList.contains("add-ench")) {
       await this._onSubmit(event);  // Submit any unsaved changes
       const values = this.item.system.values;
-      return this.item.update({"system.values.value_array": values.value_array.concat([["", 1]])});
+      return this.item.update({ "system.values.value_array": values.value_array.concat([["", 1]]) });
     }
 
-    if ( a.classList.contains("delete-ench") ) {
+    if (a.classList.contains("delete-ench")) {
       await this._onSubmit(event);  // Submit any unsaved changes
       const li = a.closest(".ench-part");
-      const value = li.getAttribute('data-ench-part'); 
+      const value = li.getAttribute('data-ench-part');
       const values = foundry.utils.deepClone(this.item.system.values);
       values.value_array.splice(value, 1)
-      return this.item.update({"system.values.value_array": values.value_array});
+      return this.item.update({ "system.values.value_array": values.value_array });
     }
   }
 
   // Adding and removing extras and flaws
-  async onExFlControl(event){
+  async onExFlControl(event) {
     event.preventDefault();
     const a = event.currentTarget;
 
-    if( a.classList.contains("add-exfl") ) {
+    if (a.classList.contains("add-exfl")) {
       await this._onSubmit(event);  // Submit any unsaved changes
       event.stopPropagation();
       let app;
@@ -248,13 +245,13 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
       app.render(true);
     }
 
-    if ( a.classList.contains("delete-exfl") ) {
+    if (a.classList.contains("delete-exfl")) {
       await this._onSubmit(event);  // Submit any unsaved changes
       const li = a.closest(".exfl-part");
-      const value = li.getAttribute('data-exfl-part'); 
+      const value = li.getAttribute('data-exfl-part');
       const extrasflaws = foundry.utils.deepClone(this.item.system.extrasflaws);
       extrasflaws.parts.splice(value, 1)
-      return this.item.update({"system.extrasflaws.parts": extrasflaws.parts});
+      return this.item.update({ "system.extrasflaws.parts": extrasflaws.parts });
     }
   }
 
@@ -281,9 +278,9 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
   //   return this.item.update({"system.extrasflaws.parts": extrasflaws.parts.concat([toAdd])});
   // }
 
-  async lockSheet(event){
+  async lockSheet(event) {
     event.preventDefault();
     await this._onSubmit(event);
-    return this.item.update({"system.locked": true})
+    return this.item.update({ "system.locked": true })
   }
 }

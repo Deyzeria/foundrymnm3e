@@ -43,27 +43,27 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
     context.labels = this._getLabels();
     context.items = Array.from(this.actor.items);
 
-      // Prepare character data and items.
-      if (actorData.type == 'hero') {
-        this._prepareItems(context);
-        this._prepareCharacterData(context);
-      }
-
-      // Prepare NPC data and items.
-      if (actorData.type == 'vehicle') {
-      }
-
-      if (actorData.type == 'base') {
-      }
-
-      // Add roll data for TinyMCE editors.
-      context.rollData = context.actor.getRollData();
-
-      // Prepare active effects
-      context.effects = ActiveEffectMnm3e.prepareActiveEffectCategories(this.actor.effects);
-
-      return context;
+    // Prepare character data and items.
+    if (actorData.type == 'hero') {
+      this._prepareItems(context);
+      this._prepareCharacterData(context);
     }
+
+    // Prepare NPC data and items.
+    if (actorData.type == 'vehicle') {
+    }
+
+    if (actorData.type == 'base') {
+    }
+
+    // Add roll data for TinyMCE editors.
+    context.rollData = context.actor.getRollData();
+
+    // Prepare active effects
+    context.effects = ActiveEffectMnm3e.prepareActiveEffectCategories(this.actor.effects);
+
+    return context;
+  }
 
   /**
    * Organize and classify Items for Character sheets.
@@ -72,15 +72,15 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
    *
    * @return {undefined}
    */
-   _prepareCharacterData(context) {
+  _prepareCharacterData(context) {
     // Handle ability scores.
     for (let [k, abi] of Object.entries(context.system.abilities)) {
       abi.label = CONFIG.MNM3E.abilities[k] ?? k;
-      if(abi.purchased < -5) {
+      if (abi.purchased < -5) {
         abi.status = ` ${game.i18n.localize("MNM3E.Absent")}`;
         abi.disabled = true;
       }
-      if(abi.auto < -5){
+      if (abi.auto < -5) {
         abi.status = ` ${game.i18n.localize("MNM3E.Debilitated")}`;
         abi.disabled = true;
       }
@@ -91,7 +91,7 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
       def.label = CONFIG.MNM3E.defenses[k] ?? k;
       def.disabled = context.system.abilities[def.ability].disabled && def.immune != true;
       // This will break if in different language.
-      if (def.disabled && def.label == `${game.i18n.localize("MNM3E.Toughness")}`){
+      if (def.disabled && def.label == `${game.i18n.localize("MNM3E.Toughness")}`) {
         def.disabled = false;
       }
     }
@@ -103,15 +103,15 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
       skl.label = CONFIG.MNM3E.skills[k] ?? k;
       skl.disabled = context.system.abilities[skl.ability].disabled;
 
-      if (skl.hasOwnProperty("subtype")){
-        if(skl.subtype != ""){
+      if (skl.hasOwnProperty("subtype")) {
+        if (skl.subtype != "") {
           skl.label = skl.subtype;
         }
       }
     }
   }
 
-  _getCheckmarkIcon(level){
+  _getCheckmarkIcon(level) {
     const icons = {
       false: '<i class="fa-solid fa-xmark"></i>',
       true: '<i class="fas fa-check"></i>',
@@ -119,7 +119,7 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
     return icons[level] || icons[0];
   }
 
-  _getMasteryIcon(level){
+  _getMasteryIcon(level) {
     const icons = {
       false: '<i class="far fa-book"></i>',
       true: '<i class="fas fa-solid fa-book"></i>',
@@ -127,7 +127,7 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
     return icons[level] || icons[0];
   }
 
-  _getMovementIcon(level){
+  _getMovementIcon(level) {
     const icons = {
       walk: '<i class="fa-solid fa-person-walking"></i>',
       burrow: '<i class="fa-solid fa-person-walking-dashed-line-arrow-right"></i>',
@@ -163,15 +163,15 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
       // Append to advantages.
       else if (i.type === 'advantage') {
         advantage.push(i);
-      } 
+      }
       // Append to equipment.
       else if (i.type === 'equipment') {
         equipment.push(i);
-      } 
+      }
       // Append to attacks.
       else if (i.type === 'attack') {
         attack.push(i);
-      } 
+      }
     }
 
     // Assign and return
@@ -182,7 +182,7 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
   }
 
   _getLabels() {
-    const labels = {...this.actor.labels};
+    const labels = { ...this.actor.labels };
     return labels;
   }
 
@@ -201,7 +201,7 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
 
     // -------------------------------------------------------------
     // Everything below here is only needed if the sheet is editable
-    if (this.isEditable){
+    if (this.isEditable) {
 
       // Add Inventory Item
       html.find('.item-create').click(this._onItemCreate.bind(this));
@@ -240,19 +240,19 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
   _onRollAbilityTest(event) {
     event.preventDefault();
     let ability = event.currentTarget.parentElement.dataset.ability;
-    return this.actor.rollAbility(ability, {event: event});
+    return this.actor.rollAbility(ability, { event: event });
   }
 
   _onRollDefenseTest(event) {
     event.preventDefault();
     let defense = event.currentTarget.parentElement.dataset.defense;
-    return this.actor.rollDefense(defense, {event: event});
+    return this.actor.rollDefense(defense, { event: event });
   }
 
-  _onRollSkillTest(event){
+  _onRollSkillTest(event) {
     event.preventDefault();
     const skill = event.currentTarget.closest("[data-skill]").dataset.skill;
-    return this.actor.rollSkill(skill, {event: event});
+    return this.actor.rollSkill(skill, { event: event });
   }
 
   _onConfigMenu(event) {
@@ -260,10 +260,10 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
     event.stopPropagation();
     const button = event.currentTarget;
     let app;
-    switch ( button.dataset.action ) {
+    switch (button.dataset.action) {
       case "skill":
         const skill = event.currentTarget.closest("[data-skill]").dataset.skill;
-        app = new SkillsConfig(this.actor, {key: skill});
+        app = new SkillsConfig(this.actor, { key: skill });
         break;
       default:
         break;
@@ -273,11 +273,11 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
 
 
 
-//------------------------------------------------------------------------------------------
-//------------------------------------------------------------------------------------------
-//------------------------------------Default stuff-----------------------------------------
-//------------------------------------------------------------------------------------------
-//------------------------------------------------------------------------------------------
+  //------------------------------------------------------------------------------------------
+  //------------------------------------------------------------------------------------------
+  //------------------------------------Default stuff-----------------------------------------
+  //------------------------------------------------------------------------------------------
+  //------------------------------------------------------------------------------------------
 
 
   /**
@@ -310,7 +310,7 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
    * @param {Event} event   The originating click event
    * @private
    */
-   _onRoll(event) {
+  _onRoll(event) {
     event.preventDefault();
     const element = event.currentTarget;
     const dataset = element.dataset;

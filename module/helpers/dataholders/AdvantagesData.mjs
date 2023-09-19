@@ -328,7 +328,7 @@ const AdvantagesEffects =
     ranked: false,
     effect: false
   },
-   benefitsecurityclearance: {
+  benefitsecurityclearance: {
     max_ranks: 1,
     type: "general",
     extradesc: "input",
@@ -344,7 +344,7 @@ const AdvantagesEffects =
     ranked: false,
     effect: false
   },
-   benefitwealth: {
+  benefitwealth: {
     max_ranks: 5,
     type: "general",
     extradesc: false,
@@ -600,8 +600,8 @@ export default function GetAdvantagesData(request) {
 // type
 // extradesc
 // ranked
-// 
-// 
-// 
-// 
+//
+//
+//
+//
 // 

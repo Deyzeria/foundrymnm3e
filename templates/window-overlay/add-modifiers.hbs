@@ -4,13 +4,13 @@
     <div class="flexrow height-70">
       <ul class="modifier-list boxed-part">
         {{#each responseList as |item i|}}
-          <li class="modifiers-part">
-            <a class="modifier flexrow" data-part="{{i}}">
-              <i class="modifier-icon">{{{item.icon}}}</i>
-              <label class="modifier-part">{{item.label}}</label>
-              <label class="modifier-cost">{{item.costlabel}}</label>
-            </a>
-          </li>
+        <li class="modifiers-part">
+          <a class="modifier flexrow" data-part="{{i}}">
+            <i class="modifier-icon">{{{item.icon}}}</i>
+            <label class="modifier-part">{{item.label}}</label>
+            <label class="modifier-cost">{{item.costlabel}}</label>
+          </a>
+        </li>
         {{/each}}
       </ul>
       <div class="boxed-part modifier-description">

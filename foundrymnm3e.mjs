@@ -9,7 +9,7 @@ import { FoundryMnM3eItemSheet } from "./module/sheets/item-sheet.mjs";
 import { preloadHandlebarsTemplates } from "./module/helpers/templates.mjs";
 import { ParserAccess } from "./module/helpers/HeroLabParser.mjs";
 import registerSystemSettings from "./module/settings.mjs";
-import {SetGameValues, GetScale} from "./module/helpers/data-tables.mjs";
+import { SetGameValues, GetScale } from "./module/helpers/data-tables.mjs";
 import { fillDefaults } from "./module/helpers/dataholders/ModifiersData.mjs";
 
 import * as dice from "./module/dice/_module.mjs";
@@ -29,7 +29,7 @@ globalThis.foundrymnm3e = {
 /*  Init Hook                                   */
 /* -------------------------------------------- */
 
-Hooks.once('init', async function() {
+Hooks.once('init', async function () {
   globalThis.foundrymnm3e = game.foundrymnm3e = Object.assign(game.system, globalThis.foundrymnm3e);
   // Add utility classes to the global game object so that they're more easily
   // accessible in global contexts.
@@ -47,14 +47,12 @@ Hooks.once('init', async function() {
 
   // Custom Die modifier
   // For now will be usually hardcoded to just do d20imp, adding a die with the result of 10 if the result is below 11(1-10)
-  Die.MODIFIERS.imp = function(modifier) 
-  { 
+  Die.MODIFIERS.imp = function (modifier) {
     const rgx = /imp/i;
     const match = modifier.match(rgx);
-    if ( !match ) return false;
-    if (this.results[0].result < 11) 
-    {
-      this.results.push( { "result": 10, "active": true, "exploded": true } );
+    if (!match) return false;
+    if (this.results[0].result < 11) {
+      this.results.push({ "result": 10, "active": true, "exploded": true });
     }
   }
 
@@ -79,38 +77,38 @@ Hooks.once('init', async function() {
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet("foundrymnm3e", FoundryMnM3eActorSheet, 
-    {  
+  Actors.registerSheet("foundrymnm3e", FoundryMnM3eActorSheet,
+    {
       types: ["hero"],
       makeDefault: true,
       label: "ACTOR.SheetHero"
     });
-  Actors.registerSheet("foundrymnm3e", FoundryMnM3eActorSheet, 
-    {  
+  Actors.registerSheet("foundrymnm3e", FoundryMnM3eActorSheet,
+    {
       types: ["npc"],
       makeDefault: true,
       label: "ACTOR.SheetNpc"
     });
-  Actors.registerSheet("foundrymnm3e", FoundryMnM3eActorSheet, 
-    {  
+  Actors.registerSheet("foundrymnm3e", FoundryMnM3eActorSheet,
+    {
       types: ["vehicle"],
       makeDefault: true,
       label: "ACTOR.SheetVehicle"
     });
-  Actors.registerSheet("foundrymnm3e", FoundryMnM3eActorSheet, 
-    {  
+  Actors.registerSheet("foundrymnm3e", FoundryMnM3eActorSheet,
+    {
       types: ["base"],
       makeDefault: true,
       label: "ACTOR.SheetBase"
     });
-  
+
   Items.unregisterSheet("core", ItemSheet);
-  Items.registerSheet("foundrymnm3e", FoundryMnM3eItemSheet, 
-  { 
-    makeDefault: true,
-    label: "MNM3E.SheetItem"
-  });
-  
+  Items.registerSheet("foundrymnm3e", FoundryMnM3eItemSheet,
+    {
+      makeDefault: true,
+      label: "MNM3E.SheetItem"
+    });
+
   // Preload Handlebars templates.
   return preloadHandlebarsTemplates();
 });
@@ -119,7 +117,7 @@ Hooks.once('init', async function() {
 /* -------------------------------------------- */
 /*  ReadyHook                                   */
 /* -------------------------------------------- */
-Hooks.once('ready', async function() {
+Hooks.once('ready', async function () {
   fillDefaults();
 });
 
@@ -128,7 +126,7 @@ Hooks.once('ready', async function() {
 /* -------------------------------------------- */
 
 // If you need to add Handlebars helpers, here are a few useful examples:
-Handlebars.registerHelper('concat', function() {
+Handlebars.registerHelper('concat', function () {
   var outStr = '';
   for (var arg in arguments) {
     if (typeof arguments[arg] != 'object') {
@@ -138,7 +136,7 @@ Handlebars.registerHelper('concat', function() {
   return outStr;
 });
 
-Handlebars.registerHelper('toLowerCase', function(str) {
+Handlebars.registerHelper('toLowerCase', function (str) {
   return str.toLowerCase();
 });
 
@@ -167,7 +165,7 @@ Handlebars.registerHelper('isenhanced', function (value) { return value == "enha
 Hooks.once("i18nInit", () => utils.performPreLocalization(CONFIG.MNM3E));
 
 
-Hooks.once("ready", async function() {
+Hooks.once("ready", async function () {
   ParserAccess();
 
   // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
@@ -211,7 +209,7 @@ async function createItemMacro(data, slot) {
  * Get an existing item macro if one exists, otherwise create a new one.
  * @param {string} itemUuid
  */
- function rollItemMacro(itemUuid) {
+function rollItemMacro(itemUuid) {
   // Reconstruct the drop data so that we can load the item.
   const dropData = {
     type: 'Item',

@@ -9,7 +9,7 @@ export class FoundryMnM3eActor extends Actor {
 
   /** @override */
   prepareData() {
-    if ( !game.template.Actor.types.includes(this.type) ) return;
+    if (!game.template.Actor.types.includes(this.type)) return;
     super.prepareData();
     this.items.forEach(item => item.prepareFinalAttributes());
   }
@@ -55,25 +55,25 @@ export class FoundryMnM3eActor extends Actor {
     //this._prepareNpcData(actorData);
   }
 
-  _prepareBaseAbilities (actorData){
+  _prepareBaseAbilities(actorData) {
     if (actorData.type !== "hero") return;
 
     const systemData = actorData.system;
 
     const abilities = {};
-    for (const key of Object.keys(CONFIG.MNM3E.abilities)){
+    for (const key of Object.keys(CONFIG.MNM3E.abilities)) {
       abilities[key] = systemData.abilities[key];
     }
     systemData.abilities = abilities;
 
     const defenses = {};
-    for (const key of Object.keys(CONFIG.MNM3E.defenses)){
+    for (const key of Object.keys(CONFIG.MNM3E.defenses)) {
       defenses[key] = systemData.defenses[key];
     }
     systemData.defenses = defenses;
 
     const skills = {};
-    for (const key of Object.keys(CONFIG.MNM3E.skills)){
+    for (const key of Object.keys(CONFIG.MNM3E.skills)) {
       skills[key] = systemData.skills[key];
     }
     systemData.skills = skills;
@@ -87,46 +87,39 @@ export class FoundryMnM3eActor extends Actor {
 
     const systemData = actorData.system;
 
-    if (systemData.heroname == ""){
+    if (systemData.heroname == "") {
       systemData.heroname = actorData.name;
-    } else if (systemData.heroname != actorData.name && systemData.heroname != "")
-    {
+    } else if (systemData.heroname != actorData.name && systemData.heroname != "") {
       actorData.name = systemData.heroname;
     }
-  
+
 
     systemData.generic.pp = Math.max(systemData.generic.pl * 15, 15) + systemData.generic.extrapp;
 
     for (let [key, ability] of Object.entries(systemData.abilities)) {
-      if(ability.purchased >= -5)
-      {
+      if (ability.purchased >= -5) {
         ability.total = ability.purchased + ability.misc + ability.auto;
         systemData.generic.pp_ability += ability.purchased * 2;
-      } 
-      else
-      {
+      }
+      else {
         ability.total = -100;
         systemData.generic.pp_ability += -5 * 2;
       }
     }
 
     for (let [key, defense] of Object.entries(systemData.defenses)) {
-      if(systemData.abilities[defense.ability].total > -6)
-      {
+      if (systemData.abilities[defense.ability].total > -6) {
         defense.default = systemData.abilities[defense.ability].total;
         defense.total = defense.purchased + defense.misc + defense.auto + defense.default;
         defense.ac = 10 + parseInt(defense.total);
       }
-      else
-      {
+      else {
         defense.default = 0;
-        if(key == 'toughness')
-        {
+        if (key == 'toughness') {
           defense.total = defense.misc + defense.auto;
           defense.ac = 10 + parseInt(defense.total);
-        } 
-        else 
-        {
+        }
+        else {
           defense.total = -100;
         }
       }
@@ -142,11 +135,11 @@ export class FoundryMnM3eActor extends Actor {
     systemData.generic.pp_spent = systemData.generic.pp_ability + systemData.generic.pp_defenses + systemData.generic.pp_skills + systemData.generic.pp_advantages + systemData.generic.pp_powers;
   }
 
-  _preparePowerCost(actorData){
+  _preparePowerCost(actorData) {
     const systemData = actorData.system;
 
     let powcost = this.items.reduce((powcost, i) => {
-      if ( i.type != "power" ) return powcost;
+      if (i.type != "power") return powcost;
       const c = i.system.power_cost.active_cost || 0;
       return powcost + c;
     }, 0)
@@ -154,7 +147,7 @@ export class FoundryMnM3eActor extends Actor {
     systemData.generic.pp_powers = powcost;
 
     let advcost = this.items.reduce((advcost, i) => {
-      if ( i.type != "advantage" || i.system.enchanced ) return advcost;
+      if (i.type != "advantage" || i.system.enchanced) return advcost;
       const c = i.system.ranks || 0;
       return advcost + c;
     }, 0)
@@ -162,15 +155,14 @@ export class FoundryMnM3eActor extends Actor {
     systemData.generic.pp_advantages = advcost;
   }
 
-  prepareSpeeds()
-  {
+  prepareSpeeds() {
     const speeds = this.system.speed;
     const v = 'distance';
     speeds.walk.distance = ScaleTable.GetScale(speeds.walk.rank, v);
 
     const types = ['burrowing', 'flight', 'leaping', 'swimming', 'teleport'];
     types.forEach(element => {
-      if(!speeds[element].active) return;
+      if (!speeds[element].active) return;
       speeds[element].distance = ScaleTable.GetScale(speeds[element].rank, v);
     });
   }
@@ -186,7 +178,7 @@ export class FoundryMnM3eActor extends Actor {
    * Override getRollData() that's supplied to rolls.
    */
   getRollData() {
-    const data = {...super.getRollData()};
+    const data = { ...super.getRollData() };
 
     // Prepare character roll data.
     this._getCharacterRollData(data);
@@ -198,7 +190,7 @@ export class FoundryMnM3eActor extends Actor {
    * Prepare character roll data.
    */
   _getCharacterRollData(data) {
-  if (this.type !== 'hero') return;
+    if (this.type !== 'hero') return;
   }
 
   /**
@@ -206,17 +198,15 @@ export class FoundryMnM3eActor extends Actor {
  * Prompt the user for input on which variety of roll they want to do.
  * @param {string} abilityId    The ability id (e.g. "str")
  * @param {object} options      Options which configure how ability tests or saving throws are rolled
- */  
-// FIXME: Add Debilitated, Absent check and roll change
-  async rollAbility(abilityId, options={}) {
+ */
+  // FIXME: Add Debilitated, Absent check and roll change
+  async rollAbility(abilityId, options = {}) {
     const label = CONFIG.MNM3E.abilities[abilityId] ?? "";
     const abl = this.system.abilities[abilityId];
-    if (abl.purchased < -6)
-    {
+    if (abl.purchased < -6) {
       console.debug("Absent");
     }
-    else if (abl.auto < -6)
-    {
+    else if (abl.auto < -6) {
       console.debug("Debilitated");
     }
     else {
@@ -227,17 +217,17 @@ export class FoundryMnM3eActor extends Actor {
       data.total = abl?.total ?? 0;
 
       // Roll and return
-      const flavor = game.i18n.format("MNM3E.AbilityPromptTitle", {ability: label});
+      const flavor = game.i18n.format("MNM3E.AbilityPromptTitle", { ability: label });
       const rollData = foundry.utils.mergeObject({
         data,
         title: `${flavor}: ${this.name}`,
         flavor,
         messageData: {
-          speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
-          "flags.foundrymnm3e.roll": {type: "ability", abilityId}
+          speaker: options.speaker || ChatMessage.getSpeaker({ actor: this }),
+          "flags.foundrymnm3e.roll": { type: "ability", abilityId }
         }
-        }, options);
-        rollData.parts = parts.concat(options.parts ?? []);
+      }, options);
+      rollData.parts = parts.concat(options.parts ?? []);
 
       const roll = await d20Roll(rollData);
       return roll;
@@ -245,19 +235,16 @@ export class FoundryMnM3eActor extends Actor {
   }
 
   // FIXME: Add Disabled check and roll change
-  async rollDefense(defenseId, options={}) {
+  async rollDefense(defenseId, options = {}) {
     const label = CONFIG.MNM3E.defenses[defenseId] ?? "";
     const def = this.system.defenses[defenseId];
-    if (def?.immune)
-    {
+    if (def?.immune) {
       console.debug("Immune");
     }
-    else if (def.total < -6)
-    {
+    else if (def.total < -6) {
       console.debug("Debilitated");
     }
-    else
-    {
+    else {
       const parts = [];
       const data = this.getRollData();
 
@@ -265,25 +252,25 @@ export class FoundryMnM3eActor extends Actor {
       data.total = def?.total ?? 0;
 
       // Roll and return
-      const flavor = game.i18n.format("MNM3E.DefensePromptTitle", {defense: label});
+      const flavor = game.i18n.format("MNM3E.DefensePromptTitle", { defense: label });
       const rollData = foundry.utils.mergeObject({
         data,
         title: `${flavor}: ${this.name}`,
         flavor,
         messageData: {
-          speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
-          "flags.foundrymnm3e.roll": {type: "defense", defenseId}
+          speaker: options.speaker || ChatMessage.getSpeaker({ actor: this }),
+          "flags.foundrymnm3e.roll": { type: "defense", defenseId }
         }
-        }, options);
-        rollData.parts = parts.concat(options.parts ?? []);
-      
+      }, options);
+      rollData.parts = parts.concat(options.parts ?? []);
+
       const roll = await d20Roll(rollData);
       return roll;
     }
   }
 
   // FIXME: Add Disabled check and roll change
-  async rollSkill(skillId, options={}) {
+  async rollSkill(skillId, options = {}) {
     const skl = this.system.skills[skillId];
     const label = skl.subtype != null ? skl.subtype : CONFIG.MNM3E.skills[skillId];
     const parts = [];
@@ -293,28 +280,28 @@ export class FoundryMnM3eActor extends Actor {
     data.total = skl?.total ?? 0;
 
     // Roll and return
-    const flavor = game.i18n.format("MNM3E.SkillPromptTitle", {skill: label});
+    const flavor = game.i18n.format("MNM3E.SkillPromptTitle", { skill: label });
     const rollData = foundry.utils.mergeObject({
       data,
       title: `${flavor}: ${this.name}`,
       flavor,
       messageData: {
-        speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
-        "flags.foundrymnm3e.roll": {type: "skill", skillId}
+        speaker: options.speaker || ChatMessage.getSpeaker({ actor: this }),
+        "flags.foundrymnm3e.roll": { type: "skill", skillId }
       }
-      }, options);
-      rollData.parts = parts.concat(options.parts ?? []);
-    
+    }, options);
+    rollData.parts = parts.concat(options.parts ?? []);
+
     const roll = await d20Roll(rollData);
     return roll;
   }
 }
 
 Hooks.on("renderActorSheet", (app, html, data) => {
-  if(data.system.generic.pp_spent > data.system.generic.pp){
+  if (data.system.generic.pp_spent > data.system.generic.pp) {
     html.find(".attribute-value.multiple .spenttotal")[0].style.background = "red";
   }
-  if(!Number.isInteger(data.system.generic.pp_skills)){
+  if (!Number.isInteger(data.system.generic.pp_skills)) {
     html.find(".skillsspent")[0].style.background = "red";
   }
 });

@@ -1,578 +1,619 @@
 {
-"Actor": {
-    "types": ["hero", "vehicle", "base"],
+  "Actor": {
+    "types": [
+      "hero",
+      "vehicle",
+      "base"
+    ],
     "templates": {
-        "common": {
-            "abilities":{
-                "str": {
-                    "purchased": 0,
-                    "misc": 0,
-                    "auto": 0,
-                    "total": 0
-                },
-                "sta": {
-                    "purchased": 0,
-                    "misc": 0,
-                    "auto": 0,
-                    "total": 0
-                },
-                "agl": {
-                    "purchased": 0,
-                    "misc": 0,
-                    "auto": 0,
-                    "total": 0
-                },
-                "dex": {
-                    "purchased": 0,
-                    "misc": 0,
-                    "auto": 0,
-                    "total": 0
-                },
-                "fgt": {
-                    "purchased": 0,
-                    "misc": 0,
-                    "auto": 0,
-                    "total": 0
-                },
-                "int": {
-                    "purchased": 0,
-                    "misc": 0,
-                    "auto": 0,
-                    "total": 0
-                },
-                "awe": {
-                    "purchased": 0,
-                    "misc": 0,
-                    "auto": 0,
-                    "total": 0
-                },
-                "pre": {
-                    "purchased": 0,
-                    "misc": 0,
-                    "auto": 0,
-                    "total": 0
-                }
-            },
-            "generic": {
-                "pl": 0,
-                "pp": 0,
-                "extrapp": 0,
-                "ep": 0,
-                "hero_point": 0,
-                "pp_ability": 0,
-                "pp_defenses": 0,
-                "pp_skills": 0,
-                "pp_advantages": 0,
-                "pp_powers": 0,
-                "pp_spent": 0,
-                "initiative": 0,
-                "size": -2,
-                "wounds": 0,
-                "languages": [],
-                "complications": []
-            },
-            "defenses": {
-                "dodge": {
-                    "purchased": 0,
-                    "default": 0,
-                    "ability": "agl",
-                    "misc": 0,
-                    "auto": 0,
-                    "total": 0,
-                    "ac": 0,
-                    "immune": false,
-                    "impervious": 0
-                },
-                "parry": {
-                    "purchased": 0,
-                    "default": 0,
-                    "ability": "fgt",
-                    "misc": 0,
-                    "auto": 0,
-                    "total": 0,
-                    "ac": 0,
-                    "immune": false,
-                    "impervious": 0
-                },
-                "fortitude": {
-                    "purchased": 0,
-                    "default": 0,
-                    "ability": "sta",
-                    "misc": 0,
-                    "auto": 0,
-                    "total": 0,
-                    "ac": 0,
-                    "immune": false,
-                    "impervious": 0
-                },
-                "toughness": {
-                    "purchased": 0,
-                    "default": 0,
-                    "ability": "sta",
-                    "misc": 0,
-                    "auto": 0,
-                    "total": 0,
-                    "ac": 0,
-                    "immune": false,
-                    "impervious": 0
-                },
-                "will": {
-                    "purchased": 0,
-                    "default": 0,
-                    "ability": "awe",
-                    "misc": 0,
-                    "auto": 0,
-                    "total": 0,
-                    "ac": 0,
-                    "immune": false,
-                    "impervious": 0
-                }
-            },
-            "skills":{
-                "acr": {
-                    "default": 0,
-                    "ability": "agl",
-                    "purchased": 0,
-                    "misc": 0,
-                    "auto": 0,
-                    "total": 0,
-                    "untrained": false,
-                    "mastery": false
-                },
-                "ath": {
-                    "default": 0,
-                    "ability": "str",
-                    "purchased": 0,
-                    "misc": 0,
-                    "auto": 0,
-                    "total": 0,
-                    "untrained": true,
-                    "mastery": false
-                },
-                "clc1": {
-                    "default": 0,
-                    "ability": "fgt",
-                    "purchased": 0,
-                    "misc": 0,
-                    "auto": 0,
-                    "total": 0,
-                    "subtype": "",
-                    "untrained": true,
-                    "mastery": false
-                },
-                "clc2": {
-                    "default": 0,
-                    "ability": "fgt",
-                    "purchased": 0,
-                    "misc": 0,
-                    "auto": 0,
-                    "total": 0,
-                    "subtype": "",
-                    "untrained": true,
-                    "mastery": false
-                },
-                "dec": {
-                    "default": 0,
-                    "ability": "pre",
-                    "purchased": 0,
-                    "misc": 0,
-                    "auto": 0,
-                    "total": 0,
-                    "untrained": true,
-                    "mastery": false
-                },
-                "exp1": {
-                    "default": 0,
-                    "ability": "int",
-                    "purchased": 0,
-                    "misc": 0,
-                    "auto": 0,
-                    "total": 0,
-                    "subtype": "",
-                    "untrained": false,
-                    "mastery": false
-                },
-                "exp2": {
-                    "default": 0,
-                    "ability": "int",
-                    "purchased": 0,
-                    "misc": 0,
-                    "auto": 0,
-                    "total": 0,
-                    "subtype": "",
-                    "untrained": false,
-                    "mastery": false
-                },
-                "exp3": {
-                    "default": 0,
-                    "ability": "int",
-                    "purchased": 0,
-                    "misc": 0,
-                    "auto": 0,
-                    "total": 0,
-                    "subtype": "",
-                    "untrained": false,
-                    "mastery": false
-                },
-                "exp4": {
-                    "default": 0,
-                    "ability": "int",
-                    "purchased": 0,
-                    "misc": 0,
-                    "auto": 0,
-                    "total": 0,
-                    "subtype": "",
-                    "untrained": false,
-                    "mastery": false
-                },
-                "exp5": {
-                    "default": 0,
-                    "ability": "int",
-                    "purchased": 0,
-                    "misc": 0,
-                    "auto": 0,
-                    "total": 0,
-                    "subtype": "",
-                    "untrained": false,
-                    "mastery": false
-                },
-                "ins": {
-                    "default": 0,
-                    "ability": "awe",
-                    "purchased": 0,
-                    "misc": 0,
-                    "auto": 0,
-                    "total": 0,
-                    "untrained": true,
-                    "mastery": false
-                },
-                "inm": {
-                    "default": 0,
-                    "ability": "pre",
-                    "purchased": 0,
-                    "misc": 0,
-                    "auto": 0,
-                    "total": 0,
-                    "untrained": true,
-                    "mastery": false
-                },
-                "inv": {
-                    "default": 0,
-                    "ability": "int",
-                    "purchased": 0,
-                    "misc": 0,
-                    "auto": 0,
-                    "total": 0,
-                    "untrained": false,
-                    "mastery": false
-                },
-                "prc": {
-                    "default": 0,
-                    "ability": "awe",
-                    "purchased": 0,
-                    "misc": 0,
-                    "auto": 0,
-                    "total": 0,
-                    "untrained": true,
-                    "mastery": false
-                },
-                "prs": {
-                    "default": 0,
-                    "ability": "pre",
-                    "purchased": 0,
-                    "misc": 0,
-                    "auto": 0,
-                    "total": 0,
-                    "untrained": true,
-                    "mastery": false
-                },
-                "rng1": {
-                    "default": 0,
-                    "ability": "dex",
-                    "purchased": 0,
-                    "misc": 0,
-                    "auto": 0,
-                    "total": 0,
-                    "subtype": "",
-                    "untrained": true,
-                    "mastery": false
-                },
-                "rng2": {
-                    "default": 0,
-                    "ability": "dex",
-                    "purchased": 0,
-                    "misc": 0,
-                    "auto": 0,
-                    "total": 0,
-                    "subtype": "",
-                    "untrained": true,
-                    "mastery": false
-                },
-                "soh": {
-                    "default": 0,
-                    "ability": "dex",
-                    "purchased": 0,
-                    "misc": 0,
-                    "auto": 0,
-                    "total": 0,
-                    "untrained": false,
-                    "mastery": false
-                },
-                "ste": {
-                    "default": 0,
-                    "ability": "agl",
-                    "purchased": 0,
-                    "misc": 0,
-                    "auto": 0,
-                    "total": 0,
-                    "untrained": true,
-                    "mastery": false
-                },
-                "tec": {
-                    "default": 0,
-                    "ability": "int",
-                    "purchased": 0,
-                    "misc": 0,
-                    "auto": 0,
-                    "total": 0,
-                    "untrained": false,
-                    "mastery": false
-                },
-                "tre": {
-                    "default": 0,
-                    "ability": "int",
-                    "purchased": 0,
-                    "misc": 0,
-                    "auto": 0,
-                    "total": 0,
-                    "untrained": false,
-                    "mastery": false
-                },
-                "veh": {
-                    "default": 0,
-                    "ability": "dex",
-                    "purchased": 0,
-                    "misc": 0,
-                    "auto": 0,
-                    "total": 0,
-                    "untrained": false,
-                    "mastery": false
-                }
-            }
+      "common": {
+        "abilities": {
+          "str": {
+            "purchased": 0,
+            "misc": 0,
+            "auto": 0,
+            "total": 0
+          },
+          "sta": {
+            "purchased": 0,
+            "misc": 0,
+            "auto": 0,
+            "total": 0
+          },
+          "agl": {
+            "purchased": 0,
+            "misc": 0,
+            "auto": 0,
+            "total": 0
+          },
+          "dex": {
+            "purchased": 0,
+            "misc": 0,
+            "auto": 0,
+            "total": 0
+          },
+          "fgt": {
+            "purchased": 0,
+            "misc": 0,
+            "auto": 0,
+            "total": 0
+          },
+          "int": {
+            "purchased": 0,
+            "misc": 0,
+            "auto": 0,
+            "total": 0
+          },
+          "awe": {
+            "purchased": 0,
+            "misc": 0,
+            "auto": 0,
+            "total": 0
+          },
+          "pre": {
+            "purchased": 0,
+            "misc": 0,
+            "auto": 0,
+            "total": 0
+          }
         },
-        "movement": {
-            "speed": {
-                "walk": {
-                    "rank": 0,
-                    "distance": 0,
-                    "active": true
-                },
-                "burrowing": {
-                    "rank": 0,
-                    "distance": 0,
-                    "active": false
-                },
-                "flight": {
-                    "rank": 0,
-                    "distance": 0,
-                    "active": false
-                },
-                "leaping": {
-                    "rank": 0,
-                    "distance": 0,
-                    "active": false
-                },
-                "swimming": {
-                    "rank": 0,
-                    "distance": 0,
-                    "active": false
-                },
-                "teleport": {
-                    "rank": 0,
-                    "distance": 0,
-                    "active": false,
-                    "extended": false
-                },
-                "extratypes": [],
-                "closescale": "m",
-                "farscale": "km"
-            }
+        "generic": {
+          "pl": 0,
+          "pp": 0,
+          "extrapp": 0,
+          "ep": 0,
+          "hero_point": 0,
+          "pp_ability": 0,
+          "pp_defenses": 0,
+          "pp_skills": 0,
+          "pp_advantages": 0,
+          "pp_powers": 0,
+          "pp_spent": 0,
+          "initiative": 0,
+          "size": -2,
+          "wounds": 0,
+          "languages": [],
+          "complications": []
         },
-        "details": {
-            "heroname": "",
-            "realidentity": "",
-            "active_identity": 1,
-            "gender": "",
-            "age": 0,
-            "height": "",
-            "weight": 0,
-            "eyes": "",
-            "hair": "",
-            "group_affiliation": "",
-            "base_of_operation": "",
-            "image_one": "",
-            "image_two": ""
+        "defenses": {
+          "dodge": {
+            "purchased": 0,
+            "default": 0,
+            "ability": "agl",
+            "misc": 0,
+            "auto": 0,
+            "total": 0,
+            "ac": 0,
+            "immune": false,
+            "impervious": 0
+          },
+          "parry": {
+            "purchased": 0,
+            "default": 0,
+            "ability": "fgt",
+            "misc": 0,
+            "auto": 0,
+            "total": 0,
+            "ac": 0,
+            "immune": false,
+            "impervious": 0
+          },
+          "fortitude": {
+            "purchased": 0,
+            "default": 0,
+            "ability": "sta",
+            "misc": 0,
+            "auto": 0,
+            "total": 0,
+            "ac": 0,
+            "immune": false,
+            "impervious": 0
+          },
+          "toughness": {
+            "purchased": 0,
+            "default": 0,
+            "ability": "sta",
+            "misc": 0,
+            "auto": 0,
+            "total": 0,
+            "ac": 0,
+            "immune": false,
+            "impervious": 0
+          },
+          "will": {
+            "purchased": 0,
+            "default": 0,
+            "ability": "awe",
+            "misc": 0,
+            "auto": 0,
+            "total": 0,
+            "ac": 0,
+            "immune": false,
+            "impervious": 0
+          }
+        },
+        "skills": {
+          "acr": {
+            "default": 0,
+            "ability": "agl",
+            "purchased": 0,
+            "misc": 0,
+            "auto": 0,
+            "total": 0,
+            "untrained": false,
+            "mastery": false
+          },
+          "ath": {
+            "default": 0,
+            "ability": "str",
+            "purchased": 0,
+            "misc": 0,
+            "auto": 0,
+            "total": 0,
+            "untrained": true,
+            "mastery": false
+          },
+          "clc1": {
+            "default": 0,
+            "ability": "fgt",
+            "purchased": 0,
+            "misc": 0,
+            "auto": 0,
+            "total": 0,
+            "subtype": "",
+            "untrained": true,
+            "mastery": false
+          },
+          "clc2": {
+            "default": 0,
+            "ability": "fgt",
+            "purchased": 0,
+            "misc": 0,
+            "auto": 0,
+            "total": 0,
+            "subtype": "",
+            "untrained": true,
+            "mastery": false
+          },
+          "dec": {
+            "default": 0,
+            "ability": "pre",
+            "purchased": 0,
+            "misc": 0,
+            "auto": 0,
+            "total": 0,
+            "untrained": true,
+            "mastery": false
+          },
+          "exp1": {
+            "default": 0,
+            "ability": "int",
+            "purchased": 0,
+            "misc": 0,
+            "auto": 0,
+            "total": 0,
+            "subtype": "",
+            "untrained": false,
+            "mastery": false
+          },
+          "exp2": {
+            "default": 0,
+            "ability": "int",
+            "purchased": 0,
+            "misc": 0,
+            "auto": 0,
+            "total": 0,
+            "subtype": "",
+            "untrained": false,
+            "mastery": false
+          },
+          "exp3": {
+            "default": 0,
+            "ability": "int",
+            "purchased": 0,
+            "misc": 0,
+            "auto": 0,
+            "total": 0,
+            "subtype": "",
+            "untrained": false,
+            "mastery": false
+          },
+          "exp4": {
+            "default": 0,
+            "ability": "int",
+            "purchased": 0,
+            "misc": 0,
+            "auto": 0,
+            "total": 0,
+            "subtype": "",
+            "untrained": false,
+            "mastery": false
+          },
+          "exp5": {
+            "default": 0,
+            "ability": "int",
+            "purchased": 0,
+            "misc": 0,
+            "auto": 0,
+            "total": 0,
+            "subtype": "",
+            "untrained": false,
+            "mastery": false
+          },
+          "ins": {
+            "default": 0,
+            "ability": "awe",
+            "purchased": 0,
+            "misc": 0,
+            "auto": 0,
+            "total": 0,
+            "untrained": true,
+            "mastery": false
+          },
+          "inm": {
+            "default": 0,
+            "ability": "pre",
+            "purchased": 0,
+            "misc": 0,
+            "auto": 0,
+            "total": 0,
+            "untrained": true,
+            "mastery": false
+          },
+          "inv": {
+            "default": 0,
+            "ability": "int",
+            "purchased": 0,
+            "misc": 0,
+            "auto": 0,
+            "total": 0,
+            "untrained": false,
+            "mastery": false
+          },
+          "prc": {
+            "default": 0,
+            "ability": "awe",
+            "purchased": 0,
+            "misc": 0,
+            "auto": 0,
+            "total": 0,
+            "untrained": true,
+            "mastery": false
+          },
+          "prs": {
+            "default": 0,
+            "ability": "pre",
+            "purchased": 0,
+            "misc": 0,
+            "auto": 0,
+            "total": 0,
+            "untrained": true,
+            "mastery": false
+          },
+          "rng1": {
+            "default": 0,
+            "ability": "dex",
+            "purchased": 0,
+            "misc": 0,
+            "auto": 0,
+            "total": 0,
+            "subtype": "",
+            "untrained": true,
+            "mastery": false
+          },
+          "rng2": {
+            "default": 0,
+            "ability": "dex",
+            "purchased": 0,
+            "misc": 0,
+            "auto": 0,
+            "total": 0,
+            "subtype": "",
+            "untrained": true,
+            "mastery": false
+          },
+          "soh": {
+            "default": 0,
+            "ability": "dex",
+            "purchased": 0,
+            "misc": 0,
+            "auto": 0,
+            "total": 0,
+            "untrained": false,
+            "mastery": false
+          },
+          "ste": {
+            "default": 0,
+            "ability": "agl",
+            "purchased": 0,
+            "misc": 0,
+            "auto": 0,
+            "total": 0,
+            "untrained": true,
+            "mastery": false
+          },
+          "tec": {
+            "default": 0,
+            "ability": "int",
+            "purchased": 0,
+            "misc": 0,
+            "auto": 0,
+            "total": 0,
+            "untrained": false,
+            "mastery": false
+          },
+          "tre": {
+            "default": 0,
+            "ability": "int",
+            "purchased": 0,
+            "misc": 0,
+            "auto": 0,
+            "total": 0,
+            "untrained": false,
+            "mastery": false
+          },
+          "veh": {
+            "default": 0,
+            "ability": "dex",
+            "purchased": 0,
+            "misc": 0,
+            "auto": 0,
+            "total": 0,
+            "untrained": false,
+            "mastery": false
+          }
         }
+      },
+      "movement": {
+        "speed": {
+          "walk": {
+            "rank": 0,
+            "distance": 0,
+            "active": true
+          },
+          "burrowing": {
+            "rank": 0,
+            "distance": 0,
+            "active": false
+          },
+          "flight": {
+            "rank": 0,
+            "distance": 0,
+            "active": false
+          },
+          "leaping": {
+            "rank": 0,
+            "distance": 0,
+            "active": false
+          },
+          "swimming": {
+            "rank": 0,
+            "distance": 0,
+            "active": false
+          },
+          "teleport": {
+            "rank": 0,
+            "distance": 0,
+            "active": false,
+            "extended": false
+          },
+          "extratypes": [],
+          "closescale": "m",
+          "farscale": "km"
+        }
+      },
+      "details": {
+        "heroname": "",
+        "realidentity": "",
+        "active_identity": 1,
+        "gender": "",
+        "age": 0,
+        "height": "",
+        "weight": 0,
+        "eyes": "",
+        "hair": "",
+        "group_affiliation": "",
+        "base_of_operation": "",
+        "image_one": "",
+        "image_two": ""
+      }
     },
     "hero": {
-        "templates": ["common", "movement", "details"]
+      "templates": [
+        "common",
+        "movement",
+        "details"
+      ]
     },
     "npc": {
-        "templates": ["common", "movement", "details"]
+      "templates": [
+        "common",
+        "movement",
+        "details"
+      ]
     },
     "vehicle": {
-        "templates": ["movement"],
-        "size": 0,
-        "str": 0,
-        "defense": {
-            "bought": 0,
-            "ac": 0
-        },
-        "toughness": 5
+      "templates": [
+        "movement"
+      ],
+      "size": 0,
+      "str": 0,
+      "defense": {
+        "bought": 0,
+        "ac": 0
+      },
+      "toughness": 5
     },
     "base": {
-        "templates": ["base"],
-        "size": 0,
-        "toghness": 6
+      "templates": [
+        "base"
+      ],
+      "size": 0,
+      "toghness": 6
     }
-},
-"Item": {
-    "types": ["power", "device", "advantage", "general", "base", "vehicle", "attack"],
+  },
+  "Item": {
+    "types": [
+      "power",
+      "device",
+      "advantage",
+      "general",
+      "base",
+      "vehicle",
+      "attack"
+    ],
     "templates": {
-        "itemDescription": {
-            "description": ""
+      "itemDescription": {
+        "description": ""
+      },
+      "customisable": {
+        "power_effect": "",
+        "descriptor": [],
+        "type": "",
+        "action": {
+          "type": "",
+          "length": 0
         },
-        "customisable": {
-            "power_effect": "",
-            "descriptor": [],
-            "type": "",
-            "action": {
-                "type": "",
-                "length": 0
-            },
-            "duration": "",
-            "array": {
-                
-            },
-            "active": false,
-            "locked": false,
-            "power_cost": {
-                "base_cost": 1,
-                "extras": 0,
-                "flaws": 0,
-                "flat": 0,
-                "rank": 0,
-                "final_cost": 0,
-                "active_cost": 0,
-                "active_rank": 0,
-                "manual_purchase": true,
-                "max_ranks": 0
-            },
-            "extrasflaws": {
-                "parts": []
-            },
-            "values":{
-                "value_one": "",
-                "value_two": "",
-                "value_three": "",
-                "value_four": "",
-                "value_five": "",
-                "value_array": []
-            },
-            "unique":{
-                "value_one": "",
-                "value_two": "",
-                "value_three": "",
-                "value_four": "",
-                "value_five": ""
-            }
+        "duration": "",
+        "array": {},
+        "active": false,
+        "locked": false,
+        "power_cost": {
+          "base_cost": 1,
+          "extras": 0,
+          "flaws": 0,
+          "flat": 0,
+          "rank": 0,
+          "final_cost": 0,
+          "active_cost": 0,
+          "active_rank": 0,
+          "manual_purchase": true,
+          "max_ranks": 0
         },
-        "combat": {
-            "ranges": {
-                "range": "",
-                "close": 0,
-                "medium": 0,
-                "far": 0,
-                "rangeincrease": 0
-            },
-            "save": {
-                "resistance": "",
-                "effect": null
-            },
-            "damage":{
-                "resistance": "",
-                "effect": null
-            },
-            "area": {
-                "type": "",
-                "save": {
-                    "resistance": "dodge",
-                    "effect": null
-                },
-                "range": null,
-                "range2": null
-            },
-            "attack": {
-                "skill": "",
-                "type": "",
-                "auto": 0,
-                "total": 0
-            }
+        "extrasflaws": {
+          "parts": []
+        },
+        "values": {
+          "value_one": "",
+          "value_two": "",
+          "value_three": "",
+          "value_four": "",
+          "value_five": "",
+          "value_array": []
+        },
+        "unique": {
+          "value_one": "",
+          "value_two": "",
+          "value_three": "",
+          "value_four": "",
+          "value_five": ""
         }
-    },
-        "power": {
-            "templates": ["itemDescription", "customisable", "combat"]
+      },
+      "combat": {
+        "ranges": {
+          "range": "",
+          "close": 0,
+          "medium": 0,
+          "far": 0,
+          "rangeincrease": 0
         },
-        "device": {
-            "templates": ["itemDescription", "customisable", "combat"]
+        "save": {
+          "resistance": "",
+          "effect": null
         },
-        "general": {
-            "templates": ["itemDescription"],
-            "final_cost": 0
+        "damage": {
+          "resistance": "",
+          "effect": null
         },
-        "vehicle": {
-            "templates": ["itemDescription"],
-            "size": 0,
-            "str": 0,
-            "speed": 0,
-            "defense": 0,
-            "toughness": 5,
-            "features": 0,
-            "feature_desc": "",
-            "final_cost": 0
-        },
-        "base": {
-            "templates": ["itemDescription"],
-            "size": 0,
-            "toghness": 6,
-            "features": 0,
-            "feature_desc": "",
-            "final_cost": 0
-        },
-        "advantage": {
-            "templates": ["itemDescription"],
-            "id": "",
-            "ranks": 1,
-            "max_ranks": 1,
-            "type": "",
-            "additionalDesc": "",
-            "extradesc": false,
-            "ranked": false,
-            "effect": false,
-            "enchanced": false
+        "area": {
+          "type": "",
+          "save": {
+            "resistance": "dodge",
+            "effect": null
+          },
+          "range": null,
+          "range2": null
         },
         "attack": {
-            "templates": ["itemDescription", "range"],
-            "action": {
-                "type": "free",
-                "length": "0"
-            },
-            "power_effect": "",
-            "descriptor": "",
-            "effect": 0,
-            "misc_to_hit": 0,
-            "dc": 0,
-            "other_mods": ""
+          "skill": "",
+          "type": "",
+          "auto": 0,
+          "total": 0
         }
+      }
+    },
+    "power": {
+      "templates": [
+        "itemDescription",
+        "customisable",
+        "combat"
+      ]
+    },
+    "device": {
+      "templates": [
+        "itemDescription",
+        "customisable",
+        "combat"
+      ]
+    },
+    "general": {
+      "templates": [
+        "itemDescription"
+      ],
+      "final_cost": 0
+    },
+    "vehicle": {
+      "templates": [
+        "itemDescription"
+      ],
+      "size": 0,
+      "str": 0,
+      "speed": 0,
+      "defense": 0,
+      "toughness": 5,
+      "features": 0,
+      "feature_desc": "",
+      "final_cost": 0
+    },
+    "base": {
+      "templates": [
+        "itemDescription"
+      ],
+      "size": 0,
+      "toghness": 6,
+      "features": 0,
+      "feature_desc": "",
+      "final_cost": 0
+    },
+    "advantage": {
+      "templates": [
+        "itemDescription"
+      ],
+      "id": "",
+      "ranks": 1,
+      "max_ranks": 1,
+      "type": "",
+      "additionalDesc": "",
+      "extradesc": false,
+      "ranked": false,
+      "effect": false,
+      "enchanced": false
+    },
+    "attack": {
+      "templates": [
+        "itemDescription",
+        "range"
+      ],
+      "action": {
+        "type": "free",
+        "length": "0"
+      },
+      "power_effect": "",
+      "descriptor": "",
+      "effect": 0,
+      "misc_to_hit": 0,
+      "dc": 0,
+      "other_mods": ""
     }
+  }
 }

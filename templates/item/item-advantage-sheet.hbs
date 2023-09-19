@@ -1,8 +1,8 @@
 <form class="{{cssClass}}" autocomplete="off">
   <header class="sheet-header">
-    <img class="power-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+    <img class="power-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
     <div class="header-fields main-header">
-      <h1 class="charname power-name"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
+      <h1 class="charname power-name"><input name="name" type="text" value="{{item.name}}" placeholder="Name" /></h1>
     </div>
   </header>
 
@@ -29,20 +29,22 @@
       {{#if ranked}}
       <li class="power flexrow">
         <label class="resource-label">Rank</label>
-        <input class="power-value" type="number" name="system.ranks" value="{{system.ranks}}" min="1" max="{{max_ranks}}" data-dtype="Number"/>
+        <input class="power-value" type="number" name="system.ranks" value="{{system.ranks}}" min="1"
+          max="{{max_ranks}}" data-dtype="Number" />
       </li>
       {{/if}}
       {{#if extradesc}}
       <li class="power flexrow">
         <label class="resource-label">Extra description</label>
         {{#if (isinput extradesc)}}
-          <input class="power-value" type="text" name="system.additionalDesc" placeholder="{{descPlaceholder}}" value="{{additionalDesc}}"/>        
+        <input class="power-value" type="text" name="system.additionalDesc" placeholder="{{descPlaceholder}}"
+          value="{{additionalDesc}}" />
         {{/if}}
 
         {{#if (isdropdown extradesc)}}
-          <select class="power-value" name="system.additionalDesc">
-            {{selectOptions descDropdown selected=additionalDesc}}
-          </select>
+        <select class="power-value" name="system.additionalDesc">
+          {{selectOptions descDropdown selected=additionalDesc}}
+        </select>
         {{/if}}
       </li>
       {{/if}}

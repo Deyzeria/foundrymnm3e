@@ -6,33 +6,34 @@
     </div>
   </li>
   {{#each advantage as |item id|}}
-    <li class="item flexrow" data-item-id="{{item._id}}">
-      <div class="item-name advname">
-        <div class="item-image">
-          <a class="rollable" data-roll-type="item"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></a>
-        </div>
-        <h4 class="advname">{{item.name}}</h4>
-
-        <div class="advrank">
-          {{#if item.system.ranked}}
-            <div class="flexrow border1px">
-              <label class="cost-value"/>{{item.system.ranks}}</label>
-            </div>
-          {{/if}}
-        </div>
-
-        <div class="advdesc">
-          {{#if (isinput item.system.extradesc)}}
-          <div class="flexrow border1px">
-            <label class="cost-value"/>{{item.system.additionalDesc}}</label>
-          </div>
-          {{/if}}
-        </div>
+  <li class="item flexrow" data-item-id="{{item._id}}">
+    <div class="item-name advname">
+      <div class="item-image">
+        <a class="rollable" data-roll-type="item"><img src="{{item.img}}" title="{{item.name}}" width="24"
+            height="24" /></a>
       </div>
-      <div class="item-controls">
-        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+      <h4 class="advname">{{item.name}}</h4>
+
+      <div class="advrank">
+        {{#if item.system.ranked}}
+        <div class="flexrow border1px">
+          <label class="cost-value" />{{item.system.ranks}}</label>
+        </div>
+        {{/if}}
       </div>
-    </li>
+
+      <div class="advdesc">
+        {{#if (isinput item.system.extradesc)}}
+        <div class="flexrow border1px">
+          <label class="cost-value" />{{item.system.additionalDesc}}</label>
+        </div>
+        {{/if}}
+      </div>
+    </div>
+    <div class="item-controls">
+      <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+      <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+    </div>
+  </li>
   {{/each}}
 </ol>

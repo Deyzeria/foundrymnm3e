@@ -21,20 +21,19 @@ export class FoundryMnM3eItem extends Item {
     super.prepareDerivedData();
     this.labels = {};
 
-    switch ( this.type ) {
+    switch (this.type) {
       case "power":
         this.prepareExtrasFlawsCostAddition();
         this.prepareCostTotal();
         this._prepareLabels();
-        this.system.combineddescription= "";
-      break;
+        this.system.combineddescription = "";
+        break;
 
       case "advantage":
-        if(this.system.ranked == false)
-        {
-          this.update({'system.ranks': 1});
+        if (this.system.ranked == false) {
+          this.update({ 'system.ranks': 1 });
         }
-      break;
+        break;
     }
 
     //if ( !this.isOwned ) this.prepareFinalAttributes();
@@ -45,18 +44,15 @@ export class FoundryMnM3eItem extends Item {
     super._onUpdate(data, options, userId);
 
     // Power updates
-    if(data.system?.power_effect != undefined)
-    {
+    if (data.system?.power_effect != undefined) {
       this.preparePower();
     }
-    if(data.system?.values?.value_array != undefined)
-    {
+    if (data.system?.values?.value_array != undefined) {
       this.addActiveEffects();
     }
 
     // Advantages
-    if(data.system?.id != undefined && data.system?.id != "")
-    {
+    if (data.system?.id != undefined && data.system?.id != "") {
       this.prepareAdvantage();
     }
   }
@@ -67,7 +63,7 @@ export class FoundryMnM3eItem extends Item {
    */
   getRollData() {
     // If present, return the actor's roll data.
-    if ( !this.actor ) return null;
+    if (!this.actor) return null;
     const rollData = this.actor.getRollData();
     // Grab the item's system data as well.
     rollData.item = foundry.utils.deepClone(this.system);
@@ -81,22 +77,19 @@ export class FoundryMnM3eItem extends Item {
 
     // Activation label
     const act = this.system.action ?? {};
-    this.labels.activate = act.type  ? [act.length, C.powerActivationEnum[act.type]].filterJoin(" ") : "";
+    this.labels.activate = act.type ? [act.length, C.powerActivationEnum[act.type]].filterJoin(" ") : "";
 
     // Range label
     const rng = this.system.ranges ?? {};
-    if ( [null, "personal", "perception", "rank", ""].includes(rng.range) )
-    {
+    if ([null, "personal", "perception", "rank", ""].includes(rng.range)) {
       rng.close = rng.medium = rng.far = null;
       this.labels.range = C.powerRangeEnum[rng.range] ?? "";
     }
-    else if (rng.range == "close")
-    {
+    else if (rng.range == "close") {
       this.prepareRanges();
-      this.labels.range = rng.close + " " + ScaleTable.GetDistanceName(false); 
+      this.labels.range = rng.close + " " + ScaleTable.GetDistanceName(false);
     }
-    else
-    {
+    else {
       this.prepareRanges();
       this.labels.range = rng.close + "/" + rng.medium + "/" + rng.far + " " + ScaleTable.GetDistanceName(false);
     }
@@ -107,17 +100,15 @@ export class FoundryMnM3eItem extends Item {
     this.labels.basepower = C.defaultPowerEffects[this.system.power_effect] ?? "";
   }
 
-  prepareRanges(){
+  prepareRanges() {
     const rng = this.system.ranges ?? {};
 
     const RangeIncrease = Math.pow(2, rng.rangeincrease);
-    
-    if (rng.range == 'close')
-    {
+
+    if (rng.range == 'close') {
       rng.close = 1 * RangeIncrease;
     }
-    else
-    {
+    else {
       const baseRange = this.system.power_cost.rank * RangeIncrease;
       rng.close = baseRange * 25;
       rng.medium = baseRange * 50;
@@ -127,17 +118,17 @@ export class FoundryMnM3eItem extends Item {
 
   prepareFinalAttributes() {
     // Other Saving throws
-    switch ( this.type ) {
+    switch (this.type) {
       case "power":
         this.prepareTransformativeDataPowers();
-        if(this.system.save.resistance != "" && this.system.save.resistance != "none") this.getSaveDC();
-        if(this.system.damage.resistance != "" && this.system.damage.resistance != "none") this.getDamageDC();
-        if(this.system.area.type != "" && this.system.area.type != "none") this.getAreaSaveDC();
+        if (this.system.save.resistance != "" && this.system.save.resistance != "none") this.getSaveDC();
+        if (this.system.damage.resistance != "" && this.system.damage.resistance != "none") this.getDamageDC();
+        if (this.system.area.type != "" && this.system.area.type != "none") this.getAreaSaveDC();
         this.prepareFinalDescription();
-      break;
+        break;
       case "advantage":
         this.setAdvantageItemName();
-      break;
+        break;
     }
 
     //this.getAttackToHit();
@@ -152,8 +143,7 @@ export class FoundryMnM3eItem extends Item {
       duration: "",
       savingthrow: ""
     }
-    if(this.system.power_effect != "")
-    {
+    if (this.system.power_effect != "") {
       powerData = GetPowerData(this.system.power_effect);
     }
 
@@ -173,25 +163,24 @@ export class FoundryMnM3eItem extends Item {
     //Data is not always updated if you switch too quickly :/
     this.update(updateData);
 
-    if(powerData.data == false) return;
+    if (powerData.data == false) return;
 
     this.preparePowers(powerData.data ?? {});
   }
 
-  preparePowers(data)
-  {
+  preparePowers(data) {
     this.clearValueAndUnique();
 
     var updateData = {};
     switch (this.system.power_effect) {
-      case 'affliction':        
-        updateData["system.unique.value_one"]= this.ListFiller(data.rank1, CONFIG.MNM3E.conditions);
-        updateData["system.unique.value_two"]= this.ListFiller(data.rank2, CONFIG.MNM3E.conditions);
-        updateData["system.unique.value_three"]= this.ListFiller(data.rank3, CONFIG.MNM3E.conditions);
-        updateData["system.unique.resistancecheck"]= this.ListFiller(data.resistance, CONFIG.MNM3E.defenses);
+      case 'affliction':
+        updateData["system.unique.value_one"] = this.ListFiller(data.rank1, CONFIG.MNM3E.conditions);
+        updateData["system.unique.value_two"] = this.ListFiller(data.rank2, CONFIG.MNM3E.conditions);
+        updateData["system.unique.value_three"] = this.ListFiller(data.rank3, CONFIG.MNM3E.conditions);
+        updateData["system.unique.resistancecheck"] = this.ListFiller(data.resistance, CONFIG.MNM3E.defenses);
         break;
       case 'communication':
-        updateData["system.unique.value_one"]= this.ListFiller(data.sensetype, CONFIG.MNM3E.SenseTypes);
+        updateData["system.unique.value_one"] = this.ListFiller(data.sensetype, CONFIG.MNM3E.SenseTypes);
         break;
       case 'damage':
         updateData["system.values.value_one"] = false;
@@ -200,7 +189,7 @@ export class FoundryMnM3eItem extends Item {
         updateData["system.unique.value_one"] = this.ListFiller(data, CONFIG.MNM3E.abilities);
         break;
       case 'enhancedextra':
-        
+
         break;
       case 'enhancedtrait':
         updateData["system.unique.value_one"] = {
@@ -213,7 +202,7 @@ export class FoundryMnM3eItem extends Item {
     this.update(updateData);
   }
 
-  prepareAdvantage(){
+  prepareAdvantage() {
     var advantageData = {
       max_ranks: 1,
       type: "",
@@ -221,7 +210,7 @@ export class FoundryMnM3eItem extends Item {
       ranked: false,
       effect: false
     }
-    if(this.system.id != null){
+    if (this.system.id != null) {
       advantageData = GetAdvantagesData(this.system.id);
     }
 
@@ -232,27 +221,23 @@ export class FoundryMnM3eItem extends Item {
     updateData["system.extradesc"] = advantageData.extradesc ?? false;
     updateData["system.ranked"] = advantageData.ranked ?? false;
     updateData["system.effect"] = advantageData.effect ?? false;
-    
-    if (advantageData.extradesc == "input")
-    {
+
+    if (advantageData.extradesc == "input") {
       updateData["system.description"] = advantageData.description ?? "";
     }
-    else if (advantageData.extradesc == "dropdown")
-    {
+    else if (advantageData.extradesc == "dropdown") {
       var arr = new Object();
       const skl = CONFIG.MNM3E.skills;
       const dt = advantageData.dropdown;
 
-      if (Array.isArray(dt) && dt.length)
-      {
+      if (Array.isArray(dt) && dt.length) {
         dt.forEach(element => {
           const subtypeValue = this.actor.system.skills[element].subtype;
           const val = (subtypeValue !== undefined && subtypeValue !== '') ? subtypeValue : skl[element];
           arr[element] = val;
         });
       }
-      else
-      {
+      else {
         Object.keys(skl).forEach(element => {
           const subtypeValue = this.actor.system.skills[element].subtype;
           const val = (subtypeValue !== undefined && subtypeValue !== '') ? subtypeValue : skl[element];
@@ -270,7 +255,7 @@ export class FoundryMnM3eItem extends Item {
    * @param {object} table Config object to use
    * @returns Object
    */
-  ListFiller(data, table){
+  ListFiller(data, table) {
     var response = new Object();
     data.forEach(element => {
       response[element] = table[element];
@@ -279,65 +264,55 @@ export class FoundryMnM3eItem extends Item {
     return response;
   }
 
-  setAdvantageItemName()
-  {
-    if (this.system.id != "custom" && this.system.id != "")
-    {
+  setAdvantageItemName() {
+    if (this.system.id != "custom" && this.system.id != "") {
       const conf = CONFIG.MNM3E;
-      if(this.system.extradesc == false)
-      {
+      if (this.system.extradesc == false) {
         this.name = conf.AdvantageEnum[this.system.id];
       }
-      else if(this.system.extradesc == "input")
-      {
+      else if (this.system.extradesc == "input") {
         this.name = conf.AdvantageEnum[this.system.id] + " (" + this.system.additionalDesc + ")";
       }
-      else if(this.system.extradesc == "dropdown")
-      {
+      else if (this.system.extradesc == "dropdown") {
         const val = this.skillsWithCharacterNames();
         this.name = conf.AdvantageEnum[this.system.id] + " (" + val[this.system.additionalDesc] + ")";
       }
-    }  
+    }
   }
 
-  getSaveDC() 
-  {
+  getSaveDC() {
     const save = this.system.save;
     var dc = this.system.power_cost.active_rank + 10;
 
     this.system.save.effect = dc;
   }
 
-  getAreaSaveDC() 
-  {
+  getAreaSaveDC() {
     const save = this.system.area.save;
     var dc = this.system.power_cost.active_rank + 10;
 
     this.system.save.effect = dc;
   }
 
-  getDamageDC() 
-  {
+  getDamageDC() {
     const save = this.system.damage;
     var dc = this.system.power_cost.active_rank + 15;
 
-    if(this.system.values.value_one === true)
-    {
+    if (this.system.values.value_one === true) {
       dc += this.actor.system.abilities.str.total;
     }
 
     const abl = CONFIG.MNM3E.abilities[save.resistance]?.label ?? "";
-    this.labels.damage = game.i18n.format("MNM3E.SaveDamageDC", {dc: dc || "", ability: abl});
+    this.labels.damage = game.i18n.format("MNM3E.SaveDamageDC", { dc: dc || "", ability: abl });
     this.system.damage.effect = dc;
   }
 
-  getAttackToHit() 
-  {
+  getAttackToHit() {
     if (this.system.attack.type == "") return null;
     const rollData = this.getRollData();
     const parts = [];
 
-    if ( !this.isOwned ) return {rollData, parts};
+    if (!this.isOwned) return { rollData, parts };
 
     parts.push("@total");
 
@@ -345,11 +320,10 @@ export class FoundryMnM3eItem extends Item {
     const roll = new Roll(parts.join("+"), rollData);
     const formula = simplifyRollFormula(roll.formula) || "0";
     this.labels.toHit = !/^[+-]/.test(formula) ? `+ ${formula}` : formula;
-    return {rollData, parts};
+    return { rollData, parts };
   }
 
-  prepareExtrasFlawsCostAddition()
-  {
+  prepareExtrasFlawsCostAddition() {
     let extras = this.system.extrasflaws.parts.reduce((extras, i) => {
       if (i[1] != "extra") return extras;
       const c = i[2] || 0;
@@ -367,8 +341,7 @@ export class FoundryMnM3eItem extends Item {
     const flatsTypes = ["extraflat", "flawsflat"];
     let flat = this.system.extrasflaws.parts.reduce((flat, i) => {
       if (!flatsTypes.includes(i[1])) return flat;
-      if (i[1] == "flawsflat")
-      {
+      if (i[1] == "flawsflat") {
         const c = i[2] || 0;
         return flat - c
       }
@@ -379,16 +352,13 @@ export class FoundryMnM3eItem extends Item {
     this.system.power_cost.flat = flat;
   }
 
-  prepareTransformativeDataPowers()
-  {
-    if(this.system.power_effect == 'affliction')
-    {
+  prepareTransformativeDataPowers() {
+    if (this.system.power_effect == 'affliction') {
       this.system.save.resistance = this.system.values.value_five;
     }
   }
 
-  clearValueAndUnique()
-  {
+  clearValueAndUnique() {
     var updateData = {};
     updateData["system.values.value_one"] = "";
     updateData["system.values.value_two"] = "";
@@ -407,19 +377,17 @@ export class FoundryMnM3eItem extends Item {
     this.update(updateData);
   }
 
-  prepareCostTotal(){
+  prepareCostTotal() {
     const pcost = this.system.power_cost;
 
-    if(!pcost.manual_purchase) this.calculateRanksNonManual();
+    if (!pcost.manual_purchase) this.calculateRanksNonManual();
 
     var combinedPerRank = pcost.base_cost + pcost.extras - pcost.flaws;
 
-    if(combinedPerRank < 1)
-    {
+    if (combinedPerRank < 1) {
       pcost.final_cost = Math.ceil(pcost.rank / (2 - combinedPerRank)) + pcost.flat;
-    } 
-    else 
-    {
+    }
+    else {
       pcost.final_cost = combinedPerRank * pcost.rank + pcost.flat;
     }
 
@@ -428,13 +396,12 @@ export class FoundryMnM3eItem extends Item {
     pcost.active_rank = pcost.rank;
   }
 
-  calculateRanksNonManual()
-  {
+  calculateRanksNonManual() {
     const pcost = this.system.power_cost;
 
     switch (this.system.power_effect) {
       case 'concealment':
-        
+
         break;
       case 'enhancedtrait':
       case 'enhancedability':
@@ -445,15 +412,15 @@ export class FoundryMnM3eItem extends Item {
         break;
 
       case 'enhancedextra':
-        
+
         break;
 
       case 'enhancedadvantage':
-        
+
         break;
 
       case 'illusion':
-        
+
         break;
 
       default:
@@ -461,33 +428,33 @@ export class FoundryMnM3eItem extends Item {
     }
   }
 
-  async addModifierExFl(mod)
-  {
+  async addModifierExFl(mod) {
     const extrasflaws = this.system.extrasflaws;
 
-    return this.update({"system.extrasflaws.parts": extrasflaws.parts.concat([[
-      mod.label, //Display label
-      mod.type, //
-      mod.cost,
-      mod.id,
-      mod.max_ranks,
-      mod.effect
-    ]])});
+    return this.update({
+      "system.extrasflaws.parts": extrasflaws.parts.concat([[
+        mod.label, //Display label
+        mod.type, //
+        mod.cost,
+        mod.id,
+        mod.max_ranks,
+        mod.effect
+      ]])
+    });
   }
 
-  addActiveEffects(){
+  addActiveEffects() {
     //if (!this.system.active) return;
     const effects = [];
 
     const aefs = Object.entries(this.effects)[4][1];
 
     //Clear remaining active effects if all elements in value array are deleted
-    if(this.system.values.value_array.length == 0 && aefs.length != 0)
-    {
+    if (this.system.values.value_array.length == 0 && aefs.length != 0) {
       this.clearItemActiveEffects(aefs);
       return;
     }
-    
+
     switch (this.system.power_effect) {
       case 'enhancedability':
       case 'enhancedtrait':
@@ -497,88 +464,83 @@ export class FoundryMnM3eItem extends Item {
         this.system.values.value_array.forEach(element => {
           const name = element[0] != '' ? element[0] : 'str';
           var typeBonus = '';
-          if(this.system.power_effect == 'enhancedability')
-          {
+          if (this.system.power_effect == 'enhancedability') {
             typeBonus = 'abilities';
           }
-          else if (defenses.includes(name))
-          {
+          else if (defenses.includes(name)) {
             typeBonus = 'defenses';
           }
-          else if (skills.includes(name))
-          {
+          else if (skills.includes(name)) {
             typeBonus = 'skills';
           }
 
           const val = {
-            key:`system.${typeBonus}.${name}.auto`,
+            key: `system.${typeBonus}.${name}.auto`,
             mode: 2,
             value: element[1] != '' ? element[1] : '0'
           };
           effects.push(val);
         });
-       break;
-      
+        break;
+
       case 'growth':
         var rank = this.system.power_cost.active_rank;
 
-        if(this.actor.system.abilities.sta.purchased < -5)
-        {
+        if (this.actor.system.abilities.sta.purchased < -5) {
           // If Absent
           const conbuff = {
-            key:`system.defenses.toughness.auto`,
+            key: `system.defenses.toughness.auto`,
             mode: 2,
             value: rank
           };
           effects.push(conbuff);
         }
-        else
-        {
+        else {
           const conbuff = {
-            key:`system.abilities.sta.auto`,
+            key: `system.abilities.sta.auto`,
             mode: 2,
             value: rank
           };
           effects.push(conbuff);
         }
-        
+
         var growthbonus = [
-        {
-          key:`system.abilities.str.auto`,
-          mode: 2,
-          value: rank
-        },
-        {
-          key:`system.skills.inm.auto`,
-          mode: 2,
-          value: Math.floor(rank/2)
-        },
-        {
-          key:`system.speed.walk.rank`,
-          mode: 2,
-          value: Math.floor(rank/8)
-        },
-        {
-          key:`system.skills.ste.auto`,
-          mode: 2,
-          value: `-${rank}`
-        },
-        {
-          key:`system.skills.ste.auto`,
-          mode: 2,
-          value: `-${rank}`
-        },
-        {
-          key:`system.defenses.dodge.auto`,
-          mode: 2,
-          value: `-${Math.floor(rank/2)}`
-        },
-        {
-          key:`system.defenses.parry.auto`,
-          mode: 2,
-          value: `-${Math.floor(rank/2)}`
-        }
-        //FIXME: Mass +1 for each rank. Size +1 for each 4 ranks
+          {
+            key: `system.abilities.str.auto`,
+            mode: 2,
+            value: rank
+          },
+          {
+            key: `system.skills.inm.auto`,
+            mode: 2,
+            value: Math.floor(rank / 2)
+          },
+          {
+            key: `system.speed.walk.rank`,
+            mode: 2,
+            value: Math.floor(rank / 8)
+          },
+          {
+            key: `system.skills.ste.auto`,
+            mode: 2,
+            value: `-${rank}`
+          },
+          {
+            key: `system.skills.ste.auto`,
+            mode: 2,
+            value: `-${rank}`
+          },
+          {
+            key: `system.defenses.dodge.auto`,
+            mode: 2,
+            value: `-${Math.floor(rank / 2)}`
+          },
+          {
+            key: `system.defenses.parry.auto`,
+            mode: 2,
+            value: `-${Math.floor(rank / 2)}`
+          }
+          //FIXME: Mass +1 for each rank. Size +1 for each 4 ranks
         ];
 
         effects.push(growthbonus);
@@ -588,37 +550,37 @@ export class FoundryMnM3eItem extends Item {
         var rank = this.system.power_cost.active_rank;
 
         var shrinkbonus = [
-        {
-          key:`system.skills.ste.auto`,
-          mode: 2,
-          value: rank
-        },
-        {
-          key:`system.skills.inm.auto`,
-          mode: 2,
-          value: `-${Math.floor(rank/2)}`
-        },
-        {
-          key:`system.defenses.dodge.auto`,
-          mode: 2,
-          value: Math.floor(rank/2)
-        },
-        {
-          key:`system.defenses.parry.auto`,
-          mode: 2,
-          value: Math.floor(rank/2)
-        },
-        {
-          key:`system.speed.walk.rank`,
-          mode: 2,
-          value: `-${Math.floor(rank/8)}`
-        },
-        {
-          key:`system.abilities.str.auto`,
-          mode: 2,
-          value: `-${Math.floor(rank/4)}`
-        }
-        //FIXME: Size -1 for each 4 ranks
+          {
+            key: `system.skills.ste.auto`,
+            mode: 2,
+            value: rank
+          },
+          {
+            key: `system.skills.inm.auto`,
+            mode: 2,
+            value: `-${Math.floor(rank / 2)}`
+          },
+          {
+            key: `system.defenses.dodge.auto`,
+            mode: 2,
+            value: Math.floor(rank / 2)
+          },
+          {
+            key: `system.defenses.parry.auto`,
+            mode: 2,
+            value: Math.floor(rank / 2)
+          },
+          {
+            key: `system.speed.walk.rank`,
+            mode: 2,
+            value: `-${Math.floor(rank / 8)}`
+          },
+          {
+            key: `system.abilities.str.auto`,
+            mode: 2,
+            value: `-${Math.floor(rank / 4)}`
+          }
+          //FIXME: Size -1 for each 4 ranks
         ];
         effects.push(shrinkbonus);
         break;
@@ -627,30 +589,26 @@ export class FoundryMnM3eItem extends Item {
         return;
     }
 
-    if(aefs.length == 0)
-    {
+    if (aefs.length == 0) {
       this.createItemActiveEffects(effects);
     }
-    else
-    {
+    else {
       this.updateItemActiveEffects(aefs, effects);
     }
   }
-  
-  createItemActiveEffects(effects)
-  {
+
+  createItemActiveEffects(effects) {
     this.createEmbeddedDocuments("ActiveEffect", [{
-        name: this.name,
-        icon: "icons/svg/aura.svg",
-        origin: this.uuid,
-        "duration.rounds": undefined,
-        disabled: false,
-        changes: effects
-      }]);
+      name: this.name,
+      icon: "icons/svg/aura.svg",
+      origin: this.uuid,
+      "duration.rounds": undefined,
+      disabled: false,
+      changes: effects
+    }]);
   }
 
-  async updateItemActiveEffects(list, effects)
-  {
+  async updateItemActiveEffects(list, effects) {
     const updates = [{
       _id: list[0]._id,
       changes: effects
@@ -658,14 +616,13 @@ export class FoundryMnM3eItem extends Item {
     await this.updateEmbeddedDocuments("ActiveEffect", updates);
   }
 
-  clearItemActiveEffects(list)
-  {
+  clearItemActiveEffects(list) {
     var updates = [];
     updates.push(list[0]._id);
     this.deleteEmbeddedDocuments("ActiveEffect", updates);
   }
 
-  skillsWithCharacterNames(){
+  skillsWithCharacterNames() {
     var returnObject = new Object();
     const skillsactor = this.actor.system.skills;
     Object.keys(CONFIG.MNM3E.skills).forEach(element => {
@@ -719,8 +676,7 @@ export class FoundryMnM3eItem extends Item {
    * This is a vague solution for the small field above the description
    * which just has all data in short
    */
-  prepareFinalDescription()
-  {
+  prepareFinalDescription() {
     var combdesc = [];
     const conf = CONFIG.MNM3E;
     const data = this.system;
@@ -729,62 +685,59 @@ export class FoundryMnM3eItem extends Item {
 
     // switch (data.power_effect) {
     //   case value:
-        
+
     //     break;
-    
+
     //   default:
     //     break;
     // }
-    
+
     // Area filler
-    if(data.area.type != "" && data.area.type != null)
-    {
+    if (data.area.type != "" && data.area.type != null) {
       switch (data.area.type) {
         case 'areaburst':
         case 'areacloud':
           var rangeString = ScaleTable.GetScale(data.area.range, 'distancedisplay');
-          var areasize = game.i18n.format("MNM3E.areaSphereDescription", {range: rangeString});
-          combdesc.push(game.i18n.format("MNM3E.areaFullDescription", {type: conf.attackType[data.area.type], scale: areasize, dc: data.save.effect || "", ability: conf.defenses[data.save.resistance]}));
+          var areasize = game.i18n.format("MNM3E.areaSphereDescription", { range: rangeString });
+          combdesc.push(game.i18n.format("MNM3E.areaFullDescription", { type: conf.attackType[data.area.type], scale: areasize, dc: data.save.effect || "", ability: conf.defenses[data.save.resistance] }));
           break;
 
         case 'areacylinder':
           var rangeString = ScaleTable.GetScale(data.area.range, 'distancedisplay');
-          var areasize = game.i18n.format("MNM3E.areaCylinderDescription", {range: rangeString});
-          combdesc.push(game.i18n.format("MNM3E.areaFullDescription", {type: conf.attackType[data.area.type], scale: areasize, dc: data.save.effect || "", ability: conf.defenses[data.save.resistance]}));
+          var areasize = game.i18n.format("MNM3E.areaCylinderDescription", { range: rangeString });
+          combdesc.push(game.i18n.format("MNM3E.areaFullDescription", { type: conf.attackType[data.area.type], scale: areasize, dc: data.save.effect || "", ability: conf.defenses[data.save.resistance] }));
           break;
 
         case 'areacone':
           var rangeString = ScaleTable.GetScale(data.area.range, 'distancedisplay');
-          var areasize = game.i18n.format("MNM3E.areaConeDescription", {range: rangeString});
-          combdesc.push(game.i18n.format("MNM3E.areaFullDescription", {type: conf.attackType[data.area.type], scale: areasize, dc: data.save.effect || "", ability: conf.defenses[data.save.resistance]}));
+          var areasize = game.i18n.format("MNM3E.areaConeDescription", { range: rangeString });
+          combdesc.push(game.i18n.format("MNM3E.areaFullDescription", { type: conf.attackType[data.area.type], scale: areasize, dc: data.save.effect || "", ability: conf.defenses[data.save.resistance] }));
           break;
 
         case 'arealine':
           var rangeString = ScaleTable.GetScale(data.area.range, 'distancedisplay');
           var range2String = ScaleTable.GetScale(data.area.range2, 'distancedisplay');
-          var areasize = game.i18n.format("MNM3E.areaLineDescription", {range: rangeString, range2: range2String});
-          combdesc.push(game.i18n.format("MNM3E.areaFullDescription", {type: conf.attackType[data.area.type], scale: areasize, dc: data.save.effect || "", ability: conf.defenses[data.save.resistance]}));
+          var areasize = game.i18n.format("MNM3E.areaLineDescription", { range: rangeString, range2: range2String });
+          combdesc.push(game.i18n.format("MNM3E.areaFullDescription", { type: conf.attackType[data.area.type], scale: areasize, dc: data.save.effect || "", ability: conf.defenses[data.save.resistance] }));
           break;
 
         case 'areashapeable':
           var rangeString = ScaleTable.GetScale(data.area.range, 'massdisplay');
-          var areasize = game.i18n.format("MNM3E.areaShapeableDescription", {range: rangeString});
-          combdesc.push(game.i18n.format("MNM3E.areaFullDescription", {type: conf.attackType[data.area.type], scale: areasize, dc: data.save.effect || "", ability: conf.defenses[data.save.resistance]}));
+          var areasize = game.i18n.format("MNM3E.areaShapeableDescription", { range: rangeString });
+          combdesc.push(game.i18n.format("MNM3E.areaFullDescription", { type: conf.attackType[data.area.type], scale: areasize, dc: data.save.effect || "", ability: conf.defenses[data.save.resistance] }));
           break;
 
         case 'areaperception':
-          combdesc.push(game.i18n.format("MNM3E.areaPerceptionDescription", {dc: data.save.effect || "", ability: conf.defenses[data.save.resistance]}));
+          combdesc.push(game.i18n.format("MNM3E.areaPerceptionDescription", { dc: data.save.effect || "", ability: conf.defenses[data.save.resistance] }));
           break;
       }
     }
-    else if(data.save.resistance != "" && data.save.resistance != "none")
-    {
-      combdesc.push(game.i18n.format("MNM3E.SaveDC", {dc: data.save.effect || "", ability: conf.defenses[data.save.resistance]}));
+    else if (data.save.resistance != "" && data.save.resistance != "none") {
+      combdesc.push(game.i18n.format("MNM3E.SaveDC", { dc: data.save.effect || "", ability: conf.defenses[data.save.resistance] }));
     }
 
-    if(data.damage.resistance != "" && data.damage.resistance != "none")
-    {
-      combdesc.push(game.i18n.format("MNM3E.SaveDamageDC", {dc: data.damage.effect || "", ability: conf.defenses[data.damage.resistance]}));
+    if (data.damage.resistance != "" && data.damage.resistance != "none") {
+      combdesc.push(game.i18n.format("MNM3E.SaveDamageDC", { dc: data.damage.effect || "", ability: conf.defenses[data.damage.resistance] }));
     }
 
 

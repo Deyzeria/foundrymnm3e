@@ -1,28 +1,27 @@
-export async function ParserAccess(){
+export async function ParserAccess() {
     // ---REMOVE---
     const manualSwitch = false;
     const generateActor = false;
-    if(manualSwitch){
-    var dataActor;
-    xmlfetcher()
-        .then(async xmlDoc => {
-            const parsed = xmlToJson(xmlDoc);
-            console.debug(parsed);
+    if (manualSwitch) {
+        var dataActor;
+        xmlfetcher()
+            .then(async xmlDoc => {
+                const parsed = xmlToJson(xmlDoc);
+                console.debug(parsed);
                 var actorJson = await GenerateActor(parsed, "hero");
-                
+
                 actorJson = PopulateActorData(actorJson, parsed);
                 PopulateActorAdvantages(actorJson, parsed);
                 PopulateActorPowers(actorJson, parsed);
                 //console.debug(actorJson); 
                 if (!generateActor) return;
                 await Actor.create(actorJson);
-        });
+            });
     }
 }
 
 // xml file should be passed here.
-async function xmlfetcher()
-{
+async function xmlfetcher() {
     try {
         const xmlFileUrl = 'https://raw.githubusercontent.com/Sinantrarion/codecollection/main/AAAABBAAAA.xml';
         // Fetch the XML file using the fetch() API
@@ -39,68 +38,65 @@ async function xmlfetcher()
 }
 
 function xmlToJson(xml) {
-	var obj = {};
+    var obj = {};
 
-	if (xml.nodeType == 1) { // element
-		// do attributes
-		if (xml.attributes.length > 0) {
-		obj = {};
-			for (var j = 0; j < xml.attributes.length; j++) {
-				var attribute = xml.attributes.item(j);
-				obj[attribute.nodeName] = attribute.nodeValue;
-			}
-		}
-	} else if (xml.nodeType == 3) { // text
-		obj["text"] = xml.nodeValue.trim();
-	}
+    if (xml.nodeType == 1) { // element
+        // do attributes
+        if (xml.attributes.length > 0) {
+            obj = {};
+            for (var j = 0; j < xml.attributes.length; j++) {
+                var attribute = xml.attributes.item(j);
+                obj[attribute.nodeName] = attribute.nodeValue;
+            }
+        }
+    } else if (xml.nodeType == 3) { // text
+        obj["text"] = xml.nodeValue.trim();
+    }
 
-	// do children
-	if (xml.hasChildNodes()) {
-		for(var i = 0; i < xml.childNodes.length; i++) {
-			var item = xml.childNodes.item(i);
-			var nodeName = item.nodeName;
-			if (typeof(obj[nodeName]) == "undefined") {
-				obj[nodeName] = xmlToJson(item);
-			} else {
-				if (typeof(obj[nodeName].push) == "undefined") {
-					var old = obj[nodeName];
-					obj[nodeName] = [];
-					obj[nodeName].push(old);
-				}
-				obj[nodeName].push(xmlToJson(item));
-			}
-		}
-	}
-	return obj;
+    // do children
+    if (xml.hasChildNodes()) {
+        for (var i = 0; i < xml.childNodes.length; i++) {
+            var item = xml.childNodes.item(i);
+            var nodeName = item.nodeName;
+            if (typeof (obj[nodeName]) == "undefined") {
+                obj[nodeName] = xmlToJson(item);
+            } else {
+                if (typeof (obj[nodeName].push) == "undefined") {
+                    var old = obj[nodeName];
+                    obj[nodeName] = [];
+                    obj[nodeName].push(old);
+                }
+                obj[nodeName].push(xmlToJson(item));
+            }
+        }
+    }
+    return obj;
 }
 
-async function GenerateActor(dataActor, actorType){
-    return new Actor({name: dataActor.document.public.character.name, type:actorType}).toObject()
+async function GenerateActor(dataActor, actorType) {
+    return new Actor({ name: dataActor.document.public.character.name, type: actorType }).toObject()
 }
 
-function PopulateActorData(actorStub, dataActor){
+function PopulateActorData(actorStub, dataActor) {
     const dataBase = dataActor.document.public.character;
 
     // ----ABILITIES----
     const actorStubAbilitiesList = ['str', 'sta', 'agl', 'dex', 'fgt', 'int', 'awe', 'pre'];
-    for (var i = 0; i < actorStubAbilitiesList.length; i++)
-    {
+    for (var i = 0; i < actorStubAbilitiesList.length; i++) {
         actorStub.system.abilities[actorStubAbilitiesList[i]].purchased = parseInt(dataBase.attributes.attribute[i].base);
     }
 
     // ----DEFENCES----
     const actorStubDefensesList = ['dodge', 'parry', 'fortitude', 'toughness', 'will']
-    for (var i = 0; i < actorStubDefensesList.length; i++)
-    {
+    for (var i = 0; i < actorStubDefensesList.length; i++) {
         actorStub.system.defenses[actorStubDefensesList[i]].purchased = parseInt(dataBase.defenses.defense[i].cost.value);
         actorStub.system.defenses[actorStubDefensesList[i]].impervious = parseInt(dataBase.defenses.defense[i].impervious);
     }
-    
+
     // ----SKILLS----
     const skillsList = dataBase.skills.skill;
     const actorStubSkillList = ['acr', 'ath', 'dec', 'inm', 'ins', 'inv', 'prc', 'prs', 'soh', 'ste', 'tec', 'tre', 'veh'];
-    for (var i = 0; i < actorStubSkillList.length; i++)
-    {
+    for (var i = 0; i < actorStubSkillList.length; i++) {
         var tempValue = skillsList[GetSkill(skillsList, i)].base;
         tempValue = (tempValue === "-") ? 0 : parseInt(tempValue);
         actorStub.system.skills[actorStubSkillList[i]].purchased = tempValue;
@@ -111,66 +107,63 @@ function PopulateActorData(actorStub, dataActor){
     var numb = [0, 2]
     var namb = ['Close Combat: ', 'Ranged Combat: '];
     var namr = ['CC: ', 'RC: '];
-    for (var i = 0; i < numb.length; i++)
-    {
+    for (var i = 0; i < numb.length; i++) {
         var skillArray = GetMultipleSkills(skillsList, numb[i]);
-        for (var y = 0; y < skillArray.length; y++)
-        {
+        for (var y = 0; y < skillArray.length; y++) {
             var tempValue = skillsList[skillArray[y]].base;
             tempValue = (tempValue === "-") ? 0 : parseInt(tempValue);
-            actorStub.system.skills[comb[y+numb[i]]].purchased = tempValue;
+            actorStub.system.skills[comb[y + numb[i]]].purchased = tempValue;
 
-            if(skillsList[skillArray[y]].name !== ""){
+            if (skillsList[skillArray[y]].name !== "") {
                 var skillName = skillsList[skillArray[y]].name;
-                actorStub.system.skills[comb[y+numb[i]]].subtype = skillName.replace(namb[i], namr[i]);
+                actorStub.system.skills[comb[y + numb[i]]].subtype = skillName.replace(namb[i], namr[i]);
             }
         }
     }
 
     comb = ['exp1', 'exp2', 'exp3', 'exp4', 'exp5'];
     var skillArray = GetMultipleSkills(skillsList, 1);
-    for (var i = 0; i < skillArray.length; i++)
-    {
+    for (var i = 0; i < skillArray.length; i++) {
         var tempValue = skillsList[skillArray[i]].base;
         tempValue = (tempValue === "-") ? 0 : parseInt(tempValue);
         actorStub.system.skills[comb[i]].purchased = tempValue;
 
-        const variant = skillsList[skillArray[i]].name.split(":")[0].trim(); 
-        switch(variant) {
+        const variant = skillsList[skillArray[i]].name.split(":")[0].trim();
+        switch (variant) {
             case "Expertise (AGL)":
                 console.log("Matched Expertise (AGL)");
                 actorStub.system.skills[comb[i]].ability = "agl";
-            break;
+                break;
             case "Expertise (AWE)":
                 console.log("Matched Expertise (AWE)");
                 actorStub.system.skills[comb[i]].ability = "awe";
-            break;
+                break;
             case "Expertise (DEX)":
                 console.log("Matched Expertise (DEX)");
                 actorStub.system.skills[comb[i]].ability = "dex";
-            break;
+                break;
             case "Expertise (FGT)":
                 console.log("Matched Expertise (FGT)");
                 actorStub.system.skills[comb[i]].ability = "fgt";
-            break;
+                break;
             case "Expertise (PRE)":
                 console.log("Matched Expertise (PRE)");
                 actorStub.system.skills[comb[i]].ability = "pre";
-            break;
+                break;
             case "Expertise (STA)":
                 console.log("Matched Expertise (STA)");
                 actorStub.system.skills[comb[i]].ability = "sta";
-            break;
+                break;
             case "Expertise (STR)":
                 console.log("Matched Expertise (STR)");
                 actorStub.system.skills[comb[i]].ability = "str";
-            break;
+                break;
             case "Expertise":
                 console.log("Matched default Expertise, remains INT");
-            break;
+                break;
             default:
                 console.warn(variant, " does not exist as a valid Expertise")
-            break;
+                break;
         }
         var skillName = skillsList[skillArray[i]].name;
         actorStub.system.skills[comb[i]].subtype = skillName.replace(variant, "EX")
@@ -184,18 +177,18 @@ function PopulateActorData(actorStub, dataActor){
     actorStub.system.generic.extrapp = extrapp;
 
     var disposition = 0;
-    switch(dataActor.document.public.character.relationship) {
+    switch (dataActor.document.public.character.relationship) {
         case 'ally':
-        disposition = 1;
-        break;
+            disposition = 1;
+            break;
         case 'enemy':
-        disposition = -1;
-        break;
+            disposition = -1;
+            break;
         case 'neutral':
-        disposition = 0;
-        break;
+            disposition = 0;
+            break;
         default:
-        break
+            break
     }
     actorStub.prototypeToken.disposition = disposition;
 
@@ -204,7 +197,7 @@ function PopulateActorData(actorStub, dataActor){
     actorStub.system.hair = dataBase.personal.hair;
     actorStub.system.eyes = dataBase.personal.eyes;
     actorStub.system.height = dataBase.personal.charheight.text; // Maybe to change. There is value, which you int(value/12) for feet and (value%12) for inches.
-    actorStub.system.weight = parseInt(dataBase.personal.charweight.value); 
+    actorStub.system.weight = parseInt(dataBase.personal.charweight.value);
     actorStub.system.gender = dataBase.personal.gender;
     actorStub.system.heroname = dataActor.document.public.character.name;
 
@@ -229,7 +222,7 @@ function GetSkill(skillsList, skillIndex) {
         'Vehicles'
     ];
 
-    const matchingIndexes = skillsList.map(e=>e.name).indexOf(skillNames[skillIndex])
+    const matchingIndexes = skillsList.map(e => e.name).indexOf(skillNames[skillIndex])
 
     return matchingIndexes;
 }
@@ -255,25 +248,20 @@ function GetMultipleSkills(skillsList, skillIndex) {
 //-------ADVANTAGES--------//
 //-------------------------//
 //-------------------------//
-function PopulateActorAdvantages(actorStub, dataActor)
-{
+function PopulateActorAdvantages(actorStub, dataActor) {
     const advantageList = dataActor.document.public.character.advantages.advantage;
     var advListToAdd = [];
     var advToAnalyseCustom = [];
-    for (var i=0; i < advantageList.length; i++)
-    {
+    for (var i = 0; i < advantageList.length; i++) {
         const val = advantageList[i];
-        if (val.useradded == undefined || val.useradded == "yes")
-        {
+        if (val.useradded == undefined || val.useradded == "yes") {
             var id = FindAdvantageId(val);
-            
+
             var additionalDesc = null;
-            if (id == -1)
-            {
+            if (id == -1) {
                 response = UniqueAdvantage(val);
 
-                if (response == -1)
-                {
+                if (response == -1) {
                     advToAnalyseCustom.push(val);
                     continue;
                 }
@@ -307,8 +295,7 @@ function PopulateActorAdvantages(actorStub, dataActor)
     // });
 }
 
-function FindAdvantageId(val)
-{
+function FindAdvantageId(val) {
     const adConfArray = Object.values(CONFIG.MNM3E.AdvantageEnum);
 
     var name = val.name;
@@ -318,13 +305,11 @@ function FindAdvantageId(val)
     return id;
 }
 
-function UniqueAdvantage(val)
-{
+function UniqueAdvantage(val) {
     const responseobj = new Object;
 }
 
-function FindAdvantageType(id)
-{
+function FindAdvantageType(id) {
     const adConf = Object.keys(CONFIG.MNM3E.AdvantageEnum);
     return adConf[id];
 }
@@ -335,8 +320,7 @@ function FindAdvantageType(id)
 //---------POWERS----------//
 //-------------------------//
 //-------------------------//
-function PopulateActorPowers(actorStub, dataActor)
-{
+function PopulateActorPowers(actorStub, dataActor) {
     const powersList = dataActor.document.public.character.powers.power;
     var powerListToAdd = [];
     var powersInArrays = [];
@@ -345,40 +329,32 @@ function PopulateActorPowers(actorStub, dataActor)
 
     var powToAnalyseCustom = [];
 
-    for (var i=0; i < powersList.length; i++)
-    {
+    for (var i = 0; i < powersList.length; i++) {
         const val = powersList[i];
-        if(val.otherpowers == undefined)
-        {
+        if (val.otherpowers == undefined) {
             var id = FindPowerId(val);
 
-            if (id == -1) 
-            {
+            if (id == -1) {
                 powToAnalyseCustom.push(val);
                 continue;
             }
-    
+
             var powername = removeAfterLastColon(val.name);
             var cadv = [];
-            if(val.chainedadvantages != undefined)
-            {
+            if (val.chainedadvantages != undefined) {
                 console.debug(val.chainedadvantages);
-                if (Array.isArray(val.chainedadvantages.chainedadvantage))
-                {
+                if (Array.isArray(val.chainedadvantages.chainedadvantage)) {
                     val.chainedadvantages.chainedadvantage.forEach(element => {
-                    var id = FindAdvantageId(element);
-                    if (id == -1)
-                    {
-                        console.warn("Unknown Chained Advantage ", element);
-                    }
-                    else
-                    {
-                        cadv.push(FindAdvantageType(id));
-                    }
+                        var id = FindAdvantageId(element);
+                        if (id == -1) {
+                            console.warn("Unknown Chained Advantage ", element);
+                        }
+                        else {
+                            cadv.push(FindAdvantageType(id));
+                        }
                     });
                 }
-                else
-                {
+                else {
 
                 }
             }
@@ -387,7 +363,7 @@ function PopulateActorPowers(actorStub, dataActor)
                 name: powername,
                 descriptors: val.descriptors,
                 ranks: Number.parseInt(val.ranks),
-    
+
                 extras: FindExtrasFlaws(val.extras.extra), //FIXME: Should actually assign correct values
                 flaws: FindExtrasFlaws(val.flaws.flaw), //FIXME: Should actually assign correct values
                 options: val.options?.option ?? [],
@@ -395,8 +371,7 @@ function PopulateActorPowers(actorStub, dataActor)
                 chainedadvantages: cadv
             });
         }
-        else
-        {
+        else {
             powersInArrays.push(buildArray(val));
         }
     }
@@ -420,31 +395,27 @@ function PopulateActorPowers(actorStub, dataActor)
     // });
 }
 
-function FindPowerId(val)
-{
+function FindPowerId(val) {
     const powerConfArray = Object.values(CONFIG.MNM3E.defaultPowerEffects);
 
     const pattern = /:\s+([\w\s]+)\s+\d+$/;
     console.debug(val);
     var matches = val.name.match(pattern);
-    if (matches && matches.length >= 2) 
-    {
+    if (matches && matches.length >= 2) {
         var type = matches[1];
-    } 
-    else 
-    {
+    }
+    else {
         console.warn("Didn't find power type!");
         return;
     }
 
     var id = powerConfArray.findIndex((pow) => pow == type);
 
-    if(id == -1)
-    {
+    if (id == -1) {
         const words = matches[1].match(/\w+/g);
         words.forEach(element => {
             id = powerConfArray.findIndex((pow) => pow == element);
-            if(id > -1) return id;
+            if (id > -1) return id;
         });
         return -1;
     }
@@ -453,15 +424,13 @@ function FindPowerId(val)
 }
 
 // FIXME:
-function FindExtrasFlaws(list)
-{
+function FindExtrasFlaws(list) {
     var datalist;
-    
+
     datalist = Object.values(CONFIG.MNM3E.ExtrasFlawsAll);
-    
+
     var responselist = [];
-    for (var i=0; i < list.length; i++)
-    {
+    for (var i = 0; i < list.length; i++) {
         const val = list[i];
         var id = datalist.findIndex((exfl) => exfl == val.name);
         responselist.push(datalist[id]);
@@ -469,8 +438,7 @@ function FindExtrasFlaws(list)
     return responselist;
 }
 
-function GetArrayType(powersList)
-{
+function GetArrayType(powersList) {
     var description = powersList.description;
     var summary = powersList.summary;
     var response = {
@@ -522,15 +490,12 @@ function GetArrayType(powersList)
     return response;
 }
 
-function buildArray(datatable)
-{
+function buildArray(datatable) {
     var powersList = [];
-    if (Array.isArray(datatable.otherpowers.power))
-    {
+    if (Array.isArray(datatable.otherpowers.power)) {
         powersList = datatable.otherpowers.power;
     }
-    else
-    {
+    else {
         powersList.push(datatable.otherpowers.power);
     }
 
@@ -546,12 +511,10 @@ function buildArray(datatable)
         indestructible: arrayTypeData.indestructible
     });
 
-    for (var i=0; i < powersList.length; i++)
-    {
+    for (var i = 0; i < powersList.length; i++) {
         const val = powersList[i];
         var id = FindPowerId(val);
-        if (id == -1) 
-        {
+        if (id == -1) {
             console.warn("Custom Power!");
             return null;
         }
@@ -576,11 +539,10 @@ function buildArray(datatable)
 
 function removeAfterLastColon(inputString) {
     const lastSemicolonIndex = inputString.lastIndexOf(':');
-    
+
     if (lastSemicolonIndex !== -1) {
-      return inputString.substring(0, lastSemicolonIndex);
+        return inputString.substring(0, lastSemicolonIndex);
     } else {
-      return inputString; // No semicolon found, return the original string
+        return inputString; // No semicolon found, return the original string
     }
 }
-  

@@ -13,7 +13,7 @@ export default class ActiveEffectMnm3e extends ActiveEffect {
     const a = event.currentTarget;
     const li = a.closest("li");
     const effect = li.dataset.effectId ? owner.effects.get(li.dataset.effectId) : null;
-    switch ( a.dataset.action ) {
+    switch (a.dataset.action) {
       case "create":
         return owner.createEmbeddedDocuments("ActiveEffect", [{
           name: "New Effect",
@@ -27,7 +27,7 @@ export default class ActiveEffectMnm3e extends ActiveEffect {
       case "delete":
         return effect.delete();
       case "toggle":
-        return effect.update({disabled: !effect.disabled});
+        return effect.update({ disabled: !effect.disabled });
     }
   }
 
@@ -37,36 +37,35 @@ export default class ActiveEffectMnm3e extends ActiveEffect {
    * @return {object}                   Data for rendering
    */
   static prepareActiveEffectCategories(effects) {
-      // Define effect header categories
-      const categories = {
-        temporary: {
-          type: "temporary",
-          label: "Temporary Effects",
-          effects: []
-        },
-        passive: {
-          type: "passive",
-          label: "Passive Effects",
-          effects: []
-        },
-        inactive: {
-          type: "inactive",
-          label: "Inactive Effects",
-          effects: []
-        }
-      };
-
-      // Iterate over active effects, classifying them into categories
-      for ( let e of effects ) {
-        if ( e.disabled ) categories.inactive.effects.push(e);
-        else if ( e.isTemporary ) categories.temporary.effects.push(e);
-        else categories.passive.effects.push(e);
+    // Define effect header categories
+    const categories = {
+      temporary: {
+        type: "temporary",
+        label: "Temporary Effects",
+        effects: []
+      },
+      passive: {
+        type: "passive",
+        label: "Passive Effects",
+        effects: []
+      },
+      inactive: {
+        type: "inactive",
+        label: "Inactive Effects",
+        effects: []
       }
-      return categories;
+    };
+
+    // Iterate over active effects, classifying them into categories
+    for (let e of effects) {
+      if (e.disabled) categories.inactive.effects.push(e);
+      else if (e.isTemporary) categories.temporary.effects.push(e);
+      else categories.passive.effects.push(e);
+    }
+    return categories;
   }
 
-  static addActiveEffectItems(nameSource, state, list, effect, uuid, owner)
-  {
+  static addActiveEffectItems(nameSource, state, list, effect, uuid, owner) {
     console.debug("hit");
     // owner.createEmbeddedDocuments("ActiveEffect", [{
     //   name: nameSource,
@@ -77,20 +76,18 @@ export default class ActiveEffectMnm3e extends ActiveEffect {
     // }]);
 
     console.debug("State: ", state);
-    if(state)
-    {
+    if (state) {
       var eff = [];
       effect.forEach(element => {
         const val = {
-          key:`system.${list}.${element.name}.auto`,
-          mode:2,
-          value:element.value
+          key: `system.${list}.${element.name}.auto`,
+          mode: 2,
+          value: element.value
         }
         eff.push(val)
       });
 
-      if(owner.effects.filter(e => e.origin === uuid).length == 0)
-      {
+      if (owner.effects.filter(e => e.origin === uuid).length == 0) {
         return owner.createEmbeddedDocuments("ActiveEffect", [{
           name: nameSource,
           icon: "icons/svg/aura.svg",
@@ -100,10 +97,10 @@ export default class ActiveEffectMnm3e extends ActiveEffect {
           changes: eff
         }]);
       }
-      
+
     }
 
-    
+
     // else
     // {
 
