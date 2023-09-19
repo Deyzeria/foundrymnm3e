@@ -110,9 +110,17 @@ Hooks.once('init', async function() {
     makeDefault: true,
     label: "MNM3E.SheetItem"
   });
-  fillDefaults();
+  
   // Preload Handlebars templates.
   return preloadHandlebarsTemplates();
+});
+
+
+/* -------------------------------------------- */
+/*  ReadyHook                                   */
+/* -------------------------------------------- */
+Hooks.once('ready', async function() {
+  fillDefaults();
 });
 
 /* -------------------------------------------- */

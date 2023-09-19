@@ -179,7 +179,7 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
 
     // Handle Extras and Flaws
     const exfl = formData.system?.extrasflaws;
-    if (exfl) exfl.parts = Object.values(exfl?.parts || {}).map(d => [d[0] || "", d[1] || "", d[2] || 0], d[3] || "", d[4] || 0, d[5] || false);
+    if (exfl) exfl.parts = Object.values(exfl?.parts || {}).map(d => [d[0] || "", d[1] || "", d[2] || 0, d[3] || "", d[4] || 0, d[5] || false]);
 
     const ench = formData.system?.values;
     if (ench) ench.value_array = Object.values(ench?.value_array || {}).map(e => [e[0] || "", e[1] || 1]);

@@ -179,9 +179,9 @@
 
           {{#each system.extrasflaws.parts as |part i|}}
             <li class="extras exfl-part flexrow" data-exfl-part="{{i}}">
-              <input class="extras-value" class="exfl-name" type="text" name="system.extrasflaws.parts.{{i}}.0" value="{{ lookup this "0"}}">
-              <input type="number" class="exfl-rank extras-value"  name="system.extrasflaws.parts.{{i}}.2" value="{{ lookup this "2"}}" min="0" max="5" data-dtype="Number"/>
-              <select class="extras-value" name="system.extrasflaws.parts.{{i}}.1">
+              <input disabled class="extras-value" class="exfl-name" type="text" name="system.extrasflaws.parts.{{i}}.0" value="{{ lookup this "0"}}">
+              <input disabled type="number" class="exfl-rank extras-value"  name="system.extrasflaws.parts.{{i}}.2" value="{{ lookup this "2"}}" min="0" max="5" data-dtype="Number"/>
+              <select disabled class="extras-value" name="system.extrasflaws.parts.{{i}}.1">
                 {{#select (lookup this "1")}}
                   {{selectOptions @root.config.ExtrasFlawsTypes}}
                 {{/select}}

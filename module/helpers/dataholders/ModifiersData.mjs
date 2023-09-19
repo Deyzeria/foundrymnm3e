@@ -450,7 +450,7 @@ export function fillDefaults()
 {
   for(const mod in allMods)
   {
-    allMods[mod].label = conf[mod] ?? null;
+    allMods[mod].label = CONFIG.MNM3E.ExtrasFlawsAll[mod] ?? null;
     allMods[mod].id = mod;
     allMods[mod].costlabel = getCostLabel(allMods[mod].type, allMods[mod].cost);
     allMods[mod].icon = modIcons[allMods[mod].type] ?? null;
@@ -463,7 +463,6 @@ export function fillDefaults()
  * @returns {object} 
  */
 export function GetAllExtrasFlaws(power_type) {
-  const conf = CONFIG.MNM3E.ExtrasFlawsAll;
   var returnModifiers = new Object();
 
   //var powerTypeMods = this.GetPowerModifiers(power_type);

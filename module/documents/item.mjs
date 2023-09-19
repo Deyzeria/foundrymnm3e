@@ -461,12 +461,10 @@ export class FoundryMnM3eItem extends Item {
     }
   }
 
-  async addModifierExFl(mod, event)
+  async addModifierExFl(mod)
   {
-    await this._onSubmit(event);  // Submit any unsaved changes
-    event.stopPropagation();
+    const extrasflaws = this.system.extrasflaws;
 
-    const extrasflaws = this.item.system.extrasflaws;
     return this.update({"system.extrasflaws.parts": extrasflaws.parts.concat([[
       mod.label, //Display label
       mod.type, //

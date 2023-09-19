@@ -48,6 +48,9 @@ export default class ExtrasFlawsSheet extends BaseConfigSheet {
   async addModifiersToParent(event)
   {
     event.preventDefault();
+    //await this._onSubmit(event);  // Submit any unsaved changes
+    event.stopPropagation();
+
     this.document.addModifierExFl(mods.getSpecificModifier(this.selected), event);
   }
 
