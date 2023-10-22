@@ -1229,6 +1229,7 @@
   padding: 3px 2px;
 }
 .highlighted {
+  background: rgba(51, 235, 60, 0.07) !important;
   border: 2px solid black;
 }
 .foundrymnm3e li.modifiers-part:nth-child(even){
@@ -1252,6 +1253,10 @@
 .foundrymnm3e .boxed-part {
   border: 2px groove #4b4a44;
   border-radius: 3px;
+}
+.foundrymnm3e .modifier-description {
+  height: 100%;
+  overflow-y: auto;
 }
 .foundrymnm3e .buttons-center {
   margin-top: 10px;
