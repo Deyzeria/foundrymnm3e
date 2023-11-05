@@ -1,11 +1,11 @@
 import { preLocalize } from "./utils.mjs";
 
+/**
+ * @global
+ * @constant {Object}
+ */
 export const MNM3E = {};
 
-/**
- * The set of Ability Scores used within the sytem.
- * @type {Object}
- */
 MNM3E.abilities = {
   str: "MNM3E.AbilityStr",
   sta: "MNM3E.AbilitySta",

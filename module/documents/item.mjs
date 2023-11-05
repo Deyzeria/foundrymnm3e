@@ -30,9 +30,9 @@ export class FoundryMnM3eItem extends Item {
         break;
 
       case "advantage":
-        if (this.system.ranked == false) {
-          this.update({ 'system.ranks': 1 });
-        }
+        // if (this.system.ranked == false) {
+        //   this.update({ _id: this._id, 'system.ranks': 1});
+        // }
         break;
     }
 
@@ -87,7 +87,7 @@ export class FoundryMnM3eItem extends Item {
     }
     else if (rng.range == "close") {
       this.prepareRanges();
-      this.labels.range = rng.close + " " + ScaleTable.GetDistanceName(false);
+      this.labels.range = rng.close + " " + ScaleTable.GetDistanceName(false) + " (close)";
     }
     else {
       this.prepareRanges();

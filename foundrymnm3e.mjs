@@ -7,7 +7,7 @@ import { FoundryMnM3eActorSheet } from "./module/sheets/actor-sheet.mjs";
 import { FoundryMnM3eItemSheet } from "./module/sheets/item-sheet.mjs";
 // Import helper/utility classes and constants.
 import { preloadHandlebarsTemplates } from "./module/helpers/templates.mjs";
-import { ParserAccess } from "./module/helpers/HeroLabParser.mjs";
+import { ParserAccess } from "./module/helpers/HeroLab-Parser/HeroLabParser.mjs";
 import registerSystemSettings from "./module/settings.mjs";
 import { SetGameValues, GetScale } from "./module/helpers/data-tables.mjs";
 import { fillDefaults } from "./module/helpers/dataholders/ModifiersData.mjs";
@@ -57,6 +57,7 @@ Hooks.once('init', async function () {
   }
 
   // Add custom constants for configuration.
+  /** @global */
   CONFIG.MNM3E = MNM3E;
   CONFIG.ActiveEffect.documentClass = documents.ActiveEffectMnm3e;
   CONFIG.Actor.documentClass = FoundryMnM3eActor;

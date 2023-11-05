@@ -3,7 +3,7 @@
   {{!-- Sheet Header --}}
   <header class="sheet-header">
     <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{system.heroname}}" height="150" width="100" />
-    <img class="secondary-img" src="{{actor.img}}" data-edit="img" title="{{system.realidentity}}" height="50"
+    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{system.realidentity}}" height="50"
       width="50" />
     <div class="header-fields">
       <div class="flexrow">
@@ -17,45 +17,35 @@
       {{!-- Power Level, Extra Power Points, Power Points Spent, Hero Points --}}
       <ul class="attributes flexrow">
         <li class="attribute pl">
-          <h4 class="attribute-name box-title">Power Level</h4>
-          <center>
-            <input class="attribute-value" oninput="setDefaultToZero(this)" type="text" name="system.generic.pl"
+          <div class="flexrow">
+            <h4 class="attribute-name">Power Level</h4>
+            <input class="attribute-value flex-70px" oninput="setDefaultToZero(this)" type="text" name="system.generic.pl"
               value="{{system.generic.pl}}" data-dtype="Number" />
-          </center>
-        </li>
-
-        <li class="attribute extpp">
-          <h4 class="attribute-name box-title">Extra PP</h4>
-          <center>
-            <input class="attribute-value" oninput="setDefaultToZero(this)" type="text" name="system.generic.extrapp"
-              value="{{system.generic.extrapp}}" data-dtype="Number" />
-          </center>
-        </li>
-
-        <li class="attribute ppspent">
-          <h4 class="attribute-name box-title">Spent</h4>
-          <center>
+          </div>
+          <div class="flexrow">
             <div id="pptotal" class="attribute-value multiple">
-              <input class="spenttotal" type="text" name="system.generic.pp_spent" value="{{system.generic.pp_spent}}"
+              <input class="ppspent" type="text" name="system.generic.pp_spent" value="{{system.generic.pp_spent}}"
                 data-dtype="Number" disabled />
               <span class="sep"> / </span>
-              <input type="text" name="system.generic.pp" value="{{system.generic.pp}}" data-dtype="Number" disabled />
+              <input class="ppspent" type="text" name="system.generic.pp" value="{{system.generic.pp}}" data-dtype="Number" disabled />
             </div>
-          </center>
+            <input class="attribute-value flex-70px" oninput="setDefaultToZero(this)" type="text" name="system.generic.extrapp"
+                value="{{system.generic.extrapp}}" data-dtype="Number" />
+          </div>
         </li>
 
-        <li class="attribute hp">
-          <h4 class="attribute-name box-title">Hero Points</h4>
+        {{!-- <li class="attribute hp">
+          <h4 class="attribute-name">Hero Points</h4>
           <center>
             <input class="attribute-value" oninput="setDefaultToZero(this)" type="text" name="system.generic.hero_point"
               value="{{system.generic.hero_point}}" data-dtype="Number" />
           </center>
-        </li>
+        </li> --}}
       </ul>
       {{!-- Power Point Spent --}}
-      <ul class="attributes flexrow">
+      {{!-- <ul class="attributes flexrow">
         <li class="attribute ppabilities">
-          <h4 class="attribute-name box-title">Abilities</h4>
+          <h4 class="attribute-name">Abilities</h4>
           <center>
             <input class="attribute-value" type="text" name="system.generic.pp_ability"
               value="{{system.generic.pp_ability}}" data-dtype="Number" disabled />
@@ -63,7 +53,7 @@
         </li>
 
         <li class="attribute ppdefences">
-          <h4 class="attribute-name box-title">Defences</h4>
+          <h4 class="attribute-name">Defences</h4>
           <center>
             <input class="attribute-value" type="text" name="system.generic.pp_defenses"
               value="{{system.generic.pp_defenses}}" data-dtype="Number" disabled />
@@ -71,7 +61,7 @@
         </li>
 
         <li class="attribute ppskills">
-          <h4 class="attribute-name box-title">Skills</h4>
+          <h4 class="attribute-name">Skills</h4>
           <center>
             <input class="attribute-value skillsspent" type="text" name="system.generic.pp_skills"
               value="{{system.generic.pp_skills}}" data-dtype="Number" disabled />
@@ -79,7 +69,7 @@
         </li>
 
         <li class="attribute ppadvantages">
-          <h4 class="attribute-name box-title">Advantages</h4>
+          <h4 class="attribute-name">Advantages</h4>
           <center>
             <input class="attribute-value" type="text" name="system.generic.pp_advantages"
               value="{{system.generic.pp_advantages}}" data-dtype="Number" disabled />
@@ -87,13 +77,13 @@
         </li>
 
         <li class="attribute pppowers">
-          <h4 class="attribute-name box-title">Powers</h4>
+          <h4 class="attribute-name">Powers</h4>
           <center>
             <input class="attribute-value" type="text" name="system.generic.pp_powers"
               value="{{system.generic.pp_powers}}" data-dtype="Number" disabled />
           </center>
         </li>
-      </ul>
+      </ul> --}}
     </div>
   </header>
 
@@ -158,11 +148,12 @@
               <div class="defense-value" data-tooltip="MNM3E.Misc" data-tooltip-direction="UP">Misc</div>
               <div class="defense-value" data-tooltip="MNM3E.Auto" data-tooltip-direction="UP">Auto</div>
               <div class="defense-value" data-tooltip="MNM3E.Total" data-tooltip-direction="UP">Total</div>
-              <div class="defense-value" data-tooltip="MNM3E.AC" data-tooltip-direction="UP">AC</div>
+              <div class="defense-value" data-tooltip="MNM3E.AC" data-tooltip-direction="UP"><i
+                  class="fa-solid fa-shield-halved"></i></div>
               <div class="defense-value" data-tooltip="MNM3E.Impervious" data-tooltip-direction="UP">Imp</div>
             </li>
             {{#each system.defenses as |defense key|}}
-            <li class="flexrow defense" data-defense="{{key}}">
+            <li class="flexrow defense defense-row" data-defense="{{key}}">
               <label class="resource-label rollable-defense rollable flexexlarge align-center"
                 data-roll="d20+@defenses.{{key}}.total" data-label="{{defense.label}}">{{defense.label}}</label>
               <div class="flexrow defense-div">
@@ -197,14 +188,14 @@
 
           <ul class="attributes flexrow">
             <li class="attribute wounds">
-              <h4 class="attribute-name box-title">Wounds</h4>
+              <h4 class="attribute-name">Wounds</h4>
               <center>
                 <input class="attribute-value" oninput="setDefaultToZero(this)" type="text" name="system.generic.wounds"
                   value="{{system.generic.wounds}}" data-dtype="Number" />
               </center>
             </li>
             <li class="attribute initiative">
-              <h4 class="attribute-name box-title">Initiative</h4>
+              <h4 class="attribute-name">Initiative</h4>
               <center>
                 <input class="attribute-value" disabled type="text" name="system.generic.initiative"
                   value="{{system.generic.initiative}}" data-dtype="Number" />

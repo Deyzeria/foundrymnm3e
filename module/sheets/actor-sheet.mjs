@@ -1,6 +1,7 @@
 import ActiveEffectMnm3e from "../helpers/effects.mjs";
-
 import SkillsConfig from "./parts/skills-config.mjs"
+
+/** @typedef {import("../documentation/actor-documentation.mjs").actorData} actorData */
 
 /**
  * Extend the basic ActorSheet with some very simple modifications
@@ -67,9 +68,7 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
 
   /**
    * Organize and classify Items for Character sheets.
-   *
-   * @param {Object} actorData The actor to prepare.
-   *
+   * @param {actorData} context The actor to prepare.
    * @return {undefined}
    */
   _prepareCharacterData(context) {
@@ -111,6 +110,10 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
     }
   }
 
+  /**
+   * @param {boolean} level Has checkmark
+   * @returns {string} FontAwesome icon
+   */
   _getCheckmarkIcon(level) {
     const icons = {
       false: '<i class="fa-solid fa-xmark"></i>',
@@ -119,6 +122,10 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
     return icons[level] || icons[0];
   }
 
+  /**
+   * @param {boolean} level Has mastery
+   * @returns {string} FontAwesome icon
+   */
   _getMasteryIcon(level) {
     const icons = {
       false: '<i class="far fa-book"></i>',
@@ -127,6 +134,10 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
     return icons[level] || icons[0];
   }
 
+  /**
+   * @param {string} level Movement type
+   * @returns {string} FontAwesome icon
+   */
   _getMovementIcon(level) {
     const icons = {
       walk: '<i class="fa-solid fa-person-walking"></i>',
@@ -141,10 +152,7 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
 
   /**
    * Organize and classify Items for Character sheets.
-   *
    * @param {Object} actorData The actor to prepare.
-   *
-   * @return {undefined}
    */
   _prepareItems(context) {
     // Initialize containers.
@@ -235,7 +243,6 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
       }
     }
   }
-
 
   _onRollAbilityTest(event) {
     event.preventDefault();
@@ -336,5 +343,4 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
       return roll;
     }
   }
-
 }

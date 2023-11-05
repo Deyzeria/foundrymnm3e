@@ -1,35 +1,32 @@
 <form class="{{cssClass}}" autocomplete="off">
   <header class="sheet-header">
-    <img class="power-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+    <img class="power-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
     <div class="header-fields power-header">
       <div class="flexrow">
         <a class="toggle active-toggle">{{{activestate}}}</a>
-        <h1 class="charname power-name"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
+        <h1 class="charname power-name"><input name="name" type="text" value="{{item.name}}" placeholder="Name" /></h1>
       </div>
       <div class="flexrow">
-        <label class="sub-header" name="labels.basepower">{{labels.basepower}}</label>  
+        <label class="sub-header" name="labels.basepower">{{labels.basepower}}</label>
         <label class="active_ranks">{{localize "MNM3E.Cost"}}: {{system.power_cost.active_cost}}</label>
         <label class="active_ranks">{{localize "MNM3E.Rank"}}: {{system.power_cost.active_rank}}</label>
       </div>
     </div>
   </header>
-
-  {{!-- Sheet Tab Navigation --}}
-  <nav class="sheet-tabs tabs" data-group="primary">
-    <a class="item" data-tab="attributes">Attributes</a>
-  </nav>
-
+  <hr>
+  </hr>
   {{!-- Sheet Body --}}
   <section class="sheet-body">
     <div class="flexrow">
-      <label>{{system.combineddescription}}</label>
+      <label>Combined Description: {{system.combineddescription}}</label>
     </div>
-    <hr></hr>
+    <hr>
+    </hr>
     <div class="power-description">
       <h3>{{localize "MNM3E.Description" }}</h3>
       <textarea name="system.description" rows="5">{{system.description}}</textarea>
     </div>
-    
+
     {{!-- Power Effect Data Setup --}}
     <div class="flexrow">
       <ul class="power-types sectionpower">
@@ -57,7 +54,7 @@
         </li>
         <li class="power flexrow">
           <label class="resource-label">{{localize "MNM3E.Duration"}}</label>
-          <label class="resource-label" data-value="selected_duration">{{selected_duration}}</label> 
+          <label class="resource-label" data-value="selected_duration">{{selected_duration}}</label>
         </li>
         <li class="power flexrow">
           <label class="resource-label">{{localize "MNM3E.Resistance"}}</label>
@@ -74,72 +71,77 @@
       <ul class="cost-list">
         <li class="cost flexrow">
           <label class="resource-label">{{localize "MNM3E.Rank"}}</label>
-          <input class="cost-value rank" type="number" name="system.power_cost.rank" value="{{system.power_cost.rank}}" min="0" max="{{max_ranks}}" data-dtype="Number"/>
+          <input class="cost-value rank" type="number" name="system.power_cost.rank" value="{{system.power_cost.rank}}"
+            min="0" max="{{max_ranks}}" data-dtype="Number" />
         </li>
         <li class="cost flexrow">
           <label class="resource-label">{{localize "MNM3E.BaseCost"}}</label>
-          <input class="cost-value base" type="text" disabled name="system.power_cost.base_cost" value="{{system.power_cost.base_cost}}" data-dtype="Number"/>
+          <input class="cost-value base" type="text" disabled name="system.power_cost.base_cost"
+            value="{{system.power_cost.base_cost}}" data-dtype="Number" />
         </li>
         <li class="cost flexrow">
           <label class="resource-label">{{localize "MNM3E.Extras"}}</label>
-          <input class="cost-value extra" type="text" disabled name="system.power_cost.extras" value="{{system.power_cost.extras}}" data-dtype="Number"/>
+          <input class="cost-value extra" type="text" disabled name="system.power_cost.extras"
+            value="{{system.power_cost.extras}}" data-dtype="Number" />
         </li>
         <li class="cost flexrow">
           <label class="resource-label">{{localize "MNM3E.Flaws"}}</label>
-          <input class="cost-value flaw" type="text" disabled name="system.power_cost.flaws" value="{{system.power_cost.flaws}}" data-dtype="Number"/>
+          <input class="cost-value flaw" type="text" disabled name="system.power_cost.flaws"
+            value="{{system.power_cost.flaws}}" data-dtype="Number" />
         </li>
         <li class="cost flexrow">
           <label class="resource-label">{{localize "MNM3E.Flats"}}</label>
-          <input class="cost-value flat" type="text" disabled name="system.power_cost.flat" value="{{system.power_cost.flat}}" data-dtype="Number"/>
+          <input class="cost-value flat" type="text" disabled name="system.power_cost.flat"
+            value="{{system.power_cost.flat}}" data-dtype="Number" />
         </li>
         <li class="cost flexrow">
           <label class="resource-label">{{localize "MNM3E.FinalCost"}}</label>
-          <input class="cost-value final" type="text" disabled name="system.power_cost.final_cost" value="{{system.power_cost.final_cost}}" data-dtype="Number"/>
+          <input class="cost-value final" type="text" disabled name="system.power_cost.final_cost"
+            value="{{system.power_cost.final_cost}}" data-dtype="Number" />
         </li>
       </ul>
     </div>
 
     <div class="extras-uniques flexrow">
       <div class="unique-left-column">
-        <ul class="unique-selection extras-types sectionpower">
+        <ul class="unique-selection sectionpower">
           {{!-- Affliction Unique --}}
           {{#if (isaffliction selected_powers)}}
-          <div>
-            <li class="extras flexrow">
-              <label class="resource-label">{{ localize "MNM3E.menuFirstDegree"}}</label>
-              <select class="extras-value" name="system.values.value_one">
-                {{selectOptions value_one selected=setvalueone blank=""}}
-              </select>
-            </li>
-            <li class="extras flexrow">
-              <label class="resource-label">{{ localize "MNM3E.menuSecondDegree"}}</label>
-              <select class="extras-value" name="system.values.value_two">
-                {{selectOptions value_two selected=setvaluetwo blank=""}}
-              </select>
-            </li>
-            <li class="extras flexrow">
-              <label class="resource-label">{{ localize "MNM3E.menuThirdDegree"}}</label>
-              <select class="extras-value" name="system.values.value_three">
-                {{selectOptions value_three selected=setvaluethree blank=""}}
-              </select>
-            </li>
-            <li class="extras flexrow">
-              <label class="resource-label">{{ localize "MNM3E.menuResistedBy"}}</label>
-              <select class="extras-value" name="system.values.value_five">
-                {{selectOptions resistancearray selected=setvaluefive blank=""}}
-              </select>
-            </li>
-          </div>
+          <li class="unique flexrow">
+            <label class="resource-label">{{ localize "MNM3E.menuFirstDegree"}}</label>
+            <select class="unique-value" name="system.values.value_one">
+              {{selectOptions value_one selected=setvalueone blank=""}}
+            </select>
+          </li>
+          <li class="unique flexrow">
+            <label class="resource-label">{{ localize "MNM3E.menuSecondDegree"}}</label>
+            <select class="unique-value" name="system.values.value_two">
+              {{selectOptions value_two selected=setvaluetwo blank=""}}
+            </select>
+          </li>
+          <li class="unique flexrow">
+            <label class="resource-label">{{ localize "MNM3E.menuThirdDegree"}}</label>
+            <select class="unique-value" name="system.values.value_three">
+              {{selectOptions value_three selected=setvaluethree blank=""}}
+            </select>
+          </li>
+          <li class="unique flexrow">
+            <label class="resource-label">{{ localize "MNM3E.menuResistedBy"}}</label>
+            <select class="unique-value" name="system.values.value_five">
+              {{selectOptions resistancearray selected=setvaluefive blank=""}}
+            </select>
+          </li>
           {{/if}}
           {{!-- Communication Unique--}}
           {{#if (iscommunication selected_powers)}}
           <div>
-            <li class="extras flexrow">
+            <li class="unique flexrow">
               <label class="sense-type">{{ localize "MNM3E.menuSenseType"}}</label>
-              <select class="extras-value" name="system.values.value_one">
+              <select class="unique-value" name="system.values.value_one">
                 {{selectOptions value_one selected=setvalueone blank=""}}
               </select>
-              <input class="unique-input" name="system.values.value_two" type="text" value="{{system.values.value_two}}">
+              <input class="unique-input" name="system.values.value_two" type="text"
+                value="{{system.values.value_two}}">
             </li>
           </div>
           {{/if}}
@@ -147,7 +149,8 @@
           {{#if (isdamage selected_powers)}}
           <div>
             <label class="checkbox resource-label">
-              <input type="checkbox" name="system.values.value_one" {{checked system.values.value_one}}/> {{ localize "MNM3E.menuAddStrength" }}
+              <input type="checkbox" name="system.values.value_one" {{checked system.values.value_one}} /> {{ localize
+              "MNM3E.menuAddStrength" }}
             </label>
           </div>
           {{/if}}
@@ -155,39 +158,46 @@
           {{#if (isenhanced selected_powers)}}
           <div>
             <a class="ench-control flexrow add-ench">
-              <label class="add"><i class="fas fa-plus plusimg"></i>{{ localize "MNM3E.menuAddEnhanced" }}<i class="fas fa-plus plusimg"></i></label>
+              <label class="add"><i class="fas fa-plus plusimg"></i>{{ localize "MNM3E.menuAddEnhanced" }}<i
+                  class="fas fa-plus plusimg"></i></label>
             </a>
             {{#each system.values.value_array as |part a|}}
-              <li class="extras ench-part flexrow" data-ench-part="{{a}}">
-                <select class="extras-value" name="system.values.value_array.{{a}}.0">
-                  {{#select (lookup this "0")}}
-                    {{selectOptions @root.system.unique.value_one}}
-                  {{/select}}
-                </select>
-                <input class="ench-name extras-value" type="text" name="system.values.value_array.{{a}}.1" min="0" value="{{ lookup this "1"}}">
-                <a class="ench-control delete-ench delete-symbol" name="{{a}}"><i class="fas fa-minus"></i></a>
-              </li>
+            <li class="extras ench-part flexrow" data-ench-part="{{a}}">
+              <select class="extras-value" name="system.values.value_array.{{a}}.0">
+                {{#select (lookup this "0")}}
+                {{selectOptions @root.system.unique.value_one}}
+                {{/select}}
+              </select>
+              <input class="ench-name extras-value" type="text" name="system.values.value_array.{{a}}.1" min="0" value="{{ lookup this "1"}}">
+              <a class="ench-control delete-ench delete-symbol" name="{{a}}"><i class="fas fa-minus"></i></a>
+            </li>
             {{/each}}
           </div>
           {{/if}}
         </ul>
 
-        <ul class="extras-types extras-flaws-list">
+        <ul class="extras-types">
           <a class="exfl-control flexrow add-exfl">
-            <label class="add"><i class="fas fa-plus plusimg"></i>{{localize "MNM3E.menuAddExFl"}}<i class="fas fa-plus plusimg"></i></label>
+            <label class="add"><i class="fas fa-plus plusimg"></i>{{localize "MNM3E.menuAddExFl"}}<i
+                class="fas fa-plus plusimg"></i></label>
           </a>
 
           {{#each system.extrasflaws.parts as |part i|}}
-            <li class="extras exfl-part flexrow" data-exfl-part="{{i}}">
-              <input disabled class="extras-value" class="exfl-name" type="text" name="system.extrasflaws.parts.{{i}}.0" value="{{ lookup this "0"}}">
-              <input disabled type="number" class="exfl-rank extras-value"  name="system.extrasflaws.parts.{{i}}.2" value="{{ lookup this "2"}}" min="0" max="5" data-dtype="Number"/>
-              <select disabled class="extras-value" name="system.extrasflaws.parts.{{i}}.1">
-                {{#select (lookup this "1")}}
-                  {{selectOptions @root.config.ExtrasFlawsTypes}}
-                {{/select}}
-              </select>
-              <a class="exfl-control delete-exfl delete-symbol" name="{{i}}"><i class="fas fa-minus"></i></a>
-            </li>
+          <li class="extras exfl-part flexrow" data-exfl-part="{{i}}">
+            <input disabled class="extras-value" class="exfl-name" type="text" name="system.extrasflaws.parts.{{i}}.0"
+              value="{{ lookup this "0"}}">
+            {{#if condition}}
+
+            {{/if}}
+            <input disabled type="number" class="exfl-rank extras-value" name="system.extrasflaws.parts.{{i}}.2"
+              value="{{ lookup this "2"}}" min="0" max="5" data-dtype="Number" />
+            <select disabled class="extras-value" name="system.extrasflaws.parts.{{i}}.1">
+              {{#select (lookup this "1")}}
+              {{selectOptions @root.config.ExtrasFlawsTypes}}
+              {{/select}}
+            </select>
+            <a class="exfl-control delete-exfl delete-symbol" name="{{i}}"><i class="fas fa-minus"></i></a>
+          </li>
           {{/each}}
         </ul>
       </div>

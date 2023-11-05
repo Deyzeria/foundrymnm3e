@@ -1,6 +1,8 @@
 import { d20Roll } from "../dice/dice.mjs";
 import ActiveEffectMnm3e from "../helpers/effects.mjs";
 
+/** @typedef {import("../documentation/actor-documentation.mjs").actorData} actorData */
+
 /**
  * Extend the base Actor document by defining a custom roll data structure which is ideal for the Simple system.
  * @extends {Actor}
@@ -41,6 +43,7 @@ export class FoundryMnM3eActor extends Actor {
    * is queried and has a roll executed directly from it).
    */
   prepareDerivedData() {
+    /** @type {actorData} */
     const actorData = this;
     const systemData = actorData.system;
     const flags = actorData.flags.foundrymnm3e || {};
@@ -55,6 +58,10 @@ export class FoundryMnM3eActor extends Actor {
     //this._prepareNpcData(actorData);
   }
 
+  /**
+   * @param {actorData} actorData 
+   * @returns 
+   */
   _prepareBaseAbilities(actorData) {
     if (actorData.type !== "hero") return;
 
@@ -81,6 +88,7 @@ export class FoundryMnM3eActor extends Actor {
 
   /**
    * Prepare Character type specific data
+   * @param {actorData} actorData 
    */
   _prepareCharacterData(actorData) {
     if (actorData.type !== "hero") return;
@@ -135,6 +143,10 @@ export class FoundryMnM3eActor extends Actor {
     systemData.generic.pp_spent = systemData.generic.pp_ability + systemData.generic.pp_defenses + systemData.generic.pp_skills + systemData.generic.pp_advantages + systemData.generic.pp_powers;
   }
 
+  /**
+   * Prepare cost of Powers and Advantages
+   * @param {actorData} actorData 
+   */
   _preparePowerCost(actorData) {
     const systemData = actorData.system;
 
@@ -165,13 +177,6 @@ export class FoundryMnM3eActor extends Actor {
       if (!speeds[element].active) return;
       speeds[element].distance = ScaleTable.GetScale(speeds[element].rank, v);
     });
-  }
-
-  /**
-   * Prepare NPC type specific data.
-   */
-  _prepareVehicleData(actorData) {
-
   }
 
   /**
@@ -213,8 +218,18 @@ export class FoundryMnM3eActor extends Actor {
       const parts = [];
       const data = this.getRollData();
 
-      parts.push("@total");
-      data.total = abl?.total ?? 0;
+      parts.push("@purchased");
+      data.purchased = abl.purchased;
+
+      if (abl.misc != 0) {
+        parts.push("@misc");
+        data.misc = abl.misc;
+      }
+
+      if (abl.auto != 0) {
+        parts.push("@auto");
+        data.auto = abl.auto;
+      }
 
       // Roll and return
       const flavor = game.i18n.format("MNM3E.AbilityPromptTitle", { ability: label });
@@ -248,8 +263,24 @@ export class FoundryMnM3eActor extends Actor {
       const parts = [];
       const data = this.getRollData();
 
-      parts.push("@total");
-      data.total = def?.total ?? 0;
+      parts.push("@default");
+      data.default = def.default;
+
+      parts.push("@purchased");
+      data.purchased = def.purchased;
+
+      if (def.misc != 0) {
+        parts.push("@misc");
+        data.misc = def.misc;
+      }
+
+      if (def.auto != 0) {
+        parts.push("@auto");
+        data.auto = def.auto;
+      }
+
+      // parts.push("@total");
+      // data.total = def?.total ?? 0;
 
       // Roll and return
       const flavor = game.i18n.format("MNM3E.DefensePromptTitle", { defense: label });
@@ -276,8 +307,21 @@ export class FoundryMnM3eActor extends Actor {
     const parts = [];
     const data = this.getRollData();
 
-    parts.push("@total");
-    data.total = skl?.total ?? 0;
+    parts.push("@default");
+    data.default = skl.default;
+
+    parts.push("@purchased");
+    data.purchased = skl.purchased;
+
+    if (skl.misc != 0) {
+      parts.push("@misc");
+      data.misc = skl.misc;
+    }
+
+    if (skl.auto != 0) {
+      parts.push("@auto");
+      data.auto = skl.auto;
+    }
 
     // Roll and return
     const flavor = game.i18n.format("MNM3E.SkillPromptTitle", { skill: label });
@@ -298,10 +342,25 @@ export class FoundryMnM3eActor extends Actor {
 }
 
 Hooks.on("renderActorSheet", (app, html, data) => {
-  if (data.system.generic.pp_spent > data.system.generic.pp) {
+  const syst = data.system;
+
+  if (syst.generic.pp_spent > syst.generic.pp) {
     html.find(".attribute-value.multiple .spenttotal")[0].style.background = "red";
   }
-  if (!Number.isInteger(data.system.generic.pp_skills)) {
+  if (!Number.isInteger(syst.generic.pp_skills)) {
     html.find(".skillsspent")[0].style.background = "red";
+  }
+
+  if (syst.defenses.dodge.total + syst.defenses.toughness.total > syst.generic.pl * 2 || syst.defenses.parry.total + syst.defenses.toughness.total > syst.generic.pl * 2) {
+    let defrow = html.find(".defense-row");
+    defrow[0].style.background = "rgba(255, 0, 0, 0.2)";
+    defrow[1].style.background = "rgba(255, 0, 0, 0.2)";
+    defrow[3].style.background = "rgba(255, 0, 0, 0.2)";
+  }
+
+  if (syst.defenses.fortitude.total + syst.defenses.will.total > syst.generic.pl * 2) {
+    let defrow = html.find(".defense-row");
+    defrow[2].style.background = "rgba(255, 0, 0, 0.2)";
+    defrow[4].style.background = "rgba(255, 0, 0, 0.2)";
   }
 });

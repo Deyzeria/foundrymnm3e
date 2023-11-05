@@ -1,7 +1,7 @@
 <form autocomplete="off">
   <div class="sheet-body full-page-container">
     <h1 class="text-center"><label>Choose the modifiers from the list below</label></h1>
-    <div class="flexrow height-70">
+    <div class="descriptions">
       <ul class="modifier-list boxed-part">
         {{#each responseList as |item i|}}
         <li class="modifiers-part">
@@ -13,6 +13,7 @@
         </li>
         {{/each}}
       </ul>
+
       <div class="boxed-part modifier-description">
         <p style="margin-left:5px;">
 
