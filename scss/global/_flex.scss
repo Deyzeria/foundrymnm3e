@@ -1,0 +1,70 @@
+// Flexbox.
+.flex-group-center,
+.flex-group-left,
+.flex-group-right {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.flex-group-left {
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.flex-group-right {
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.flexshrink {
+  flex: 0;
+}
+
+.flex-between {
+  justify-content: space-between;
+}
+
+.flexlarge {
+  flex: 2;
+}
+
+.flexexlarge {
+  -webkit-box-flex: 3;
+  -ms-flex: 3;
+  flex: 3;
+}
+
+.flexexlargeheader {
+  -webkit-box-flex: 3;
+  -ms-flex: 3;
+  flex: 2.5;
+}
+
+// Alignment styles.
+.align-left {
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.align-right {
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.align-center {
+  justify-content: center;
+  text-align: center;
+}
+
+.flex-50px {
+  flex: 0 0 50px;
+}
+
+.flex-70px {
+  flex: 0 0 70px;
+}
+
+.flex-100px {
+  flex: 0 0 100px;
+}
