@@ -2,9 +2,8 @@
 
   {{!-- Sheet Header --}}
   <header class="sheet-header">
-    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{system.heroname}}" height="150" width="100" />
-    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{system.realidentity}}" height="50"
-      width="50" />
+    <img class="profile-img" src="{{actor.system.image_one}}" data-edit="system.image_one" title="{{system.heroname}}"/>
+    <img class="profile-img" src="{{actor.system.image_two}}" data-edit="system.image_two" title="{{system.realidentity}}"/>
     <div class="header-fields">
       <div class="flexrow">
         <h1 class="charname"><input name="system.heroname" type="text" value="{{system.heroname}}"
@@ -19,21 +18,54 @@
         <li class="attribute pl">
           <div class="flexrow">
             <h4 class="attribute-name">Power Level</h4>
-            <input class="attribute-value flex-70px" oninput="setDefaultToZero(this)" type="text" name="system.generic.pl"
-              value="{{system.generic.pl}}" data-dtype="Number" />
+            <input class="attribute-value flex-70px" oninput="setDefaultToZero(this)" type="text"
+              name="system.generic.pl" value="{{system.generic.pl}}" data-dtype="Number" />
           </div>
           <div class="flexrow">
             <div id="pptotal" class="attribute-value multiple">
-              <input class="ppspent" type="text" name="system.generic.pp_spent" value="{{system.generic.pp_spent}}"
-                data-dtype="Number" disabled />
+              <label class="ppspent">{{system.generic.pp_spent}}</label>
               <span class="sep"> / </span>
-              <input class="ppspent" type="text" name="system.generic.pp" value="{{system.generic.pp}}" data-dtype="Number" disabled />
+              <label class="ppspent">{{system.generic.pp}}</label>
+              <div class="flexrow extrapp" data-tooltip="Extra Power Points">
+                <label>+</label>
+                <input oninput="setDefaultToZero(this)" type="text" name="system.generic.extrapp"
+                  value="{{system.generic.extrapp}}" data-dtype="Number" />
+              </div>
             </div>
-            <input class="attribute-value flex-70px" oninput="setDefaultToZero(this)" type="text" name="system.generic.extrapp"
-                value="{{system.generic.extrapp}}" data-dtype="Number" />
           </div>
         </li>
 
+        <div class="pptooltip">
+          <div class="flexrow">
+            <label class="value">{{system.generic.pp_ability}}</label>
+            <label class="flexlarge">Abilities</label>
+          </div>
+          <div class="flexrow">
+            <label class="value">{{system.generic.pp_defenses}}</label>
+            <label class="flexlarge">Defenses</label>
+          </div>
+          <div class="flexrow">
+            <label class="value">{{system.generic.pp_skills}}</label>
+            <label class="flexlarge">Skills</label>
+          </div>
+          <div class="flexrow">
+            <label class="value">{{system.generic.pp_advantages}}</label>
+            <label class="flexlarge">Advantages</label>
+          </div>
+          <div class="flexrow">
+            <label class="value">{{system.generic.pp_powers}}</label>
+            <label class="flexlarge">Powers</label>
+          </div>
+        </div>
+
+        <li class="attribute initiative">
+          <a class="initiativeact">
+            <h4 class="attribute-name">Initiative</h4>
+            <center>
+              <label class="attribute-label">{{system.generic.initiative}}</label>
+            </center>
+          </a>
+        </li>
         {{!-- <li class="attribute hp">
           <h4 class="attribute-name">Hero Points</h4>
           <center>
@@ -42,48 +74,6 @@
           </center>
         </li> --}}
       </ul>
-      {{!-- Power Point Spent --}}
-      {{!-- <ul class="attributes flexrow">
-        <li class="attribute ppabilities">
-          <h4 class="attribute-name">Abilities</h4>
-          <center>
-            <input class="attribute-value" type="text" name="system.generic.pp_ability"
-              value="{{system.generic.pp_ability}}" data-dtype="Number" disabled />
-          </center>
-        </li>
-
-        <li class="attribute ppdefences">
-          <h4 class="attribute-name">Defences</h4>
-          <center>
-            <input class="attribute-value" type="text" name="system.generic.pp_defenses"
-              value="{{system.generic.pp_defenses}}" data-dtype="Number" disabled />
-          </center>
-        </li>
-
-        <li class="attribute ppskills">
-          <h4 class="attribute-name">Skills</h4>
-          <center>
-            <input class="attribute-value skillsspent" type="text" name="system.generic.pp_skills"
-              value="{{system.generic.pp_skills}}" data-dtype="Number" disabled />
-          </center>
-        </li>
-
-        <li class="attribute ppadvantages">
-          <h4 class="attribute-name">Advantages</h4>
-          <center>
-            <input class="attribute-value" type="text" name="system.generic.pp_advantages"
-              value="{{system.generic.pp_advantages}}" data-dtype="Number" disabled />
-          </center>
-        </li>
-
-        <li class="attribute pppowers">
-          <h4 class="attribute-name">Powers</h4>
-          <center>
-            <input class="attribute-value" type="text" name="system.generic.pp_powers"
-              value="{{system.generic.pp_powers}}" data-dtype="Number" disabled />
-          </center>
-        </li>
-      </ul> --}}
     </div>
   </header>
 
@@ -194,73 +184,68 @@
                   value="{{system.generic.wounds}}" data-dtype="Number" />
               </center>
             </li>
-            <li class="attribute initiative">
-              <h4 class="attribute-name">Initiative</h4>
-              <center>
-                <input class="attribute-value" disabled type="text" name="system.generic.initiative"
-                  value="{{system.generic.initiative}}" data-dtype="Number" />
-              </center>
-            </li>
           </ul>
         </aside>
       </section>
 
-      {{!-- Skills --}}
-      <ul class="skills-list">
-        {{!-- Headers --}}
-        <li class="flexrow features-header">
-          <div class="skill-name-controls">
-            <div class="resource-label flexexlarge flexrow"></div>
-          </div>
-          <div class="skill-ability abl" data-tooltip="Original Ability" data-tooltip-direction="UP">Abl</div>
-          <div class="skill-original-ability" data-tooltip="Original Ability" data-tooltip-direction="UP">Stat</div>
-          <div class="skill-value" data-tooltip="Purchased" data-tooltip-direction="UP">Purc</div>
-          <div class="skill-value" data-tooltip="Misc" data-tooltip-direction="UP">Misc</div>
-          <div class="skill-value" data-tooltip="Automatic" data-tooltip-direction="UP">Auto</div>
-          <div class="skill-value" data-tooltip="Total" data-tooltip-direction="UP">Total</div>
-          <div class="checkmarks">
-            <div class="toggle1" data-tooltip="Untrained?" data-tooltip-direction="UP">U</div>
-            <div class="toggle2" data-tooltip="Mastery?" data-tooltip-direction="UP">M</div>
-          </div>
-        </li>
-        {{#each system.skills as |skill key|}}
-        <li class="skill flexrow" data-skill="{{key}}">
-          <div class="skill-name-controls">
-            <label class="resource-label rollable-skill rollable flexexlarge align-center"
-              data-roll="d20+@skills.{{key}}.total" data-label="{{skill.label}}">{{skill.label}}</label>
-            <a class="config-button" data-action="skill" data-tooltip="Configure">
-              <i class="fas fa-cog"></i>
-            </a>
-          </div>
-          <label class="skill-ability">{{skill.ability}}</label>
-          <div class="flexrow">
-            {{#if skill.disabled}}
-            <input class="skill-value disabler" type="text" disabled name="disabled" value="Disabled"
-              data-dtype="Text" />
-            {{else}}
-            <input class="skill-value originalstat" type="text" disabled name="system.skills.{{key}}.default"
-              value="{{skill.default}}" data-dtype="Number" />
-            <input class="skill-value purchased" oninput="setDefaultToZero(this)" type="text"
-              name="system.skills.{{key}}.purchased" value="{{skill.purchased}}" data-dtype="Number" />
-            <input class="skill-value misc" oninput="setDefaultToZero(this)" type="text"
-              name="system.skills.{{key}}.misc" value="{{skill.misc}}" data-dtype="Number" />
-            <input class="skill-value auto" type="text" disabled name="system.skills.{{key}}.auto"
-              value="{{skill.auto}}" data-dtype="Number" />
-            <input class="skill-value total" type="text" disabled name="system.skills.{{key}}.total"
-              value="{{skill.total}}" data-dtype="Number" />
-            {{/if}}
-          </div>
-          <div class="checkmarks">
-            <i class="toggle1">{{{skill.untrainedIcon}}}</i>
-            <i class="toggle2">{{{skill.masteryIcon}}}</i>
-          </div>
-        </li>
-        {{/each}}
-      </ul>
+      <section class="grid flexcol">
+        <aside class="sidebar ">
+          {{!-- Skills --}}
+          <ul class="skills-list">
+            {{!-- Headers --}}
+            <li class="flexrow features-header">
+              <div class="skill-name-controls">
+                <div class="resource-label flexexlarge flexrow"></div>
+              </div>
+              <div class="skill-ability abl" data-tooltip="Original Ability" data-tooltip-direction="UP">Abl</div>
+              <div class="skill-original-ability" data-tooltip="Original Ability" data-tooltip-direction="UP">Stat</div>
+              <div class="skill-value" data-tooltip="Purchased" data-tooltip-direction="UP">Purc</div>
+              <div class="skill-value" data-tooltip="Misc" data-tooltip-direction="UP">Misc</div>
+              <div class="skill-value" data-tooltip="Automatic" data-tooltip-direction="UP">Auto</div>
+              <div class="skill-value" data-tooltip="Total" data-tooltip-direction="UP">Total</div>
+              <div class="checkmarks">
+                <div class="toggle1" data-tooltip="Untrained?" data-tooltip-direction="UP">U</div>
+                <div class="toggle2" data-tooltip="Mastery?" data-tooltip-direction="UP">M</div>
+              </div>
+            </li>
+            {{#each system.skills as |skill key|}}
+            <li class="skill flexrow" data-skill="{{key}}">
+              <div class="skill-name-controls">
+                <label class="resource-label rollable-skill rollable flexexlarge align-center"
+                  data-roll="d20+@skills.{{key}}.total" data-label="{{skill.label}}">{{skill.label}}</label>
+                <a class="config-button" data-action="skill" data-tooltip="Configure">
+                  <i class="fas fa-cog"></i>
+                </a>
+              </div>
+              <label class="skill-ability">{{skill.ability}}</label>
+              <div class="flexrow">
+                {{#if skill.disabled}}
+                <input class="skill-value disabler" type="text" disabled name="disabled" value="Disabled"
+                  data-dtype="Text" />
+                {{else}}
+                <input class="skill-value originalstat" type="text" disabled name="system.skills.{{key}}.default"
+                  value="{{skill.default}}" data-dtype="Number" />
+                <input class="skill-value purchased" oninput="setDefaultToZero(this)" type="text"
+                  name="system.skills.{{key}}.purchased" value="{{skill.purchased}}" data-dtype="Number" />
+                <input class="skill-value misc" oninput="setDefaultToZero(this)" type="text"
+                  name="system.skills.{{key}}.misc" value="{{skill.misc}}" data-dtype="Number" />
+                <input class="skill-value auto" type="text" disabled name="system.skills.{{key}}.auto"
+                  value="{{skill.auto}}" data-dtype="Number" />
+                <input class="skill-value total" type="text" disabled name="system.skills.{{key}}.total"
+                  value="{{skill.total}}" data-dtype="Number" />
+                {{/if}}
+              </div>
+              <div class="checkmarks">
+                <i class="toggle1">{{{skill.untrainedIcon}}}</i>
+                <i class="toggle2">{{{skill.masteryIcon}}}</i>
+              </div>
+            </li>
+            {{/each}}
+          </ul>
+      </section>
+      </aside>
     </div>
 
-    {{!-- https://stackoverflow.com/questions/6199773/how-to-enable-disable-an-html-button-based-on-scenarios --}}
-    {{!-- https://sebhastian.com/call-javascript-function-html/ --}}
     {{!-- Biography Tab --}}
     <div class="tab biography" data-group="primary" data-tab="description">
       {{!-- If you want TinyMCE editors to output inline rolls when rendered, you need to pass the actor's roll data to
@@ -284,13 +269,11 @@
 
   </section>
 
-  <pre>
-    <script>
-      function setDefaultToZero(input) {
-        if (input.value == '') {
-          input.value = '0';
-        }
+  <script>
+    function setDefaultToZero(input) {
+      if (input.value == '') {
+        input.value = '0';
       }
-    </script>
-  </pre>
+    }
+  </script>
 </form>

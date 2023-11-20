@@ -32,7 +32,7 @@ export default class SkillsConfig extends BaseConfigSheet {
     return `${game.i18n.format("MNM3E.SkillConfig", { skill: label })}: ${this.document.name}`;
   }
 
-  get isSubtypeType() {
+  isSubtypeType() {
     if (this.options.key.startsWith("clc")) {
       return "CC";
     } else if (this.options.key.startsWith("exp")) {

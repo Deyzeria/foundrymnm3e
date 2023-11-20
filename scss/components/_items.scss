@@ -1,5 +1,4 @@
 .item-sheet {
-  
   width: 622px;
   min-width: 622px;
   max-width: 622px;
@@ -31,7 +30,10 @@
 }
 
 .foundrymnm3e.sheet.item {
-
+  .window-content {
+    background: white;
+  }
+  
   ul.power-types {
     list-style: none;
     margin: 0 5px 0;
@@ -331,8 +333,9 @@
   .item {
     align-items: center;
     padding: 0 2px; // to align with the header border
-    border-bottom: 1px solid $c-faint;
-
+    border-bottom: 2px solid $c-dark;
+    padding: 2px 0px;
+    
     &:last-child {
       border-bottom: none;
     }
@@ -346,6 +349,7 @@
         background-size: 30px;
         border: none;
         margin-right: 5px;
+        background-color: $c-faint;
       }
 
       .advrank{

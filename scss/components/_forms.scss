@@ -16,8 +16,10 @@
     -ms-flex: 0 0 100px;
     flex: 0 0 100px;
     height: 100px;
-    margin-right: 1px;
-    background: #cccccc;
+    max-height: 100px;
+    max-width: 100px;
+    margin-right: 5px;
+    background: $c-faint;
   }
 
   .power-img {
@@ -80,7 +82,7 @@
     font-size: 32px;
     padding: 13px 0;
     &:hover {
-      color: rgb(68, 0, 255);
+      color: rgba(68, 0, 255, 0.5);
       text-shadow: 0 0 8px blue;
       cursor: pointer;
     }

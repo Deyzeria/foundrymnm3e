@@ -210,6 +210,7 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
     // -------------------------------------------------------------
     // Everything below here is only needed if the sheet is editable
     if (this.isEditable) {
+      let timer;
 
       // Add Inventory Item
       html.find('.item-create').click(this._onItemCreate.bind(this));
@@ -227,6 +228,23 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
 
       html.find(".config-button").click(this._onConfigMenu.bind(this));
 
+      html.find(".ppspent").hover(ev => {
+        let pptooltip = html.find(".pptooltip")[0].classList;
+
+        if (ev.type == "mouseenter") {
+          timer = setTimeout(
+            () => {
+              pptooltip.add("open");
+            }, 1000);
+        }
+        if (ev.type == "mouseleave") {
+          clearTimeout(timer);
+          if (pptooltip[1] == "open") {
+            pptooltip.remove("open");
+          }
+        }
+      });
+
       // Drag events for macros.
       if (this.actor.isOwner) {
         // Rollable abilities.
@@ -240,6 +258,8 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
           li.setAttribute("draggable", true);
           li.addEventListener("dragstart", handler, false);
         });
+
+        html.find(".swapbutton").click(this._swapHeroStates.bind(this));
       }
     }
   }
@@ -278,7 +298,10 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
     app?.render(true);
   }
 
-
+  _swapHeroStates(event) {
+    event.preventDefault();
+    return this.actor.changeState();
+  }
 
   //------------------------------------------------------------------------------------------
   //------------------------------------------------------------------------------------------

@@ -6,6 +6,7 @@ import ActiveEffectMnm3e from "../helpers/effects.mjs";
 /**
  * Extend the base Actor document by defining a custom roll data structure which is ideal for the Simple system.
  * @extends {Actor}
+ * @type {actorData}
  */
 export class FoundryMnM3eActor extends Actor {
 
@@ -94,6 +95,9 @@ export class FoundryMnM3eActor extends Actor {
     if (actorData.type !== "hero") return;
 
     const systemData = actorData.system;
+
+    if (systemData.image_one == "") systemData.image_one = "icons/svg/mystery-man.svg";
+    if (systemData.image_two == "") systemData.image_two = "icons/svg/mystery-man.svg";
 
     if (systemData.heroname == "") {
       systemData.heroname = actorData.name;
@@ -339,16 +343,34 @@ export class FoundryMnM3eActor extends Actor {
     const roll = await d20Roll(rollData);
     return roll;
   }
+
+  async changeState() {
+    var system = this.system;
+    let updates = [{_id: this.id, name: "", img: ""}];
+
+    updates[0]['system.active_identity'] = !system.active_identity;
+
+    if (!system.active_identity) {
+      updates[0].name = system.heroname;
+      updates[0].img = system.image_one;
+    }
+    else {
+      updates[0].name = system.realidentity;
+      updates[0].img = system.image_two;
+    }
+    console.debug(updates[0]);
+    Actor.updateDocuments(updates);
+  }
 }
 
 Hooks.on("renderActorSheet", (app, html, data) => {
   const syst = data.system;
 
   if (syst.generic.pp_spent > syst.generic.pp) {
-    html.find(".attribute-value.multiple .spenttotal")[0].style.background = "red";
+    html.find(".attribute-value.multiple .ppspent")[0].style.background = "rgba(255, 0, 0, 0.7)";
   }
   if (!Number.isInteger(syst.generic.pp_skills)) {
-    html.find(".skillsspent")[0].style.background = "red";
+    //html.find(".skillsspent")[0].style.background = "red";
   }
 
   if (syst.defenses.dodge.total + syst.defenses.toughness.total > syst.generic.pl * 2 || syst.defenses.parry.total + syst.defenses.toughness.total > syst.generic.pl * 2) {

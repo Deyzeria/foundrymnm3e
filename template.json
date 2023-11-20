@@ -405,7 +405,7 @@
       "details": {
         "heroname": "",
         "realidentity": "",
-        "active_identity": 1,
+        "active_identity": true,
         "gender": "",
         "age": 0,
         "height": "",
