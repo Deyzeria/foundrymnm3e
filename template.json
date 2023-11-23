@@ -397,9 +397,7 @@
             "active": false,
             "extended": false
           },
-          "extratypes": [],
-          "closescale": "m",
-          "farscale": "km"
+          "extratypes": []
         }
       },
       "details": {

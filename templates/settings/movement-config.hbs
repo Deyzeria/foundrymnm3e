@@ -1,0 +1,14 @@
+<form>
+  {{#each config}}
+  <div class="flexrow" data-id="{{id}}">
+    <label>{{label}}</label>
+    <input type="number" name="{{id}}.value" value="{{value}}" min="-5" max="20" data-dtype="Number">
+  </div>
+  {{/each}}
+
+  <footer class="sheet-footer flexrow">
+    <button type="submit">
+      <i class="far fa-save"></i> {{localize "Save Changes"}}
+    </button>
+  </footer>
+</form>

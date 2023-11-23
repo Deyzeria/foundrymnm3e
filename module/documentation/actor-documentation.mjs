@@ -143,11 +143,9 @@
  * @prop {speedType} flight
  * @prop {speedType} leaping
  * @prop {speedType} swimming
- * @prop {speedType } teleport
+ * @prop {speedType} teleport
  * 
  * @prop {Array} extratypes
- * @prop {string} closescale
- * @prop {string} farscale
  */
 
 /** Speed

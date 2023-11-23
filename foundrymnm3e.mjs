@@ -43,7 +43,7 @@ Hooks.once('init', async function () {
   registerSystemSettings();
 
   // If this doesn't work, then move arrays separately and make this getting right when getting value?
-  SetGameValues(game.settings.get("foundrymnm3e", "measurementsystem"));
+  SetGameValues();
 
   // Custom Die modifier
   // For now will be usually hardcoded to just do d20imp, adding a die with the result of 10 if the result is below 11(1-10)

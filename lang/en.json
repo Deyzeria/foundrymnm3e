@@ -674,5 +674,8 @@
   "SETTINGS.mnmScaleSystem": "Units of Measurement",
   "SETTINGS.mnmScaleSystemDesc": "Choose which units of measurement MnM should use.",
   "SETTINGS.mnmScaleSystemMeters": "Meters",
-  "SETTINGS.mnmScaleSystemFeet": "Feet"
+  "SETTINGS.mnmScaleSystemFeet": "Feet",
+  "SETTINGS.mnmMovementScalesName": "Default movement scales",
+  "SETTINGS.mnmMovementScalesLabel": "Default Movement",
+  "SETTINGS.mnmMovementScalesHint": "Configure from what rank do different speeds start on rank 0"
 }

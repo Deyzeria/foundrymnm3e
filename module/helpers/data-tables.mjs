@@ -453,12 +453,22 @@ var scale_array =
   "distancedisplay": distance_display,
   "mass": mass_values,
   "massdisplay": mass_display,
-  "volume": volume_display,
-  "time": time_display,
+  "volumedisplay": volume_display,
+  "time": time_value,
+  "timedisplay": time_display
 };
+var defaultSpeedScales = {
+  "walk": 0,
+  "burrowing": -5,
+  "flight": 0,
+  "leaping": -2,
+  "swimming": -2,
+  "teleport": 0
+}
 
-export function SetGameValues(value) {
-  if (value == "meters") {
+export function SetGameValues() {
+  const measurvalue = game.settings.get("foundrymnm3e", "measurementsystem");
+  if (measurvalue == "meters") {
     distance_values = distance_meters_values;
     distance_display = distance_meters_display;
     mass_values = mass_kilograms_values;
@@ -481,6 +491,14 @@ export function SetGameValues(value) {
     "volume": volume_display,
     "time": time_display,
   }
+
+  // const speedvalue = game.settings.get("foundrymnm3e", "movementScalesSetting");
+  // defaultSpeedScales.walk = speedvalue.walk;
+  // defaultSpeedScales.burrowing = speedvalue.burrowing;
+  // defaultSpeedScales.flight = speedvalue.flight;
+  // defaultSpeedScales.leaping = speedvalue.leaping;
+  // defaultSpeedScales.swimming = speedvalue.swimming;
+  // defaultSpeedScales.teleport = speedvalue.teleport;
 }
 
 
@@ -502,38 +520,83 @@ export function GetDistanceName(fullname) {
 
 /**
  * Function to request the return of one of scales
- * @param {int} value Rank to return. Rank 0 value for Time = 6 second
- * @param {string} type Type of list to get. `distance`, `distancedisplay`, `mass`, `massdisplay`, `volume`, `time`
- * @returns Int or String.
+ * @param {Number} value Rank to return. Rank 0 value for Time = 6 second
+ * @param {String} type Type of list to get. `distance`, `distancedisplay`, `mass`, `massdisplay`, `volume`, `time`
+ * @returns {Number | String}
  */
 export function GetScale(value, type) {
-  var returnvalue = 0;
-
+  value = value + 5;
   if (type != null) {
-    var scale = scale_array[type]
-    if (value >= 0 && value <= 35) {
-      returnvalue = scale[value + 5];
+    var scale = scale_array[type];
+    
+    if (!["distancedisplay", "volumedisplay", "massdisplay", "timedisplay"].includes(type)){
+      return GetNumberValue(scale, value);
     }
-    else if (value > 35) {
-      if (type == "distancedisplay" || type == "massdisplay") {
-
-      }
-      else {
-        returnvalue = GetOverLimit(scale, value + 5);
-      }
-    }
-    else if (value < 0) {
-      if (type == "distancedisplay" || type == "massdisplay") {
-
-      }
-      else {
-        returnvalue = GetUnderLimit(scale, value + 5);
-      }
+    else {
+      return GetDisplayValue(scale, value);
     }
   }
-  return returnvalue;
 }
 
+/**
+ * 
+ * @param {Number} rank Rank of power 
+ * @param {String} speedType
+ * @param {Boolean} display Is the return must be of display, default false
+ * @returns {Number | String} Number if display false, String if display true
+ */
+export function GetSpeedScale(rank, speedType, display = false) {
+  var value = rank + 5 + defaultSpeedScales[speedType];
+  if (!display) {
+    var scale = scale_array.distance;
+    return GetNumberValue(scale, value);
+  }
+
+  else {
+    var scale = scale_array.distancedisplay;
+    return GetDisplayValue(scale, value);
+  }
+}
+
+/**
+ * @param {Array} scale 
+ * @param {Number} value 
+ * @returns {Number}
+ */
+function GetNumberValue(scale, value) {
+  if (value >= 0 && value <= 35) {
+    return scale[value];
+  }
+  else if (value > 35) {
+    return GetOverLimit(scale, value);
+  }
+  else if (value < 0) {
+    return GetUnderLimit(scale, value)
+  }
+}
+
+/**
+ * @param {Array} scale 
+ * @param {Number} value 
+ * @returns {String}
+ */
+function GetDisplayValue(scale, value) {
+  if (value >= 0 && value <= 35) {
+    return scale[value];
+  }
+  else if (value > 35) {
+    return "over value";
+  }
+  else if (value < 0) {
+    return "under value"
+  }
+}
+
+/**
+ * @param {Array} array 
+ * @param {Number} maxValue 
+ * @returns {Number}
+ */
 function GetOverLimit(array, maxValue) {
   var value = array[35]
   for (let i = 35; i < maxValue; i++) {
@@ -542,6 +605,11 @@ function GetOverLimit(array, maxValue) {
   return value;
 }
 
+/**
+ * @param {Array} array 
+ * @param {Number} minValue 
+ * @returns {Number}
+ */
 function GetUnderLimit(array, minValue) {
   var value = array[0]
   for (let i = 0; i > minValue; i--) {

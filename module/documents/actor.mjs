@@ -1,4 +1,5 @@
 import { d20Roll } from "../dice/dice.mjs";
+import { GetSpeedScale } from "../helpers/data-tables.mjs";
 import ActiveEffectMnm3e from "../helpers/effects.mjs";
 
 /** @typedef {import("../documentation/actor-documentation.mjs").actorData} actorData */
@@ -6,7 +7,7 @@ import ActiveEffectMnm3e from "../helpers/effects.mjs";
 /**
  * Extend the base Actor document by defining a custom roll data structure which is ideal for the Simple system.
  * @extends {Actor}
- * @type {actorData}
+ * @type {actorData} Actor
  */
 export class FoundryMnM3eActor extends Actor {
 
@@ -56,6 +57,7 @@ export class FoundryMnM3eActor extends Actor {
 
 
     this._prepareCharacterData(actorData);
+    //this.prepareSpeeds();
     //this._prepareNpcData(actorData);
   }
 
@@ -173,13 +175,14 @@ export class FoundryMnM3eActor extends Actor {
 
   prepareSpeeds() {
     const speeds = this.system.speed;
-    const v = 'distance';
-    speeds.walk.distance = ScaleTable.GetScale(speeds.walk.rank, v);
+    const v = '';
 
-    const types = ['burrowing', 'flight', 'leaping', 'swimming', 'teleport'];
+    const types = ["walk",'burrowing', 'flight', 'leaping', 'swimming', 'teleport'];
     types.forEach(element => {
       if (!speeds[element].active) return;
-      speeds[element].distance = ScaleTable.GetScale(speeds[element].rank, v);
+      // Try to remove distance from template
+      speeds[element].distance = GetSpeedScale(speeds[element].rank, element);
+      speeds[element].displaydistance = GetSpeedScale(speeds[element].rank, element, true)
     });
   }
 
