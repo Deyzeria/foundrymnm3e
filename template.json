@@ -71,9 +71,7 @@
           "pp_spent": 0,
           "initiative": 0,
           "size": -2,
-          "wounds": 0,
-          "languages": [],
-          "complications": []
+          "wounds": 0
         },
         "defenses": {
           "dodge": {
@@ -401,19 +399,37 @@
         }
       },
       "details": {
-        "heroname": "",
-        "realidentity": "",
-        "active_identity": true,
-        "gender": "",
-        "age": 0,
-        "height": "",
-        "weight": 0,
-        "eyes": "",
-        "hair": "",
-        "group_affiliation": "",
-        "base_of_operation": "",
-        "image_one": "",
-        "image_two": ""
+        "details": {
+          "active_identity": true,
+          "has_secret_identity": true,
+          "secret_as_public": false,
+          "civilian_identity": {
+            "image": "",
+            "name": "",
+            "gender": "",
+            "age": 0,
+            "height": "",
+            "weight": 0,
+            "eyes": "",
+            "hair": "",
+            "description": ""
+          },
+          "hero_identity": {
+            "image": "",
+            "name": "",
+            "gender": "",
+            "age": 0,
+            "height": "",
+            "weight": 0,
+            "eyes": "",
+            "hair": "",
+            "description": ""
+          },
+          "group_affiliation": "",
+          "base_of_operation": "",
+          "languages": [],
+          "complications": []
+        }
       }
     },
     "hero": {

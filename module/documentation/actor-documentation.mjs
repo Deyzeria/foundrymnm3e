@@ -18,22 +18,7 @@
  * @prop {skillsList} skills
  * @prop {genericList} generic
  * @prop {speedList} speed
- * 
- * @prop {number} active_identity
- * @prop {number} age
- * @prop {number} weight
- * 
- * @prop {string} heroname
- * @prop {string} realidentity
- * 
- * @prop {string} eyes
- * @prop {string} gender 
- * @prop {string} height 
- * @prop {string} hair
- * @prop {string} image_one
- * @prop {string} image_two
- * @prop {string} base_of_operation 
- * @prop {string} group_affiliation 
+ * @prop {details} details
  */
 
 /** Ability List
@@ -72,8 +57,6 @@
  * @prop {number} initiative
  * @prop {number} size
  * @prop {number} wounds
- * @prop {Array} languages
- * @prop {Array} complications
  */
 
 /** Defense List
@@ -155,3 +138,28 @@
  * @prop {boolean} active
  */
 
+/** Details
+ * @typedef {Object} details
+ * @prop {boolean} active_identity
+ * @prop {boolean} has_secret_identity
+ * @prop {boolean} secret_as_public
+ * @prop {string} group_affiliation
+ * @prop {string} base_of_operation
+ * @prop {Array} languages
+ * @prop {Array} complications
+ * @prop {Identity} civilian_identity
+ * @prop {Identity} hero_identity
+ */
+
+/** Separate Identity Page
+ * @typedef {Object} Identity
+ * @prop {string} image
+ * @prop {string} name
+ * @prop {string} gender
+ * @prop {string} height
+ * @prop {string} eyes
+ * @prop {string} hair
+ * @prop {string} description
+ * @prop {number} age
+ * @prop {number} weight
+ */

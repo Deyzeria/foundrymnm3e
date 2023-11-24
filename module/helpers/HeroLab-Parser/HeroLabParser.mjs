@@ -80,6 +80,12 @@ async function GenerateActor(dataActor, actorType) {
   return new Actor({ name: dataActor.document.public.character.name, type: actorType }).toObject()
 }
 
+/**
+ * 
+ * @param {import("../../documentation/actor-documentation.mjs").actorData} actorStub 
+ * @param {*} dataActor 
+ * @returns 
+ */
 function PopulateActorData(actorStub, dataActor) {
   const dataBase = dataActor.document.public.character;
 
@@ -197,13 +203,14 @@ function PopulateActorData(actorStub, dataActor) {
   actorStub.prototypeToken.disposition = disposition;
 
   // ----DETAILS----
-  actorStub.system.age = parseInt(dataBase.personal.age);
-  actorStub.system.hair = dataBase.personal.hair;
-  actorStub.system.eyes = dataBase.personal.eyes;
-  actorStub.system.height = dataBase.personal.charheight.text; // Maybe to change. There is value, which you int(value/12) for feet and (value%12) for inches.
-  actorStub.system.weight = parseInt(dataBase.personal.charweight.value);
-  actorStub.system.gender = dataBase.personal.gender;
-  actorStub.system.heroname = dataActor.document.public.character.name;
+  var details = actorStub.system.details.civilian_identity;
+  details.age = parseInt(dataBase.personal.age);
+  details.hair = dataBase.personal.hair;
+  details.eyes = dataBase.personal.eyes;
+  details.height = dataBase.personal.charheight.text; // Maybe to change. There is value, which you int(value/12) for feet and (value%12) for inches.
+  details.weight = parseInt(dataBase.personal.charweight.value);
+  details.gender = dataBase.personal.gender;
+  details.name = dataBase.name;
 
   // = parseInt(dataBase.);
   return actorStub;

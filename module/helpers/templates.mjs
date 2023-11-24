@@ -16,6 +16,8 @@ export const preloadHandlebarsTemplates = async function () {
 
     // Arrays
     "systems/foundrymnm3e/templates/actor/parts/actor-array-list.hbs",
-    "systems/foundrymnm3e/templates/actor/parts/actor-array.hbs"
+    "systems/foundrymnm3e/templates/actor/parts/actor-array.hbs",
+
+    "systems/foundrymnm3e/templates/window-overlay/add-modifiers.hbs"
   ]);
 };

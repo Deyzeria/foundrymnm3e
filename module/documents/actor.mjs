@@ -98,13 +98,13 @@ export class FoundryMnM3eActor extends Actor {
 
     const systemData = actorData.system;
 
-    if (systemData.image_one == "") systemData.image_one = "icons/svg/mystery-man.svg";
-    if (systemData.image_two == "") systemData.image_two = "icons/svg/mystery-man.svg";
+    if (systemData.details.hero_identity.image == "") systemData.details.hero_identity.image = "icons/svg/mystery-man.svg";
+    if (systemData.details.civilian_identity.image == "") systemData.details.civilian_identity.image = "icons/svg/mystery-man.svg";
 
-    if (systemData.heroname == "") {
-      systemData.heroname = actorData.name;
-    } else if (systemData.heroname != actorData.name && systemData.heroname != "") {
-      actorData.name = systemData.heroname;
+    if (systemData.details.hero_identity.name == "") {
+      systemData.details.hero_identity.name = actorData.name;
+    } else if (systemData.details.hero_identity.name != actorData.name) {
+      actorData.name = systemData.details.hero_identity.name;
     }
 
 
@@ -177,7 +177,7 @@ export class FoundryMnM3eActor extends Actor {
     const speeds = this.system.speed;
     const v = '';
 
-    const types = ["walk",'burrowing', 'flight', 'leaping', 'swimming', 'teleport'];
+    const types = ["walk", 'burrowing', 'flight', 'leaping', 'swimming', 'teleport'];
     types.forEach(element => {
       if (!speeds[element].active) return;
       // Try to remove distance from template
@@ -348,44 +348,46 @@ export class FoundryMnM3eActor extends Actor {
   }
 
   async changeState() {
+    /** @type {import("../documentation/actor-documentation.mjs").system} */
     var system = this.system;
-    let updates = [{_id: this.id, name: "", img: ""}];
+    let updates = [{ _id: this.id, name: "", img: "" }];
 
-    updates[0]['system.active_identity'] = !system.active_identity;
+    updates[0]['system.active_identity'] = !system.details.active_identity;
 
-    if (!system.active_identity) {
-      updates[0].name = system.heroname;
-      updates[0].img = system.image_one;
+    if (!system.details.active_identity) {
+      updates[0].name = system.details.hero_identity.name;
+      updates[0].img = system.details.hero_identity.image;
     }
     else {
-      updates[0].name = system.realidentity;
-      updates[0].img = system.image_two;
+      updates[0].name = system.details.civilian_identity.name;
+      updates[0].img = system.details.civilian_identity.image;
     }
-    console.debug(updates[0]);
     Actor.updateDocuments(updates);
   }
 }
 
 Hooks.on("renderActorSheet", (app, html, data) => {
-  const syst = data.system;
+  const system = data.system;
 
-  if (syst.generic.pp_spent > syst.generic.pp) {
+  if (system.generic.pp_spent > system.generic.pp) {
     html.find(".attribute-value.multiple .ppspent")[0].style.background = "rgba(255, 0, 0, 0.7)";
   }
-  if (!Number.isInteger(syst.generic.pp_skills)) {
+  if (!Number.isInteger(system.generic.pp_skills)) {
     //html.find(".skillsspent")[0].style.background = "red";
   }
 
-  if (syst.defenses.dodge.total + syst.defenses.toughness.total > syst.generic.pl * 2 || syst.defenses.parry.total + syst.defenses.toughness.total > syst.generic.pl * 2) {
+  if (system.defenses.dodge.total + system.defenses.toughness.total > system.generic.pl * 2 || system.defenses.parry.total + system.defenses.toughness.total > system.generic.pl * 2) {
     let defrow = html.find(".defense-row");
     defrow[0].style.background = "rgba(255, 0, 0, 0.2)";
     defrow[1].style.background = "rgba(255, 0, 0, 0.2)";
     defrow[3].style.background = "rgba(255, 0, 0, 0.2)";
   }
 
-  if (syst.defenses.fortitude.total + syst.defenses.will.total > syst.generic.pl * 2) {
+  if (system.defenses.fortitude.total + system.defenses.will.total > system.generic.pl * 2) {
     let defrow = html.find(".defense-row");
     defrow[2].style.background = "rgba(255, 0, 0, 0.2)";
     defrow[4].style.background = "rgba(255, 0, 0, 0.2)";
   }
+
+  
 });

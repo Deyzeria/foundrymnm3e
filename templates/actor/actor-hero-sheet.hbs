@@ -2,14 +2,14 @@
 
   {{!-- Sheet Header --}}
   <header class="sheet-header">
-    <img class="profile-img" src="{{actor.system.image_one}}" data-edit="system.image_one" title="{{system.heroname}}"/>
-    <img class="profile-img" src="{{actor.system.image_two}}" data-edit="system.image_two" title="{{system.realidentity}}"/>
+    <img class="profile-img" src="{{actor.system.details.hero_identity.image}}" data-edit="system.details.hero_identity.image" title="{{system.details.hero_identity.name}}"/>
+    <img class="profile-img" src="{{actor.system.details.civilian_identity.image}}" data-edit="system.details.civilian_identity.image" title="{{system.details.civilian_identity.name}}"/>
     <div class="header-fields">
       <div class="flexrow">
-        <h1 class="charname"><input name="system.heroname" type="text" value="{{system.heroname}}"
+        <h1 class="charname"><input name="system.details.hero_identity.name" type="text" value="{{system.details.hero_identity.name}}"
             placeholder="Superman" /></h1>
         <i class="fa-solid fa-arrows-rotate swapbutton"></i>
-        <h1 class="charname"><input name="system.realidentity" type="text" value="{{system.realidentity}}"
+        <h1 class="charname"><input name="system.details.civilian_identity.name" type="text" value="{{system.details.civilian_identity.name}}"
             placeholder="Clark Kent" /></h1>
       </div>
 
