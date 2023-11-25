@@ -103,10 +103,7 @@ export class FoundryMnM3eActor extends Actor {
 
     if (systemData.details.hero_identity.name == "") {
       systemData.details.hero_identity.name = actorData.name;
-    } else if (systemData.details.hero_identity.name != actorData.name) {
-      actorData.name = systemData.details.hero_identity.name;
     }
-
 
     systemData.generic.pp = Math.max(systemData.generic.pl * 15, 15) + systemData.generic.extrapp;
 
@@ -147,6 +144,29 @@ export class FoundryMnM3eActor extends Actor {
     }
 
     systemData.generic.pp_spent = systemData.generic.pp_ability + systemData.generic.pp_defenses + systemData.generic.pp_skills + systemData.generic.pp_advantages + systemData.generic.pp_powers;
+  }
+
+  /**
+   * @param {actorData} data 
+   * @param {Object} options 
+   * @param {String} userId 
+   */
+  _onUpdate(data, options, userId) {
+    super._onUpdate(data, options, userId);
+
+    if(data.system.details?.hero_identity?.name || data.system.details?.civilian_identity?.name)
+    {
+      let updates = [{ _id: this.id, name: ""}];
+      if(this.system.details.active_identity)
+      {
+        updates[0].name =  this.system.details.hero_identity.name;
+      }
+      else
+      {
+        updates[0].name = this.system.details.civilian_identity.name;
+      }
+      Actor.updateDocuments(updates);
+    }
   }
 
   /**
@@ -352,7 +372,7 @@ export class FoundryMnM3eActor extends Actor {
     var system = this.system;
     let updates = [{ _id: this.id, name: "", img: "" }];
 
-    updates[0]['system.active_identity'] = !system.details.active_identity;
+    updates[0]['system.details.active_identity'] = !system.details.active_identity;
 
     if (!system.details.active_identity) {
       updates[0].name = system.details.hero_identity.name;
@@ -367,6 +387,7 @@ export class FoundryMnM3eActor extends Actor {
 }
 
 Hooks.on("renderActorSheet", (app, html, data) => {
+  /** @type {import("../documentation/actor-documentation.mjs").system} */
   const system = data.system;
 
   if (system.generic.pp_spent > system.generic.pp) {
@@ -389,5 +410,5 @@ Hooks.on("renderActorSheet", (app, html, data) => {
     defrow[4].style.background = "rgba(255, 0, 0, 0.2)";
   }
 
-  
+
 });

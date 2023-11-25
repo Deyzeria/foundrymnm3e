@@ -11,11 +11,12 @@ export class MovementConfig extends FormApplication {
   /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      title: game.i18n.localize("mnmMovementScalesName"),
+      title: game.i18n.localize("SETTINGS.mnmMovementScalesName"),
+      classes: ["foundrymnm3e", "movement-config"],
       id: "movement-config",
       template: "systems/foundrymnm3e/templates/settings/movement-config.hbs",
       popOut: true,
-      width: 600,
+      width: 240,
       height: "auto"
     });
   }
@@ -28,11 +29,10 @@ export class MovementConfig extends FormApplication {
     const context = super.getData(options);
     context.config = [];
     const types = ["walk",'burrowing', 'flight', 'leaping', 'swimming', 'teleport'];
-    const speedvalue = game.settings.get("foundrymnm3e", "movementScalesSetting")
+    const speedvalue = game.settings.get("foundrymnm3e", "movementScalesSetting");
 
-    console.debug(speedvalue);
     types.forEach(element => {
-      //context.config.push({label: element, id: element, value: speedvalue[types]});
+      context.config.push({label: CONFIG.MNM3E.movementTypes[element], id: element, value: speedvalue[element]});
     });
     return context;
   }
@@ -41,7 +41,16 @@ export class MovementConfig extends FormApplication {
 
   /** @inheritdoc */
   async _updateObject(event, formData) {
-    //await game.settings.set("foundrymnm3e", "movementScalesSetting", foundry.utils.expandObject(formData));
+    let vars = foundry.utils.expandObject(formData);
+    let settingset = {
+      walk: vars.walk.value,
+      burrowing: vars.burrowing.value,
+      flight: vars.flight.value,
+      swimming: vars.swimming.value,
+      teleport: vars.teleport.value,
+      leaping: vars.leaping.value
+    }
+    await game.settings.set("foundrymnm3e", "movementScalesSetting", settingset);
     return SettingsConfig.reloadConfirm({ world: true });
   }
 }

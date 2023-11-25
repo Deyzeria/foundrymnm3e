@@ -1,26 +1,16 @@
-export async function ParserAccess() {
-  // ---REMOVE---
-  const manualSwitch = false;
-  const generateActor = false;
-  if (manualSwitch) {
-    var dataActor;
-    xmlfetcher()
-      .then(async xmlDoc => {
-        const parsed = xmlToJson(xmlDoc);
-        console.debug(parsed);
-        var actorJson = await GenerateActor(parsed, "hero");
+export async function ParserAccess(xmlfile) {
+  const parser = new DOMParser();
+  const xmlDoc = parser.parseFromString(xmlfile, 'text/xml');
+  const parsed = xmlToJson(xmlDoc);
+  var actorJson = await GenerateActor(parsed, "hero");
 
-        actorJson = PopulateActorData(actorJson, parsed);
-        var advList = PopulateActorAdvantages(parsed);
-        var powList = PopulateActorPowers(parsed);
-        //console.debug(actorJson);
+  actorJson = PopulateActorData(actorJson, parsed);
+  // var advList = PopulateActorAdvantages(parsed);
+  // var powList = PopulateActorPowers(parsed);
 
-        if (!generateActor) return;
-        await Actor.create(actorJson);
+  await Actor.create(actorJson);
 
-        // Activate functions which populate actor with items!
-      });
-  }
+  // Activate functions which populate actor with items!
 }
 
 // xml file should be passed here.
@@ -80,10 +70,9 @@ async function GenerateActor(dataActor, actorType) {
   return new Actor({ name: dataActor.document.public.character.name, type: actorType }).toObject()
 }
 
-/**
- * 
+/** Populates base actor data, abilities, defenses, skills, visuals, role 
  * @param {import("../../documentation/actor-documentation.mjs").actorData} actorStub 
- * @param {*} dataActor 
+ * @param {import("./hero-lab-documentation.mjs").hlparsed} dataActor 
  * @returns 
  */
 function PopulateActorData(actorStub, dataActor) {
@@ -99,7 +88,6 @@ function PopulateActorData(actorStub, dataActor) {
   const actorStubDefensesList = ['dodge', 'parry', 'fortitude', 'toughness', 'will']
   for (var i = 0; i < actorStubDefensesList.length; i++) {
     actorStub.system.defenses[actorStubDefensesList[i]].purchased = parseInt(dataBase.defenses.defense[i].cost.value);
-    actorStub.system.defenses[actorStubDefensesList[i]].impervious = parseInt(dataBase.defenses.defense[i].impervious);
   }
 
   // ----SKILLS----
@@ -254,11 +242,10 @@ function GetMultipleSkills(skillsList, skillIndex) {
 }
 
 
-//-------------------------//
-//-------------------------//
-//-------ADVANTAGES--------//
-//-------------------------//
-//-------------------------//
+/** ADVANTAGES
+ * @param {import("./hero-lab-documentation.mjs").hlparsed} dataActor 
+ * @returns 
+ */
 function PopulateActorAdvantages(dataActor) {
   const advantageList = dataActor.document.public.character.advantages.advantage;
   const advantagelist = CONFIG.MNM3E.AdvantageEnum;
@@ -376,11 +363,10 @@ function FindAdvantageType(id) {
   return adConf[id];
 }
 
-//-------------------------//
-//-------------------------//
-//---------POWERS----------//
-//-------------------------//
-//-------------------------//
+/** POWERS
+ * @param {import("./hero-lab-documentation.mjs").hlparsed} dataActor 
+ * @returns 
+ */
 function PopulateActorPowers(dataActor) {
   const powersList = dataActor.document.public.character.powers.power;
   var powerListToAdd = [];

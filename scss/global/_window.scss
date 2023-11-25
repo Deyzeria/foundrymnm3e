@@ -13,3 +13,13 @@
     cursor: pointer;
   }
 }
+
+.menu-buttons {
+  text-align: left;
+  .import-character {
+    height: 28px;
+    line-height: 26px;
+    margin: 4px;
+    width: 141px;
+  }
+}

@@ -13,10 +13,13 @@ export const preloadHandlebarsTemplates = async function () {
     "systems/foundrymnm3e/templates/actor/parts/actor-powers.hbs",
     "systems/foundrymnm3e/templates/actor/parts/actor-effects.hbs",
     "systems/foundrymnm3e/templates/actor/parts/actor-advantages.hbs",
+    "systems/foundrymnm3e/templates/actor/parts/actor-description.hbs",
 
     // Arrays
     "systems/foundrymnm3e/templates/actor/parts/actor-array-list.hbs",
     "systems/foundrymnm3e/templates/actor/parts/actor-array.hbs",
+
+    "systems/foundrymnm3e/templates/settings/import-menu.hbs",
 
     "systems/foundrymnm3e/templates/window-overlay/add-modifiers.hbs"
   ]);

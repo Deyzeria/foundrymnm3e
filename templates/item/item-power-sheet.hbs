@@ -29,77 +29,82 @@
 
     {{!-- Power Effect Data Setup --}}
     <div class="flexrow">
-      <ul class="power-types sectionpower">
-        <li class="power flexrow">
-          <label class="resource-label">{{localize "MNM3E.BasePower"}}</label>
-          {{#if locked}}
-          <label class="resource-label" data-value="selected_type">{{selected_powers}}</label>
-          {{else}}
-          <select class="power-value" name="system.power_effect">
-            {{selectOptions powers selected=selected_powers blank=""}}
-          </select>
+      <aside class="sidebar">
+        <ul class="power-types sectionpower">
+          <li class="power flexrow">
+            <label class="resource-label" style="flex: 0 0 42%;">{{localize "MNM3E.BasePower"}}</label>
+            <input type="checkbox" class="resource-checkmark" name="system.locked" {{checked system.locked}} />
+            {{#if locked}}
+            <label class="resource-label" data-value="selected_type">{{selected_powers}}</label>
+            {{else}}
+            <select class="power-value" name="system.power_effect">
+              {{selectOptions powers selected=selected_powers blank=""}}
+            </select>
+            {{/if}}
+          </li>
+          <li class="power flexrow">
+            <label class="resource-label">{{localize "MNM3E.PowerType"}}</label>
+            <label class="resource-label" data-value="selected_type">{{selected_type}}</label>
+          </li>
+          <li class="power flexrow">
+            <label class="resource-label">{{localize "MNM3E.Action"}}</label>
+            <label class="resource-label" data-value="selected_action">{{selected_action}}</label>
+          </li>
+          <li class="power flexrow">
+            <label class="resource-label">{{localize "MNM3E.Range"}}</label>
+            <label class="resource-label" data-value="selected_range">{{selected_range}}</label>
+          </li>
+          <li class="power flexrow">
+            <label class="resource-label">{{localize "MNM3E.Duration"}}</label>
+            <label class="resource-label" data-value="selected_duration">{{selected_duration}}</label>
+          </li>
+          <li class="power flexrow">
+            <label class="resource-label">{{localize "MNM3E.Resistance"}}</label>
+            <label class="resource-label" data-value="selected_savingthrow">{{selected_savingthrow}}</label>
+          </li>
+          {{#if saveDamage}}
+          <li class="power flexrow">
+            <label class="resource-label">{{localize "MNM3E.ResistanceDamage"}}</label>
+            <label class="resource-label" data-value="selected_damage">{{selected_damage}}</label>
+          </li>
           {{/if}}
-        </li>
-        <li class="power flexrow">
-          <label class="resource-label">{{localize "MNM3E.PowerType"}}</label>
-          <label class="resource-label" data-value="selected_type">{{selected_type}}</label>
-        </li>
-        <li class="power flexrow">
-          <label class="resource-label">{{localize "MNM3E.Action"}}</label>
-          <label class="resource-label" data-value="selected_action">{{selected_action}}</label>
-        </li>
-        <li class="power flexrow">
-          <label class="resource-label">{{localize "MNM3E.Range"}}</label>
-          <label class="resource-label" data-value="selected_range">{{selected_range}}</label>
-        </li>
-        <li class="power flexrow">
-          <label class="resource-label">{{localize "MNM3E.Duration"}}</label>
-          <label class="resource-label" data-value="selected_duration">{{selected_duration}}</label>
-        </li>
-        <li class="power flexrow">
-          <label class="resource-label">{{localize "MNM3E.Resistance"}}</label>
-          <label class="resource-label" data-value="selected_savingthrow">{{selected_savingthrow}}</label>
-        </li>
-        {{#if saveDamage}}
-        <li class="power flexrow">
-          <label class="resource-label">{{localize "MNM3E.ResistanceDamage"}}</label>
-          <label class="resource-label" data-value="selected_damage">{{selected_damage}}</label>
-        </li>
-        {{/if}}
-      </ul>
+        </ul>
+      </aside>
 
-      <ul class="cost-list">
-        <li class="cost flexrow">
-          <label class="resource-label">{{localize "MNM3E.Rank"}}</label>
-          <input class="cost-value rank" type="number" name="system.power_cost.rank" value="{{system.power_cost.rank}}"
-            min="0" max="{{max_ranks}}" data-dtype="Number" />
-        </li>
-        <li class="cost flexrow">
-          <label class="resource-label">{{localize "MNM3E.BaseCost"}}</label>
-          <input class="cost-value base" type="text" disabled name="system.power_cost.base_cost"
-            value="{{system.power_cost.base_cost}}" data-dtype="Number" />
-        </li>
-        <li class="cost flexrow">
-          <label class="resource-label">{{localize "MNM3E.Extras"}}</label>
-          <input class="cost-value extra" type="text" disabled name="system.power_cost.extras"
-            value="{{system.power_cost.extras}}" data-dtype="Number" />
-        </li>
-        <li class="cost flexrow">
-          <label class="resource-label">{{localize "MNM3E.Flaws"}}</label>
-          <input class="cost-value flaw" type="text" disabled name="system.power_cost.flaws"
-            value="{{system.power_cost.flaws}}" data-dtype="Number" />
-        </li>
-        <li class="cost flexrow">
-          <label class="resource-label">{{localize "MNM3E.Flats"}}</label>
-          <input class="cost-value flat" type="text" disabled name="system.power_cost.flat"
-            value="{{system.power_cost.flat}}" data-dtype="Number" />
-        </li>
-        <li class="cost flexrow">
-          <label class="resource-label">{{localize "MNM3E.FinalCost"}}</label>
-          <input class="cost-value final" type="text" disabled name="system.power_cost.final_cost"
-            value="{{system.power_cost.final_cost}}" data-dtype="Number" />
-        </li>
-      </ul>
+      <aside class="sidebar cost-list">
+        <ul class="cost-list">
+          <li class="cost flexrow">
+            <label class="resource-label">{{localize "MNM3E.Rank"}}</label>
+            <input class="cost-value rank" type="number" name="system.power_cost.rank"
+              value="{{system.power_cost.rank}}" min="0" max="{{max_ranks}}" data-dtype="Number" />
+          </li>
+          <li class="cost flexrow">
+            <label class="resource-label">{{localize "MNM3E.BaseCost"}}</label>
+            <input class="cost-value base" type="text" disabled name="system.power_cost.base_cost"
+              value="{{system.power_cost.base_cost}}" data-dtype="Number" />
+          </li>
+          <li class="cost flexrow">
+            <label class="resource-label">{{localize "MNM3E.Extras"}}</label>
+            <input class="cost-value extra" type="text" disabled name="system.power_cost.extras"
+              value="{{system.power_cost.extras}}" data-dtype="Number" />
+          </li>
+          <li class="cost flexrow">
+            <label class="resource-label">{{localize "MNM3E.Flaws"}}</label>
+            <input class="cost-value flaw" type="text" disabled name="system.power_cost.flaws"
+              value="{{system.power_cost.flaws}}" data-dtype="Number" />
+          </li>
+          <li class="cost flexrow">
+            <label class="resource-label">{{localize "MNM3E.Flats"}}</label>
+            <input class="cost-value flat" type="text" disabled name="system.power_cost.flat"
+              value="{{system.power_cost.flat}}" data-dtype="Number" />
+          </li>
+          <li class="cost flexrow">
+            <label class="resource-label">{{localize "MNM3E.FinalCost"}}</label>
+            <input class="cost-value final" type="text" disabled name="system.power_cost.final_cost"
+              value="{{system.power_cost.final_cost}}" data-dtype="Number" />
+          </li>
+        </ul>
+      </aside>
     </div>
 
     <div class="extras-uniques flexrow">
@@ -168,7 +173,8 @@
                 {{selectOptions @root.system.unique.value_one}}
                 {{/select}}
               </select>
-              <input class="ench-name extras-value" type="text" name="system.values.value_array.{{a}}.1" min="0" value="{{ lookup this "1"}}">
+              <input class="ench-name extras-value" type="text" name="system.values.value_array.{{a}}.1" min="0"
+                value="{{ lookup this " 1"}}">
               <a class="ench-control delete-ench delete-symbol" name="{{a}}"><i class="fas fa-minus"></i></a>
             </li>
             {{/each}}
@@ -185,12 +191,12 @@
           {{#each system.extrasflaws.parts as |part i|}}
           <li class="extras exfl-part flexrow" data-exfl-part="{{i}}">
             <input disabled class="extras-value" class="exfl-name" type="text" name="system.extrasflaws.parts.{{i}}.0"
-              value="{{ lookup this "0"}}">
+              value="{{ lookup this " 0"}}">
             {{#if condition}}
 
             {{/if}}
             <input disabled type="number" class="exfl-rank extras-value" name="system.extrasflaws.parts.{{i}}.2"
-              value="{{ lookup this "2"}}" min="0" max="5" data-dtype="Number" />
+              value="{{ lookup this " 2"}}" min="0" max="5" data-dtype="Number" />
             <select disabled class="extras-value" name="system.extrasflaws.parts.{{i}}.1">
               {{#select (lookup this "1")}}
               {{selectOptions @root.config.ExtrasFlawsTypes}}

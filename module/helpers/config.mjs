@@ -67,7 +67,7 @@ preLocalize("defenses");
 
 MNM3E.movementTypes = {
   walk: "MNM3E.Walk",
-  burrow: "MNM3E.Burrowing",
+  burrowing: "MNM3E.Burrowing",
   flight: "MNM3E.Flight",
   leaping: "MNM3E.Leaping",
   swimming: "MNM3E.Swimming",

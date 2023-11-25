@@ -1,5 +1,44 @@
 <div class="flexrow">
-  
+  <aside class="sidebar flexrow">
+    <div class="flexcol">
+      <div></div>
+      <div class="flexrow">
+        <label>Gender</label>
+        <input name="system.details.civilian_identity.gender" type="text"
+          value="{{system.details.civilian_identity.gender}}">
+      </div>
+      <div class="flexrow">
+        <label>Hair</label>
+        <input name="system.details.civilian_identity.hair" type="text"
+          value="{{system.details.civilian_identity.hair}}">
+      </div>
+      <div class="flexrow">
+        <label>Eyes</label>
+        <input name="system.details.civilian_identity.eyes" type="text"
+          value="{{system.details.civilian_identity.eyes}}">
+      </div>
+    </div>
+  </aside>
+  <aside class="sidebar">
+    <div class="flexcol">
+      <input type="checkbox" name="system.details.has_secret_identity" {{checked system.details.has_secret_identity}} />
+      {{#if system.details.has_secret_identity}}
+      <div class="flexrow">
+        <label>Gender</label>
+        <input name="system.details.hero_identity.gender" type="text" value="{{system.details.hero_identity.gender}}">
+      </div>
+      <div class="flexrow">
+        <label>Hair</label>
+        <input name="system.details.hero_identity.hair" type="text" value="{{system.details.hero_identity.hair}}">
+      </div>
+      <div class="flexrow">
+        <label>Eyes</label>
+        <input name="system.details.hero_identity.eyes" type="text" value="{{system.details.hero_identity.eyes}}">
+      </div>
+      {{/if}}
+    </div>
+  </aside>
+  <aside class="sidebar">
+    
+  </aside>
 </div>
-
-{{editor system.biography target="system.biography" rollData=rollData button=true owner=owner editable=editable}}

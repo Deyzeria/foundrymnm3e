@@ -30,6 +30,8 @@ globalThis.foundrymnm3e = {
 /* -------------------------------------------- */
 
 Hooks.once('init', async function () {
+  CONFIG.debug.hooks = true;
+
   globalThis.foundrymnm3e = game.foundrymnm3e = Object.assign(game.system, globalThis.foundrymnm3e);
   // Add utility classes to the global game object so that they're more easily
   // accessible in global contexts.
@@ -167,8 +169,6 @@ Hooks.once("i18nInit", () => utils.performPreLocalization(CONFIG.MNM3E));
 
 
 Hooks.once("ready", async function () {
-  ParserAccess();
-
   // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
   Hooks.on("hotbarDrop", (bar, data, slot) => createItemMacro(data, slot));
 });
@@ -186,6 +186,7 @@ Hooks.once("ready", async function () {
  */
 async function createItemMacro(data, slot) {
   if (data.type !== "Item") return;
+  console.debug(data);
   if (!("data" in data)) return ui.notifications.warn("You can only create macro buttons for owned Items");
   const item = data.data;
 
@@ -203,6 +204,69 @@ async function createItemMacro(data, slot) {
   }
   game.user.assignHotbarMacro(macro, slot);
   return false;
+}
+
+Hooks.on("renderActorDirectory", (app, html, data) => {
+  const divb = document.createElement("div");
+  divb.classList.add("menu-buttons");
+  divb.classList.add("grid");
+  const buttonb = document.createElement("button");
+  buttonb.classList.add("import-character");
+  const iconb = document.createElement("i");
+  iconb.classList.add("fa-solid");
+  iconb.classList.add("fa-file-import");
+
+  const buttontext = document.createTextNode("Import HeroLab character");
+
+  buttonb.appendChild(iconb);
+  buttonb.appendChild(buttontext);
+
+  divb.appendChild(buttonb);
+
+  html[0].children[0].insertBefore(divb, html[0].children[0].children[1]);
+  html[0].children[0].children[1].children[0].addEventListener('click', async (event) => {
+    importFromXmlDialog();
+  })
+});
+
+async function importFromXmlDialog() {
+  new Dialog({
+    title: `Import HeroLab XML`,
+    content: await renderTemplate("systems/foundrymnm3e/templates/settings/import-menu.hbs"),
+    buttons: {
+      import: {
+        icon: '<i class="fas fa-file-import"></i>',
+        label: "Import",
+        callback: html => {
+          const form = html.find("form")[0];
+          console.debug(form.data.files);
+          if (!form.data.files.length) return ui.notifications.error("You did not upload a data file!");
+          readTextFromFile(form.data.files[0]).then(xml => ParserAccess(xml));
+        }
+      },
+      no: {
+        icon: '<i class="fas fa-times"></i>',
+        label: "Cancel"
+      }
+    },
+    default: "import"
+  }, {
+  width: 400
+}).render(true);
+
+  /*
+    async importFromJSONDialog() {
+      new Dialog({
+        title: `Import Data: ${this.name}`,
+        content: await renderTemplate("templates/apps/import-data.html"),
+        buttons: {
+        },
+        default: "import"
+      }, {
+        width: 400
+      }).render(true);
+    }
+  */
 }
 
 /**

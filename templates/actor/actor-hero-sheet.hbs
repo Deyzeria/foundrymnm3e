@@ -2,15 +2,17 @@
 
   {{!-- Sheet Header --}}
   <header class="sheet-header">
-    <img class="profile-img" src="{{actor.system.details.hero_identity.image}}" data-edit="system.details.hero_identity.image" title="{{system.details.hero_identity.name}}"/>
-    <img class="profile-img" src="{{actor.system.details.civilian_identity.image}}" data-edit="system.details.civilian_identity.image" title="{{system.details.civilian_identity.name}}"/>
+    <img class="profile-img" src="{{actor.system.details.hero_identity.image}}"
+      data-edit="system.details.hero_identity.image" title="{{system.details.hero_identity.name}}" />
+    <img class="profile-img" src="{{actor.system.details.civilian_identity.image}}"
+      data-edit="system.details.civilian_identity.image" title="{{system.details.civilian_identity.name}}" />
     <div class="header-fields">
       <div class="flexrow">
-        <h1 class="charname"><input name="system.details.hero_identity.name" type="text" value="{{system.details.hero_identity.name}}"
-            placeholder="Superman" /></h1>
+        <h1 class="charname"><input name="system.details.hero_identity.name" type="text"
+            value="{{system.details.hero_identity.name}}" placeholder="Superman" /></h1>
         <i class="fa-solid fa-arrows-rotate swapbutton"></i>
-        <h1 class="charname"><input name="system.details.civilian_identity.name" type="text" value="{{system.details.civilian_identity.name}}"
-            placeholder="Clark Kent" /></h1>
+        <h1 class="charname"><input name="system.details.civilian_identity.name" type="text"
+            value="{{system.details.civilian_identity.name}}" placeholder="Clark Kent" /></h1>
       </div>
 
       {{!-- Power Level, Extra Power Points, Power Points Spent, Hero Points --}}
@@ -242,15 +244,15 @@
             </li>
             {{/each}}
           </ul>
+        </aside>
       </section>
-      </aside>
     </div>
 
     {{!-- Biography Tab --}}
     <div class="tab biography" data-group="primary" data-tab="description">
       {{!-- If you want TinyMCE editors to output inline rolls when rendered, you need to pass the actor's roll data to
       the rollData property. --}}
-      {{editor system.biography target="system.biography" rollData=rollData button=true owner=owner editable=editable}}
+      {{> "systems/foundrymnm3e/templates/actor/parts/actor-description.hbs"}}
     </div>
 
     {{!-- Owned powers Tab --}}

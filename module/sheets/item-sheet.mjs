@@ -28,6 +28,7 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
   async getData() {
     // Retrieve base data structure.
     const context = await super.getData();
+    /** @type {import("../documentation/item-documentation.mjs").itemData} */
     const item = context.item;
     const source = item.toObject();
 
@@ -77,7 +78,7 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
           max_ranks: systemData.power_cost.max_ranks,
           purchase: this._canBePurchased(),
           active: systemData.active,
-          activestate: this._getActiveIcon(systemData.locked),
+          activestate: this._getActiveIcon(systemData.active),
           locked: systemData.locked,
           lock: this._getCheckmarkIcon(systemData.locked)
         });

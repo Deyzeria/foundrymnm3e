@@ -6,6 +6,7 @@ import ActiveEffectMnm3e from "../helpers/effects.mjs";
 /**
  * Extend the basic Item with some very simple modifications.
  * @extends {Item}
+ * @type {import("../documentation/item-documentation.mjs").itemData}
  */
 export class FoundryMnM3eItem extends Item {
   prepareData() {
