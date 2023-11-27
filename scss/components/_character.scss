@@ -93,6 +93,10 @@
         cursor: pointer;
       }
 
+      a:hover {
+        text-shadow: none;
+      }
+
       &:hover {
         background-color: rgba(102, 141, 250, 0.486);
         cursor: pointer;
@@ -150,7 +154,7 @@
       }
 
       &.wounds {
-        background-color: rgba(255, 149, 149, 0.7) !important;
+        background-color: rgba(255, 149, 149, 0.1) !important;
 
         .attribute-value {
           width: 70px;
@@ -174,9 +178,7 @@
   ul.ability-list,
   ul.defense-list,
   ul.skills-list {
-    flex: 0 0 180px;
     list-style: none;
-    width: 370px;
     //margin: 0 5px 0;
     padding: 0;
     border: 2px groove #eeede0;
@@ -224,7 +226,7 @@
       }
 
       .skill-ability {
-        flex: 0 0 26px;
+        flex: 0 0 32px;
         text-transform: capitalize;
         margin-right: 10px;
       }
@@ -285,7 +287,7 @@
 
     &:disabled {
       background: rgba(226, 134, 81, 0.2) !important;
-      border: transparent;
+      border: transparent !important;
     }
   }
 
@@ -294,7 +296,7 @@
 
     &:disabled {
       background: rgba(80, 226, 99, 0.2) !important;
-      border: transparent;
+      border: transparent !important;
     }
   }
 
@@ -303,7 +305,7 @@
 
     &:disabled {
       background: rgba(226, 81, 105, 0.2) !important;
-      border: transparent;
+      border: transparent !important;
     }
   }
 
@@ -312,7 +314,7 @@
 
     &:disabled {
       background: rgba(80, 226, 219, 0.2) !important;
-      border: transparent;
+      border: transparent !important;
     }
   }
 
@@ -321,7 +323,7 @@
 
     &:disabled {
       background: rgba(161, 61, 156, 0.2) !important;
-      border: transparent;
+      border: transparent !important;
     }
   }
 
@@ -330,7 +332,7 @@
 
     &:disabled {
       background: rgba(167, 167, 167, 0.2) !important;
-      border: transparent;
+      border: transparent !important;
     }
   }
 

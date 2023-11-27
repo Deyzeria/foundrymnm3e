@@ -205,7 +205,6 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
     html.find(".exfl-control").click(this.onExFlControl.bind(this));
     html.find(".ench-control").click(this.onEnchControl.bind(this));
 
-    html.find(".lockbutton").click(this.lockSheet.bind(this));
     // Roll handlers, click handlers, etc. would go here.
     if (this.item.type == "power") {
       this._disableOverriddenFields(html);
@@ -254,34 +253,5 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
       extrasflaws.parts.splice(value, 1)
       return this.item.update({ "system.extrasflaws.parts": extrasflaws.parts });
     }
-  }
-
-  // /**
-  //  * 
-  //  * @param {Object} data 
-  //  * @param {String} data.label Display label
-  //  * @param {type} data.type extra/extraflat/flaws/flawsflat Modifier
-  //  * @returns Creates extrasflaws part
-  //  */
-  // async addModifier(data)
-  // {
-  //   const extrasflaws = this.item.system.extrasflaws;
-
-  //   var toAdd = [
-  //     data.label, //Display label
-  //     data.type, //
-  //     data.cost,
-  //     data.id,
-  //     data.max_ranks,
-  //     data.effect
-  //   ];
-
-  //   return this.item.update({"system.extrasflaws.parts": extrasflaws.parts.concat([toAdd])});
-  // }
-
-  async lockSheet(event) {
-    event.preventDefault();
-    await this._onSubmit(event);
-    return this.item.update({ "system.locked": true })
   }
 }

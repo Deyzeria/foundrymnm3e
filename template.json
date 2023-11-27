@@ -360,7 +360,8 @@
             "untrained": false,
             "mastery": false
           }
-        }
+        },
+        "arrays": []
       },
       "movement": {
         "speed": {
@@ -474,7 +475,8 @@
       "general",
       "base",
       "vehicle",
-      "attack"
+      "attack",
+      "array"
     ],
     "templates": {
       "itemDescription": {

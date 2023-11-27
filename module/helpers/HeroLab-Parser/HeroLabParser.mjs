@@ -1,8 +1,10 @@
 export async function ParserAccess(xmlfile) {
   const parser = new DOMParser();
   const xmlDoc = parser.parseFromString(xmlfile, 'text/xml');
+  console.debug(xmlDoc);
   const parsed = xmlToJson(xmlDoc);
   var actorJson = await GenerateActor(parsed, "hero");
+  console.debug(parsed);
 
   actorJson = PopulateActorData(actorJson, parsed);
   // var advList = PopulateActorAdvantages(parsed);
@@ -29,6 +31,7 @@ async function xmlfetcher() {
     throw error;
   }
 }
+
 
 function xmlToJson(xml) {
   var obj = {};
@@ -590,4 +593,20 @@ function removeAfterLastColon(inputString) {
 
 function PopulateActorItems() {
   // Run prepareAdvantage and preparePower for each one of them!
+}
+
+/**
+ * 
+ * @param {import("./hero-lab-documentation.mjs").hlparsed} actorData 
+ */
+function GenerateActorAdvantages(actorData) {
+  let advsunchecked = actorData.document.public.character.advantages.advantage;
+  /** @type {import("./hero-lab-documentation.mjs").hladvantage[]} */
+  var advs = [];
+  if (Array.isArray(advs)) {
+    advs = advsunchecked;
+  }
+  else {
+    advs.add(advsunchecked);
+  }
 }

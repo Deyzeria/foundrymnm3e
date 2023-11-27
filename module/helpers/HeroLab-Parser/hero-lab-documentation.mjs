@@ -24,9 +24,9 @@
  * @prop {String} relationship
  * @prop {String} name
  *
- * @prop {{advantage: hladvantage[]}} advantages
- * @prop {{item: hlgear[]}} gear
- * @prop {{power: hlpower[]}} powers
+ * @prop {{advantage: hladvantage|hladvantage[]}} advantages
+ * @prop {{item: hlgear|hlgear[]}} gear
+ * @prop {{power: hlpower|hlpower[]}} powers
  *  *
  * @prop {hlminions} minions
  */
@@ -77,9 +77,9 @@
  * @prop {String} summary "Easily Removable"|"Removable" + " (indestructible)" otherwise ignore
  * @prop {String} description "Easily Removable"|"Removable" + " (indestructible)" otherwise ignore
  * 
- * @prop {} descriptors
+ * @prop {{descriptor: {name: String}|{name: String}[]}} descriptors
  * 
- * @prop {} alternatepowers
+ * @prop {{power: hlpower|Array.hlpower}} alternatepowers This is for alt powers at the bottom
  * @prop {{chainedadvantage: {name: String}|{name: String}[]}} chainedadvantages
  * @prop {{power: hlpower|Array.hlpower}} otherpowers Here go the powers within an array
  * 

@@ -142,8 +142,10 @@ export class FoundryMnM3eActor extends Actor {
       skill.total = skill.default + skill.purchased + skill.misc + skill.auto;
       systemData.generic.pp_skills += skill.purchased / 2;
     }
-
+    
     systemData.generic.pp_spent = systemData.generic.pp_ability + systemData.generic.pp_defenses + systemData.generic.pp_skills + systemData.generic.pp_advantages + systemData.generic.pp_powers;
+
+    systemData.generic.initiative = systemData.abilities.agl.total;
   }
 
   /**
@@ -394,10 +396,13 @@ Hooks.on("renderActorSheet", (app, html, data) => {
     html.find(".attribute-value.multiple .ppspent")[0].style.background = "rgba(255, 0, 0, 0.7)";
   }
   if (!Number.isInteger(system.generic.pp_skills)) {
-    //html.find(".skillsspent")[0].style.background = "red";
+    html.find(".skills-list")[0].style.borderColor = "red";
+    html.find(".attribute-value.multiple .ppspent")[0].style.background = "rgba(255, 0, 0, 0.7)";
+    html.find(".pptooltip .skills-spent")[0].style.background = "rgba(255, 0, 0, 0.7)";
   }
 
   if (system.defenses.dodge.total + system.defenses.toughness.total > system.generic.pl * 2 || system.defenses.parry.total + system.defenses.toughness.total > system.generic.pl * 2) {
+    html.find(".defense-list")[0].style.borderColor = "red";
     let defrow = html.find(".defense-row");
     defrow[0].style.background = "rgba(255, 0, 0, 0.2)";
     defrow[1].style.background = "rgba(255, 0, 0, 0.2)";
@@ -405,10 +410,9 @@ Hooks.on("renderActorSheet", (app, html, data) => {
   }
 
   if (system.defenses.fortitude.total + system.defenses.will.total > system.generic.pl * 2) {
+    html.find(".defense-list")[0].style.borderColor = "red";
     let defrow = html.find(".defense-row");
     defrow[2].style.background = "rgba(255, 0, 0, 0.2)";
     defrow[4].style.background = "rgba(255, 0, 0, 0.2)";
   }
-
-
 });

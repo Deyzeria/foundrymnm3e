@@ -19,6 +19,7 @@
  * @prop {genericList} generic
  * @prop {speedList} speed
  * @prop {details} details
+ * @prop {Array} arrays
  */
 
 /** Ability List

@@ -25,6 +25,10 @@ export class FoundryMnM3eActorSheet extends ActorSheet {
     return `systems/foundrymnm3e/templates/actor/actor-${this.actor.type}-sheet.hbs`;
   }
 
+  _filters = {
+    powerarrays: new Set()
+  }
+
   /* -------------------------------------------- */
 
   /** @override */

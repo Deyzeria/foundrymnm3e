@@ -216,7 +216,7 @@ Hooks.on("renderActorDirectory", (app, html, data) => {
   iconb.classList.add("fa-solid");
   iconb.classList.add("fa-file-import");
 
-  const buttontext = document.createTextNode("Import HeroLab character");
+  const buttontext = document.createTextNode("HeroLab Importer");
 
   buttonb.appendChild(iconb);
   buttonb.appendChild(buttontext);
@@ -239,7 +239,6 @@ async function importFromXmlDialog() {
         label: "Import",
         callback: html => {
           const form = html.find("form")[0];
-          console.debug(form.data.files);
           if (!form.data.files.length) return ui.notifications.error("You did not upload a data file!");
           readTextFromFile(form.data.files[0]).then(xml => ParserAccess(xml));
         }
@@ -251,22 +250,8 @@ async function importFromXmlDialog() {
     },
     default: "import"
   }, {
-  width: 400
-}).render(true);
-
-  /*
-    async importFromJSONDialog() {
-      new Dialog({
-        title: `Import Data: ${this.name}`,
-        content: await renderTemplate("templates/apps/import-data.html"),
-        buttons: {
-        },
-        default: "import"
-      }, {
-        width: 400
-      }).render(true);
-    }
-  */
+    width: 400
+  }).render(true);
 }
 
 /**
