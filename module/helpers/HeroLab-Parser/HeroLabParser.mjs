@@ -636,15 +636,15 @@ function removeAfterLastColon(inputString) {
  * @param {{name: string, type: string, system: {id: string, ranks: number, additionalDesc: string}}[]} AdvantageList 
  * @returns 
  */
-function PopulateActorItems(Actor, AdvantageList) {
-  console.debug(AdvantageList);
-  for (let index = 0; index < AdvantageList.length; index++) {
-    const element = AdvantageList[index];
-    Actor.createEmbeddedDocuments("Item", [element]);
+async function PopulateActorItems(Actor, AdvantageList) {
+  for (let i = 0; i < AdvantageList.length; i++) {
+    const element = AdvantageList[i];
+    await Actor.createEmbeddedDocuments("Item", [element]);
+    // Need to figure out how to run a function on them.
   }
-  // Finally, create the item!
-  
 
-  // Run prepareAdvantage and preparePower for each one of them!
+  for (let a = 0; a < Actor.itemTypes.advantage.length; a++) {
+    Actor.itemTypes.advantage[a].prepareAdvantage();
+    Actor.itemTypes.advantage[a].setAdvantageItemName();
+  }
 }
-

@@ -366,18 +366,19 @@
         border-width: 2px;
         text-align: center;
         font-size: 20px;
+        margin-right: 10px;
         font-weight: bold;
       }
     }
 
     .advdesc {
-      flex: 0 0 400px;
-      font-size: 20px;
+      flex: 0 0 300px;
+      font-size: 13px;
       font-weight: bold;
     }
 
     .advname {
-      flex: 0 0 150px;
+      flex: 0 0 300px;
     }
   }
 

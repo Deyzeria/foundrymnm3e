@@ -276,7 +276,8 @@ export class FoundryMnM3eItem extends Item {
       }
       else if (this.system.extradesc == "dropdown") {
         const val = this.skillsWithCharacterNames();
-        this.name = conf.AdvantageEnum[this.system.id] + " (" + val[this.system.additionalDesc] + ")";
+        const add = val[this.system.additionalDesc] ?? "Choose";
+        this.name = conf.AdvantageEnum[this.system.id] + " (" + add + ")";
       }
     }
   }
