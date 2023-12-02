@@ -9,9 +9,12 @@ export async function ParserAccess(xmlfile) {
   actorJson = PopulateActorData(actorJson, parsed);
   // var advList = PopulateActorAdvantages(parsed);
   // var powList = PopulateActorPowers(parsed);
+  var advlist = GenerateActorAdvantages(parsed.document.public.character.advantages.advantage);
+  console.debug(advlist);
 
-  await Actor.create(actorJson);
+  var act = await Actor.create(actorJson);
 
+  PopulateActorItems(act, advlist);
   // Activate functions which populate actor with items!
 }
 
@@ -32,7 +35,10 @@ async function xmlfetcher() {
   }
 }
 
-
+/**
+ * @param {XMLDocument} xml 
+ * @returns {import("./hero-lab-documentation.mjs").hlparsed}
+ */
 function xmlToJson(xml) {
   var obj = {};
 
@@ -244,65 +250,90 @@ function GetMultipleSkills(skillsList, skillIndex) {
   return matchingIndexes;
 }
 
+// ....###....########..##.....##....###....##....##.########....###.....######...########..######.
+// ...##.##...##.....##.##.....##...##.##...###...##....##......##.##...##....##..##.......##....##
+// ..##...##..##.....##.##.....##..##...##..####..##....##.....##...##..##........##.......##......
+// .##.....##.##.....##.##.....##.##.....##.##.##.##....##....##.....##.##...####.######....######.
+// .#########.##.....##..##...##..#########.##..####....##....#########.##....##..##.............##
+// .##.....##.##.....##...##.##...##.....##.##...###....##....##.....##.##....##..##.......##....##
+// .##.....##.########.....###....##.....##.##....##....##....##.....##..######...########..######.
 
-/** ADVANTAGES
- * @param {import("./hero-lab-documentation.mjs").hlparsed} dataActor 
- * @returns 
+/**
+ * Initial call to generate a list of advantages to populate
+ * @param {import("./hero-lab-documentation.mjs").hladvantage[]|import("./hero-lab-documentation.mjs").hladvantage} advsunchecked 
  */
-function PopulateActorAdvantages(dataActor) {
-  const advantageList = dataActor.document.public.character.advantages.advantage;
+function GenerateActorAdvantages(advsunchecked) {
   const advantagelist = CONFIG.MNM3E.AdvantageEnum;
-  var advListToAdd = [];
-  var advToAnalyseCustom = [];
+  /** @type {import("./hero-lab-documentation.mjs").hladvantage[]} */
+  var advs = [];
+  var returnarr = [];
 
-  for (var i = 0; i < advantageList.length; i++) {
-    let val = advantageList[i];
+  if (Array.isArray(advs)) {
+    advs = advsunchecked;
+  }
+  else {
+    advs.add(advsunchecked);
+  }
 
-    if (val.useradded == undefined || val.useradded == "yes") {
-      var id = FindAdvantageId(val.name);
-
-      let additionalDesc = null;
-      let choiceDesc = null;
-      if (id == -1) {
-        let response = UniqueAdvantage(val);
-        id = response[0];
-        let tempDesc = response[1];
-        choiceDesc = response[2];
-
-        if (id == -1) {
-          advToAnalyseCustom.push(val);
-          continue;
+  for (let index = 0; index < advs.length; index++) {
+    const element = advs[index];
+    if (element.useradded == undefined || element.useradded == "yes") {
+      var response = GetAdvantageSpecificName(element.name);
+      if (response != null) {
+        var toAddArray = {
+          name: advantagelist[response[0]],
+          type: 'advantage',
+          system: {
+            id: response[0],
+            ranks: Number.parseInt(element.cost.value),
+            additionalDesc: response[1] ?? response[2] ?? '',
+          }
         }
 
-        if (tempDesc == "") {
-          additionalDesc = val.name.split(': ')[1];
-        }
-        else {
-          additionalDesc = tempDesc;
-        }
+        returnarr.push(toAddArray);
       }
+    }
+  }
+  return returnarr;
+}
 
-      let type = FindAdvantageType(id)
-      var toAddArray = {
-        name: advantagelist[type],
-        type: 'advantage',
-        system: {
-          id: type,
-          ranks: Number.parseInt(val.cost.value),
-          additionalDesc: additionalDesc ?? choiceDesc ?? '',
-        }
-      }
-      advListToAdd.push(toAddArray);
+/**
+ * @param {string} advantage
+ * @returns {string[]} Type, Additional Desc, Choice Desc
+ */
+function GetAdvantageSpecificName(advantage) {
+  const adConfArray = Object.values(CONFIG.MNM3E.AdvantageEnum);
+  const adConf = Object.keys(CONFIG.MNM3E.AdvantageEnum);
+
+  var additionalDesc = "";
+  var choiceDesc = "";
+
+  const pattern = /\s+\d+$/;
+  advantage = advantage.replace(pattern, '');
+  var id = adConfArray.findIndex((adv) => adv == advantage);
+
+  if (id == -1) {
+    let response = UniqueAdvantage(advantage);
+    id = response[0];
+    additionalDesc = response[1];
+    choiceDesc = response[2];
+    if (id == -1) {
+      console.warn("Didn't find ", advantage);
+      return null;
     }
   }
 
-  console.debug("Advantages Unsorted: ", advToAnalyseCustom);
-  return advListToAdd;
+  var type = adConf[id];
+  return [type, additionalDesc, choiceDesc];
 }
 
+/**
+ * @param {string} val 
+ * @returns {Array}
+ */
 function UniqueAdvantage(val) {
   let pattern = /\w+/g;
-  let words = val.name.match(pattern);
+  let words = val.match(pattern);
   let id = -1;
   let additionalDesc = "";
   let choiceDesc = null;
@@ -312,17 +343,17 @@ function UniqueAdvantage(val) {
       // FIXME: Check other Benefits for working!
       case 'Security':
         id = FindAdvantageId('Benefit, Security Clearance');
-        additionalDesc = val.name.split(': ')[1];
+        additionalDesc = val.split(': ')[1];
         break;
 
       case 'Status':
         id = FindAdvantageId('Benefit, Status');
-        additionalDesc = val.name.split(': ')[1];
+        additionalDesc = val.split(': ')[1];
         break;
 
       case 'Wealth':
         id = FindAdvantageId('Benefit, Wealth');
-        additionalDesc = val.name.split(': ')[1];
+        additionalDesc = val.split(': ')[1];
         break;
       default:
 
@@ -335,7 +366,7 @@ function UniqueAdvantage(val) {
     pattern = /\((.+)\)/;
     // FIXME: Choice of specific Expertise and potentially other skills.
     // Yes, I do know that you could use words[1], but this was implemented for theoretical usage of Sleight of hand or other multiword ones
-    choiceDesc = val.name.match(pattern)[1].split(':')[0];
+    choiceDesc = val.match(pattern)[1].split(':')[0];
   }
   else {
     id = FindAdvantageId(words[0]);
@@ -345,6 +376,7 @@ function UniqueAdvantage(val) {
       id = FindAdvantageId(words[0] + " " + words[1]);
     }
   }
+
   return [id, additionalDesc, choiceDesc];
 }
 
@@ -365,6 +397,14 @@ function FindAdvantageType(id) {
   const adConf = Object.keys(CONFIG.MNM3E.AdvantageEnum);
   return adConf[id];
 }
+
+// .########...#######..##......##.########.########...######.
+// .##.....##.##.....##.##..##..##.##.......##.....##.##....##
+// .##.....##.##.....##.##..##..##.##.......##.....##.##......
+// .########..##.....##.##..##..##.######...########...######.
+// .##........##.....##.##..##..##.##.......##...##.........##
+// .##........##.....##.##..##..##.##.......##....##..##....##
+// .##.........#######...###..###..########.##.....##..######.
 
 /** POWERS
  * @param {import("./hero-lab-documentation.mjs").hlparsed} dataActor 
@@ -394,16 +434,16 @@ function PopulateActorPowers(dataActor) {
       var cadv = [];
       if (val.chainedadvantages != {} && val.chainedadvantages != undefined) {
         if (Array.isArray(val.chainedadvantages.chainedadvantage)) {
-          val.chainedadvantages.chainedadvantage.forEach(element => {
-            var id = FindAdvantageId(element.name);
-            if (id == -1) {
-              //let response = UniqueAdvantage(id)
-              console.warn("Unknown Chained Advantage ", element);
-            }
-            else {
-              cadv.push(FindAdvantageType(id));
-            }
-          });
+          // val.chainedadvantages.chainedadvantage.forEach(element => {
+          //   var id = FindAdvantageId(element.name);
+          //   if (id == -1) {
+          //     //let response = UniqueAdvantage(id)
+          //     console.warn("Unknown Chained Advantage ", element);
+          //   }
+          //   else {
+          //     cadv.push(FindAdvantageType(id));
+          //   }
+          // });
         }
         else {
 
@@ -590,23 +630,21 @@ function removeAfterLastColon(inputString) {
   }
 }
 
+/**
+ * 
+ * @param {import("../../documentation/actor-documentation.mjs").actorData} Actor 
+ * @param {{name: string, type: string, system: {id: string, ranks: number, additionalDesc: string}}[]} AdvantageList 
+ * @returns 
+ */
+function PopulateActorItems(Actor, AdvantageList) {
+  console.debug(AdvantageList);
+  for (let index = 0; index < AdvantageList.length; index++) {
+    const element = AdvantageList[index];
+    Actor.createEmbeddedDocuments("Item", [element]);
+  }
+  // Finally, create the item!
+  
 
-function PopulateActorItems() {
   // Run prepareAdvantage and preparePower for each one of them!
 }
 
-/**
- * 
- * @param {import("./hero-lab-documentation.mjs").hlparsed} actorData 
- */
-function GenerateActorAdvantages(actorData) {
-  let advsunchecked = actorData.document.public.character.advantages.advantage;
-  /** @type {import("./hero-lab-documentation.mjs").hladvantage[]} */
-  var advs = [];
-  if (Array.isArray(advs)) {
-    advs = advsunchecked;
-  }
-  else {
-    advs.add(advsunchecked);
-  }
-}

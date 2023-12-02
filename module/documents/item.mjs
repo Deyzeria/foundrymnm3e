@@ -44,7 +44,7 @@ export class FoundryMnM3eItem extends Item {
   _onUpdate(data, options, userId) {
     super._onUpdate(data, options, userId);
 
-    // Power updates
+    // Power updates THIS DOES NOT OCCUR IF WE ADD POWERS USING IMPORTER
     if (data.system?.power_effect != undefined) {
       this.preparePower();
     }
@@ -52,7 +52,7 @@ export class FoundryMnM3eItem extends Item {
       this.addActiveEffects();
     }
 
-    // Advantages
+    // Advantages THIS DOES NOT OCCUR IF WE ADD ADVANTAGES USING IMPORTER
     if (data.system?.id != undefined && data.system?.id != "") {
       this.prepareAdvantage();
     }

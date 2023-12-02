@@ -1,5 +1,5 @@
 /**
- * @typedef {Object} itemData
+ * @typedef {Object} powerData
  * @prop {String} img
  * @prop {String} name
  * @prop {String} type
