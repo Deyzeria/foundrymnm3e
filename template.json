@@ -484,14 +484,12 @@
       },
       "customisable": {
         "power_effect": "",
-        "descriptor": [],
         "type": "",
         "action": {
           "type": "",
           "length": 0
         },
         "duration": "",
-        "array": {},
         "active": false,
         "locked": false,
         "power_cost": {
@@ -504,10 +502,8 @@
           "active_cost": 0,
           "active_rank": 0,
           "manual_purchase": true,
-          "max_ranks": 0
-        },
-        "extrasflaws": {
-          "parts": []
+          "max_ranks": 0,
+          "removable": 0
         },
         "values": {
           "value_one": "",
@@ -523,6 +519,16 @@
           "value_three": "",
           "value_four": "",
           "value_five": ""
+        },
+        "extrasflaws": {
+          "parts": []
+        },
+        "descriptor": {
+          "parts": []
+        },
+        "array": {
+          "attachement": "",
+          "parts": []
         }
       },
       "combat": {

@@ -55,7 +55,6 @@ export class FoundryMnM3eActor extends Actor {
     // things organized.
     this._preparePowerCost(actorData);
 
-
     this._prepareCharacterData(actorData);
     //this.prepareSpeeds();
     //this._prepareNpcData(actorData);

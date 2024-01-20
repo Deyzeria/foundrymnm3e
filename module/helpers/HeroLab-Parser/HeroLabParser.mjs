@@ -4,35 +4,17 @@ export async function ParserAccess(xmlfile) {
   console.debug(xmlDoc);
   const parsed = xmlToJson(xmlDoc);
   var actorJson = await GenerateActor(parsed, "hero");
+  console.debug(actorJson);
   console.debug(parsed);
 
   actorJson = PopulateActorData(actorJson, parsed);
-  // var advList = PopulateActorAdvantages(parsed);
   // var powList = PopulateActorPowers(parsed);
   var advlist = GenerateActorAdvantages(parsed.document.public.character.advantages.advantage);
-  console.debug(advlist);
 
   var act = await Actor.create(actorJson);
 
   PopulateActorItems(act, advlist);
   // Activate functions which populate actor with items!
-}
-
-// xml file should be passed here.
-async function xmlfetcher() {
-  try {
-    const xmlFileUrl = 'https://raw.githubusercontent.com/Sinantrarion/codecollection/main/AAAABBAAAA.xml';
-    // Fetch the XML file using the fetch() API
-    const response = await fetch(xmlFileUrl);
-    const xmlText = await response.text();
-    const parser = new DOMParser();
-    const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
-    return xmlDoc;
-  }
-  catch (error) {
-    console.error("Error parsing XML:", error);
-    throw error;
-  }
 }
 
 /**

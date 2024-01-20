@@ -1,0 +1,22 @@
+<form autocomplete="off">
+  <div class="sheet-body full-page-container">
+    <h1 class="text-center"><label>Choose the descriptor from the list below</label></h1>
+    <div class="descriptions">
+      <ul class="modifier-list boxed-part">
+        {{#each responseList as |item i|}}
+        <li class="modifiers-part">
+          <a class="modifier flexrow" data-part="{{i}}">
+            <i class="modifier-icon">{{{item.icon}}}</i>
+            <label class="modifier-part">{{item.label}}</label>
+            <label class="modifier-cost">{{item.costlabel}}</label>
+          </a>
+        </li>
+        {{/each}}
+      </ul>
+    </div>
+    <div class="flexrow buttons-center">
+      <a class="mod-buttons add">Add</a>
+      <a class="mod-buttons">Close</a>
+    </div>
+  </div>
+</form>

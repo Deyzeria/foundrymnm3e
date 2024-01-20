@@ -1,4 +1,4 @@
-import ExtrasFlawsSheet from "./parts/add-modifiers.mjs";
+import ExtrasFlawsSheet from "./parts/add-modifiers-sheet.mjs";
 
 /**
  * Extend the basic ItemSheet with some very simple modifications
@@ -76,6 +76,7 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
           resistancearray: systemData.unique.resistancecheck ?? {},
 
           max_ranks: systemData.power_cost.max_ranks,
+          max_upgradeable: systemData.power_cost.rank + 1,
           purchase: this._canBePurchased(),
           active: systemData.active,
           activestate: this._getActiveIcon(systemData.active),
@@ -211,7 +212,7 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
     }
   }
 
-  // Adding and removing extras and flaws
+  // Adding and removing enchancements (Enhanced Ability etc)
   async onEnchControl(event) {
     event.preventDefault();
     const a = event.currentTarget;
@@ -250,6 +251,29 @@ export class FoundryMnM3eItemSheet extends ItemSheet {
       const li = a.closest(".exfl-part");
       const value = li.getAttribute('data-exfl-part');
       const extrasflaws = foundry.utils.deepClone(this.item.system.extrasflaws);
+      extrasflaws.parts.splice(value, 1)
+      return this.item.update({ "system.extrasflaws.parts": extrasflaws.parts });
+    }
+  }
+
+  // Adding and removing extras and flaws
+  async onDescriptorControl(event) {
+    event.preventDefault();
+    const a = event.currentTarget;
+
+    if (a.classList.contains("add-descriptor")) {
+      await this._onSubmit(event);  // Submit any unsaved changes
+      event.stopPropagation();
+      let app;
+      app = new ExtrasFlawsSheet(this.item);
+      app.render(true);
+    }
+
+    if (a.classList.contains("delete-descriptor")) {
+      await this._onSubmit(event);  // Submit any unsaved changes
+      const li = a.closest(".descriptor-part");
+      const value = li.getAttribute('data-descriptor-part');
+      const extrasflaws = foundry.utils.deepClone(this.item.system.descriptor);
       extrasflaws.parts.splice(value, 1)
       return this.item.update({ "system.extrasflaws.parts": extrasflaws.parts });
     }

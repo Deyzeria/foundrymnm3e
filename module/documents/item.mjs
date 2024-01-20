@@ -388,14 +388,22 @@ export class FoundryMnM3eItem extends Item {
 
     if (combinedPerRank < 1) {
       pcost.final_cost = Math.ceil(pcost.rank / (2 - combinedPerRank)) + pcost.flat;
+      pcost.active_cost = Math.ceil(pcost.active_rank / (2 - combinedPerRank)) + pcost.flat;
     }
     else {
       pcost.final_cost = combinedPerRank * pcost.rank + pcost.flat;
+      pcost.active_cost = combinedPerRank * pcost.active_rank + pcost.flat;
     }
 
+    if (pcost.removable > 0) {
+      var decreaseCostFinal = Math.ceil(pcost.final_cost / 5);
+      var decreaseCostActive = Math.ceil(pcost.active_cost / 5);
+      pcost.final_cost = pcost.removable == 1 ? pcost.final_cost - decreaseCostFinal : pcost.final_cost - decreaseCostFinal * 2;
+      pcost.active_cost = pcost.removable == 1 ? pcost.active_cost - decreaseCostActive : pcost.active_cost - decreaseCostActive * 2;
+    }
     // Check if array
-    pcost.active_cost = pcost.final_cost;
-    pcost.active_rank = pcost.rank;
+    // pcost.active_cost = pcost.final_cost;
+    // pcost.active_rank = pcost.rank;
   }
 
   calculateRanksNonManual() {

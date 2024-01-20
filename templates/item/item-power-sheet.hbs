@@ -7,9 +7,22 @@
         <h1 class="charname power-name"><input name="name" type="text" value="{{item.name}}" placeholder="Name" /></h1>
       </div>
       <div class="flexrow">
-        <label class="sub-header" name="labels.basepower">{{labels.basepower}}</label>
-        <label class="active_ranks">{{localize "MNM3E.Cost"}}: {{system.power_cost.active_cost}}</label>
-        <label class="active_ranks">{{localize "MNM3E.Rank"}}: {{system.power_cost.active_rank}}</label>
+        {{#if locked}}
+        <label class="sub-header power-choice" data-value="selected_type">{{selected_powers}}</label>
+        {{else}}
+        <select class="sub-header power-choice" name="system.power_effect">
+          {{selectOptions powers selected=selected_powers blank=""}}
+        </select>
+        {{/if}}
+        <input type="checkbox" class="resource-checkmark" name="system.locked" {{checked system.locked}} />
+        <div class="flexcol">
+          <label class="active_ranks">{{localize "MNM3E.Cost"}}:</label>
+          <label class="active_ranks">{{system.power_cost.active_cost}}</label>
+        </div>
+        <div class="flexcol">
+          <label class="active_ranks">{{localize "MNM3E.Rank"}}:</label>
+          <label class="active_ranks">{{system.power_cost.active_rank}}</label>
+        </div>
       </div>
     </div>
   </header>
@@ -28,19 +41,13 @@
     </div>
 
     {{!-- Power Effect Data Setup --}}
+    {{#if locked}}
     <div class="flexrow">
       <aside class="sidebar">
         <ul class="power-types sectionpower">
           <li class="power flexrow">
-            <label class="resource-label" style="flex: 0 0 42%;">{{localize "MNM3E.BasePower"}}</label>
-            <input type="checkbox" class="resource-checkmark" name="system.locked" {{checked system.locked}} />
-            {{#if locked}}
+            <label class="resource-label">{{localize "MNM3E.BasePower"}}</label>
             <label class="resource-label" data-value="selected_type">{{selected_powers}}</label>
-            {{else}}
-            <select class="power-value" name="system.power_effect">
-              {{selectOptions powers selected=selected_powers blank=""}}
-            </select>
-            {{/if}}
           </li>
           <li class="power flexrow">
             <label class="resource-label">{{localize "MNM3E.PowerType"}}</label>
@@ -75,8 +82,10 @@
         <ul class="cost-list">
           <li class="cost flexrow">
             <label class="resource-label">{{localize "MNM3E.Rank"}}</label>
-            <input class="cost-value rank" type="number" name="system.power_cost.rank"
+            <input class="cost-value rank halfsize" type="number" name="system.power_cost.rank"
               value="{{system.power_cost.rank}}" min="0" max="{{max_ranks}}" data-dtype="Number" />
+            <input class="cost-value rank halfsize" type="number" name="system.power_cost.active_rank"
+              value="{{system.power_cost.active_rank}}" min="0" max="{{max_upgradeable}}" data-dtype="Number" />
           </li>
           <li class="cost flexrow">
             <label class="resource-label">{{localize "MNM3E.BaseCost"}}</label>
@@ -100,8 +109,10 @@
           </li>
           <li class="cost flexrow">
             <label class="resource-label">{{localize "MNM3E.FinalCost"}}</label>
-            <input class="cost-value final" type="text" disabled name="system.power_cost.final_cost"
+            <input class="cost-value final halfsize" type="text" disabled name="system.power_cost.final_cost"
               value="{{system.power_cost.final_cost}}" data-dtype="Number" />
+            <input class="cost-value final halfsize" type="text" disabled name="system.power_cost.active_cost"
+              value="{{system.power_cost.active_cost}}" data-dtype="Number" />
           </li>
         </ul>
       </aside>
@@ -208,5 +219,6 @@
         </ul>
       </div>
     </div>
+    {{/if}}
   </section>
 </form>

@@ -21,6 +21,6 @@ export const preloadHandlebarsTemplates = async function () {
 
     "systems/foundrymnm3e/templates/settings/import-menu.hbs",
 
-    "systems/foundrymnm3e/templates/window-overlay/add-modifiers.hbs"
+    "systems/foundrymnm3e/templates/window-overlay/add-modifiers-sheet.hbs"
   ]);
 };

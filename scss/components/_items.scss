@@ -1,7 +1,7 @@
 .item-sheet {
-  width: 622px;
-  min-width: 622px;
-  max-width: 622px;
+  width: 600px;
+  min-width: 600px;
+  max-width: 600px;
   font-family: "Blippo", serif;
 }
 
@@ -30,6 +30,33 @@
 }
 
 .foundrymnm3e.sheet.item {
+  .power-header {
+    margin-top: 0px;
+
+    .resource-checkmark {
+      margin-top: 0px;
+      margin: 0px 5px;
+      height: 40px;
+      flex: 0 0 40px;
+    }
+
+    .power-choice {
+      display: flex;
+      justify-content: left;
+      align-items: flex-end;
+      margin: 0px;
+      height: 40px;
+      line-height: 28px;
+      font-family: $font-primary;
+    }
+
+    .active_ranks {
+      font-size: 18px;
+      margin-top: -4px;
+    }
+  }
+
+
   .window-content {
     background: white;
   }
@@ -53,11 +80,6 @@
       .resource-label {
         text-transform: capitalize;
         margin-top: 1px;
-      }
-
-      .resource-checkmark {
-        margin-top: 0px;
-        margin: 0px 5px;
       }
 
       .power-value {
@@ -126,6 +148,10 @@
 
           &.flat {
             background: rgba(255, 115, 0, 0.5);
+          }
+
+          &.halfsize {
+            flex: 0.5;
           }
         }
       }
@@ -262,15 +288,7 @@
   .toggle {
     flex: 0 0 45px;
     font-size: 40px;
-    margin-top: 8px;
-  }
-
-  .active_ranks {
-    padding: 0px;
-    margin: 5px 0;
-    margin-left: 5px;
-    font-size: 25px;
-    padding: 6px;
+    margin-top: 4px;
   }
 
   .plusimg {
